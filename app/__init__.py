@@ -1,8 +1,6 @@
-# Import flask and template operators
 from flask import Flask, render_template
-
-# Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+from flask_navigation import Navigation
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -16,6 +14,13 @@ from app import views
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+nav = Navigation(app)
+
+nav.Bar('top', [
+    nav.Item('Home', 'index'),
+    nav.Item('Register', 'auth.register'),
+    nav.Item('Log in', 'auth.login')
+])
 
 # Sample HTTP error handling
 @app.errorhandler(404)
