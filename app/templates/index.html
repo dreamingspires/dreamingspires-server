@@ -5,5 +5,11 @@
     </head>
     <body>
         <h1>Dreaming Spires</h1>
+        <h3>Bringing programming talent to your research.</h3>
+        <a href="{{ url_for('auth.login') }}">log in</a>
+        <a href="{{ url_for('auth.register') }}">register</a>
+        <p>Are you a...</p>
+        <p><a href="{{ url_for('client') }}">research institution looking for programming talent?</a></p>
+        <p><a href="{{ url_for('developer') }}">developer or student looking for freelance work?</a></p>
     </body>
 </html>

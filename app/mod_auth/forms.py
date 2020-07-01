@@ -1,17 +1,20 @@
-# Import Form and RecaptchaField (optional)
-from flask_wtf import Form # , RecaptchaField
+from flask_wtf import FlaskForm # , RecaptchaField
+from wtforms import validators, StringField, PasswordField, BooleanField
 
-# Import Form elements such as TextField and BooleanField (optional)
-from wtforms import TextField, PasswordField # BooleanField
-
-# Import Form validators
-from wtforms.validators import Required, Email, EqualTo
-
-
-# Define the login form (WTForms)
-
-class LoginForm(Form):
-    email    = TextField('Email Address', [Email(),
-                Required(message='Forgot your email address?')])
+class LoginForm(FlaskForm):
+    email    = StringField('Email Address', [validators.Email(),
+        validators.Required(message='Forgot your email address?')])
     password = PasswordField('Password', [
-                Required(message='Must provide a password. ;-)')])
+        validators.Required(message='Must provide a password. ;-)')])
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    email = StringField('Email Address', [validators.Email(),
+        validators.Required(message="Must provide an email address")])
+    password = PasswordField('New Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField('Repeat Password')
+    accept_tos = BooleanField('I accept the Terms of Service', [
+        validators.DataRequired()])
+

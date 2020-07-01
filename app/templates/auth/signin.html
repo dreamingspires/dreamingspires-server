@@ -1,4 +1,14 @@
 {% macro render_field(field, placeholder=None) %}
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
 {% if field.errors %}
 <div>
 {% elif field.flags.error %}

@@ -1,0 +1,21 @@
+{% from "macros/_formhelpers.html" import render_field %}
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <dl>
+    {{ form.csrf_token }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ render_field(form.accept_tos) }}
+  </dl>
+  <p><button type=submit name=submit>Register</button>
+</form>
