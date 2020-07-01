@@ -15,7 +15,23 @@
     {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {{ render_field(form.confirm) }}
+    {{ render_field(form.university_check) }}
+    <div id="div_university">
+    {{ render_field(form.university) }}
+    </div>
+    {{ render_field(form.upload_cv) }}
     {{ render_field(form.accept_tos) }}
   </dl>
   <p><button type=submit name=submit>Register</button>
 </form>
+
+<script>
+function yesnoCheck() {
+    if (document.getElementById('university_check').checked) {
+        document.getElementById('div_university').style.display = 'block';
+    } else {
+        document.getElementById('div_university').style.display = 'none';
+    }
+}
+yesnoCheck()
+</script>
