@@ -10,7 +10,7 @@ from werkzeug import secure_filename
 from app import db
 
 # Import module forms
-from app.mod_auth.forms import LoginForm, RegisterForm, CVForm
+from app.mod_auth.forms import LoginForm, RegisterForm
 
 # Import module models (i.e. User)
 from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
