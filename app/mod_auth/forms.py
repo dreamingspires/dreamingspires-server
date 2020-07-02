@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm # , RecaptchaField
+from flask_wtf.file import FileField
 from wtforms import validators, StringField, PasswordField, BooleanField, \
-    SelectField, RadioField, FileField
+    SelectField, RadioField
 from wtforms.widgets import TextInput, HTMLString
 from app.static.university_list import university_list
 
@@ -57,7 +58,8 @@ class LoginForm(FlaskForm):
         validators.Required(message='Must provide a password. ;-)')])
 
 class RegisterForm(FlaskForm):
-    username = StringField('Username', [validators.Length(min=3, max=25)])
+    user_name = StringField('Username', [validators.Length(min=3, max=25)])
+    display_name = StringField('Display Name', [validators.Length(min=3, max=25)])
     email = StringField('Email Address', [validators.Email(),
         validators.Required(message="Must provide an email address")])
     password = PasswordField('New Password', [
@@ -71,8 +73,8 @@ class RegisterForm(FlaskForm):
     #    ('no', 'I am not a university student')], \
     #    validators=[validators.DataRequired()])
     university = DatalistField('University', university_list, default=None)
-    upload_cv = FileField('Upload your CV (.pdf only)', validators=[
-        validators.DataRequired(),
-        validators.regexp('.+?\.pdf$')])
+    upload_cv = FileField('Upload your CV (.pdf only)')#, validators=[
+#        validators.DataRequired(),
+#        validators.regexp('.+?\.pdf$')])
     accept_tos = BooleanField('I accept the Terms of Service', [
         validators.DataRequired()])

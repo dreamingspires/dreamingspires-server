@@ -8,10 +8,11 @@
 </div>
 {% endif %}
 {% endwith %}
-<form method="POST" action="." accept-charset="UTF-8" role="form">
+<form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
   <dl>
     {{ form.csrf_token }}
-    {{ render_field(form.username) }}
+    {{ render_field(form.user_name) }}
+    {{ render_field(form.display_name) }}
     {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {{ render_field(form.confirm) }}

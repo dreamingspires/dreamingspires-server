@@ -1,6 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_navigation import Navigation
+from depot.manager import DepotManager
+
+# Define the back-end file storage
+DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
 
 # Define the WSGI application object
 app = Flask(__name__)

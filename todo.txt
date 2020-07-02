@@ -1,0 +1,2 @@
+File storage with depot
+https://github.com/amol-/depot/tree/master/examples/flask

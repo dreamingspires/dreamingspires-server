@@ -4,15 +4,17 @@ from flask import Blueprint, request, render_template, \
 
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug import secure_filename
 
 # Import the database object from the main app module
 from app import db
 
 # Import module forms
-from app.mod_auth.forms import LoginForm, RegisterForm
+from app.mod_auth.forms import LoginForm, RegisterForm, CVForm
 
 # Import module models (i.e. User)
-from app.mod_auth.models import User
+from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
+    Organisation, Project
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -42,12 +44,23 @@ def login():
 
 @mod_auth.route('/register/', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm(request.form)
+    form = RegisterForm()
     print(form.errors)
     if form.validate_on_submit():
         print('form validated')
-        user = User(form.username.data, form.email.data, 
-                generate_password_hash(form.password.data))
+        print(form.upload_cv.data)
+        #f = form.upload_cv.data
+        #filename = secure_filename(f.filename)
+
+        #cv = CV(document=b'test document')
+        cv = CV(document=form.upload_cv.data)
+        dev = Developer(display_name=form.display_name.data, cv=cv)
+        email = Email(email=form.email.data)
+        user = User(user_name=form.user_name.data,
+                    password=generate_password_hash(form.password.data),
+                    developer=dev)
+                    #email_addresses=[email], developer=dev)
+        user.email_addresses.append(email)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
