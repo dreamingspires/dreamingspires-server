@@ -1,6 +1,5 @@
 from app import db
 from depot.fields.sqlalchemy import UploadedFileField
-from flask_login import UserMixin
 import uuid
 
 # Define constants
@@ -18,7 +17,7 @@ class Base(db.Model):
                                            onupdate=db.func.current_timestamp())
 
 # Define a User model
-class User(UserMixin, Base):
+class User(Base):
     __tablename__ = 'auth_user'
     user_name = db.Column(db.String(LEN_USER_NAME), nullable=False, \
             primary_key=True, unique=True)

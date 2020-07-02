@@ -56,7 +56,6 @@ class LoginForm(FlaskForm):
         validators.Required(message='Forgot your email address?')])
     password = PasswordField('Password', [
         validators.Required(message='Must provide a password. ;-)')])
-    remember_me = BooleanField('Remember me')
 
 class RegisterForm(FlaskForm):
     user_name = StringField('Username', [validators.Length(min=3, max=25)])

@@ -17,6 +17,9 @@ email_validator = "^1.1.1"
 Flask-Navigation = "^0.2.0"
 SQLAlchemy-ImageAttach = "^1.1.0"
 filedepot = "^0.7.1"
+flask-principal = "^0.4.0"
+flask-login = "^0.5.0"
+is-safe-url = "^1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
