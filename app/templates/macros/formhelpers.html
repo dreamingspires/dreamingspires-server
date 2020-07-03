@@ -1,5 +1,7 @@
 {% macro render_field(field) %}
+  {% if field.label %}
   <dt>{{ field.label }}
+  {% endif %}
   <dd>{{ field(**kwargs)|safe }}
   {% if field.errors %}
     <ul class=errors>

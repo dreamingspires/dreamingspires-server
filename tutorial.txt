@@ -13,3 +13,6 @@ https://bulma.io/documentation/form/general/#complete-form-example
 
 # Example site:
 https://github.com/app-generator/flask-bulma-css
+
+# Dashboard (projects menu?) Bulma extension:
+https://github.com/lucperkins/bulma-dashboard

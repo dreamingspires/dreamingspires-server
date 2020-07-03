@@ -14,25 +14,26 @@
 {% endwith %}
 
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
+    <h3 class="title">Register as a developer</h3>
     <div class="box">
         <form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
           <dl>
             {{ form.csrf_token }}
-            {{ render_field(form.user_name) }}
-            {{ render_field(form.email) }}
-            {{ render_field(form.password) }}
-            {{ render_field(form.confirm) }}
-            {{ render_field(form.display_name) }}
-            {{ render_field(form.description) }}
+            {{ render_field(form.user_name) }}<br/>
+            {{ render_field(form.email) }}<br/>
+            {{ render_field(form.password) }}<br/>
+            {{ render_field(form.confirm) }}<br/>
+            {{ render_field(form.display_name) }}<br/>
+            {{ render_field(form.description) }}<br/>
             {{ render_field(form.university_check) }}
             <div id="div_university">
-            {{ render_field(form.university) }}
+            {{ render_field(form.university) }}<br/>
             </div>
-            {{ render_field(form.upload_cv) }}
+            {{ render_field(form.upload_cv) }}<br/>
             {{ render_field(form.accept_tos) }}
           </dl>
-          <p><button type=submit name=submit>Register</button>
+          <button class="button is-success" type="submit" name="submit">Register</button>
+
         </form>
 
         <script>
