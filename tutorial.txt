@@ -7,3 +7,6 @@ https://bulma.io/documentation/components/navbar/
 
 # CSS tags:
 https://www.designlabthemes.com/css-tags-how-to-style-post-tags/
+
+# Prettifying forms:
+https://bulma.io/documentation/form/general/#complete-form-example

@@ -33,7 +33,7 @@ class DatalistInput(TextInput):
             html.append(u'<option value="{}">'.format(item))
         html.append(u'</datalist>')
 
-        return HTMLString(u''.join(html))
+        return htmlstring(u''.join(html))
 
 class DatalistField(StringField):
     """
@@ -51,8 +51,37 @@ class DatalistField(StringField):
         else:
             return u''
 
+class EmailInput(TextInput):
+    """
+    Custom widget to create an email input box
+    Depends upon the bulma CSS framework
+    """
+    def __call__(self, field, **kwargs):
+        if field.default is None:
+            value = ""
+        else:
+            value = field.default
+        
+        html = [u'<div class="field">',
+                u'<p class="control has-icons-left has-icons-right">',
+                u'<input list="{field.id}" id="{field.id}" name="{field.name}" value="{value}" class="input" type="email" placeholder="Email">',
+                u'<span class="icon is-small is-left">',
+                u'<i class="fas fa-envelope"></i>',
+                u'</span>',
+                u'<span class="icon is-small is-right">',
+                u'<i class="fas fa-check"></i>',
+                u'</span>',
+                u'</p>']
+        return HTMLString(u''.join(html))
+
+class EmailField(StringField):
+    """
+    Custom field type for email input
+    """
+    widget = EmailInput()
+
 class LoginForm(FlaskForm):
-    email    = StringField('Email Address', [validators.Email(),
+    email    = EmailField('Email Address', [validators.Email(),
         validators.Required(message='Forgot your email address?')])
     password = PasswordField('Password', [
         validators.Required(message='Must provide a password. ;-)')])
@@ -60,7 +89,7 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     user_name = StringField('Username', [validators.Length(min=3, max=25)])
-    email = StringField('Email Address', [validators.Email(),
+    email = EmailField('Email Address', [validators.Email(),
         validators.Required(message="Must provide an email address")])
     password = PasswordField('New Password', [
         validators.DataRequired(),
