@@ -2,3 +2,8 @@ https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-ap
 
 # CSS and login process:
 https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login
+
+https://bulma.io/documentation/components/navbar/
+
+# CSS tags:
+https://www.designlabthemes.com/css-tags-how-to-style-post-tags/

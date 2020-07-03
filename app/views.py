@@ -17,3 +17,7 @@ def developer():
 @app.route('/login2')
 def login2():
     return render_template('login2.html')
+
+@app.route('/projects')
+def projects():
+    return render_template('projects/projects.html')

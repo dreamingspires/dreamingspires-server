@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="title">Dreaming Spires</h1>
-    <h3 class="title">Bringing programming talent to your research.</h3>
-    <p>Are you a...</p>
-    <p><a href="{{ url_for('client') }}">research institution looking for programming talent?</a></p>
-    <p><a href="{{ url_for('developer') }}">developer or student looking for freelance work?</a></p>
+    <div id="topPage">
+        <div style="padding-bottom:60px">
+            <h1 class="title is-1">Dreaming Spires</h1>
+            <p class="subtitle is-3">Bringing programming talent to your research.</p>
+        </div>
+        <p class="is-size-5">Are you a...</p>
+        <div class="columns">
+            <div class="column">
+                <a href="{{ url_for('client') }}"><div class="box">
+                    <p>research institution looking for programming talent?</p>
+                </div></a>
+            </div>
+            <div class="column">
+                <a href="{{ url_for('developer') }}"><div class="box">
+                    <p>developer or student looking for freelance work?</p>
+                </div></a>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        We are a ...
+    </div>
 {% endblock %}
