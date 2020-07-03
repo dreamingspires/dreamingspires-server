@@ -31,7 +31,7 @@ login_manager.login_view = 'auth.login'
 
 nav.Bar('top', [
     nav.Item('Home', 'index'),
-    nav.Item('Register', 'auth.register'),
+    nav.Item('<strong>Sign up</strong>', 'auth.register'),
     nav.Item('Log in', 'auth.login')
 ])
 

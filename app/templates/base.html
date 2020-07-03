@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dreaming Spires</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/108492ddd0.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 </head>
 
 <body>
@@ -62,17 +63,16 @@
                             <div class="navbar-end">
                               <div class="navbar-item">
                                 <div class="buttons">
-                                  <a class="button is-primary">
-                                    <strong>Sign up</strong>
-                                  </a>
-                                  <a class="button is-light">
-                                    Log in
-                                  </a>
+                                    {% for item in nav.top %}
+                                        {% if item.is_active %}
+                                            <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
+                                        {% else %}
+                                            <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
+
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                               </div>
-                            {% for item in nav.top %}
-                                <a href="{{ item.url }}" class="navbar-item">{{ item.label }}</a>
-                            {% endfor %}
                         </div>
                     </div>
                 </div>
