@@ -5,6 +5,8 @@ from depot.manager import DepotManager
 from flask_login import LoginManager
 from flask_principal import Principal
 
+from app.utils import register_template_utils 
+
 # Define the back-end file storage
 DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
 
@@ -20,6 +22,7 @@ db = SQLAlchemy(app)
 nav = Navigation(app)
 login_manager = LoginManager(app)
 principals = Principal(app)
+register_template_utils(app)
 
 # login_manager settings
 from app.mod_auth.models import User

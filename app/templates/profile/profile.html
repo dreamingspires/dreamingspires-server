@@ -1,7 +1,50 @@
 {% extends "base.html" %}
 
+{% from "macros/formhelpers.html" import render_field %}
+
 {% block content %}
-<h1 class="title">
-  Welcome, Anthony!
-</h1>
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="column is-6 is-offset-3">
+    <h3 class="title">Customise your profile</h3>
+    <div class="box">
+        <form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
+          <dl>
+            {{ form.csrf_token }}
+            {{ render_field(form.user_name) }}<br/>
+            {{ render_field(form.email) }}<br/>
+            {{ render_field(form.password) }}<br/>
+            {{ render_field(form.confirm) }}<br/>
+            {{ render_field(form.display_name) }}<br/>
+            {{ render_field(form.description) }}<br/>
+            {{ render_field(form.university_check) }}
+            <div id="div_university">
+            {{ render_field(form.university) }}<br/>
+            </div>
+            {{ render_field(form.upload_cv) }}<br/>
+            {{ render_field(form.accept_tos) }}
+          </dl>
+          <button class="button is-success" type="submit" name="submit">Register</button>
+        </form>
+
+        <script>
+        function yesnoCheck() {
+            if (document.getElementById('university_check').checked) {
+                document.getElementById('div_university').style.display = 'block';
+            } else {
+                document.getElementById('div_university').style.display = 'none';
+            }
+        }
+        yesnoCheck()
+        </script>
+    </div>
+</div>
 {% endblock %}

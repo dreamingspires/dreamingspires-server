@@ -5,3 +5,5 @@ https://github.com/amol-/depot/tree/master/examples/flask
 * Step 1: Basic account setup
             Get sent email link, authorise
 * Step 2: Extended profile setup (clearly denote which fields are required for an interview
+
+Prettier FileField

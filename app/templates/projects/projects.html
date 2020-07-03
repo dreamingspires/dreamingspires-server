@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% from "macros/formhelpers.html" import render_field %}
+##{% from "macros/formhelpers.html" import render_projects_table %}
 
 {% block content %}
     <table class="table">
@@ -14,7 +14,7 @@
             <th>tags</th><!--back-end, front-end, porting-->
         </thead>
         <tbody>
-            {{ render_projects_table(projects_table) }}
+##            {{ render_projects_table(projects_table) }}
             <tr>
                 <td><a>Do a thing!</a></td>
                 <td>2020-07-03</td>
@@ -23,7 +23,7 @@
                 <td>University of Oxford</td>
                 <td>Department of Silly Walks</td>
                 <td><div class="tags">
-                    <a>Python</a> <a>Porting</a>
+                    <a class="tag">Python</a> <a class="tag">Porting</a>
                 </div></td>
             </tr>
         </tbody>

@@ -1,20 +1,9 @@
 {% extends "base.html" %}
-
-{% from "macros/formhelpers.html" import render_field %}
+{% from "macros/bulma_form.html" import render_form %}
 
 {% block content %}
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Login</h3>
-    <div class="box">
-        <form method="POST" action="." accept-charset="UTF-8" role="form">
-          {{ form.csrf_token }}
-          {{ render_field(form.email, placeholder="Your Email Address",
-                autofocus="")  }}
-          {{ render_field(form.password, placeholder="Password") }}
-          {{ render_field(form.remember_me) }}
-          <a role="button" href="">Forgot your password?</a><span class="clearfix"></span>
-          <button class="button is-success" type="submit" name="submit">Sign in</button>
-        </form>  
-    </div>
+    <h3 class="title">Log in</h3>
 </div>
+{{ render_form(form, ".", width=8, mark_required=False, is_horizontal=False) }}
 {% endblock %}
