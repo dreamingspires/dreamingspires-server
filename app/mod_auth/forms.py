@@ -4,7 +4,7 @@ from wtforms import validators, StringField, PasswordField, BooleanField, \
     SelectField, RadioField, TextAreaField, SubmitField
 from wtforms.widgets import TextInput, TextArea, CheckboxInput, \
     FileInput, HTMLString, PasswordInput
-from app.static.university_list import university_list
+from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 

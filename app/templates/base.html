@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dreaming Spires</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <script src="https://kit.fontawesome.com/108492ddd0.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">-->
+    <link rel="stylesheet" href="/static/assets/css/main.css">
+    <script src="https://kit.fontawesome.com/108492ddd0.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-</head>
+</he:d>
 
 <body>
     <section class="hero is-primary is-fullheight">
@@ -59,9 +60,8 @@
                     </div>
 
                     <div class="container">
-                        <div id="navbarMenuHeroA" class="navbar-menu">
-                            <div class="navbar-end">
-                              <div class="navbar-item">
+                        <div class="navbar-end">
+                            <div class="navbar-item">
                                 <div class="buttons">
                                     {% for item in nav.top %}
                                         {% if item.is_active %}
@@ -72,18 +72,16 @@
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
 
-        <div class="hero-body">
-            <div class="container has-text-centered">
-               {% block content %}
-               {% endblock %}
-            </div>
+        <div class="is-fullwidth">
+           {% block content %}
+           {% endblock %}
         </div>
 
         <div class="hero-foot">

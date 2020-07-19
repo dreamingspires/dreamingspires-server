@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in sass/*; do
+    j="${i%%.*}.css"
+    j="app/static/assets/css/${j##*/}"
+    sassc "$i" > "$j"
+    echo "$i -> $j"
+done

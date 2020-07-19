@@ -1,42 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div id="topPage">
-        <div style="padding-bottom:60px">
-            <h1 class="title is-1">Dreaming Spires</h1>
-            <p class="subtitle is-3">Bringing programming talent to your research.</p>
-        </div>
-        <p class="is-size-5">Are you a...</p>
-        <div class="columns">
-            <div class="column">
-                <a href="{{ url_for('client') }}"><div class="box">
-                    <p>research institution looking for programming talent?</p>
-                </div></a>
+    <section class="hero is-primary is-medium is-fullheight-with-navbar">
+        <div class="hero-body is-bg-img" style="background-image: url('/static/assets/images/backgrounds/background.png'); background-position: bottom">
+            <div class="container has-text-centered">
+                <div class="pb-4">
+                    <h1 class="title is-1">Dreaming Spires</h1>
+                    <p class="subtitle is-3">Bringing programming talent to your research.</p>
+                </div>
+                <div class="mt-6">
+                    <p class="is-size-5 mb-4">Are you a...</p>
+                    <div class="columns is-mobile is-centered">
+                        <div class="column is-one-third-desktop has-equal-height">
+                            <a href="{{ url_for('client') }}">
+                                <div class="button is-box-button">
+                                    <p>research institution looking for</p>
+                                    <p>programming talent?</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="column is-one-third-desktop has-equal-height">
+                            <a href="{{ url_for('client') }}">
+                            <a href="{{ url_for('developer') }}"><div class="button is-box-button">
+                                <p>developer or student looking for</p>
+                                <p>freelance work?</p>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="column">
-                <a href="{{ url_for('developer') }}"><div class="box">
-                    <p>developer or student looking for freelance work?</p>
-                </div></a>
-            </div>
         </div>
-    </div>
+    </section>
 
-
-    {% include 'includes/cta.html' %}
-    {% include 'includes/cards.html' %}
-    
-    <div>
-        Collaborative freelance agency
-            Gain access to our first-class technical support and programming skillset
-
-        Writing code to solve interesting research problems
-        
-        Specialising in open source and community-driven work
-
-        With a wide talent pool
-    </div>
+    {% include 'includes/who_are_we.html' %}
+    {% include 'includes/testimonials.html' %}
+    {% include 'includes/portfolio.html' %}
 
     <div>
-    Our portfolio
+        How does it work?
     </div>
 {% endblock %}
