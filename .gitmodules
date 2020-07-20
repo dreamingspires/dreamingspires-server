@@ -1,3 +1,6 @@
 [submodule "modules/bulma"]
 	path = modules/bulma
 	url = https://github.com/jgthms/bulma
+[submodule "modules/bulma-collapsible"]
+	path = modules/bulma-collapsible
+	url = https://github.com/creativebulma/bulma-collapsible

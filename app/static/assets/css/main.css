@@ -7394,6 +7394,17 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
 
+.is-collapsible {
+  height: 0;
+  overflow-y: hidden;
+  transition: height 0.2s ease; }
+  .is-collapsible.is-active {
+    transition: height 0.2s ease; }
+  .is-collapsible.message-body {
+    padding: 0 !important; }
+    .is-collapsible.message-body .message-body-content {
+      padding: 1.25em 1.5em; }
+
 .has-equal-height {
   height: 100%;
   display: flex;

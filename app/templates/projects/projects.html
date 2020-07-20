@@ -3,29 +3,112 @@
 ##{% from "macros/formhelpers.html" import render_projects_table %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-            <th>Project</th>
-            <th>Date Posted</th>
-            <th><abbr title="Estimated Completion Time">ECT</abbr></th>
-            <th>Pay</th>
-            <th>Organisation</th>
-            <th>Department</th>
-            <th>tags</th><!--back-end, front-end, porting-->
-        </thead>
-        <tbody>
-##            {{ render_projects_table(projects_table) }}
-            <tr>
-                <td><a>Do a thing!</a></td>
-                <td>2020-07-03</td>
-                <td>2w</td>
-                <td>£1000</td>
-                <td>University of Oxford</td>
-                <td>Department of Silly Walks</td>
-                <td><div class="tags">
-                    <a class="tag">Python</a> <a class="tag">Porting</a>
-                </div></td>
-            </tr>
-        </tbody>
-    </table>
+<section class="hero is-fullheight-with-navbar">
+    <div class="hero-body" style="position: absolute">
+        <div class="columns">
+        <div class="column is-2 aside">
+        <aside class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a>Dashboard</a></li>
+            <li><a>Marketplace</a></li>
+          </ul>
+          <p class="menu-label">
+            Developer
+          </p>
+          <ul class="menu-list">
+            <li><a href="#collapsible-div-0" data-action="collapse">Current Assignments</a>
+                <div id="collapsible-div-0" class="is-collapsible">
+                <ul>
+                    <li><a>Assignment 1</a></li>
+                    <li><a>Assignment 1</a></li>
+                </ul>
+                </div>
+            </li>
+            <li><a>Past Assignments</a></li>
+            <li><a>Payroll</a></li>
+          </ul>
+          <p class="menu-label">
+            Organisations
+          </p>
+          <ul class="menu-list">
+            <li><a href="#collapsible-div-1" data-action="collapse"> University of Oxford</a>
+                <div id="collapsible-div-1" class="is-collapsible">
+                <ul>
+                    <li><a>Department of Computer Science</a>
+                        <ul>
+                            <li><a>Test 1</a>
+                            <li><a>Test 2</a>
+                        </ul>
+                    </li>
+                    <li><a>Department of Engineering</a></li>
+                </ul>
+                </div>
+            </li>
+          </ul>
+        </aside>
+        </div>
+            </aside>
+
+            <main class="column main">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
+                  </ul>
+                </nav>
+                        <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="title has-text-primary"><i class="fa fa-tachometer"></i> Dashboard</div>
+                    </div>
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <button type="button" class="button is-small">
+                        March 8, 2017 - April 6, 2017
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+            <table class="table">
+                <thead>
+                    <th>Project</th>
+                    <th>Date Posted</th>
+                    <th><abbr title="Estimated Completion Time">ECT</abbr></th>
+                    <th>Pay</th>
+                    <th>Organisation</th>
+                    <th>Department</th>
+                    <th>tags</th><!--back-end, front-end, porting-->
+                </thead>
+                <tbody>
+        ##            {{ render_projects_table(projects_table) }}
+                    <tr>
+                        <td><a>Do a thing!</a></td>
+                        <td>2020-07-03</td>
+                        <td>2w</td>
+                        <td>£1000</td>
+                        <td>University of Oxford</td>
+                        <td>Department of Silly Walks</td>
+                        <td><div class="tags">
+                            <a class="tag">Python</a> <a class="tag">Porting</a>
+                        </div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            </main>
+        </div>
+    </div>
+</section>
+<script>
+    const collapsibles = document.getElementsByClassName('is-collapsible');
+    for (var i=0; i<collapsibles.length; ++i) {
+        new bulmaCollapsible(collapsibles[i]);
+    };
+</script>
+
 {% endblock %}
