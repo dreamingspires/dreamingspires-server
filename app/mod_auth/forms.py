@@ -44,8 +44,7 @@ class RegisterForm(FlaskForm):
     university = DatalistField('', \
         university_list, default=None,
         render_kw={'placeholder': 'Enter your university'})
-    upload_cv = FileField('Upload your CV (optional, .pdf only)', validators=[
-            validators.DataRequired()])
+    upload_cv = FileField('Upload your CV (optional, .pdf only)')
     accept_tos = BooleanField('I accept the Terms of Service', [
         validators.DataRequired()])
     submit = SubmitField('Register', render_kw={'class': 'button is-success'})

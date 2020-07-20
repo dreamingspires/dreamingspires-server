@@ -11,6 +11,9 @@ class DatalistInput(TextInput):
         super().__init__()
 
     def __call__(self, field, **kwargs):
+        id=f'{field.id}_list'
+        kwargs['list'] = f'{id}'
+        
         super_html = super().__call__(field, **kwargs)
         kwargs.setdefault('id', field.id)
         kwargs.setdefault('name', field.name)
@@ -23,10 +26,8 @@ class DatalistInput(TextInput):
         else:
             value = field.default
 
-        print(kwargs)
-            
         html = [super_html,
-                f'<datalist class="" id="{field.id}_list"']
+                f'<datalist class="" id="{id}">']
         for item in field.datalist:
             html.append(u'<option value="{}">'.format(item))
         html.append(u'</datalist>')
