@@ -25,6 +25,8 @@ mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 @mod_auth.route('/home/', methods=['GET', 'POST'])
 def home():
+    return render_template('projects/projects.html')
+
     return 'Successfully logged in'
 
 # Set the route and accepted methods

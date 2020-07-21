@@ -1,73 +1,135 @@
+import pdb
 # Import flask dependencies
-from flask import Blueprint, request, render_template, \
+from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
-
-# Import password / encryption helper tools
-from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug import secure_filename
+from flask_navigation import Navigation
 
 # Import the database object from the main app module
 from app import db
 
-# Import module forms
-from app.mod_auth.forms import LoginForm, RegisterForm
-
-# Import module models (i.e. User)
-from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
-    Organisation, Project
-
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
+mod_projects = Blueprint('projects', __name__, url_prefix='/')
+
+sidebar = Navigation()
+sidebar.Bar('sidebar', [
+    sidebar.Item('Dashboard', '')
+])
 
 
-@mod_auth.route('/projects/', methods=['GET', 'POST'])
+class MenuElement():
+    def render(self):
+        return ''
+
+class MenuLabel(MenuElement):
+    def __init__(self, label):
+        self.label = label
+
+    def render(self):
+        return """
+            <p class="menu-label">
+                {}
+            </p>
+            """.format(self.label)
+
+class MenuLink(MenuElement):
+    def __init__(self, label, href=""):
+        self.label = label
+        self.href = href
+
+    def render(self):
+        return """
+        <a href={}>
+            {}
+        </a>
+        """.format(self.href, self.label)
+
+class MenuList(MenuElement):
+    def __init__(self, head=None, children=[]):
+        self.head = head
+        self.children = children
+
+    def render(self):
+        lines = [self.head.render()] if self.head is not None else []
+        lines.append('<ul class="menu-list">')
+        for child in self.children:
+            lines.append('<li>')
+            lines.append(child.render())
+            lines.append('</li>')
+        lines.append('</ul>')
+        return '\n'.join(lines)
+
+# TODO: technically this could be formatted better, if this was ever to be
+# expanded fully into a flask plugin
+# This makes use of the bulma-collapsible extension
+class MenuCollapsibleList(MenuElement):
+    def __init__(self, collapsible_id, label, href, children):
+        self.collapsible_id = collapsible_id
+        self.label = label
+        self.href = href
+        self.children = children
+
+    def render(self):
+        name = f'collapsible-div-{self.collapsible_id}'
+        print(name)
+
+        lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
+        lines.append(f'<div id="{name}" class="is-collapsible">')
+        lines.append('<ul>')
+        for child in self.children:
+            lines.append('<li>')
+            lines.append(child.render())
+            lines.append('</li>')
+        lines.append('</ul>')
+        lines.append('</div>')
+        print(lines)
+        return '\n'.join(lines)
+
+class Menu(MenuElement):
+    def __init__(self, children=[]):
+        self.children = children
+
+    def render(self):
+        lines = ['<aside class="menu">']
+        for child in self.children:
+            lines.append(child.render())
+        lines.append('</aside>')
+        return '\n'.join(lines)
+
+# TODO: think about how to tell if a link is active or not
+def generate_sidebar():
+    menu = Menu([
+        MenuLabel('General'),
+        MenuList(None, [
+            MenuLink('Dashboard', 'dashboard'), # TODO: resolve URLs properly
+            MenuLink('Marketplace', 'marketplace'),
+        ]),
+        MenuLabel('Developer'),
+        MenuList(None, [
+            MenuCollapsibleList(0, 'Current Assignments', '', [
+                MenuLink('Assignment 1', ''),
+                MenuLink('Assignment 2', '')
+            ]),
+            MenuLink('Past Assignments'),
+            MenuLink('Payroll')
+        ]),
+        MenuLabel('Organisations'),
+        MenuList(None, [
+            MenuCollapsibleList(1, 'University of Oxford', '', [
+		MenuList(MenuLink('Dept. of Computer Science', ''), [
+		    MenuLink('Test 1', ''),
+		    MenuLink('Test 2', '')
+		])
+	    ])
+	])
+    ])
+    return menu.render()
+
+
+@mod_projects.route('/projects', methods=['GET', 'POST'])
 def projects():
     # Ensure the user is logged in
-    assert
 
-@mod_auth.route('/home/', methods=['GET', 'POST'])
-def home():
-    return 'Successfully logged in'
+    # Generate the appropriate sidebar
 
-# Set the route and accepted methods
-@mod_auth.route('/login/', methods=['GET', 'POST'])
-def login():
-    # If sign in form is submitted
-    form = LoginForm(request.form)
-
-    # Verify the sign in form
-    if form.validate_on_submit():
-        print('form validated')
-        user = User.query.filter_by(primary_email=form.email.data).first()
-        if user and check_password_hash(user.password, form.password.data):
-            session['user_id'] = user.id
-            session['logged_in'] = True
-            return redirect(url_for('auth.home'))
-
-        flash('Wrong email or password', 'error-message')
-
-    return render_template('auth/signin.html', form=form)
-
-@mod_auth.route('/register/', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        # Check username is not already taken
-        if User.query.filter_by(primary_email=form.email.data).first():
-            flash('An account has already been registered with this email address.')
-        elif User.query.filter_by(user_name=form.user_name.data).first():
-            flash('Username already taken.')
-        else:
-            cv = CV(document=form.upload_cv.data)
-            dev = Developer(cv=cv)
-            display_name2 = form.display_name.data if form.display_name.data != '' \
-                else form.user_name.data
-            user = User(user_name=form.user_name.data,
-                password=generate_password_hash(form.password.data),
-                display_name=display_name2, description=form.description.data,
-                primary_email=form.email.data, developer=dev)
-                #email_addresses=[email], developer=dev)
-            db.session.add(user)
-            db.session.commit()
-            return redirect(url_for('auth.login'))
-    return render_template('auth/register.html', form=form, entries=list(range(1000)))
+    sidebar = generate_sidebar()
+    return render_template('projects/projects.html', sidebar=sidebar)

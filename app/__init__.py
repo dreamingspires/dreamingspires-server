@@ -35,7 +35,8 @@ login_manager.login_view = 'auth.login'
 nav.Bar('start', [
     nav.Item('Home', 'index'),
     nav.Item('About', 'about'),
-    nav.Item('Contact', 'contact')
+    nav.Item('Contact', 'contact'),
+    nav.Item('Projects', 'projects.projects')
 ])
 
 nav.Bar('end', [
@@ -54,10 +55,12 @@ def not_found(error):
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.mod_auth.controllers import mod_auth as auth_module
 from app.mod_profile.controllers import mod_profile as profile_module
+from app.mod_projects.controllers import mod_projects as projects_module
 
 # Register blueprint
 app.register_blueprint(auth_module)
 app.register_blueprint(profile_module)
+app.register_blueprint(projects_module)
 
 # Build the database:
 # This will create the database file using SQLAlchemy

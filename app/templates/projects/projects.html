@@ -7,6 +7,8 @@
     <div class="hero-body" style="position: absolute">
         <div class="columns">
         <div class="column is-2 aside">
+        {{ sidebar|safe }}
+        <!--
         <aside class="menu">
           <p class="menu-label">
             General
@@ -36,9 +38,9 @@
           <ul class="menu-list">
             <li><a href="#collapsible-div-1" data-action="collapse"> University of Oxford</a>
                 <div id="collapsible-div-1" class="is-collapsible">
-                <ul>
+                <ul class="menu-list">
                     <li><a>Department of Computer Science</a>
-                        <ul>
+                        <ul class="menu-list">
                             <li><a>Test 1</a>
                             <li><a>Test 2</a>
                         </ul>
@@ -49,6 +51,7 @@
             </li>
           </ul>
         </aside>
+        -->
         </div>
             </aside>
 
