@@ -32,8 +32,13 @@ def load_user(uid):
 login_manager.login_view = 'auth.login'
 
 
-nav.Bar('top', [
+nav.Bar('start', [
     nav.Item('Home', 'index'),
+    nav.Item('About', 'about'),
+    nav.Item('Contact', 'contact')
+])
+
+nav.Bar('end', [
     nav.Item('<strong>Sign up</strong>', 'auth.register'),
     nav.Item('Log in', 'auth.login')
 ])

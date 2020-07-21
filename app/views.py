@@ -6,6 +6,14 @@ from app import app, nav
 def index():
     return render_template('public/index.html')
 
+@app.route('/about')
+def about():
+    return render_template('public/about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('public/contact.html')
+
 @app.route('/client')
 def client():
     return render_template('public/client.html')
