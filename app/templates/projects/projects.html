@@ -6,54 +6,9 @@
 <section class="hero is-fullheight-with-navbar">
     <div class="hero-body" style="position: absolute">
         <div class="columns">
-        <div class="column is-2 aside">
-        {{ sidebar|safe }}
-        <!--
-        <aside class="menu">
-          <p class="menu-label">
-            General
-          </p>
-          <ul class="menu-list">
-            <li><a>Dashboard</a></li>
-            <li><a>Marketplace</a></li>
-          </ul>
-          <p class="menu-label">
-            Developer
-          </p>
-          <ul class="menu-list">
-            <li><a href="#collapsible-div-0" data-action="collapse">Current Assignments</a>
-                <div id="collapsible-div-0" class="is-collapsible">
-                <ul>
-                    <li><a>Assignment 1</a></li>
-                    <li><a>Assignment 1</a></li>
-                </ul>
-                </div>
-            </li>
-            <li><a>Past Assignments</a></li>
-            <li><a>Payroll</a></li>
-          </ul>
-          <p class="menu-label">
-            Organisations
-          </p>
-          <ul class="menu-list">
-            <li><a href="#collapsible-div-1" data-action="collapse"> University of Oxford</a>
-                <div id="collapsible-div-1" class="is-collapsible">
-                <ul class="menu-list">
-                    <li><a>Department of Computer Science</a>
-                        <ul class="menu-list">
-                            <li><a>Test 1</a>
-                            <li><a>Test 2</a>
-                        </ul>
-                    </li>
-                    <li><a>Department of Engineering</a></li>
-                </ul>
-                </div>
-            </li>
-          </ul>
-        </aside>
-        -->
-        </div>
-            </aside>
+            <div class="column is-2 aside">
+                {{ sidebar|safe }}
+            </div>
 
             <main class="column main">
                 <nav class="breadcrumb is-small" aria-label="breadcrumbs">
@@ -85,7 +40,7 @@
                     <th>Pay</th>
                     <th>Organisation</th>
                     <th>Department</th>
-                    <th>tags</th><!--back-end, front-end, porting-->
+                    <th>tags</th>
                 </thead>
                 <tbody>
         ##            {{ render_projects_table(projects_table) }}
@@ -111,6 +66,17 @@
     const collapsibles = document.getElementsByClassName('is-collapsible');
     for (var i=0; i<collapsibles.length; ++i) {
         new bulmaCollapsible(collapsibles[i]);
+    };
+
+    // Collapse on hover functionality
+    function mouseover_expand(elem) {
+        const c = elem.querySelector('.is-collapsible');
+        c.bulmaCollapsible('expand');
+    };
+
+    function mouseover_collapse(elem) {
+        const c = elem.querySelector('.is-collapsible');
+        c.bulmaCollapsible('collapse');
     };
 </script>
 

@@ -9,10 +9,12 @@ $beige-lighter: #EFF0EB;
 $cyan-light: #71C0F4;
 $cyan-lighter: #B6DFF9;
 
+$sky-blue: #65C8D0;
+
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
 // Update Bulma's global variables
-$primary: $cyan-light;
+$primary: $sky-blue;
 $navbar-breakpoint: $mobile;
 
 // Import Bulma

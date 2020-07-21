@@ -62,17 +62,22 @@ class MenuList(MenuElement):
 # expanded fully into a flask plugin
 # This makes use of the bulma-collapsible extension
 class MenuCollapsibleList(MenuElement):
-    def __init__(self, collapsible_id, label, href, children):
+    def __init__(self, collapsible_id, label, href, children, mouseover=False):
         self.collapsible_id = collapsible_id
         self.label = label
         self.href = href
         self.children = children
+        self.mouseover = mouseover
 
     def render(self):
         name = f'collapsible-div-{self.collapsible_id}'
         print(name)
 
-        lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
+        if self.mouseover:
+            lines = ['<div onmouseover="mouseover_expand(this)" onmouseout="mouseover_collapse(this)">']
+            lines.append(f'<a href="{self.href}">{self.label}</a>')
+        else:
+            lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
         lines.append(f'<div id="{name}" class="is-collapsible">')
         lines.append('<ul>')
         for child in self.children:
@@ -81,6 +86,8 @@ class MenuCollapsibleList(MenuElement):
             lines.append('</li>')
         lines.append('</ul>')
         lines.append('</div>')
+        if self.mouseover:
+            lines.append('</div>')
         print(lines)
         return '\n'.join(lines)
 
@@ -108,7 +115,7 @@ def generate_sidebar():
             MenuCollapsibleList(0, 'Current Assignments', '', [
                 MenuLink('Assignment 1', ''),
                 MenuLink('Assignment 2', '')
-            ]),
+            ], mouseover=True),
             MenuLink('Past Assignments'),
             MenuLink('Payroll')
         ]),
