@@ -4,133 +4,60 @@ from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
 from flask_navigation import Navigation
 
+import app.extensions.sidebar as sb
+import app.extensions.jobs as jobs
+
 # Import the database object from the main app module
 from app import db
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_projects = Blueprint('projects', __name__, url_prefix='/')
 
-sidebar = Navigation()
-sidebar.Bar('sidebar', [
-    sidebar.Item('Dashboard', '')
-])
-
-
-class MenuElement():
-    def render(self):
-        return ''
-
-class MenuLabel(MenuElement):
-    def __init__(self, label):
-        self.label = label
-
-    def render(self):
-        return """
-            <p class="menu-label">
-                {}
-            </p>
-            """.format(self.label)
-
-class MenuLink(MenuElement):
-    def __init__(self, label, href=""):
-        self.label = label
-        self.href = href
-
-    def render(self):
-        return """
-        <a href={}>
-            {}
-        </a>
-        """.format(self.href, self.label)
-
-class MenuList(MenuElement):
-    def __init__(self, head=None, children=[]):
-        self.head = head
-        self.children = children
-
-    def render(self):
-        lines = [self.head.render()] if self.head is not None else []
-        lines.append('<ul class="menu-list">')
-        for child in self.children:
-            lines.append('<li>')
-            lines.append(child.render())
-            lines.append('</li>')
-        lines.append('</ul>')
-        return '\n'.join(lines)
-
-# TODO: technically this could be formatted better, if this was ever to be
-# expanded fully into a flask plugin
-# This makes use of the bulma-collapsible extension
-class MenuCollapsibleList(MenuElement):
-    def __init__(self, collapsible_id, label, href, children, mouseover=False):
-        self.collapsible_id = collapsible_id
-        self.label = label
-        self.href = href
-        self.children = children
-        self.mouseover = mouseover
-
-    def render(self):
-        name = f'collapsible-div-{self.collapsible_id}'
-        print(name)
-
-        if self.mouseover:
-            lines = ['<div onmouseover="mouseover_expand(this)" onmouseout="mouseover_collapse(this)">']
-            lines.append(f'<a href="{self.href}">{self.label}</a>')
-        else:
-            lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
-        lines.append(f'<div id="{name}" class="is-collapsible">')
-        lines.append('<ul>')
-        for child in self.children:
-            lines.append('<li>')
-            lines.append(child.render())
-            lines.append('</li>')
-        lines.append('</ul>')
-        lines.append('</div>')
-        if self.mouseover:
-            lines.append('</div>')
-        print(lines)
-        return '\n'.join(lines)
-
-class Menu(MenuElement):
-    def __init__(self, children=[]):
-        self.children = children
-
-    def render(self):
-        lines = ['<aside class="menu">']
-        for child in self.children:
-            lines.append(child.render())
-        lines.append('</aside>')
-        return '\n'.join(lines)
-
 # TODO: think about how to tell if a link is active or not
 def generate_sidebar():
-    menu = Menu([
-        MenuLabel('General'),
-        MenuList(None, [
-            MenuLink('Dashboard', 'dashboard'), # TODO: resolve URLs properly
-            MenuLink('Marketplace', 'marketplace'),
+    menu = sb.Menu([
+        sb.MenuLabel('General'),
+        sb.MenuList(None, [
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard', 'dashboard'), # TODO: resolve URLs properly
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-store-alt"></i></span> Marketplace', 'marketplace'),
         ]),
-        MenuLabel('Developer'),
-        MenuList(None, [
-            MenuCollapsibleList(0, 'Current Assignments', '', [
-                MenuLink('Assignment 1', ''),
-                MenuLink('Assignment 2', '')
+        sb.MenuLabel('Developer'),
+        sb.MenuList(None, [
+            sb.MenuCollapsibleList(0, '<span class="icon is-small"><i class="fa fa-clipboard-list"></i></span> Current Assignments', '', [
+                sb.MenuLink('Assignment 1', ''),
+                sb.MenuLink('Assignment 2', '')
             ], mouseover=True),
-            MenuLink('Past Assignments'),
-            MenuLink('Payroll')
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-clipboard-check"></i></span> Past Assignments'),
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-money-check-alt"></i></span> Payroll')
         ]),
-        MenuLabel('Organisations'),
-        MenuList(None, [
-            MenuCollapsibleList(1, 'University of Oxford', '', [
-		MenuList(MenuLink('Dept. of Computer Science', ''), [
-		    MenuLink('Test 1', ''),
-		    MenuLink('Test 2', '')
+        sb.MenuLabel('Organisations'),
+        sb.MenuList(None, [
+            sb.MenuCollapsibleList(1, '<span class="icon is-small"><i class="fa fa-university"></i></span> University of Oxford', '', [
+		sb.MenuList(sb.MenuLink('<span class="icon is-small"><i class="fa fa-desktop"></i></span> Dept. of Computer Science', ''), [
+		    sb.MenuLink('Test 1', ''),
+		    sb.MenuLink('Test 2', '')
 		])
-	    ])
+	    ], mouseover=True)
 	])
     ])
     return menu.render()
 
+sample_job = {
+    'job_link': 'broken_job_link',
+    'title': 'Do a thing (generated)',
+    'date': '2020-07-03',
+    'ect': '2w',
+    'cost': '£1000',
+    'organisation': 'University of Oxford',
+    'organisation_link': 'broken_organisation_link',
+    'department': 'Dept. of Computer Science',
+    'department_link': 'broken_department_link',
+    'tags': [('Python', 'link', 'broken_tag_link'), ('Porting', None, 'broken_tag_link')],
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.',
+    'colour': 'warning',
+    'image_link': None
+    #'image_link': 'https://i.ebayimg.com/images/i/400818616312-0-1/s-l1000.jpg'
+}
 
 @mod_projects.route('/projects', methods=['GET', 'POST'])
 def projects():
@@ -139,4 +66,5 @@ def projects():
     # Generate the appropriate sidebar
 
     sidebar = generate_sidebar()
-    return render_template('projects/projects.html', sidebar=sidebar)
+    sample_job_listing = jobs.JobListing(**sample_job)
+    return render_template('projects/projects.html', sidebar=sidebar, job_listings=[sample_job_listing.render()])

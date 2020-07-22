@@ -4,9 +4,9 @@
 
 {% block content %}
 <section class="hero is-fullheight-with-navbar">
-    <div class="hero-body" style="position: absolute">
+    <div class="hero-body has-background-primary-light" style="position: absolute">
         <div class="columns">
-            <div class="column is-2 aside">
+            <div class="column is-2 aside has-background-primary">
                 {{ sidebar|safe }}
             </div>
 
@@ -32,52 +32,17 @@
                   </div>
                 </div>
 
-            <table class="table">
-                <thead>
-                    <th>Project</th>
-                    <th>Date Posted</th>
-                    <th><abbr title="Estimated Completion Time">ECT</abbr></th>
-                    <th>Pay</th>
-                    <th>Organisation</th>
-                    <th>Department</th>
-                    <th>tags</th>
-                </thead>
-                <tbody>
-        ##            {{ render_projects_table(projects_table) }}
-                    <tr>
-                        <td><a>Do a thing!</a></td>
-                        <td>2020-07-03</td>
-                        <td>2w</td>
-                        <td>£1000</td>
-                        <td>University of Oxford</td>
-                        <td>Department of Silly Walks</td>
-                        <td><div class="tags">
-                            <a class="tag">Python</a> <a class="tag">Porting</a>
-                        </div></td>
-                    </tr>
-                </tbody>
-            </table>
-
+                <article class="message">
+                    <div class="message-header">
+                        <p>Marketplace</p>
+                    </div>
+                    {% for job in job_listings %}
+                    {{ job|safe }}
+                    {% endfor %}
+                </article>
             </main>
         </div>
     </div>
 </section>
-<script>
-    const collapsibles = document.getElementsByClassName('is-collapsible');
-    for (var i=0; i<collapsibles.length; ++i) {
-        new bulmaCollapsible(collapsibles[i]);
-    };
-
-    // Collapse on hover functionality
-    function mouseover_expand(elem) {
-        const c = elem.querySelector('.is-collapsible');
-        c.bulmaCollapsible('expand');
-    };
-
-    function mouseover_collapse(elem) {
-        const c = elem.querySelector('.is-collapsible');
-        c.bulmaCollapsible('collapse');
-    };
-</script>
-
+<script src="/static/assets/js/sidebar.js"></script>
 {% endblock %}
