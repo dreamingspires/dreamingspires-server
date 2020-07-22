@@ -1,4 +1,8 @@
+from pprint import pprint
 class MenuElement():
+    def __init__(self, elem_id=None):
+        self.elem_id = elem_id
+
     def render(self):
         return ''
 
@@ -12,6 +16,27 @@ class MenuLabel(MenuElement):
                 {}
             </p>
             """.format(self.label)
+
+class MenuCheckbox(MenuElement):
+    def __init__(self, prelabel, label, *args, **kwargs):
+        self.prelabel = prelabel
+        self.label = label
+        super().__init__(*args, **kwargs)
+
+    def render(self):
+        return """
+            <label for="{}">
+                <a>
+                    {}
+                    <label class="checkbox">
+                        <input type="checkbox" id={}>
+                            {}
+                        </input>
+                    </label>
+                </a>
+            </label>
+        """.format(self.elem_id, self.prelabel, self.elem_id, self.label)
+
 
 class MenuLink(MenuElement):
     def __init__(self, label, href=""):
@@ -43,23 +68,35 @@ class MenuList(MenuElement):
 # TODO: technically this could be formatted better, if this was ever to be
 # expanded fully into a flask plugin
 # This makes use of the bulma-collapsible extension
+# Replace the 'label' with a head element that gets rendered
+# Include kwargs
 class MenuCollapsibleList(MenuElement):
-    def __init__(self, collapsible_id, label, href, children, mouseover=False):
+    def __init__(self, collapsible_id, head, href, children, mouseover=False):
         self.collapsible_id = collapsible_id
-        self.label = label
+        self.is_label = isinstance(head, str)
+        if isinstance(head, str):
+            self.label = head
+        else:
+            self.label = head.render()
         self.href = href
         self.children = children
         self.mouseover = mouseover
 
     def render(self):
         name = f'collapsible-div-{self.collapsible_id}'
-        print(name)
 
         if self.mouseover:
             lines = ['<div onmouseover="mouseover_expand(this)" onmouseout="mouseover_collapse(this)">']
-            lines.append(f'<a href="{self.href}">{self.label}</a>')
+            if self.is_label:
+                lines.append(f'<a href="{self.href}">{self.label}</a>')
+            else:
+                lines.append(self.label)
         else:
-            lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
+            if self.is_label:
+                lines = [f'<a href="#{name}" data-action="collapse">{self.label}</a>']
+            else:
+                raise NotImplementedError('Can\'t use non-label header to open menu')
+
         lines.append(f'<div id="{name}" class="is-collapsible">')
         lines.append('<ul>')
         for child in self.children:
@@ -70,7 +107,7 @@ class MenuCollapsibleList(MenuElement):
         lines.append('</div>')
         if self.mouseover:
             lines.append('</div>')
-        print(lines)
+        pprint(lines)
         return '\n'.join(lines)
 
 class Menu(MenuElement):

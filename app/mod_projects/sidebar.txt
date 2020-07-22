@@ -1,0 +1,34 @@
+= Organisation =
+University of Oxford []
+    Dept. of Computer Science []
+    Dept. of Engineering []
+
+= Language =
+[ ] Python
+[ ] C
+
+= Pay =
+£[ ] to £[ ] >
+
+= Task Difficulty =
+[ ] Beginner
+[ ] Intermediate
+[ ] Advanced
+
+= Estimated Task Duration *for a competent developer, in days =
+[ ] <1d
+[ ] a few days
+[ ] a week
+[ ] a few weeks
+[ ] several months
+[ ] long-term project
+
+= Tags = (The agency adds the tags)
+[ ] Porting
+[ ] Web scraping
+[ ] Data analysis
+[ ] Security
+[ ] Web design
+[ ] Web server
+[ ] Command-line tools
+[ ] GUI

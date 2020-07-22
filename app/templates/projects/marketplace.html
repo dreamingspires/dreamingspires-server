@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+##{% from "macros/formhelpers.html" import render_projects_table %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="hero-body has-background-primary-light" style="position: absolute; padding: 0">
+        <div class="columns">
+            <div class="column is-2 aside has-background-primary">
+                {{ sidebar|safe }}
+                <div>
+                    £<input class="input" type="text"> to 
+                    £<input class="input" type="text"> Go!
+                </div>
+            </div>
+
+            <main class="column main">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Marketplace</a></li>
+                  </ul>
+                </nav>
+                        <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="title has-text-primary"><i class="fa fa-store-alt"></i> Marketplace</div>
+                    </div>
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <button type="button" class="button is-small">
+                        March 8, 2017 - April 6, 2017
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <article class="message">
+                    <div class="message-header">
+                        <p>Marketplace</p>
+                    </div>
+                    {% for job in job_listings %}
+                    {{ job|safe }}
+                    {% endfor %}
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+<script src="/static/assets/js/sidebar.js"></script>
+{% endblock %}

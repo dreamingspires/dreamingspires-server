@@ -36,7 +36,7 @@ nav.Bar('start', [
     nav.Item('Home', 'index'),
     nav.Item('About', 'about'),
     nav.Item('Contact', 'contact'),
-    nav.Item('Projects', 'projects.projects')
+    nav.Item('Marketplace', 'projects.marketplace')
 ])
 
 nav.Bar('end', [

@@ -21,7 +21,7 @@ class JobListing():
     def render(self):
         template = """
             {% if colour is not none %}
-            <div href="{{ job_link }}" class="box has-background-{{ colour }}">
+            <div href="{{ job_link }}" class="box" style="background-color: {{ colour }}">
             {% else %}
             <div href="{{ job_link }}" class="box">
             {% endif %}
@@ -44,7 +44,9 @@ class JobListing():
                                 <small><i>{{ date }}</i></small>
                                 <br>
                                 <abbr title="Current market price">{{ cost }}</abbr>
-                                <abbr title="Estimated completion time">{{ ect }}</abbr>
+                                &nbsp&nbsp&nbsp&nbsp
+                                <abbr title="Estimated completion time">Est. completion time ≈ {{ ect }}</abbr>
+                                <br>
                                 {% for (tag_text, tag_colour, tag_link) in tags %}
                                 {% if tag_colour is not none %}
                                 <a href="{{ tag_link }}" class="tag has-background-{{ tag_colour }}">
