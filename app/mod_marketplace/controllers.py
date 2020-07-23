@@ -141,6 +141,9 @@ sample_job_2 = {
 }
 
 def create_job_listing(project):
+    # Add the project back into the session, thus permitting lazy-loading
+    # of its related classes
+    db.session.add(project)
     dep = project.department
     org = dep.organisation
 
@@ -177,6 +180,4 @@ def marketplace():
     projects = Project.query.limit(5).all()
     job_listings = [create_job_listing(project).render() for project in projects]
 
-    #sample_job_listing = jobs.JobListing(**sample_job)
-    #sample_job_listing_2 = jobs.JobListing(**sample_job_2)
     return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=job_listings)

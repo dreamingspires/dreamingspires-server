@@ -23,7 +23,7 @@ LEN_TAG = 20
 # Define a base model for other database tables to inherit
 class Base(db.Model):
     __abstract__  = True
-    id = db.Column(db.String(LEN_UUID), primary_key=True, default=uuid.uuid4().hex)
+    id = db.Column(db.String(LEN_UUID), primary_key=True, default=lambda:uuid.uuid4().hex)
     date_created = db.Column(db.DateTime,  default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(),
                                            onupdate=db.func.current_timestamp())
@@ -144,7 +144,7 @@ class Project(Base):
     description = db.Column(db.String(LEN_DESCRIPTION), nullable=False)
     ect = db.Column(db.Integer)
     price = db.Column(db.Numeric(LEN_PRICE, 2))
-    display_image = db.String(LEN_URL)
+    display_image = db.Column(db.String(LEN_URL))
     tags = db.relationship('ProjectTag', secondary=project_tags_map,
         backref='projects')
 
