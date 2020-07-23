@@ -140,13 +140,43 @@ sample_job_2 = {
     'image_link': 'https://i.ebayimg.com/images/i/400818616312-0-1/s-l1000.jpg'
 }
 
+def create_job_listing(project):
+    dep = project.department
+    org = dep.organisation
+
+    # Generate tags tuples
+    tags = [(tag.display_name, tag.colour, 'broken_tag_link') for tag \
+            in project.tags]
+
+    return jobs.JobListing(
+        job_link='broken_job_link',
+        title=project.display_name,
+        date=project.date_created.strftime('%Y-%M-%d'),
+        ect=str(project.ect) if project.ect is not None else '',
+        cost=str(project.price),
+        organisation=org.display_name,
+        organisation_link=url_for('organisations.organisation', 
+            organisation_id=org.id),
+        department=dep.display_name,
+        department_link=url_for('organisations.department',
+            organisation_id=org.id, department_id=dep.id),
+        tags=tags,
+        description=project.description,
+        colour='#e0ffff',
+        image_link=project.display_image
+    )
+
 @mod_marketplace.route('/marketplace', methods=['GET', 'POST'])
 def marketplace():
     # Ensure the user is logged in
 
     # Generate the appropriate sidebar
-
     sidebar = generate_searchbar()
-    sample_job_listing = jobs.JobListing(**sample_job)
-    sample_job_listing_2 = jobs.JobListing(**sample_job_2)
-    return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=[sample_job_listing.render(), sample_job_listing_2.render()]*2)
+
+    # Get some job listings
+    projects = Project.query.limit(5).all()
+    job_listings = [create_job_listing(project).render() for project in projects]
+
+    #sample_job_listing = jobs.JobListing(**sample_job)
+    #sample_job_listing_2 = jobs.JobListing(**sample_job_2)
+    return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=job_listings)
