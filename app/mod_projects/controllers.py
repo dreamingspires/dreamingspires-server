@@ -1,4 +1,3 @@
-import pdb
 # Import flask dependencies
 from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
@@ -9,6 +8,9 @@ import app.extensions.jobs as jobs
 
 # Import the database object from the main app module
 from app import db
+
+# Import module models (i.e. Projects)
+from app.models import Project
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_projects = Blueprint('projects', __name__, url_prefix='/')
@@ -51,6 +53,10 @@ def generate_searchbar():
                 sb.MenuCheckbox('', 'Dept. of Engineering', 'checkbox_university-of-oxford_department-of-engineering'),
                 sb.MenuCheckbox('', 'Dept. of Anthropology', 'checkbox_university-of-oxford_department-of-anthropology'),
             ], mouseover=True)
+        ]),
+        sb.MenuLabel('Pay'),
+        sb.MenuList(None, [
+            sb.MenuNumericRange('£', ' to £', 'Go!')
         ]),
         sb.MenuLabel('Language'),
         sb.MenuList(None, [

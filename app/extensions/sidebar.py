@@ -17,6 +17,29 @@ class MenuLabel(MenuElement):
             </p>
             """.format(self.label)
 
+class MenuNumericRange(MenuElement):
+    def __init__(self, pre_label, mid_label, post_label):
+        self.pre_label = pre_label
+        self.mid_label = mid_label
+        self.post_label = post_label
+
+    def render(self):
+        return """
+        <a>
+            <div class="has-text-dark">
+                <span style="">{}</span>
+                <input style="width: 40px" class="input" type="text">{}
+                <input style="width: 40px" class="input" type="text">
+                <button class="button is-success">
+                    <span class="icon is-small">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                    {}
+                </button>
+            </div>
+        </a>
+        """.format(self.pre_label, self.mid_label, self.post_label)
+
 class MenuCheckbox(MenuElement):
     def __init__(self, prelabel, label, *args, **kwargs):
         self.prelabel = prelabel

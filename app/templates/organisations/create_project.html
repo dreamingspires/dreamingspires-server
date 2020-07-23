@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% from "macros/bulma_form.html" import render_form %}
+
+{% block content %}
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="column is-6 is-offset-3">
+    <h3 class="title">Create new project</h3>
+</div>
+{{ render_form(form, ".", width=8, mark_required=False, is_horizontal=False) }}
+{% endblock %}

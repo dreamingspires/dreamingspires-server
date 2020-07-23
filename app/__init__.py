@@ -25,7 +25,7 @@ principals = Principal(app)
 register_template_utils(app)
 
 # login_manager settings
-from app.mod_auth.models import User
+from app.models import User
 @login_manager.user_loader
 def load_user(uid):
     return User.query.filter_by(id=uid).first()
@@ -56,11 +56,14 @@ def not_found(error):
 from app.mod_auth.controllers import mod_auth as auth_module
 from app.mod_profile.controllers import mod_profile as profile_module
 from app.mod_projects.controllers import mod_projects as projects_module
+from app.mod_organisations.controllers import mod_organisations \
+    as organisations_module
 
 # Register blueprint
 app.register_blueprint(auth_module)
 app.register_blueprint(profile_module)
 app.register_blueprint(projects_module)
+app.register_blueprint(organisations_module)
 
 # Build the database:
 # This will create the database file using SQLAlchemy

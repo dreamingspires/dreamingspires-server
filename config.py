@@ -26,3 +26,6 @@ CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
 SECRET_KEY = "secret"
+
+# Turn off flask-sqlalchemy track modifications (pre-deprecation)
+SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -17,7 +17,9 @@ from app import db
 from app.mod_auth.forms import LoginForm, RegisterForm
 
 # Import module models (i.e. User)
-from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
+#from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
+#    Organisation, Project
+from app.models import User, Email, Matrix, CV, Developer, \
     Organisation, Project
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
