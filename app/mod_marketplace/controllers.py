@@ -13,7 +13,7 @@ from app import db
 from app.models import Project
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_projects = Blueprint('projects', __name__, url_prefix='/')
+mod_marketplace = Blueprint('marketplace', __name__, url_prefix='/')
 
 # TODO: think about how to tell if a link is active or not
 def generate_sidebar():
@@ -140,7 +140,7 @@ sample_job_2 = {
     'image_link': 'https://i.ebayimg.com/images/i/400818616312-0-1/s-l1000.jpg'
 }
 
-@mod_projects.route('/marketplace', methods=['GET', 'POST'])
+@mod_marketplace.route('/marketplace', methods=['GET', 'POST'])
 def marketplace():
     # Ensure the user is logged in
 
@@ -149,4 +149,4 @@ def marketplace():
     sidebar = generate_searchbar()
     sample_job_listing = jobs.JobListing(**sample_job)
     sample_job_listing_2 = jobs.JobListing(**sample_job_2)
-    return render_template('projects/marketplace.html', sidebar=sidebar, job_listings=[sample_job_listing.render(), sample_job_listing_2.render()]*2)
+    return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=[sample_job_listing.render(), sample_job_listing_2.render()]*2)

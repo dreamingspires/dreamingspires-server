@@ -36,7 +36,7 @@ nav.Bar('start', [
     nav.Item('Home', 'index'),
     nav.Item('About', 'about'),
     nav.Item('Contact', 'contact'),
-    nav.Item('Marketplace', 'projects.marketplace')
+    nav.Item('Marketplace', 'marketplace.marketplace')
 ])
 
 nav.Bar('end', [
@@ -55,14 +55,14 @@ def not_found(error):
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.mod_auth.controllers import mod_auth as auth_module
 from app.mod_profile.controllers import mod_profile as profile_module
-from app.mod_projects.controllers import mod_projects as projects_module
+from app.mod_marketplace.controllers import mod_marketplace as marketplace_module
 from app.mod_organisations.controllers import mod_organisations \
     as organisations_module
 
 # Register blueprint
 app.register_blueprint(auth_module)
 app.register_blueprint(profile_module)
-app.register_blueprint(projects_module)
+app.register_blueprint(marketplace_module)
 app.register_blueprint(organisations_module)
 
 # Build the database:
