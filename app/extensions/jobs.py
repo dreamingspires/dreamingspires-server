@@ -21,9 +21,9 @@ class JobListing():
     def render(self):
         template = """
             {% if colour is not none %}
-            <div href="{{ job_link }}" class="box" style="background-color: {{ colour }}">
+            <div class="box" style="background-color: {{ colour }}">
             {% else %}
-            <div href="{{ job_link }}" class="box">
+            <div class="box">
             {% endif %}
                 <article class="media">
                     <figure class="media-left">
@@ -38,14 +38,17 @@ class JobListing():
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <strong>{{ title }}</strong>
+                                <a href="{{ job_link }}">
+                                    <strong>{{ title }}</strong>
+                                </a>
+                                &nbsp
                                 <a href="{{ organisation_link }}"><small>{{ organisation }}</small></a>, 
                                 <a href="{{ department_link }}"><small>{{ department }}</small></a>
                                 <small><i>{{ date }}</i></small>
                                 <br>
-                                <abbr title="Current market price">{{ cost }}</abbr>
+                                {{ cost }}
                                 &nbsp&nbsp&nbsp&nbsp
-                                <abbr title="Estimated completion time">Est. completion time ≈ {{ ect }}</abbr>
+                                Est. completion time ≈ {{ ect }}
                                 <br>
                                 {% for (tag_text, tag_colour, tag_link) in tags %}
                                 {% if tag_colour is not none %}

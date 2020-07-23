@@ -4,13 +4,13 @@
 
 {% block content %}
 <section class="hero is-fullheight-with-navbar">
-    <div class="hero-body has-background-primary-light" style="position: absolute; padding: 0">
-        <div class="columns">
-            <div class="column is-narrow aside has-background-primary">
+    <div class="has-background-primary-light"> <!-- used to be hero-body -->
+        <div class="columns" style="width: 100%">
+            <div class="column is-narrow has-background-primary">
                 {{ sidebar|safe }}
             </div>
 
-            <main class="column main">
+            <main class="column">
                 <nav class="breadcrumb is-small" aria-label="breadcrumbs">
                   <ul>
                     <li><a href="#">Home</a></li>

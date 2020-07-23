@@ -152,7 +152,7 @@ def create_job_listing(project):
             in project.tags]
 
     return jobs.JobListing(
-        job_link='broken_job_link',
+        job_link=url_for('marketplace.projects', project_id=project.id),
         title=project.display_name,
         date=project.date_created.strftime('%Y-%M-%d'),
         ect=str(project.ect) if project.ect is not None else '',
@@ -181,3 +181,12 @@ def marketplace():
     job_listings = [create_job_listing(project).render() for project in projects]
 
     return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=job_listings)
+
+@mod_marketplace.route('/projects/<project_id>')
+def projects(project_id):
+    # Look up the project ID
+    [project] = Project.query.filter(Project.id == project_id).all()
+
+    print(project.id)
+    print(project.display_name)
+    return render_template('marketplace/project.html', project=project)

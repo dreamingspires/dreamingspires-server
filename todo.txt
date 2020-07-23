@@ -6,6 +6,7 @@ https://github.com/amol-/depot/tree/master/examples/flask
 [x] Backend SQLAlchemy things for projects board
 [ ] Verify login for marketplace
 [ ] Sidebar search functionality
+[ ] Create job page, link marketplace into jobs page
 
 # Profile page
 [ ] Customisability
