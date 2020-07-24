@@ -108,17 +108,17 @@ def generate_timeline():
 
 def generate_chat():
     return chat.Chat([
-        chat.ChatComment('Edd Salkield', None, '3h', 'This is my comment. I am typing it now.', children=[
-            chat.ChatComment('Rogan Clark', None, '2h', 'This is my reply.', is_sub_comment=True),
-            chat.ChatComment('Mark Todd', None, '2h', 'This is my reply.', is_sub_comment=True),
-            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', is_sub_comment=True)
+        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', 'This is my comment. I am typing it now.', '0', children=[
+            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
+            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
+            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
         ]),
-        chat.ChatComment('Edd Salkield', None, '3h', 'This is my comment. I am typing it now.', children=[
-            chat.ChatComment('Rogan Clark', None, '2h', 'This is my reply.', is_sub_comment=True),
-            chat.ChatComment('Mark Todd', None, '2h', 'This is my reply.', is_sub_comment=True),
-            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', is_sub_comment=True)
+        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', 'This is my comment. I am typing it now.', '0', children=[
+            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
+            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
+            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
         ]),
-        chat.ChatReply('base')
+        chat.ChatReply('base', is_reply=False)
     ]).render()
 
 sample_job = {
