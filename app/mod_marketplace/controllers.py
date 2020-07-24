@@ -4,7 +4,9 @@ from flask import Blueprint, request, render_template, render_template_string, \
 from flask_navigation import Navigation
 
 import app.extensions.sidebar as sb
+import app.extensions.timeline as tl
 import app.extensions.jobs as jobs
+import app.extensions.chat as chat
 
 # Import the database object from the main app module
 from app import db
@@ -20,8 +22,8 @@ def generate_sidebar():
     menu = sb.Menu([
         sb.MenuLabel('General'),
         sb.MenuList(None, [
-            sb.MenuLink('<span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard', 'dashboard'), # TODO: resolve URLs properly
-            sb.MenuLink('<span class="icon is-small"><i class="fa fa-store-alt"></i></span> Marketplace', 'marketplace'),
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard', url_for('marketplace.dashboard')),
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-store-alt"></i></span> Marketplace', url_for('marketplace.marketplace')),
         ]),
         sb.MenuLabel('Developer'),
         sb.MenuList(None, [
@@ -88,6 +90,36 @@ def generate_searchbar():
         
     ])
     return menu.render()
+
+def generate_timeline():
+    return tl.Timeline([
+        tl.TimelineHeader('Start', 'is-medium is-primary'),
+        tl.TimelineItem('', 'is-primary', 'January 2020', 'Project approved',
+            '', 'is-primary'),
+        tl.TimelineItem('', 'is-warning', 'Current date',
+            'Assign developer to project', '', ''),
+        tl.TimelineItem('<i class="fa fa-flag"></i>', 'is-icon', 'March 2020',
+            'Project approved', '', ''),
+        tl.TimelineItem('<i class="fa fa-file-alt"></i>', 'is-icon', 'June 2020',
+            'Estimated project review', '', ''),
+        tl.TimelineHeader('End', 'is-medium is-primary'),
+
+    ]).render()
+
+def generate_chat():
+    return chat.Chat([
+        chat.ChatComment('Edd Salkield', None, '3h', 'This is my comment. I am typing it now.', children=[
+            chat.ChatComment('Rogan Clark', None, '2h', 'This is my reply.', is_sub_comment=True),
+            chat.ChatComment('Mark Todd', None, '2h', 'This is my reply.', is_sub_comment=True),
+            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', is_sub_comment=True)
+        ]),
+        chat.ChatComment('Edd Salkield', None, '3h', 'This is my comment. I am typing it now.', children=[
+            chat.ChatComment('Rogan Clark', None, '2h', 'This is my reply.', is_sub_comment=True),
+            chat.ChatComment('Mark Todd', None, '2h', 'This is my reply.', is_sub_comment=True),
+            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', is_sub_comment=True)
+        ]),
+        chat.ChatReply('base')
+    ]).render()
 
 sample_job = {
     'job_link': 'broken_job_link',
@@ -182,11 +214,23 @@ def marketplace():
 
     return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=job_listings)
 
+@mod_marketplace.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    # Ensure the user is logged in
+
+    # Generate the appropriate sidebar
+    sidebar = generate_sidebar()
+
+    # Get some job listings
+    return render_template('marketplace/dashboard.html', sidebar=sidebar)
+
+
 @mod_marketplace.route('/projects/<project_id>')
 def projects(project_id):
     # Look up the project ID
     [project] = Project.query.filter(Project.id == project_id).all()
+    job_listing = create_job_listing(project).render()
 
-    print(project.id)
-    print(project.display_name)
-    return render_template('marketplace/project.html', project=project)
+    return render_template('marketplace/project.html', project=project, \
+            sidebar=generate_sidebar(), job_listing=job_listing, \
+            timeline=generate_timeline(), discussion=generate_chat())

@@ -4,3 +4,6 @@
 [submodule "modules/bulma-collapsible"]
 	path = modules/bulma-collapsible
 	url = https://github.com/creativebulma/bulma-collapsible
+[submodule "modules/bulma-timeline"]
+	path = modules/bulma-timeline
+	url = https://github.com/Wikiki/bulma-timeline.git

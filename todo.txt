@@ -1,3 +1,17 @@
+== Overall client workflow ==
+Having created organisation, go to create job
+Enter critical job details (other fields optional)
+Redirects to job page (currently unverified)
+    - Edit button to modify job fields
+    - Explanation about the verification process (i.e. job doesn't appear
+        on the marketplace until internally vetted.  This enables your
+        project to be tagged appropriately and advertised to relevant
+        developers)
+    - Can send message to dreamingspires admin team
+
+# Inbox for messages
+    - Allows new message to be sent to admin team
+
 File storage with depot
 https://github.com/amol-/depot/tree/master/examples/flask
 
@@ -16,6 +30,11 @@ https://github.com/amol-/depot/tree/master/examples/flask
 # Department Page
 
 # Job page
+* Key job information
+* Discussion with the department about what the job entails
+* Register interest box
+
+'Negotiable' price option
 
 # Contact page
 
