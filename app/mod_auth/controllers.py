@@ -81,14 +81,14 @@ def register():
         # Check username is not already taken
         if User.query.filter_by(primary_email=form.email.data).first():
             flash('An account has already been registered with this email address.')
-        elif User.query.filter_by(user_name=form.user_name.data).first():
+        elif User.query.filter_by(id=form.user_name.data).first():
             flash('Username already taken.')
         else:
             cv = CV(document=form.upload_cv.data)
             dev = Developer(cv=cv)
             display_name2 = form.display_name.data if form.display_name.data != '' \
                 else form.user_name.data
-            user = User(user_name=form.user_name.data,
+            user = User(id=form.user_name.data,
                 password=generate_password_hash(form.password.data),
                 display_name=display_name2, description=form.description.data,
                 primary_email=form.email.data, developer=dev)

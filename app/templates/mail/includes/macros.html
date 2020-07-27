@@ -1,0 +1,21 @@
+{% macro profile_card(user) %}
+<div class="card">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    {% if user.display_image is none %}
+                    <img src="https://bulma.io/images/placeholders/64x64.png">
+                    {% else %}
+                    <img src="{{ user.display_image }}">
+                    {% endif %}
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-4 has-text-dark">{{ user.display_name }}</p>
+                <p class="subtitle is-6 has-text-dark">@{{ user.id }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

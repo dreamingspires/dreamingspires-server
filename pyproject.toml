@@ -22,6 +22,7 @@ flask-login = "^0.5.0"
 is-safe-url = "^1.0"
 colour = "^0.1.5"
 SQLAlchemy-Utils = "^0.36.8"
+lorem = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

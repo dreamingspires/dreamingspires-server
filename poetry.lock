@@ -214,6 +214,14 @@ i18n = ["Babel (>=0.8)"]
 
 [[package]]
 category = "main"
+description = "Generator for random text that looks like Latin."
+name = "lorem"
+optional = false
+python-versions = "*"
+version = "0.1.1"
+
+[[package]]
+category = "main"
 description = "Safely add untrusted strings to HTML/XML markup."
 name = "markupsafe"
 optional = false
@@ -413,7 +421,7 @@ ipaddress = ["ipaddress"]
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "fc648c8387e7b3405729364cbb10eea3f64fc0953549a74f4fdc1ccc5b460a95"
+content-hash = "d1aa5b380607efe0be2ac9e6575112c95a277333c0052b13950bd60c602c60c7"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -489,6 +497,10 @@ itsdangerous = [
 jinja2 = [
     {file = "Jinja2-2.11.2-py2.py3-none-any.whl", hash = "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"},
     {file = "Jinja2-2.11.2.tar.gz", hash = "sha256:89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"},
+]
+lorem = [
+    {file = "lorem-0.1.1-py3-none-any.whl", hash = "sha256:c9c2914b5a772022417c398bd74b7bbd712e73ff029ba82720855e458f13ae42"},
+    {file = "lorem-0.1.1.tar.gz", hash = "sha256:785f4109a241fc2891e59705e85d065f6e6d3ed6ad91750a8cb54d4f3e59d934"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},

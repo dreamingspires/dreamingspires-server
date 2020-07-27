@@ -32,13 +32,12 @@ class Base(db.Model):
 # Define a User model
 class User(UserMixin, Base):
     __tablename__ = 'auth_user'
-    user_name = db.Column(db.String(LEN_USER_NAME), nullable=False, \
-            primary_key=True, unique=True)
     password    = db.Column(db.String(192), nullable=False)
     primary_email = db.Column(db.String(128), nullable=False, unique=True, \
             primary_key=True)
     display_name = db.Column(db.String(LEN_DISPLAY_NAME))
     description = db.Column(db.String(LEN_DESCRIPTION))
+    display_image = db.Column(db.String(LEN_URL))
 
     email_addresses = db.relationship('Email', backref='user')
     matrix_addresses = db.relationship('Matrix', backref='user')

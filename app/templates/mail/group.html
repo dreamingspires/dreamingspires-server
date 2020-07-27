@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% from "mail/includes/macros.html" import profile_card %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="has-background-primary-light"> <!-- used to be hero-body -->
+        <div class="columns" style="width: 100%">
+            <div class="column is-narrow has-background-primary">
+                {{ sidebar|safe }}
+            </div>
+
+            <main class="column">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Inbox</a></li>
+                  </ul>
+                </nav>
+                <div class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <div class="title has-text-primary">{{ group.display_name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="has-text-dark">
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Group members</p>
+                        </div>
+                        <div class="columns is-multiline is-mobile">
+                            {% for user in group.users %}
+                            <div class="column is-narrow">
+                                {{ profile_card(user) }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Chat</p>
+                        </div>
+                        <!-- Render discussion here -->
+						{{ discussion|safe }}
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+<script src="/static/assets/js/sidebar.js"></script>
+{% endblock %}

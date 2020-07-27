@@ -58,13 +58,15 @@ from app.mod_profile.controllers import mod_profile as profile_module
 from app.mod_marketplace.controllers import mod_marketplace as marketplace_module
 from app.mod_organisations.controllers import mod_organisations \
     as organisations_module
+from app.mod_mail.controllers import mod_mail as mail_module
 
 # Register blueprint
 app.register_blueprint(auth_module)
 app.register_blueprint(profile_module)
 app.register_blueprint(marketplace_module)
 app.register_blueprint(organisations_module)
+app.register_blueprint(mail_module)
 
 # Build the database:
-# This will create the database file using SQLAlchemy
+# This will create the database files using SQLAlchemy
 db.create_all()

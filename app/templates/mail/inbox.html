@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+##{% from "macros/formhelpers.html" import render_projects_table %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="has-background-primary-light"> <!-- used to be hero-body -->
+        <div class="columns" style="width: 100%">
+            <div class="column is-narrow has-background-primary">
+                {{ sidebar|safe }}
+            </div>
+
+            <main class="column">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Inbox</a></li>
+                  </ul>
+                </nav>
+                <div class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <div class="title has-text-primary"><i class="fas fa-envelope"></i> Inbox</div>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <button type="button" class="button is-small is-success" title="You will receive notifications about updates to this project">
+                                New message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="has-text-dark">
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Discussion</p>
+                        </div>
+                        <!-- Render discussion here -->
+                            {{ discussion|safe }}
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+<script src="/static/assets/js/sidebar.js"></script>
+{% endblock %}

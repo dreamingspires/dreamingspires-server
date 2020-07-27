@@ -11,6 +11,11 @@ print(f'BASE_DIR: {BASE_DIR}')
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
 DATABASE_CONNECT_OPTIONS = {}
 
+# Additional databases
+SQLALCHEMY_BINDS = {
+    'mail_db': 'sqlite:///' + os.path.join(BASE_DIR, 'mail.db')
+}
+
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
 # incoming requests using one and performing background

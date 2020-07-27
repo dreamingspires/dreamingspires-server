@@ -1,3 +1,20 @@
+== Minimally Functional Website Timeline ==
+=== Week 1 ===
+[ ] On-site messaging
+    [ ] Message page
+    [ ] Database for handling messages
+    [ ] Message log generation
+    [ ] Message tab generation
+    [ ] Forms to respond
+[ ] Developer account settings page
+[ ] Organisation sign-up
+[ ] Organisaion account settings page
+
+=== Week 2 ===
+Apply polish!
+
+
+
 == Overall client workflow ==
 Having created organisation, go to create job
 Enter critical job details (other fields optional)
