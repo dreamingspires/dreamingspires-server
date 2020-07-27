@@ -8,7 +8,7 @@ from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 
 class ReplyForm(FlaskForm):
-    comment = TextAreaField('', [validators.Length(max=500)],
+    body = TextAreaField('', [validators.Length(max=500)],
         render_kw={'placeholder': 'Add a comment...', 'class': 'textarea'})
 
 #    def __init__(self, reply_code, *args, **kwargs):
@@ -42,7 +42,7 @@ class Chat():
 
 class ChatComment():
     def __init__(self, profile_name, profile_image, comment_time, \
-            comment_text, comment_id, is_sub_comment=False, children=[]):
+            comment_text, comment_id, reply_form, is_sub_comment=False, children=[]):
         self.profile_name = profile_name
         if profile_image is None:
             self.profile_image = 'https://bulma.io/images/placeholders/128x128.png'
@@ -51,6 +51,7 @@ class ChatComment():
         self.comment_time = comment_time
         self.comment_text = comment_text
         self.comment_id = comment_id
+        self.reply_form = reply_form
         self.is_sub_comment = is_sub_comment
         self.children = children
 
@@ -61,7 +62,8 @@ class ChatComment():
         else:
             collapsible_id = f'{self.comment_id}_collapsible'
             response_bar = f'<small><a>Like</a> · <a href="#{collapsible_id}" data-action="collapse">Reply</a> · {self.comment_time}</small>'
-            chat_reply = ChatReply(f'{self.comment_id}_reply', is_reply=True)
+            chat_reply = ChatReply(f'{self.comment_id}_reply', self.reply_form,
+                    is_reply=True)
 
         lines = ["""
             <article class="media">
@@ -96,8 +98,9 @@ class ChatComment():
 
 
 class ChatReply():
-    def __init__(self, reply_code, is_reply=False, collapsible_id=None):
-        self.form = generate_reply_form(reply_code, is_reply=is_reply)
+    def __init__(self, reply_code, form, is_reply=False, collapsible_id=None):
+        #self.form = generate_reply_form(reply_code, is_reply=is_reply)
+        self.form = form
     
     def render(self):
         return """
@@ -108,7 +111,7 @@ class ChatReply():
                 </p>
               </figure>
               <div class="media-content">
-                <form method="post" action="." role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
+                <form method="post" role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
                 {}
                 <div class="field">
                   <p class="control">
@@ -122,5 +125,5 @@ class ChatReply():
                 </div>
               </div>
             </article>
-        """.format(self.form.reply_code(), self.form.comment(), self.form.submit())
+        """.format(self.form.csrf_token, self.form.body(), self.form.submit())
         # self.form.hidden_tag()

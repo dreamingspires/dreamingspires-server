@@ -2,6 +2,7 @@
 from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
 from flask_navigation import Navigation
+from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
 
 import app.extensions.sidebar as sb
@@ -13,6 +14,7 @@ from app import db
 # Import module models (i.e. Projects)
 from app.models import User, Developer
 from app.mod_mail.models import MailGroup, MailMessage
+from app.mod_mail.forms import ReplyForm
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_mail = Blueprint('mail', __name__, url_prefix='/mail/')
@@ -46,28 +48,28 @@ def generate_sidebar():
     return menu.render()
 
 import lorem
-def generate_test_chat():
-    return chat.Chat([
-        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', lorem.paragraph(), '0', children=[
-            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
-            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
-            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
-        ]),
-        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', 'This is my comment. I am typing it now.', '0', children=[
-            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
-            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
-            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
-        ]),
-        chat.ChatReply('base', is_reply=False)
-    ]).render()
+#def generate_test_chat():
+#    return chat.Chat([
+#        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', lorem.paragraph(), '0', children=[
+#            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
+#            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
+#            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
+#        ]),
+#        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', 'This is my comment. I am typing it now.', '0', children=[
+#            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
+#            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
+#            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
+#        ]),
+#        chat.ChatReply('base', is_reply=False)
+#    ]).render()
 
 
-def generate_chat(mail_group):
+def generate_chat(mail_group, reply_form):
     return chat.Chat(
         [chat.ChatComment(msg.user.display_name, msg.user.display_image, 
-                msg.date_created, msg.body, str(i), is_sub_comment=True)
+                msg.date_created, msg.body, str(i), reply_form, is_sub_comment=True)
             for i, msg in enumerate(mail_group.messages)]
-        + [chat.ChatReply('base', is_reply=False)]).render()
+        + [chat.ChatReply('base', reply_form, is_reply=False)]).render()
 
 from werkzeug.security import generate_password_hash # TEMP
 import time
@@ -77,22 +79,22 @@ def generate():
     # Generate a few users
     try:
         edd = User(id='edd',
-            password=generate_password_hash(''),
+            password=generate_password_hash('e'),
             display_name='Edd Salkield', description='My description',
             primary_email='edd@example.com', developer=Developer())
         db.session.add(edd)
         rogan = User(id='rogan',
-            password=generate_password_hash(''),
+            password=generate_password_hash('e'),
             display_name='Rogan Clark', description='My description',
             primary_email='rogan@example.com', developer=Developer())
         db.session.add(rogan)
         mark = User(id='mark',
-            password=generate_password_hash(''),
+            password=generate_password_hash('e'),
             display_name='Mark Todd', description='My description',
             primary_email='mark@example.com', developer=Developer())
         db.session.add(mark)
         josh = User(id='josh',
-            password=generate_password_hash(''),
+            password=generate_password_hash('e'),
             display_name='Josh Smailes', description='My description',
             primary_email='josh@example.com', developer=Developer())
         db.session.add(josh)
@@ -107,15 +109,15 @@ def generate():
 
         # Create some messages
         messages = []
-        message = MailMessage(user=edd, body='yo wassup', date_created=datetime.now())
+        message = MailMessage(user=edd, body='yo wassup', date_created=datetime.utcnow())
         db.session.add(message)
         messages.append(message)
         time.sleep(2)
-        message = MailMessage(user=josh, body='nm', date_created=datetime.now())
+        message = MailMessage(user=josh, body='nm', date_created=datetime.utcnow())
         db.session.add(message)
         messages.append(message)
         time.sleep(2)
-        message = MailMessage(user=mark, body='nm 2', date_created=datetime.now())
+        message = MailMessage(user=mark, body='nm 2', date_created=datetime.utcnow())
         db.session.add(message)
         messages.append(message)
         db.session.commit()
@@ -137,10 +139,27 @@ def inbox():
             discussion=generate_test_chat())
 
 @mod_mail.route('/group/<group_id>', methods=['GET', 'POST'])
+@login_required
 def group(group_id):
     # Ensure the user is logged in
+    form = ReplyForm()
+
+    if form.validate_on_submit():
+        # Get the group
+        group = MailGroup.query.filter_by(id=group_id).first()
+        print("found group")
+
+        # Construct the next message
+        print("constructing message")
+        message = MailMessage(user=current_user, body=form.body.data)
+        group.messages.append(message)
+
+        # Save and refresh the page
+        print("saving")
+        db.session.commit()
+        return redirect(url_for('mail.group', group_id=group_id))
 
     # Get the group ID
     group = MailGroup.query.filter_by(display_name='The friend chat').first()
     return render_template('mail/group.html', sidebar=generate_sidebar(),
-        group=group, discussion=generate_chat(group))
+        group=group, discussion=generate_chat(group, form))

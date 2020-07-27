@@ -1,11 +1,11 @@
 == Minimally Functional Website Timeline ==
 === Week 1 ===
 [ ] On-site messaging
-    [ ] Message page
-    [ ] Database for handling messages
-    [ ] Message log generation
+    [x] Message page
+    [x] Database for handling messages
+    [x] Message log generation
     [ ] Message tab generation
-    [ ] Forms to respond
+    [x] Forms to respond
 [ ] Developer account settings page
 [ ] Organisation sign-up
 [ ] Organisaion account settings page
