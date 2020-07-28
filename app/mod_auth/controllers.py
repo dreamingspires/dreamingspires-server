@@ -52,7 +52,7 @@ def login():
             next = request.args.get('next')
             #if not is_safe_url(next):
             #    return abort(400)
-            return redirect(next or url_for('auth.home'))
+            return redirect(next or url_for('marketplace.marketplace'))
 
         flash('Wrong email or password', 'error-message')
 

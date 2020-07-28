@@ -43,8 +43,6 @@
                             <a href="{{ item.url }}" class="navbar-item">{{ item.label|safe }}</a>
                             {% endif %}
                         {% endfor %}
-                        <!--
-                        dropdown example
                         <div class="navbar-item has-dropdown is-hoverable">
                           <a class="navbar-link">
                             More
@@ -66,22 +64,40 @@
                             </a>
                           </div>
                         </div>
-                        -->
                     </div>
 
-                    <div class="container">
+                    <div class="container has-text-dark">
                         <div class="navbar-end">
-                            <div class="navbar-item">
-                                <div class="buttons">
-                                    {% for item in nav.end %}
-                                        {% if item.is_active %}
-                                            <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
-                                        {% else %}
-                                            <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                {% if current_user.is_authenticated %}
+                                    <a class="navbar-link">
+                                        <figure class="image is-32x32">
+                                            {% if current_user.display_image is none %}
+                                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                                            {% else %}
+                                            <img class="is-rounded" src="{{ current_user.display_image }}">
+                                            {% endif %}
+                                        </figure>
+                                        &nbsp;
+                                        {{ current_user.display_name }}
+                                    </a>
+                                    <div class="navbar-dropdown is-right is-boxed">
+                                        {% for item in nav.profile %}
+                                        <a href="{{ item.url }}" class="navbar-item">{{ item.label|safe }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="buttons">
+                                        {% for item in nav.end %}
+                                            {% if item.is_active %}
+                                                <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
+                                            {% else %}
+                                                <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
 
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

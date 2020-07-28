@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_navigation import Navigation
 from depot.manager import DepotManager
@@ -42,6 +42,11 @@ nav.Bar('start', [
 nav.Bar('end', [
     nav.Item('<strong>Sign up</strong>', 'auth.register'),
     nav.Item('Log in', 'auth.login')
+])
+
+nav.Bar('profile', [
+#    nav.Item('My profile', ''),
+    nav.Item('Log out', 'auth.logout')
 ])
 
 # Import views

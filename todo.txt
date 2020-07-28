@@ -6,6 +6,7 @@
     [x] Message log generation
     [ ] Message tab generation
     [x] Forms to respond
+[x] Profile on navbar
 [ ] Developer account settings page
 [ ] Organisation sign-up
 [ ] Organisaion account settings page
