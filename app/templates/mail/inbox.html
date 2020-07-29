@@ -2,12 +2,63 @@
 
 ##{% from "macros/formhelpers.html" import render_projects_table %}
 
+{% macro render_inbox(inbox) %}
+<nav class="panel">
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      <input class="input" type="text" placeholder="Search">
+      <span class="icon is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </span>
+    </p>
+  </div>
+  <p class="panel-tabs">
+    {% for tab in inbox.tab_list %}
+    {% if tab.is_current_tab %}
+    <a class="is-active">{{ tab.text }}</a>
+    {% else %}
+    <a href="{{ tab.href }}">{{ tab.text }}</a>
+    {% endif %}
+    {% endfor %}
+  </p>
+  <!--
+  Example block that renders group user's icons
+  <a class="panel-block is-active">
+      <div style="display: flex; justify-content: space-between; width:100%">
+        <div>
+            <span class="icon">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+            </span>
+            <span class="icon">
+              <i class="fas fa-hourglass-start" aria-hidden="true"></i>
+            </span>
+            Assignment 1
+        </div>
+        <div class="has-text-grey" style="text-align: right">
+            People
+        </div>
+      </div>
+  </a>
+  -->
+  {% for entry in inbox.inbox_entries %}
+  <a href="{{ entry.href }}" class="panel-block">
+    {% for icon in entry.icons %}
+    <span class="panel-icon">
+        <i class="fas {{ icon }}" aria-hidden="true"></i>
+    </span>
+    {% endfor %}
+    {{ entry.text }}
+  </a>
+  {% endfor %}
+</nav>
+{% endmacro %}
+
 {% block content %}
 <section class="hero is-fullheight-with-navbar">
     <div class="has-background-primary-light"> <!-- used to be hero-body -->
         <div class="columns" style="width: 100%">
-            <div class="column is-narrow has-background-primary">
-                {{ sidebar|safe }}
+            <div class="column is-narrow">
+                {{ render_inbox(inbox) }}
             </div>
 
             <main class="column">
@@ -32,13 +83,7 @@
                     </div>
                 </div>
                 <div class="has-text-dark">
-                    <article class="message">
-                        <div class="message-header">
-                            <p>Discussion</p>
-                        </div>
-                        <!-- Render discussion here -->
-                            {{ discussion|safe }}
-                    </article>
+                    {{ discussion|safe }}
                 </div>
             </main>
         </div>

@@ -13,6 +13,10 @@ DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
 # Define the WSGI application object
 app = Flask(__name__)
 
+# Set jinja2 settings
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
+
 # Configurations
 app.config.from_object('config')
 
@@ -45,7 +49,7 @@ nav.Bar('end', [
 ])
 
 nav.Bar('profile', [
-#    nav.Item('My profile', ''),
+    nav.Item('Inbox', 'mail.inbox'),
     nav.Item('Log out', 'auth.logout')
 ])
 

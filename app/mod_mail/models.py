@@ -23,17 +23,17 @@ LEN_TAG = 20
 
 LEN_GROUP_NAME = 100
 LEN_MAIL = 10000
+LEN_MAIL_TAB_TEXT = 20
 
 from app.models import Base, User
 
 ## Mail
 # Messages in the group are ordered by date_created
-group_user_map = db.Table('group_user_map',
+group_user_role_map = db.Table('group_user_map',
     db.Column('group_id', db.String(LEN_UUID),
         db.ForeignKey('mail_groups.id'), primary_key=True),
-    db.Column('user_id', db.String(LEN_UUID),
-        db.ForeignKey('auth_user.id'), primary_key=True),
-#    info={'bind_key': 'mail_db'}
+    db.Column('user_role_id', db.String(LEN_UUID),
+        db.ForeignKey('mail_user_roles.id'), primary_key=True)
 )
 
 group_message_map = db.Table('group_message_map',
@@ -44,12 +44,21 @@ group_message_map = db.Table('group_message_map',
 #    info={'bind_key': 'mail_db'}
 )
 
+# Contains a user and its role for a specific group
+class MailUserRole(Base):
+    __tablename__ = 'mail_user_roles'
+    user_id = db.Column(db.String(LEN_UUID), db.ForeignKey('auth_user.id'),
+        primary_key=True)
+    user = db.relationship('User', backref='mail_user_roles')
+    creator = db.Column(db.Boolean, nullable=False)
+    relationship = db.Column(db.String(LEN_MAIL_TAB_TEXT))
+
 class MailGroup(Base):
     __tablename__ = 'mail_groups'
 #    __bind_key__ = 'mail_db'
     display_name = db.Column('group_display_name', db.String(LEN_GROUP_NAME), nullable=False)
     display_image = db.Column(db.String(LEN_URL))
-    users = db.relationship('User', secondary=group_user_map,
+    user_roles = db.relationship('MailUserRole', secondary=group_user_role_map,
         backref='mail')
     messages = db.relationship('MailMessage', secondary=group_message_map,
         backref='mail', order_by="asc(MailMessage.date_created)")

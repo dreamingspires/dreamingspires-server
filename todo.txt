@@ -4,8 +4,11 @@
     [x] Message page
     [x] Database for handling messages
     [x] Message log generation
-    [ ] Message tab generation
     [x] Forms to respond
+    [ ] Inbox generation
+    [ ] Read receipts
+    [ ] Automatic page refresh on new messages
+    [ ] Page auto-scrolls to correct location
 [x] Profile on navbar
 [ ] Developer account settings page
 [ ] Organisation sign-up
@@ -13,6 +16,8 @@
 
 === Week 2 ===
 Apply polish!
+[ ] Login process clearer if password incorrect
+[ ] Global message flashing (linked to incorrect password? Use bulma 'message')
 
 
 
