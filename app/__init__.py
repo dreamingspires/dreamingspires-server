@@ -4,6 +4,7 @@ from flask_navigation import Navigation
 from depot.manager import DepotManager
 from flask_login import LoginManager
 from flask_principal import Principal
+from flask_socketio import SocketIO
 
 from app.utils import register_template_utils 
 
@@ -27,6 +28,7 @@ nav = Navigation(app)
 login_manager = LoginManager(app)
 principals = Principal(app)
 register_template_utils(app)
+socketio = SocketIO(app)
 
 # login_manager settings
 from app.models import User

@@ -19,6 +19,12 @@ Apply polish!
 [ ] Login process clearer if password incorrect
 [ ] Global message flashing (linked to incorrect password? Use bulma 'message')
 
+== Pre-launch ==
+[ ] Ensure mail.db is correctly separated (in the models)
+[ ] socketio to use the eventlet backend
+[ ] Locally host fontawesome and the socketio client (in base.html)
+[ ] Ensure redirects are safe
+
 
 
 == Overall client workflow ==

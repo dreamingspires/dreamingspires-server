@@ -202,7 +202,6 @@ def generate_inbox(tab_list, current_tab, groups, request_args):
 @mod_mail.route('/inbox', methods=['GET', 'POST'])
 @login_required
 def inbox():
-
     # Generate the sidebar
     selectable_tabs = ['Interested', 'Current', 'Past']
     tab_list = ['All'] + selectable_tabs + ['Other']
@@ -244,7 +243,7 @@ def inbox():
             # Save and refresh the page
             db.session.commit()
             return redirect(url_for('mail.inbox', 
-                **{**request_args, **{'group_id': group.id}}))
+                **{**request.args, **{'group_id': group.id}}))
 
         discussion=generate_chat(group, ReplyForm())
 

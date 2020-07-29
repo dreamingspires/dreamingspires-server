@@ -5,13 +5,14 @@ from flask_login import login_user, logout_user, login_required, current_user
 from flask_principal import Principal, Identity, AnonymousIdentity, \
      identity_changed
 from is_safe_url import is_safe_url
+from flask_socketio import send, emit
 
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug import secure_filename
 
 # Import the database object from the main app module
-from app import db
+from app import db, socketio
 
 # Import module forms
 from app.mod_auth.forms import LoginForm, RegisterForm
@@ -57,6 +58,21 @@ def login():
         flash('Wrong email or password', 'error-message')
 
     return render_template('auth/login.html', form=form)
+
+# Allow socket connections once logged in
+@socketio.on('connect')
+def connect_handler():
+    if current_user.is_authenticated:
+        print('authenticated')
+        emit('my response',
+             {'message': '{0} has joined'.format(current_user.display_name)})
+    else:
+        print('not authenticated yet')
+        return False  # not allowed here
+
+@socketio.on('my event')
+def my_event(arg1):
+    print('"my event" occurred')
 
 @mod_auth.route('/logout/', methods=['GET', 'POST'])
 @login_required
