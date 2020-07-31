@@ -41,7 +41,7 @@
   </a>
   -->
   {% for entry in inbox.inbox_entries %}
-  <a href="{{ entry.href }}" class="panel-block">
+  <a id="inbox_entry_{{ entry.group_id }}" href="{{ entry.href }}" class="panel-block">
     {% for icon in entry.icons %}
     <span class="panel-icon">
         <i class="fas {{ icon }}" aria-hidden="true"></i>
@@ -51,6 +51,72 @@
   </a>
   {% endfor %}
 </nav>
+{% endmacro %}
+
+{% macro render_chat_comment(comment) %}
+{% if comment is not none %}
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-48x48">
+            <img src="{{ comment.profile_image }}" style="border-radius:10%">
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong>{{ comment.profile_name }}</strong>
+                <br>
+                {{ comment.comment_text }}
+                <br>
+                <small>{{ comment.comment_time }}</small>
+            </p>
+        </div>
+    </div>
+</article>
+{% else %}
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-48x48">
+            <img style="border-radius:10%">
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong></strong>
+                <br>
+                <br>
+                <small></small>
+            </p>
+        </div>
+    </div>
+</article>
+{% endif %}
+{% endmacro %}
+
+{% macro render_chat_reply(form, profile_image) %}
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+            <img src="{{ profile_image }}">
+        </p>
+    </figure>
+    <div class="media-content">
+        <form method="post" role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate>
+            {{ form.csrf_token }}
+            <div class="field">
+                <p class="control">
+                {{ form.body() }}
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                {{ form.submit() }}
+                </p>
+            </div>
+        </form>
+    </div>
+</article>
 {% endmacro %}
 
 {% block content %}
@@ -68,7 +134,7 @@
                     <li class="is-active"><a href="#" aria-current="page">Inbox</a></li>
                   </ul>
                 </nav>
-                <div class="level">
+                <div class="level mb-1">
                     <div class="level-left">
                         <div class="level-item">
                             <div class="title has-text-primary"><i class="fas fa-envelope"></i> Inbox</div>
@@ -82,12 +148,57 @@
                         </div>
                     </div>
                 </div>
+                <div class="subtitle has-text-primary">{{ chat_name }}</div>
                 <div class="has-text-dark">
-                    {{ discussion|safe }}
+                    <div id="comment_block">
+                        {% for comment in chat_comments %}
+                        {{ render_chat_comment(comment) }}
+                        {% endfor %}
+                    </div>
+                    {% if chat_comments != [] %}
+                    {{ render_chat_reply(reply_form, profile_image) }}
+                    {% endif %}
                 </div>
             </main>
         </div>
     </div>
 </section>
+
+<template id="comment_template">
+    {{ render_chat_comment(none) }}
+</template>
 <script src="/static/assets/js/sidebar.js"></script>
+<script>
+    // Join all rooms
+    group_ids = {{ group_ids | tojson }};
+    for (var i=0; i<group_ids.length; i++) {
+//        socket.join(group_ids[i]);
+        socket.emit('join', {'group_id': group_ids[i]});
+        console.log('Joining room ' + group_ids[i]);
+    };
+    const urlParams = new URLSearchParams(window.location.search);
+    const group_id = urlParams.get('group_id'); // Doesn't work on IE11
+
+    socket.on('new_message', function(data) {
+        if (data['group_id'] == group_id) {
+            // If the message relates to the current chat, update the log
+            var template = document.querySelector('#comment_template');
+            var clone = template.content.cloneNode(true);
+            var img = clone.querySelector('img');
+            img.src = data['profile_image'];
+            var strong = clone.querySelector('strong');
+            strong.textContent = data['profile_name'];
+            var brs = clone.querySelectorAll('br');
+            brs[0].insertAdjacentText('afterend', data['comment_text']);
+            brs[1].insertAdjacentText('afterend', data['comment_time']);
+
+            var comment_block = document.querySelector('#comment_block');
+            comment_block.appendChild(clone);
+        } else {
+            // Else, mark the new chat as unread
+            var id = '#inbox_entry_' + data['group_id'];
+            document.querySelector(id).style['font-weight'] = 'bold';
+        }
+    });
+</script>
 {% endblock %}

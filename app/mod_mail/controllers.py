@@ -3,6 +3,7 @@ from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
 from flask_navigation import Navigation
 from flask_login import login_required, current_user
+from flask_socketio import send, emit, join_room, leave_room
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import and_, or_, all_
 
@@ -10,12 +11,16 @@ import app.extensions.sidebar as sb
 import app.extensions.chat as chat
 
 # Import the database object from the main app module
-from app import db
+from app import db, socketio
 
 # Import module models (i.e. Projects)
 from app.models import User, Developer
 from app.mod_mail.models import MailGroup, MailMessage, MailUserRole
 from app.mod_mail.forms import ReplyForm
+
+# Import extensions
+from app.extensions.socketio_helpers import authenticated_only
+
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_mail = Blueprint('mail', __name__, url_prefix='/mail/')
@@ -48,29 +53,10 @@ def generate_sidebar():
     ])
     return menu.render()
 
-import lorem
-#def generate_test_chat():
-#    return chat.Chat([
-#        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', lorem.paragraph(), '0', children=[
-#            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
-#            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
-#            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
-#        ]),
-#        chat.ChatComment('Edd Salkield', '/static/assets/images/testimonials/edd.jpg', '3h', 'This is my comment. I am typing it now.', '0', children=[
-#            chat.ChatComment('Rogan Clark', '/static/assets/images/testimonials/rogan.jpg', '2h', 'Ummm.', '0.0', is_sub_comment=True),
-#            chat.ChatComment('Mark Todd', '/static/assets/images/testimonials/mark.jpg', '2h', 'This is my reply.', '0.1', is_sub_comment=True),
-#            chat.ChatComment('Calum White', None, '2h', 'This is my reply.', '0.2', is_sub_comment=True)
-#        ]),
-#        chat.ChatReply('base', is_reply=False)
-#    ]).render()
-
-
-def generate_chat(mail_group, reply_form):
-    return chat.Chat(
-        [chat.ChatComment(msg.user.display_name, msg.user.display_image, 
-                msg.date_created, msg.body, str(i), reply_form, is_sub_comment=True)
+def generate_chat(mail_group):
+    return [chat.ChatComment(msg.user.display_name, msg.user.display_image, 
+                msg.date_created, msg.body, str(i), is_sub_comment=True)
             for i, msg in enumerate(mail_group.messages)]
-        + [chat.ChatReply('base', reply_form, is_reply=False)]).render()
 
 from werkzeug.security import generate_password_hash # TEMP
 import time
@@ -157,10 +143,11 @@ class InboxPerson():
         self.user_id = user_id
 
 class InboxEntry():
-    def __init__(self, icons, text, href, person_list):
+    def __init__(self, icons, text, href, group_id, person_list):
         self.icons = icons
         self.text = text
         self.href = href
+        self.group_id = group_id
         self.person_list = person_list
 
 class InboxTab():
@@ -192,6 +179,7 @@ def generate_inbox(tab_list, current_tab, groups, request_args):
             ['fa-envelope'],
             group.display_name,
             url_for('mail.inbox', **{**request_args, **{'group_id': group.id}}),
+            group.id,
             []  # TODO: dynamically join to create InboxPerson as required
 #            [InboxPerson(user.id, user.display_image) \
 #                for user in group.user_roles.user]
@@ -233,27 +221,50 @@ def inbox():
 
     # Render the chat
     discussion = ''
+    group = None
+    form = ReplyForm()
     if group_id is not None:
         group = MailGroup.query.filter_by(id=group_id).first()
-        form = ReplyForm()
         if form.validate_on_submit():
+            # Add the new message into the database
+            # TODO: deduplication
             message = MailMessage(user=current_user, body=form.body.data)
             group.messages.append(message)
 
-            # Save and refresh the page
+            # Save and send a 'message changed' event to all relevant clients
             db.session.commit()
+            # Notify clients of the new message
+            profile_image = current_user.display_image \
+                if current_user.display_image is not None \
+                else 'https://bulma.io/images/placeholders/128x128.png'
+
+            socketio.emit('new_message', 
+                {
+                    'profile_image': profile_image,
+                    'profile_name': current_user.display_name,
+                    'comment_text': form.body.data,
+                    'comment_time': message.date_created.strftime('%Y-%M-%d'),
+                    'group_id': group.id
+                },
+                room=group_id)
+
             return redirect(url_for('mail.inbox', 
                 **{**request.args, **{'group_id': group.id}}))
+            # TODO: return redirect to page anchor at bottom of messages
 
-        discussion=generate_chat(group, ReplyForm())
+        discussion=generate_chat(group)
 
+    chat_comments = generate_chat(group) if group is not None else []
     return render_template('mail/inbox.html', inbox=inbox,
-            discussion=discussion)
+            chat_name = group.display_name,
+            group_ids=[group.id for group in groups],
+            chat_comments=chat_comments, reply_form=form,
+            profile_image='https://bulma.io/images/placeholders/128x128.png')
 
-@mod_mail.route('/group/<group_id>', methods=['GET', 'POST'])
+#@mod_mail.route('/group/<group_id>', methods=['GET', 'POST'])
 @login_required
 def group(group_id):
-    # Ensure the user is logged in
+    # TODO: ensure the user is in this particular group
     form = ReplyForm()
     group = MailGroup.query.filter_by(id=group_id).first()
 
@@ -269,4 +280,32 @@ def group(group_id):
         return redirect(url_for('mail.group', group_id=group_id))
 
     return render_template('mail/group.html', sidebar=generate_sidebar(),
-        group=group, discussion=generate_chat(group, form))
+        group=group, chat_comments=generate_chat(group), reply_form=form,
+        profile_image='https://bulma.io/images/placeholders/128x128.png')
+
+
+## socketio
+@mod_mail.route('/send_broadcast', methods=['GET', 'POST'])
+def send_broadcast():
+    socketio.emit('test_broadcast', {'data': 42})
+    return 'Broadcast triggered'
+#    room=session['socketio_sid']
+
+@socketio.on('join')
+@authenticated_only
+def on_join(data):
+    print('joining ' + str(type(data['group_id'])))
+    group_id = data['group_id']
+    group = MailGroup.query.filter_by(id=group_id).first()
+
+    # Ensure that the user is allowed in this room
+    if current_user not in [role.user for role in group.user_roles]:
+        return False
+
+    join_room(group_id)
+
+@socketio.on('leave')
+@authenticated_only
+def on_leave(data):
+    room = data['room']
+    leave_room(room)

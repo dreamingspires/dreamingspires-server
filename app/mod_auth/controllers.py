@@ -23,6 +23,9 @@ from app.mod_auth.forms import LoginForm, RegisterForm
 from app.models import User, Email, Matrix, CV, Developer, \
     Organisation, Project
 
+# Import extensions
+from app.extensions.socketio_helpers import authenticated_only
+
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -63,14 +66,16 @@ def login():
 @socketio.on('connect')
 def connect_handler():
     if current_user.is_authenticated:
-        print('authenticated')
-        emit('my response',
-             {'message': '{0} has joined'.format(current_user.display_name)})
+        # Store the session id in the cookie
+        session['socketio_sid'] = request.sid
+        #emit('my response',
+        #     {'message': '{0} has joined'.format(current_user.display_name)})
     else:
         print('not authenticated yet')
         return False  # not allowed here
 
 @socketio.on('my event')
+@authenticated_only
 def my_event(arg1):
     print('"my event" occurred')
 

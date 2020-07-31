@@ -13,9 +13,12 @@
     <script type="text/javascript" charset="utf-8">
         var socket = io();
         socket.on('connect', function() {
+            console.log('I\'m connected');
+            // This code only executes after authentication
+
             socket.emit('my event', {data: 'I\'m connected!'});
         });
-        socket.on('test', function() {
+        socket.on('my response', function() {
             alert('test!');
         });
     </script>

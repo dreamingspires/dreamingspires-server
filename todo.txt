@@ -5,10 +5,12 @@
     [x] Database for handling messages
     [x] Message log generation
     [x] Forms to respond
-    [ ] Inbox generation
+    [x] Inbox generation
     [ ] Read receipts
-    [ ] Automatic page refresh on new messages
-    [ ] Page auto-scrolls to correct location
+    [x] Automatic page refresh on new messages
+        [ ] Set up server-side caching to map user to socket session IDs
+    [=] Page auto-scrolls to correct location
+    [ ] Linking a chat into a project
 [x] Profile on navbar
 [ ] Developer account settings page
 [ ] Organisation sign-up
@@ -18,13 +20,20 @@
 Apply polish!
 [ ] Login process clearer if password incorrect
 [ ] Global message flashing (linked to incorrect password? Use bulma 'message')
+[ ] Password box to mask password
+[ ] Navbar logo centered correctly
+[ ] Navbar dropdown no white effect
 
 == Pre-launch ==
 [ ] Ensure mail.db is correctly separated (in the models)
 [ ] socketio to use the eventlet backend
 [ ] Locally host fontawesome and the socketio client (in base.html)
 [ ] Ensure redirects are safe
+[ ] Flask-session to use a different (non-filesystem) session storing backend
 
+== Extension ==
+[ ] Messages are send via socketio instead of page refresh (if js enabled?)
+[ ] Messages are received passively anywhere on the site (not just inbox.html)
 
 
 == Overall client workflow ==

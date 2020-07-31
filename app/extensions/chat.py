@@ -30,6 +30,22 @@ def generate_reply_form(reply_code, is_reply=False):
 
     return SubReplyForm()
 
+class ChatComment():
+    def __init__(self, profile_name, profile_image, comment_time, \
+            comment_text, comment_id, is_sub_comment=False, children=[]):
+        self.profile_name = profile_name
+        if profile_image is None:
+            self.profile_image = 'https://bulma.io/images/placeholders/128x128.png'
+        else:
+            self.profile_image = profile_image
+        self.comment_time = comment_time
+        self.comment_text = comment_text
+        self.comment_id = comment_id
+        self.is_sub_comment = is_sub_comment
+        self.children = children
+
+## Below here is deprecated
+
 
 class Chat():
     def __init__(self, children):
@@ -40,7 +56,7 @@ class Chat():
         return '\n'.join(lines)
 
 
-class ChatComment():
+class ChatCommentOld():
     def __init__(self, profile_name, profile_image, comment_time, \
             comment_text, comment_id, reply_form, is_sub_comment=False, children=[]):
         self.profile_name = profile_name
@@ -55,6 +71,7 @@ class ChatComment():
         self.is_sub_comment = is_sub_comment
         self.children = children
 
+    # Not actually used
     def render(self):
         picture_size = 'is-48x48' if self.is_sub_comment else 'is-64x64'
         if self.is_sub_comment:

@@ -34,3 +34,6 @@ SECRET_KEY = "secret"
 
 # Turn off flask-sqlalchemy track modifications (pre-deprecation)
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Configure flask-session
+SESSION_TYPE = 'filesystem'

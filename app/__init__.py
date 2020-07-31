@@ -5,6 +5,8 @@ from depot.manager import DepotManager
 from flask_login import LoginManager
 from flask_principal import Principal
 from flask_socketio import SocketIO
+from flask_session import Session   # Required because socketio can't modify
+                                    # default cookie-based sessions
 
 from app.utils import register_template_utils 
 
@@ -21,14 +23,15 @@ app.jinja_env.lstrip_blocks = True
 # Configurations
 app.config.from_object('config')
 
-# Define the database object which is imported
-# by modules and controllers
+# Register extensions with app
 db = SQLAlchemy(app)
 nav = Navigation(app)
 login_manager = LoginManager(app)
 principals = Principal(app)
 register_template_utils(app)
-socketio = SocketIO(app)
+Session(app)
+socketio = SocketIO(app, manage_session=False)
+        # Sessions are managed with flask-session
 
 # login_manager settings
 from app.models import User
