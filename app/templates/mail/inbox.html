@@ -47,7 +47,11 @@
         <i class="fas {{ icon }}" aria-hidden="true"></i>
     </span>
     {% endfor %}
-    {{ entry.text }}
+    {% if entry.bold %}
+        <b>{{ entry.text }}</b>
+    {% else %}
+        {{ entry.text }}
+    {% endif %}
   </a>
   {% endfor %}
 </nav>
@@ -155,9 +159,7 @@
                         {{ render_chat_comment(comment) }}
                         {% endfor %}
                     </div>
-                    {% if chat_comments != [] %}
                     {{ render_chat_reply(reply_form, profile_image) }}
-                    {% endif %}
                 </div>
             </main>
         </div>
@@ -197,7 +199,11 @@
         } else {
             // Else, mark the new chat as unread
             var id = '#inbox_entry_' + data['group_id'];
-            document.querySelector(id).style['font-weight'] = 'bold';
+            var entry = document.querySelector(id);
+            entry.style['font-weight'] = 'bold';
+            var icon = entry.querySelector('span').querySelector('i');
+            icon.classList.remove('fa-envelope-open');
+            icon.classList.add('fa-envelope');
         }
     });
 </script>

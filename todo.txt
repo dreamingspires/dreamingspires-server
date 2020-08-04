@@ -8,7 +8,6 @@
     [x] Inbox generation
     [ ] Read receipts
     [x] Automatic page refresh on new messages
-        [ ] Set up server-side caching to map user to socket session IDs
     [=] Page auto-scrolls to correct location
     [ ] Linking a chat into a project
 [x] Profile on navbar

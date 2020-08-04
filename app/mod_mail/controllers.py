@@ -15,7 +15,8 @@ from app import db, socketio
 
 # Import module models (i.e. Projects)
 from app.models import User, Developer
-from app.mod_mail.models import MailGroup, MailMessage, MailUserRole
+from app.mod_mail.models import MailGroup, MailMessage, MailUserRole, \
+    ReadReceipt
 from app.mod_mail.forms import ReplyForm
 
 # Import extensions
@@ -143,12 +144,13 @@ class InboxPerson():
         self.user_id = user_id
 
 class InboxEntry():
-    def __init__(self, icons, text, href, group_id, person_list):
+    def __init__(self, icons, text, href, group_id, person_list, bold):
         self.icons = icons
         self.text = text
         self.href = href
         self.group_id = group_id
         self.person_list = person_list
+        self.bold = bold
 
 class InboxTab():
     def __init__(self, text, href, is_current_tab):
@@ -162,8 +164,13 @@ class Inbox():
         self.current_tab = current_tab
         self.inbox_entries = inbox_entries
 
+def read_latest_message_yet(current_user, group):
+    # Get the current read receipt for the user
+    rr = ReadReceipt.query.filter_by(user=current_user).filter_by(group=group).first()
+    return (len(group.messages) == 0) \
+        or (rr is not None and rr.date_modified >= group.messages[-1].date_created)
 
-def generate_inbox(tab_list, current_tab, groups, request_args):
+def generate_inbox(current_user, tab_list, current_tab, groups, request_args):
     if not current_tab in tab_list:
         current_tab = tab_list[0]
 
@@ -176,16 +183,30 @@ def generate_inbox(tab_list, current_tab, groups, request_args):
 
     inbox_entries = [
         InboxEntry(
-            ['fa-envelope'],
-            group.display_name,
+            ['fa-envelope-open'] if read_latest_message_yet(current_user, group)
+                else ['fa-envelope'],
+            group.display_name if read_latest_message_yet(current_user, group)
+                else f'{group.display_name}',
             url_for('mail.inbox', **{**request_args, **{'group_id': group.id}}),
             group.id,
-            []  # TODO: dynamically join to create InboxPerson as required
+            [],  # TODO: dynamically join to create InboxPerson as required
 #            [InboxPerson(user.id, user.display_image) \
 #                for user in group.user_roles.user]
+            not read_latest_message_yet(current_user, group)
         ) for group in groups]
 
     return Inbox(tabs, current_tab, inbox_entries)
+
+def update_read_receipt(current_user, group):
+    rr = ReadReceipt.query.filter_by(user=current_user).filter_by(group=group).first()
+    if rr is not None:
+        rr.date_modified = db.func.current_timestamp()
+    else:
+        rr = ReadReceipt(user=current_user)
+        group.read_receipts.append(rr)
+    db.session.add(rr)
+    db.session.add(group)
+    db.session.commit()
 
 @mod_mail.route('/inbox', methods=['GET', 'POST'])
 @login_required
@@ -211,8 +232,6 @@ def inbox():
         MailGroup.user_roles.any(MailUserRole.id.in_(user_role_ids))
     )
 
-    inbox = generate_inbox(tab_list, current_tab, groups, request.args)
-    print(inbox.inbox_entries)
 
     group_id = request.args.get('group_id')
     if group_id is None:
@@ -233,6 +252,9 @@ def inbox():
 
             # Save and send a 'message changed' event to all relevant clients
             db.session.commit()
+
+            update_read_receipt(current_user, group)
+
             # Notify clients of the new message
             profile_image = current_user.display_image \
                 if current_user.display_image is not None \
@@ -252,11 +274,14 @@ def inbox():
                 **{**request.args, **{'group_id': group.id}}))
             # TODO: return redirect to page anchor at bottom of messages
 
+        update_read_receipt(current_user, group)
         discussion=generate_chat(group)
 
+    inbox = generate_inbox(current_user, tab_list, current_tab, groups, request.args)
     chat_comments = generate_chat(group) if group is not None else []
+    display_name = group.display_name if group is not None else ''
     return render_template('mail/inbox.html', inbox=inbox,
-            chat_name = group.display_name,
+            chat_name = display_name,
             group_ids=[group.id for group in groups],
             chat_comments=chat_comments, reply_form=form,
             profile_image='https://bulma.io/images/placeholders/128x128.png')
