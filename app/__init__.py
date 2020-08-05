@@ -49,7 +49,7 @@ nav.Bar('start', [
 ])
 
 nav.Bar('end', [
-    nav.Item('<strong>Sign up</strong>', 'auth.register'),
+    nav.Item('<strong>Sign up</strong>', 'auth.register_developer'),
     nav.Item('Log in', 'auth.login')
 ])
 

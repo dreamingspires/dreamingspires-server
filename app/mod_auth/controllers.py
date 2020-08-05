@@ -15,7 +15,8 @@ from werkzeug import secure_filename
 from app import db, socketio
 
 # Import module forms
-from app.mod_auth.forms import LoginForm, RegisterForm
+from app.mod_auth.forms import LoginForm, RegisterDeveloperForm, \
+    RegisterClientForm
 
 # Import module models (i.e. User)
 #from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
@@ -94,10 +95,9 @@ def logout():
     #                      identity=AnonymousIdentity())
     return redirect(request.args.get('next') or '/')
 
-
-@mod_auth.route('/register/', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
+@mod_auth.route('/register_developer/', methods=['GET', 'POST'])
+def register_developer():
+    form = RegisterDeveloperForm()
     if form.validate_on_submit():
         # Check username is not already taken
         if User.query.filter_by(primary_email=form.email.data).first():
@@ -121,4 +121,10 @@ def register():
             #if not is_safe_url(next):
             #    return abort(400)
             return redirect(next or url_for('auth.login'))
-    return render_template('auth/register.html', form=form, entries=list(range(1000)))
+    return render_template('auth/register_developer.html', form=form, \
+        entries=list(range(1000)))
+
+@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+def register_client():
+    form = RegisterClientForm()
+    return render_template('auth/register_client.html', form=form)

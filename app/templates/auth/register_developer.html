@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% from "macros/bulma_form.html" import render_form, render_field %}
+
+{% block content %}
+
+<div class="column is-8 is-offset-2 content"> <h1 class="title">Register as a developer</h1>
+    <p>
+    At Dreaming Spires, we find interesting programming work from organisations across the world, and give you the opportunity to earn money, improve your skills, and develop your CV by taking it on.
+    </p>
+    
+    <h2 class="subtitle">Becoming a developer</h2>
+    <p> To become a developer on Dreaming Spires, you must first register an
+    account, submitting the required information for the verification
+    process.
+    </p>
+
+    <p>
+    We will assess your application and may invite you for an online interview
+    via email.
+    The interview will consist of a short chat where we get a feel for your
+    experience level, and will involve various problems designed to test your
+    abilities.  It will take no more than 20 minutes.
+    </p>
+
+    <p>
+    Provided your application is successful, you will become a registered
+    developer!  You will be able to take on jobs from the marketplace, and
+    begin working on interesting problems for our clients.
+    </p>
+    
+    <p>
+    <b>Sound interesting?</b>  <a href="#register_form">Get signed up below</a>!
+    </p> 
+    <p>
+    <b>More questions?</b> Read our <a href="/developer_faq">developer FAQ</a>.
+    </p> 
+</div>
+
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="column is-8 is-offset-2">
+    <h3 class="title has-text-centered">Create a developer account</h3>
+</div>
+<a id="register_form"></a>
+{# render_form(form, ".", width=8, mark_required=False, is_horizontal=False) #}
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <form method="post" action="." role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
+        {{ form.csrf_token }}
+        <p>Basic user account fields</p>
+        {{ render_field(form.user_name) }}
+        {{ render_field(form.display_name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+        {{ render_field(form.confirm) }}
+        <p>Application</p>
+        {{ render_field(form.description) }}
+        {{ render_field(form.description_interested_jobs) }}
+        {{ render_field(form.university_check) }}
+        <div id="div_university">
+        {{ render_field(form.university) }}
+        </div>
+        {{ render_field(form.upload_cv) }}
+        {{ render_field(form.accept_tos) }}
+        <button class="button is-success" type="submit" name="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function yesnoCheck() {
+    if (document.getElementById('university_check').checked) {
+        document.getElementById('university_div').style.display = 'block';
+    } else {
+        document.getElementById('university_div').style.display = 'none';
+    }
+}
+yesnoCheck()
+</script>
+{% endblock %}

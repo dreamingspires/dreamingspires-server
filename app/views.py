@@ -18,9 +18,17 @@ def contact():
 def client():
     return render_template('public/client.html')
 
+@app.route('/client_faq')
+def client_faq():
+    return render_template('public/client_faq.html')
+
 @app.route('/developer')
 def developer():
     return render_template('public/developer.html')
+
+@app.route('/developer_faq')
+def developer_faq():
+    return render_template('public/developer_faq.html')
 
 @app.route('/login2')
 def login2():

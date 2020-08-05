@@ -13,9 +13,14 @@ from werkzeug import secure_filename
 # Import the database object from the main app module
 from app import db
 
+# Import module forms
+from app.mod_profile.forms import generate_developer_profile_form
+
 # Define the blueprint: 'profile', set its url prefix: app.url/profile
 mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
 
-@mod_profile.route('/', methods=['GET', 'POST'])
-def profile():
-    return render_template('profile/profile.html')
+@mod_profile.route('/developer/', methods=['GET', 'POST'])
+@login_required
+def developer():
+    form = generate_developer_profile_form(current_user)
+    return render_template('profile/developer_profile.html', form=form)

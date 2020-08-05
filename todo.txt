@@ -6,14 +6,15 @@
     [x] Message log generation
     [x] Forms to respond
     [x] Inbox generation
-    [ ] Read receipts
+    [x] Read receipts
     [x] Automatic page refresh on new messages
     [=] Page auto-scrolls to correct location
     [ ] Linking a chat into a project
 [x] Profile on navbar
-[ ] Developer account settings page
 [ ] Organisation sign-up
 [ ] Organisaion account settings page
+[ ] Organisation payment for projects
+[ ] Write client FAQ
 
 === Week 2 ===
 Apply polish!
@@ -22,6 +23,8 @@ Apply polish!
 [ ] Password box to mask password
 [ ] Navbar logo centered correctly
 [ ] Navbar dropdown no white effect
+[ ] Redirecting next after login doesn't work
+[ ] Profile images working everywhere (navbar, chat)
 
 == Pre-launch ==
 [ ] Ensure mail.db is correctly separated (in the models)
@@ -33,6 +36,7 @@ Apply polish!
 == Extension ==
 [ ] Messages are send via socketio instead of page refresh (if js enabled?)
 [ ] Messages are received passively anywhere on the site (not just inbox.html)
+[ ] Developer account settings page
 
 
 == Overall client workflow ==

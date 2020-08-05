@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% from "macros/formhelpers.html" import render_field %}
+{% from "macros/bulma_form.html" import render_field %}
 
 {% block content %}
 {% with errors = get_flashed_messages() %}
@@ -14,22 +14,27 @@
 {% endwith %}
 
 <div class="column is-6 is-offset-3">
-    <h3 class="title">Customise your profile</h3>
+    <h3 class="title has-text-centered">Complete your application</h3>
+    <div class="content">
+        <p>
+        To become verified, you must supply 
+        </p>
+    </div>
     <div class="box">
         <form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
           <dl>
             {{ form.csrf_token }}
-            {{ render_field(form.user_name) }}<br/>
-            {{ render_field(form.email) }}<br/>
-            {{ render_field(form.password) }}<br/>
-            {{ render_field(form.confirm) }}<br/>
-            {{ render_field(form.display_name) }}<br/>
-            {{ render_field(form.description) }}<br/>
+            {{ render_field(form.user_name) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.confirm) }}
+            {{ render_field(form.display_name) }}
+            {{ render_field(form.description) }}
             {{ render_field(form.university_check) }}
             <div id="div_university">
-            {{ render_field(form.university) }}<br/>
+            {{ render_field(form.university) }}
             </div>
-            {{ render_field(form.upload_cv) }}<br/>
+            {{ render_field(form.upload_cv) }}
             {{ render_field(form.accept_tos) }}
           </dl>
           <button class="button is-success" type="submit" name="submit">Register</button>
