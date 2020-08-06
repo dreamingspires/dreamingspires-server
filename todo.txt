@@ -9,8 +9,10 @@
     [x] Read receipts
     [x] Automatic page refresh on new messages
     [=] Page auto-scrolls to correct location
-    [ ] Linking a chat into a project
+    [ ] New message button
+
 [x] Profile on navbar
+[x] Modify profile page
 [ ] Organisation sign-up
 [ ] Department sign-up
     [ ] Organisation name
@@ -42,6 +44,8 @@ Apply polish!
 [ ] Messages are send via socketio instead of page refresh (if js enabled?)
 [ ] Messages are received passively anywhere on the site (not just inbox.html)
 [ ] Developer account settings page
+[ ] Linking a chat into a project
+[ ] Verification for user's educational institutions
 
 
 == Overall client workflow ==

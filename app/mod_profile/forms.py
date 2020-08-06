@@ -9,7 +9,7 @@ from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 
 def validate_image(form, field):
-    if field.data and field.data and not str(field.data).endswith(('.jpg', '.png')):
+    if field.data and not str(field.data.filename).endswith(('.jpg', '.png')):
         raise validators.ValidationError('File must be .jpg or .png')
 
 def generate_edit_user_public_profile_form(user):
@@ -38,7 +38,7 @@ def generate_edit_user_public_profile_form(user):
             university_list,
             default=user.educational_institution \
                 if user.educational_institution is not None else '')
-        change_display_image = FileField('Change profile picture',
+        display_image = FileField('Change profile picture',
             [validate_image])
 
         #password = IconPasswordField('', [

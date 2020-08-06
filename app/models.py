@@ -6,6 +6,7 @@
 from app import db
 from app.types import DeveloperVerificationStatus
 from depot.fields.sqlalchemy import UploadedFileField
+from depot.fields.specialized.image import UploadedImageWithThumb
 from flask_login import UserMixin
 import uuid
 
@@ -38,8 +39,9 @@ class User(UserMixin, Base):
             primary_key=True)
     display_name = db.Column(db.String(LEN_DISPLAY_NAME))
     description = db.Column(db.String(LEN_DESCRIPTION))
-    display_image = db.Column(db.String(LEN_URL))
+    display_image = db.Column(UploadedFileField(upload_type=UploadedImageWithThumb, upload_storage='images'))
     educational_institution = db.Column(db.String(LEN_DISPLAY_NAME))
+    can_create_departments = db.Column(db.Boolean, default=False, nullable=False)
 
     email_addresses = db.relationship('Email', backref='user')
     matrix_addresses = db.relationship('Matrix', backref='user')

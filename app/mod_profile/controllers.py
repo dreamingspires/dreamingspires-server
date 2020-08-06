@@ -12,6 +12,7 @@ from werkzeug import secure_filename
 
 # Import the database object from the main app module
 from app import db
+from depot.manager import DepotManager
 
 import app.extensions.sidebar as sb
 
@@ -20,6 +21,8 @@ from app.mod_profile.forms import generate_edit_user_public_profile_form
 
 # Define the blueprint: 'profile', set its url prefix: app.url/profile
 mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
+
+import PIL
 
 @mod_profile.route('/', methods=['GET', 'POST'])
 @login_required
@@ -38,6 +41,12 @@ def edit_profile():
             current_user.educational_institution = None
 
         # TODO: update profile picture
+        if form.display_image:
+            try:
+                current_user.display_image = form.display_image.data
+            except PIL.UnidentifiedImageError:
+                # TODO: pretty up error page
+                return "Error: Uploaded file is not an image"
 
         db.session.add(current_user)
         db.session.commit()
@@ -62,6 +71,13 @@ def edit_profile():
                 }
     return render_template('profile/profile.html', user=current_user, \
             organisations=organisations, form=form)
+
+@mod_profile.route('/create_organisation/', methods=['GET', 'POST'])
+@login_required
+def create_organisation():
+    if not current_user.can_create_departments:
+        return 'TODO: Error page'
+    return f'Create organisation page'
 
 @mod_profile.route('/edit_organisation/<id>', methods=['GET', 'POST'])
 @login_required

@@ -60,7 +60,7 @@
 <article class="media">
     <figure class="media-left">
         <p class="image is-48x48">
-            <img src="{{ comment.profile_image }}" style="border-radius:10%">
+            <img src="{{ comment.profile_image.thumb_url }}" style="border-radius:10%">
         </p>
     </figure>
     <div class="media-content">
@@ -157,7 +157,9 @@
                         {{ render_chat_comment(comment) }}
                         {% endfor %}
                     </div>
+                    {% if current_group_id %}
                     {{ render_chat_reply(reply_form, profile_image) }}
+                    {% endif %}
                 </div>
             </main>
         </div>

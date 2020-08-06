@@ -263,6 +263,10 @@ def inbox():
     discussion = ''
     group = None
     form = ReplyForm()
+    profile_image = current_user.display_image.thumb_url \
+        if current_user.display_image is not None \
+        else 'https://bulma.io/images/placeholders/128x128.png'
+
     if group_id is not None:
         group = MailGroup.query.filter_by(id=group_id).first()
         if form.validate_on_submit():
@@ -277,10 +281,6 @@ def inbox():
             update_read_receipt(current_user, group)
 
             # Notify clients of the new message
-            profile_image = current_user.display_image \
-                if current_user.display_image is not None \
-                else 'https://bulma.io/images/placeholders/128x128.png'
-
             socketio.emit('new_message', 
                 {
                     'profile_image': profile_image,
@@ -305,7 +305,8 @@ def inbox():
             chat_name = display_name,
             group_ids=[group.id for group in groups],
             chat_comments=chat_comments, reply_form=form,
-            profile_image='https://bulma.io/images/placeholders/128x128.png')
+            profile_image=profile_image,
+            current_group_id=group_id)
 
 #@mod_mail.route('/group/<group_id>', methods=['GET', 'POST'])
 @login_required

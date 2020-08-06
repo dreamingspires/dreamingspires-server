@@ -138,7 +138,8 @@ def register_client():
             user = User(id=form.user_name.data,
                 password=generate_password_hash(form.password.data),
                 display_name=display_name,
-                primary_email=form.email.data)
+                primary_email=form.email.data,
+                can_create_departments=True)
             db.session.add(user)
             db.session.commit()
 

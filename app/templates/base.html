@@ -65,11 +65,8 @@
                                 {% if current_user.is_authenticated %}
                                     <a class="navbar-link">
                                         <figure class="image is-32x32">
-                                            {% if current_user.display_image is none %}
-                                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                            {% else %}
-                                            <img class="is-rounded" src="{{ current_user.display_image }}">
-                                            {% endif %}
+                                            <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+
                                         </figure>
                                         &nbsp;
                                         {{ current_user.display_name }}

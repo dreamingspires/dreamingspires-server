@@ -11,9 +11,6 @@ from flask_migrate import Migrate
 
 from app.utils import register_template_utils 
 
-# Define the back-end file storage
-DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
-
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -34,6 +31,11 @@ Session(app)
 socketio = SocketIO(app, manage_session=False)
         # Sessions are managed with flask-session
 migrate = Migrate(app, db)
+
+# Define the back-end file storage
+DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
+DepotManager.configure('images', {'depot.storage_path': '/tmp/depot_images/'})
+app.wsgi_app = DepotManager.make_middleware(app.wsgi_app)
 
 # login_manager settings
 from app.models import User
@@ -57,6 +59,7 @@ nav.Bar('end', [
 
 nav.Bar('profile', [
     nav.Item('Inbox', 'mail.inbox'),
+    nav.Item('Edit profile', 'profile.edit_profile'),
     nav.Item('Log out', 'auth.logout')
 ])
 
