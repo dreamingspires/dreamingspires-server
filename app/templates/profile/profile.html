@@ -1,4 +1,4 @@
-{% from "macros/bulma_form.html" import render_form %}
+{% from "macros/bulma_form.html" import render_form, render_field %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -20,9 +20,6 @@
                 {% endif %}
                 <div>
                     <i class="fas fa-envelope mb-3"></i> {{ user.primary_email }}
-                </div>
-                <div>
-                    <button class="button">Edit public profile</button>
                 </div>
                 <hr>
 
@@ -92,10 +89,34 @@
                   </div>
                   #}
                 </div>
-                {{ render_form(form, width=12) }}
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-11">
+
+                            <form method="post" action="." role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
+                                {{ form.csrf_token }}
+                                {{ render_field(form.user_name) }}
+                                {{ render_field(form.email, False) }}
+                                {{ render_field(form.display_name) }}
+                                {{ render_field(form.description) }}
+                                {{ render_field(form.university_check) }}
+                                <div id="div_university">
+                                {{ render_field(form.university) }}
+                                </div>
+                                {{ render_field(form.upload_cv) }}
+                                <button class="button is-success" type="submit" name="submit"><i class="fas fa-save">&nbsp;</i>Save changes</button>
+                                {#
+                                {{ render_field(form.password) }}
+                                {{ render_field(form.confirm) }}
+                                #}
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
 </section>
 <script src="/static/assets/js/sidebar.js"></script>
+<script src="/static/assets/js/university_collapsible.js"></script>
 {% endblock %}

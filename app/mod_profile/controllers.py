@@ -16,7 +16,7 @@ from app import db
 import app.extensions.sidebar as sb
 
 # Import module forms
-from app.mod_profile.forms import generate_developer_profile_form
+from app.mod_profile.forms import generate_edit_user_public_profile_form 
 
 # Define the blueprint: 'profile', set its url prefix: app.url/profile
 mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
@@ -24,7 +24,7 @@ mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
 @mod_profile.route('/', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = generate_developer_profile_form(current_user)
+    form = generate_edit_user_public_profile_form(current_user)
     if form.validate_on_submit:
         pass
 
@@ -61,11 +61,11 @@ def edit_department(id):
 @mod_profile.route('/developer/', methods=['GET', 'POST'])
 @login_required
 def developer():
-    form = generate_developer_profile_form(current_user)
+    form = generate_edit_user_public_profile_form(current_user)
     return render_template('profile/developer_profile.html', form=form)
 
 @mod_profile.route('/join_organisation/', methods=['GET', 'POST'])
 @login_required
 def join_organisation():
-    form = generate_developer_profile_form(current_user)
+    form = generate_edit_user_public_profile_form(current_user)
     return render_template('profile/developer_profile.html', form=form)

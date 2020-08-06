@@ -39,6 +39,7 @@ class User(UserMixin, Base):
     display_name = db.Column(db.String(LEN_DISPLAY_NAME))
     description = db.Column(db.String(LEN_DESCRIPTION))
     display_image = db.Column(db.String(LEN_URL))
+    educational_institution = db.Column(db.String(LEN_DISPLAY_NAME))
 
     email_addresses = db.relationship('Email', backref='user')
     matrix_addresses = db.relationship('Matrix', backref='user')

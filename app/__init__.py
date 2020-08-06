@@ -7,6 +7,7 @@ from flask_principal import Principal
 from flask_socketio import SocketIO
 from flask_session import Session   # Required because socketio can't modify
                                     # default cookie-based sessions
+from flask_migrate import Migrate
 
 from app.utils import register_template_utils 
 
@@ -32,6 +33,7 @@ register_template_utils(app)
 Session(app)
 socketio = SocketIO(app, manage_session=False)
         # Sessions are managed with flask-session
+migrate = Migrate(app, db)
 
 # login_manager settings
 from app.models import User

@@ -8,16 +8,34 @@ from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 
-
-def generate_developer_profile_form(user):
-    class DeveloperProfileForm(FlaskForm):
+def generate_edit_user_public_profile_form(user):
+    class Form(FlaskForm):
         user_name = IconStringField('', 
             validators=[validators.Length(min=3, max=25)],
-            render_kw={'placeholder': user.id, 'disabled': 'disabled'},
+            default=user.id,
+            render_kw={'disabled': 'disabled'},
             left_logos=['fa-user'])
         email = IconStringField('', [validators.Email(),
             validators.Required(message="Must provide an email address")],
-            render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
+            default=user.primary_email,
+            render_kw={'disabled': 'disabled'}, left_logos=['fa-envelope'])
+        display_name = StringField('Display Name', [validators.Length(max=25)],
+            default=user.display_name)
+        description = TextAreaField('Description', [validators.Length(max=500)],
+            default=user.description)
+
+        # Optional stuff
+        uni_kw = {'onclick': 'yesnoCheck()'}
+        if user.educational_institution is not None:
+            uni_kw['checked'] = 'checked'
+        university_check = BooleanField('I am a university student',
+            render_kw=uni_kw)
+        university = DatalistField('Enter your university',
+            university_list,
+            default=user.educational_institution \
+                if user.educational_institution is not None else '')
+        upload_cv = FileField('Upload your CV (optional, .pdf only)')
+
         password = IconPasswordField('', [
             validators.DataRequired(),
             validators.EqualTo('confirm', message='Passwords must match')],
@@ -25,43 +43,4 @@ def generate_developer_profile_form(user):
 
         confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
             left_logos=['fa-lock'])
-
-        # Optional stuff
-        display_name = StringField('', [validators.Length(max=25)],
-            render_kw={'placeholder': 'Display Name'})
-        description = TextAreaField('', [validators.Length(max=500)],
-            render_kw={'placeholder': 'Describe yourself'})
-        university_check = BooleanField('I am a university student', \
-            render_kw={'onclick': 'yesnoCheck()'})
-        university = DatalistField('', \
-            university_list, default=None,
-            render_kw={'placeholder': 'Enter your university'})
-        upload_cv = FileField('Upload your CV (optional, .pdf only)')
-        accept_tos = BooleanField('I accept the Terms of Service', [
-            validators.DataRequired()])
-        submit = SubmitField('Register', render_kw={'class': 'button is-success'})
-        
-    return DeveloperProfileForm()
-
-
-#class PrettyRegisterForm(FlaskForm):
-#    user_name = StringField('Username', '', validators=[
-#        validators.DataRequired(),
-#        validators.Length(min=3, max=25)])
-#    email = PrettyEmailField('', [validators.Email(),
-#        validators.Required(message="Must provide an email address")])
-#    password = PrettyPasswordField('Password', '', [
-#        validators.DataRequired(),
-#        validators.EqualTo('confirm', message='Passwords must match')])
-#    confirm = PrettyPasswordField('Repeat Password', '')
-#
-#    # Optional stuff
-#    display_name = PrettyStringField('Display Name', '', [validators.Length(max=25)])
-#    description = PrettyTextAreaField('Describe yourself', '', [validators.Length(max=500)])
-#    university_check = PrettyBooleanField('I am a university student', '',
-#            render_kw={'onclick': 'yesnoCheck()'})
-#    university = DatalistField('Enter your university', '', university_list, default=None)
-#    upload_cv = PrettyFileField('Choose a file...', 'Upload your CV (optional, .pdf only)', validators=[
-#            validators.DataRequired()])
-#    accept_tos = PrettyBooleanField('I accept the Terms of Service', '', [
-#        validators.DataRequired()])
+    return Form()
