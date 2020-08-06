@@ -6,7 +6,7 @@
     <div class="has-background-primary-light"> <!-- used to be hero-body -->
         <div class="columns" style="width: 100%">
             <div class="column is-narrow has-background-primary pl-5">
-                <aside class="menu">
+                <aside class="menu mb-2">
                     <figure class="image is-128x128">
                         <img class="is-rounded" src="{{ user.display_image if user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
                     </figure>
@@ -14,19 +14,24 @@
                 <h1 class="title">{{ user.display_name }}</h1>
                 <h2 class="subtitle mb-3">{{ user.id }}</h2>
                 {% if user.description is not none %}
-                <div class="box content">
+                <div class="content">
                     <p>{{ user.description }}</p>
                 </div>
                 {% endif %}
                 <div>
                     <i class="fas fa-envelope mb-3"></i> {{ user.primary_email }}
                 </div>
+                {% if user.educational_institution %}
+                <div>
+                    <i class="fas fa-university mb-3"></i> {{ user.educational_institution }}
+                </div>
+                {% endif %}
                 <hr>
 
                 {% if user.developer %}
-                    <p class="menu-label">
-                        Developer
-                    </p>
+                <p class="menu-label">
+                    Developer
+                </p>
                 <div class="mb-3">
                     {# app.types.DeveloperVerificationStatus #}
                     {% if user.developer.verification_status.value == 1 %}
@@ -103,7 +108,7 @@
                                 <div id="div_university">
                                 {{ render_field(form.university) }}
                                 </div>
-                                {{ render_field(form.upload_cv) }}
+                                {{ render_field(form.change_display_image) }}
                                 <button class="button is-success" type="submit" name="submit"><i class="fas fa-save">&nbsp;</i>Save changes</button>
                                 {#
                                 {{ render_field(form.password) }}

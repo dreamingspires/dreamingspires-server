@@ -107,11 +107,11 @@ def register_developer():
         else:
             cv = CV(document=form.upload_cv.data)
             dev = Developer(cv=cv)
-            display_name2 = form.display_name.data if form.display_name.data != '' \
+            display_name = form.display_name.data if form.display_name.data != '' \
                 else form.user_name.data
             user = User(id=form.user_name.data,
                 password=generate_password_hash(form.password.data),
-                display_name=display_name2, description=form.description.data,
+                display_name=display_name, description=form.description.data,
                 primary_email=form.email.data, developer=dev)
                 #email_addresses=[email], developer=dev)
             db.session.add(user)

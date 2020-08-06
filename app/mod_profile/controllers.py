@@ -25,8 +25,23 @@ mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
 @login_required
 def edit_profile():
     form = generate_edit_user_public_profile_form(current_user)
-    if form.validate_on_submit:
-        pass
+    if form.validate_on_submit():
+        display_name = form.display_name.data if form.display_name.data != '' \
+            else current_user.display_name
+        current_user.display_name = display_name
+        current_user.description = form.description.data
+
+        if form.university_check.data:
+            current_user.educational_institution = None \
+                if form.university.data == '' else form.university.data
+        else:
+            current_user.educational_institution = None
+
+        # TODO: update profile picture
+
+        db.session.add(current_user)
+        db.session.commit()
+        return redirect(url_for('profile.edit_profile'))
 
     # Generate sidebar
     organisations = {}

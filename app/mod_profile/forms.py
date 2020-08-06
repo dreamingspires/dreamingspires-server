@@ -8,6 +8,10 @@ from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 
+def validate_image(form, field):
+    if field.data and field.data and not str(field.data).endswith(('.jpg', '.png')):
+        raise validators.ValidationError('File must be .jpg or .png')
+
 def generate_edit_user_public_profile_form(user):
     class Form(FlaskForm):
         user_name = IconStringField('', 
@@ -34,13 +38,14 @@ def generate_edit_user_public_profile_form(user):
             university_list,
             default=user.educational_institution \
                 if user.educational_institution is not None else '')
-        upload_cv = FileField('Upload your CV (optional, .pdf only)')
+        change_display_image = FileField('Change profile picture',
+            [validate_image])
 
-        password = IconPasswordField('', [
-            validators.DataRequired(),
-            validators.EqualTo('confirm', message='Passwords must match')],
-            render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
+        #password = IconPasswordField('', [
+        #    validators.DataRequired(),
+        #    validators.EqualTo('confirm', message='Passwords must match')],
+        #    render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
 
-        confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
-            left_logos=['fa-lock'])
+        #confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
+        #    left_logos=['fa-lock'])
     return Form()
