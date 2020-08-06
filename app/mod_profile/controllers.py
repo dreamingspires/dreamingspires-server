@@ -17,7 +17,8 @@ from depot.manager import DepotManager
 import app.extensions.sidebar as sb
 
 # Import module forms
-from app.mod_profile.forms import generate_edit_user_public_profile_form 
+from app.mod_profile.forms import generate_edit_user_public_profile_form, \
+    CreateDepartmentForm
 
 # Define the blueprint: 'profile', set its url prefix: app.url/profile
 mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
@@ -75,9 +76,10 @@ def edit_profile():
 @mod_profile.route('/create_organisation/', methods=['GET', 'POST'])
 @login_required
 def create_organisation():
+    form = CreateDepartmentForm()
     if not current_user.can_create_departments:
         return 'TODO: Error page'
-    return f'Create organisation page'
+    return render_template('profile/create_department.html', form=form)
 
 @mod_profile.route('/edit_organisation/<id>', methods=['GET', 'POST'])
 @login_required

@@ -12,6 +12,9 @@ def validate_image(form, field):
     if field.data and not str(field.data.filename).endswith(('.jpg', '.png')):
         raise validators.ValidationError('File must be .jpg or .png')
 
+class CreateDepartmentForm(FlaskForm):
+    pass
+
 def generate_edit_user_public_profile_form(user):
     class Form(FlaskForm):
         user_name = IconStringField('', 

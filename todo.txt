@@ -13,12 +13,17 @@
 
 [x] Profile on navbar
 [x] Modify profile page
+[ ] All organisation pages etc. to be part of the "dashboard"?
 [ ] Organisation sign-up
 [ ] Department sign-up
     [ ] Organisation name
     [ ] Department name
     [ ] Department description
     [ ] Add users
+[ ] Error page
+    [ ]Redirect from:
+        [ ] profile/create_organisation
+        [ ] profile/create_department
     
 [ ] Organisation payment for projects
 [ ] Write client FAQ
@@ -31,7 +36,8 @@ Apply polish!
 [ ] Navbar logo centered correctly
 [ ] Navbar dropdown no white effect
 [ ] Redirecting next after login doesn't work
-[ ] Profile images working everywhere (navbar, chat)
+[ ] User account creation rate limiting (+ organisations etc.)
+[x] Profile images working everywhere (navbar, chat)
 
 == Pre-launch ==
 [ ] Ensure mail.db is correctly separated (in the models)

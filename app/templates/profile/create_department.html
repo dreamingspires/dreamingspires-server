@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% from "macros/bulma_form.html" import render_form, render_field %}
+
+{% block content %}
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="column is-10 is-offset-1">
+    <h3 class="title has-text-centered">Create department</h3>
+    <div class="content">
+        <p>
+        To apply to create a new department, you must fill out the form below.
+        Suitable proof of leadership of the department should be attached
+        for review, and you should be prepared to answer follow-up questions
+        by email.
+        </p>
+        <p>
+        You will be able to view the application status on the dashboard.
+        Once approved, you will be able to submit tasks to the marketplace.
+        </p>
+    </div>
+    <div class="box">
+        {{ render_form(form) }}
+        {#
+        <form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
+          <dl>
+            {{ form.csrf_token }}
+            {{ render_field(form.user_name) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.confirm) }}
+            {{ render_field(form.display_name) }}
+            {{ render_field(form.description) }}
+            {{ render_field(form.university_check) }}
+            <div id="div_university">
+            {{ render_field(form.university) }}
+            </div>
+            {{ render_field(form.upload_cv) }}
+            {{ render_field(form.accept_tos) }}
+          </dl>
+          <button class="button is-success" type="submit" name="submit">Register</button>
+        </form>
+        #}
+
+        <script>
+        function yesnoCheck() {
+            if (document.getElementById('university_check').checked) {
+                document.getElementById('div_university').style.display = 'block';
+            } else {
+                document.getElementById('div_university').style.display = 'none';
+            }
+        }
+        yesnoCheck()
+        </script>
+    </div>
+</div>
+{% endblock %}
