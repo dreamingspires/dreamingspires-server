@@ -7,3 +7,6 @@
 [submodule "modules/bulma-timeline"]
 	path = modules/bulma-timeline
 	url = https://github.com/Wikiki/bulma-timeline.git
+[submodule "modules/bulma-divider"]
+	path = modules/bulma-divider
+	url = https://github.com/CreativeBulma/bulma-divider/

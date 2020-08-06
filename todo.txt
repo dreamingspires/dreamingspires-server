@@ -12,7 +12,12 @@
     [ ] Linking a chat into a project
 [x] Profile on navbar
 [ ] Organisation sign-up
-[ ] Organisaion account settings page
+[ ] Department sign-up
+    [ ] Organisation name
+    [ ] Department name
+    [ ] Department description
+    [ ] Add users
+    
 [ ] Organisation payment for projects
 [ ] Write client FAQ
 

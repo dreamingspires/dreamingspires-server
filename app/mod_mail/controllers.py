@@ -14,7 +14,7 @@ import app.extensions.chat as chat
 from app import db, socketio
 
 # Import module models (i.e. Projects)
-from app.models import User, Developer
+from app.models import User, Developer, Organisation, Department
 from app.mod_mail.models import MailGroup, MailMessage, MailUserRole, \
     ReadReceipt
 from app.mod_mail.forms import ReplyForm
@@ -97,6 +97,27 @@ def generate():
         josh_role = MailUserRole(user=josh, creator=False, relationship='Other')
         db.session.add(josh)
         db.session.add(josh_role)
+
+        # Generate some organisations
+        oxford_cs = Department(display_name='Computer Science', description='''
+            Oxford CS description
+        ''', users=[edd])
+        oxford_anthro = Department(display_name='Anthropology', description='''
+            Oxford Anthropology description
+        ''', users=[edd])
+        oxford = Organisation(display_name='University of Oxford', description='''
+            This is the description of the Universty of Oxford
+        ''', departments=[oxford_cs, oxford_anthro])
+
+        cambridge_anthro = Department(display_name='Anthropology', description='''
+            Cambridge Anthropology description
+        ''', users=[edd])
+        cambridge = Organisation(display_name='University of Cambridge', description='''
+            This is the description of the Universty of Cambridge 
+        ''', departments=[cambridge_anthro])
+
+        db.session.add(oxford)
+        db.session.add(cambridge)
 
         # Generate a group chat
         user_roles = [edd_role, rogan_role, mark_role, josh_role]

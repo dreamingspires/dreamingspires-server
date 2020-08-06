@@ -127,4 +127,23 @@ def register_developer():
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     form = RegisterClientForm()
+    if form.validate_on_submit():
+        if User.query.filter_by(primary_email=form.email.data).first():
+            flash('An account has already been registered with this email address.')
+        elif User.query.filter_by(id=form.user_name.data).first():
+            flash('Username already taken.')
+        else:
+            display_name = form.display_name.data if form.display_name.data != '' \
+                else form.user_name.data
+            user = User(id=form.user_name.data,
+                password=generate_password_hash(form.password.data),
+                display_name=display_name,
+                primary_email=form.email.data)
+            db.session.add(user)
+            db.session.commit()
+
+            next = request.args.get('next')
+            #if not is_safe_url(next):
+            #    return abort(400)
+            return redirect(next or url_for('auth.login'))
     return render_template('auth/register_client.html', form=form)

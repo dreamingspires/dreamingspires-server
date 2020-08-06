@@ -1,4 +1,5 @@
 from pprint import pprint
+
 class MenuElement():
     def __init__(self, elem_id=None):
         self.elem_id = elem_id

@@ -4,6 +4,7 @@
 # Projects), so for now all the databases are defined here instead
 
 from app import db
+from app.types import DeveloperVerificationStatus
 from depot.fields.sqlalchemy import UploadedFileField
 from flask_login import UserMixin
 import uuid
@@ -73,13 +74,16 @@ class CV(Base):
     dev_id = db.Column(db.String(LEN_UUID), db.ForeignKey('developers.id'),
             nullable=False)
     document = db.Column('content_col', UploadedFileField)
-    
 
 class Developer(Base):
     __tablename__ = 'developers'
     user_id = db.Column(db.String(LEN_UUID), db.ForeignKey('auth_user.id'),
             nullable=False)
     cv = db.relationship('CV', backref='developer')
+    verification_status = db.Column(db.Enum(DeveloperVerificationStatus), \
+        nullable=False, default=DeveloperVerificationStatus.application_not_submitted)
+    verification_attempts = db.Column(db.Integer, default=0)
+    last_verification_date = db.Column(db.DateTime)
 
     def __repr__(self):
         return f'<Developer {self.display_name}>'
