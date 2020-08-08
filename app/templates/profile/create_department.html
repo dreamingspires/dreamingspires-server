@@ -18,17 +18,17 @@
     <div class="content">
         <p>
         To apply to create a new department, you must fill out the form below.
-        Suitable proof of leadership of the department should be attached
-        for review, and you should be prepared to answer follow-up questions
-        by email.
+        You should attach proof of your leadership of the department, for
+        example through a university card or other supporting documentation.
         </p>
         <p>
-        You will be able to view the application status on the dashboard.
-        Once approved, you will be able to submit tasks to the marketplace.
+        We will review your application, and will email you after approval
+        has been granted.
+        The status of your application will be visible on the dashboard.
         </p>
     </div>
     <div class="box">
-        {{ render_form(form) }}
+        {{ render_form(form, width=8) }}
         {#
         <form method="POST" action="." accept-charset="UTF-8" role="form" enctype='multipart/form-data'>
           <dl>

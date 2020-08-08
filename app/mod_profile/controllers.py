@@ -15,6 +15,8 @@ from app import db
 from depot.manager import DepotManager
 
 import app.extensions.sidebar as sb
+from app.models import Department, Organisation, User
+import app.types as t
 
 # Import module forms
 from app.mod_profile.forms import generate_edit_user_public_profile_form, \
@@ -58,14 +60,25 @@ def edit_profile():
     if current_user.departments:
         for department in current_user.departments:
             try:
-                organisations[department.organisation.display_name]
+                display_name = department.organisation.display_name
+                organisations[display_name]
+            except AttributeError:
+                if department.temp_organisation is None:
+                    # We have a consistency error!
+                    continue
+                display_name = department.temp_organisation
+                organisations[display_name] = {
+                    # TODO: make this the pending organisation page
+                    'link': None,
+                    'departments': {}
+                }
             except KeyError:
-                organisations[department.organisation.display_name] = {
+                organisations[display_name] = {
                     'link': url_for('profile.edit_organisation', 
                         id=department.organisation.id),
                     'departments': {}
                 }
-            organisations[department.organisation.display_name]['departments']\
+            organisations[display_name]['departments']\
                 [department.display_name] = {
                     'link': url_for('profile.edit_department',
                         id=department.id)
@@ -73,12 +86,38 @@ def edit_profile():
     return render_template('profile/profile.html', user=current_user, \
             organisations=organisations, form=form)
 
-@mod_profile.route('/create_organisation/', methods=['GET', 'POST'])
+@mod_profile.route('/create_department/', methods=['GET', 'POST'])
 @login_required
-def create_organisation():
+def create_department():
     form = CreateDepartmentForm()
     if not current_user.can_create_departments:
         return 'TODO: Error page'
+
+    # Ensure the user has no other pending organisation applications
+    for dep in current_user.departments:
+        if dep.verification_status == t.VerificationStatus.pending:
+            return "You cannot register more than one organisation at once"
+
+    if form.validate_on_submit():
+
+        # Find the corresponding organisation
+        org = Organisation.query.filter_by(
+            display_name=form.organisation_name.data).first()
+
+        # Create a pending department
+        dep = Department(
+            display_name=form.department_name.data,
+            description='',
+            users=[current_user],
+            organisation=org,
+            verification_status=t.VerificationStatus.pending,
+            temp_organisation=form.organisation_name.data if org is None \
+                else None)
+
+        db.session.add(dep)
+        db.session.commit()
+
+        return redirect(url_for('profile.edit_profile'))
     return render_template('profile/create_department.html', form=form)
 
 @mod_profile.route('/edit_organisation/<id>', methods=['GET', 'POST'])

@@ -33,11 +33,10 @@
                     Developer
                 </p>
                 <div class="mb-3">
-                    {# app.types.DeveloperVerificationStatus #}
                     {% if user.developer.verification_status.value == 1 %}
                         <i class="fas fa-minus-circle has-text-warning"></i> Application pending
                     {% elif user.developer.verification_status.value == 2 %}
-                        <i class="fas fa-minus-circle has-text-warning"></i> Interview offered
+                        <i class="fas fa-minus-circle has-text-warning"></i> Awaiting response
                     {% elif user.developer.verification_status.value == 3 %}
                         <i class="fas fa-check-circle has-text-success"></i> Verified 
                     {% else %}
@@ -54,12 +53,20 @@
                     <ul class="menu-list">
                         <li>
                             <div onmouseover="mouseover_expand(this)" onmouseout="mouseover_collapse(this)">
+                                {% if org['link'] %}
                                 <a href="{{ org['link'] }}">{{ org_name }}</a>
+                                {% else %}
+                                <a>{{ org_name }}</a>
+                                {% endif %}
                                 <div id="collapsible-div-{{ loop.index }}" class="is-collapsible">
                                     <ul>
                                         {% for dep_name, dep in org['departments'].items() %}
                                         <li>
+                                            {% if dep['link'] %}
                                             <a href={{ dep['link'] }}>{{ dep_name }}</a>
+                                            {% else %}
+                                            <a>{{ dep_name }}</a>
+                                            {% endif %}
                                         </li>
                                         {% endfor %}
                                     </ul>
@@ -70,7 +77,7 @@
                     {% endfor %}
                 {% endif %}
                 {% if user.can_create_departments %}
-                <a href={{ url_for('profile.create_organisation') }} class="button is-outlined is-inverted is-success">Create department</a>
+                <a href={{ url_for('profile.create_department') }} class="button is-outlined is-inverted is-success">Create department</a>
                 {% endif %}
             </div>
 

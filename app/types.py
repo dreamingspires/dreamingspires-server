@@ -1,10 +1,18 @@
 import enum
 
-class DeveloperVerificationStatus(enum.Enum):
-    application_not_submitted = 0
-    application_submitted = 1
-    interview_offered = 2
-    verified = 3
-    rejected_at_application = 4
-    rejected_at_interview = 5
-    rejected_other = 6
+class VerificationStatus(enum.Enum):
+    not_submitted = 0
+    pending = 1
+    awaiting_response = 2
+    accepted = 3
+    rejected = 4
+
+# Define constants
+LEN_DISPLAY_NAME = 60
+LEN_DESCRIPTION = 500
+LEN_UUID=32
+LEN_MIN_UUID=3  # User for user names and such
+LEN_PRICE=10
+LEN_URL=60
+LEN_TAG = 20
+LEN_INTERNAL_DB_COMMENT = 500

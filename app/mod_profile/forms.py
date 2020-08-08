@@ -1,19 +1,31 @@
 from flask_wtf import FlaskForm # , RecaptchaField
 from flask_wtf.file import FileField
 from wtforms import validators, StringField, PasswordField, BooleanField, \
-    SelectField, RadioField, TextAreaField, SubmitField
+    SelectField, RadioField, TextAreaField, SubmitField, MultipleFileField
 from wtforms.widgets import TextInput, TextArea, CheckboxInput, \
     FileInput, HTMLString, PasswordInput
 from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
+import app.types as t
 
 def validate_image(form, field):
     if field.data and not str(field.data.filename).endswith(('.jpg', '.png')):
         raise validators.ValidationError('File must be .jpg or .png')
 
 class CreateDepartmentForm(FlaskForm):
-    pass
+    department_name = IconStringField('',
+            validators=[validators.Length(min=t.LEN_MIN_UUID, max=t.LEN_UUID)],
+            render_kw={'placeholder': 'Department name'},
+            left_logos=['fa-university'])
+    organisation_name = IconStringField(
+            'Your department\'s parent organisation (e.g. university)',
+            validators=[validators.Length(min=t.LEN_MIN_UUID, max=t.LEN_UUID)],
+            render_kw={'placeholder': 'Organisation Name (Optional)'},
+            left_logos=['fa-university'])
+    supporting_evidence = MultipleFileField(
+        'Upload supporting evidence of your department leadership')
+    submit = SubmitField('Submit', render_kw={'class': 'button is-success'})
 
 def generate_edit_user_public_profile_form(user):
     class Form(FlaskForm):

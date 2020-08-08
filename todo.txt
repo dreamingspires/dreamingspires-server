@@ -15,7 +15,9 @@
 [x] Modify profile page
 [ ] All organisation pages etc. to be part of the "dashboard"?
 [ ] Organisation sign-up
-[ ] Department sign-up
+[x] Department sign-up
+[ ] Edit department page (mostly a copy+paste job from edit_profile)
+    [ ] Shows department status
     [ ] Organisation name
     [ ] Department name
     [ ] Department description
