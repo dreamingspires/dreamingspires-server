@@ -8,10 +8,7 @@ from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
 import app.types as t
-
-def validate_image(form, field):
-    if field.data and not str(field.data.filename).endswith(('.jpg', '.png')):
-        raise validators.ValidationError('File must be .jpg or .png')
+from app.extensions.forms import validate_image
 
 class CreateDepartmentForm(FlaskForm):
     department_name = IconStringField('',
@@ -56,11 +53,4 @@ def generate_edit_user_public_profile_form(user):
         display_image = FileField('Change profile picture',
             [validate_image])
 
-        #password = IconPasswordField('', [
-        #    validators.DataRequired(),
-        #    validators.EqualTo('confirm', message='Passwords must match')],
-        #    render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
-
-        #confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
-        #    left_logos=['fa-lock'])
     return Form()

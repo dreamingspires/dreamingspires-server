@@ -8,7 +8,9 @@
             <div class="column is-narrow has-background-primary pl-5" style="max-width:250px">
                 <aside class="menu mb-2">
                     <figure class="image is-128x128">
-                        <img class="is-rounded" src="{{ user.display_image.url if user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+                        {# img should use is-square-image-128x128, but this
+                        isn't working for some reason in main.scss #}
+                        <img class="is-rounded" style="width:128px; height:128px; object-fit:cover" src="{{ user.display_image.url if user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
                     </figure>
                 </aside>
                 <h1 class="title">{{ user.display_name }}</h1>

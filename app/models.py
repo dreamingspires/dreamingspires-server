@@ -37,7 +37,8 @@ class User(UserMixin, Base):
             primary_key=True)
     display_name = db.Column(db.String(t.LEN_DISPLAY_NAME))
     description = db.Column(db.String(t.LEN_DESCRIPTION))
-    display_image = db.Column(UploadedFileField(upload_type=UploadedImageWithThumb, upload_storage='images'))
+    display_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='images'))
     educational_institution = db.Column(db.String(t.LEN_DISPLAY_NAME))
     can_create_departments = db.Column(db.Boolean, default=False, nullable=False)
 
@@ -92,6 +93,9 @@ class Organisation(BaseRequiresVerification):
     __tablename__ = 'organisations'
     display_name = db.Column(db.String(t.LEN_DISPLAY_NAME), nullable=False)
     description = db.Column(db.String(t.LEN_DESCRIPTION), nullable=False)
+    display_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='images'))
+
     users = db.relationship('User', secondary=user_organisations_map,
         backref='organisations')
     departments = db.relationship('Department', backref='organisation')
@@ -105,15 +109,25 @@ user_departments_map = db.Table('user_departments_map',
     db.Column('department_id', db.String(t.LEN_UUID), db.ForeignKey('departments.id'), \
         primary_key=True))
 
+class DepartmentFile(Base):
+    __tablename__ = 'department_files'
+    document = db.Column('content_col', UploadedFileField)
+    department_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('departments.id'),
+            nullable=False)
+
 class Department(BaseRequiresVerification):
     __tablename__ = 'departments'
     display_name = db.Column(db.String(t.LEN_DISPLAY_NAME), nullable=False)
     description = db.Column(db.String(t.LEN_DESCRIPTION), nullable=False)
-    users = db.relationship('User', secondary=user_departments_map,
-        backref='departments')
+    display_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='images'))
     organisation_id = db.Column(db.String(t.LEN_UUID), \
         db.ForeignKey('organisations.id'))
     temp_organisation = db.Column(db.String(t.LEN_DISPLAY_NAME))
+    supporting_evidence = db.relationship('DepartmentFile', backref='department')
+
+    users = db.relationship('User', secondary=user_departments_map,
+        backref='departments')
 
     def __repr__(self):
         return f'<Department {self.display_name}>'

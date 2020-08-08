@@ -1,6 +1,11 @@
 from wtforms import validators, StringField, PasswordField, FileField
 from wtforms.widgets import TextInput, FileInput, PasswordInput, HTMLString
 
+def validate_image(form, field):
+    if field.data and not str(field.data.filename).endswith(
+            ('.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG')):
+        raise validators.ValidationError('File must be .jpg or .png')
+
 class DatalistInput(TextInput):
     """
     Custom widget to create an input with a datalist attribute

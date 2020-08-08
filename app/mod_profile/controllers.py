@@ -15,7 +15,7 @@ from app import db
 from depot.manager import DepotManager
 
 import app.extensions.sidebar as sb
-from app.models import Department, Organisation, User
+from app.models import Department, Organisation, User, DepartmentFile
 import app.types as t
 
 # Import module forms
@@ -43,8 +43,7 @@ def edit_profile():
         else:
             current_user.educational_institution = None
 
-        # TODO: update profile picture
-        if form.display_image:
+        if form.display_image.data:
             try:
                 current_user.display_image = form.display_image.data
             except PIL.UnidentifiedImageError:
@@ -80,10 +79,10 @@ def edit_profile():
                 }
             organisations[display_name]['departments']\
                 [department.display_name] = {
-                    'link': url_for('profile.edit_department',
-                        id=department.id)
+                    'link': url_for('organisations.edit_department',
+                        department_id=department.id)
                 }
-    return render_template('profile/profile.html', user=current_user, \
+    return render_template('profile/profile.html', user=current_user,
             organisations=organisations, form=form)
 
 @mod_profile.route('/create_department/', methods=['GET', 'POST'])
@@ -105,6 +104,8 @@ def create_department():
             display_name=form.organisation_name.data).first()
 
         # Create a pending department
+        supporting_evidence = [DepartmentFile(document=f) \
+            for f in form.supporting_evidence.data]
         dep = Department(
             display_name=form.department_name.data,
             description='',
@@ -112,7 +113,9 @@ def create_department():
             organisation=org,
             verification_status=t.VerificationStatus.pending,
             temp_organisation=form.organisation_name.data if org is None \
-                else None)
+                else None,
+            supporting_evidence=supporting_evidence)
+        
 
         db.session.add(dep)
         db.session.commit()
@@ -124,11 +127,6 @@ def create_department():
 @login_required
 def edit_organisation(id):
     return f'Edit organisation: {id}'
-
-@mod_profile.route('/edit_department/<id>', methods=['GET', 'POST'])
-@login_required
-def edit_department(id):
-    return f'Edit department: {id}'
 
 @mod_profile.route('/developer/', methods=['GET', 'POST'])
 @login_required

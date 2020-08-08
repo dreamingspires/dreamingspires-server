@@ -40,3 +40,9 @@ $navbar-breakpoint: $mobile;
     flex-direction: column;
     height: 100%;
 }
+
+.is-square-image-128x128 {
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+}
