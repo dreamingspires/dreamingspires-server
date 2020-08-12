@@ -11,6 +11,21 @@ from flask_migrate import Migrate
 
 from app.utils import register_template_utils 
 
+class PrefixMiddleware(object):
+    def __init__(self, app, prefix=''):
+        self.app = app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+
+        if environ['PATH_INFO'].startswith(self.prefix):
+            environ['PATH_INFO'] = environ['PATH_INFO'][len(self.prefix):]
+            environ['SCRIPT_NAME'] = self.prefix
+            return self.app(environ, start_response)
+        else:
+            start_response('404', [('Content-Type', 'text/plain')])
+            return ["This url does not belong to the app.".encode()]
+
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -20,6 +35,12 @@ app.jinja_env.lstrip_blocks = True
 
 # Configurations
 app.config.from_object('config')
+
+#try:
+if app.config['PREFIX']:
+    app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=app.config['PREFIX'])
+#except KeyError:
+#    pass
 
 # Register extensions with app
 db = SQLAlchemy(app)

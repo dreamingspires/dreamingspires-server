@@ -37,3 +37,5 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Configure flask-session
 SESSION_TYPE = 'filesystem'
+
+PREFIX='/dreamingspires'
