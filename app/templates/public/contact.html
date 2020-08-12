@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Contact Page</title>
-    </head>
-    <body>
-        <h1>Contact Page</h1>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="mt-4">
+        <div class="columns" style="width: 100%">
+            <main class="column is-10 is-offset-1 content">
+                <div class="box">
+                    <h1 class="title has-text-primary">Contact us</h3>
+                    <hr>
+                    <p>If you have questions about what we offer, or would like
+                    to get involved in some way, we'd love to hear from you.</p>
+
+                    <p>For information about submitting jobs and working with
+                    us as a client, see our <a href="{{ url_for('client_faq') }}">client faq</a>.</p>
+                    <p>For information about freelancing with us as a developer,
+                    see our <a href="{{ url_for('developer_faq') }}">developer faq</a>.</p>
+
+                    <h3 class="subtitle has-text-primary">For general enquiries</h3>
+                    For anything else, feel free to contact us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>!
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}

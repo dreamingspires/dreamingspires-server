@@ -48,7 +48,7 @@ login_manager.login_view = 'auth.login'
 nav.Bar('start', [
     nav.Item('Home', 'index'),
     nav.Item('About', 'index', args={'_anchor':'about'}),
-    nav.Item('Contact', 'contact', args={'_anchor':'contact'}),
+    nav.Item('Contact', 'contact'),
 ])
 
 nav.Bar('end', [
