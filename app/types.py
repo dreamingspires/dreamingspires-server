@@ -7,6 +7,13 @@ class VerificationStatus(enum.Enum):
     accepted = 3
     rejected = 4
 
+class DeveloperProjectStatus(enum.Enum):
+    not_related = 0
+    interested = 1
+    assigned = 2
+    deassigned = 3
+    completed = 4
+
 # Define constants
 LEN_DISPLAY_NAME = 60
 LEN_DESCRIPTION = 500

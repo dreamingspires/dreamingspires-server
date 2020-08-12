@@ -36,6 +36,7 @@ def home():
 
     return 'Successfully logged in'
 
+
 # Set the route and accepted methods
 @mod_auth.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -57,7 +58,7 @@ def login():
             next = request.args.get('next')
             #if not is_safe_url(next):
             #    return abort(400)
-            return redirect(next or url_for('marketplace.marketplace'))
+            return redirect(next or url_for('profile.edit_profile'))
 
         flash('Wrong email or password', 'error-message')
 
@@ -125,6 +126,11 @@ def register_developer():
         entries=list(range(1000)))
 
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])
+def register_client():
+    return render_template('auth/register_client_temp.html')
+
+
+#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     form = RegisterClientForm()
     if form.validate_on_submit():

@@ -48,7 +48,9 @@ class JobListing():
                                 <br>
                                 {{ cost }}
                                 &nbsp&nbsp&nbsp&nbsp
+                                {% if ect %}
                                 Est. completion time ≈ {{ ect }}
+                                {% endif %}
                                 <br>
                                 {% for (tag_text, tag_colour, tag_link) in tags %}
                                 {% if tag_colour is not none %}

@@ -2,23 +2,39 @@
 from flask import Blueprint, request, render_template, render_template_string, \
                   flash, g, session, redirect, url_for
 from flask_navigation import Navigation
+from flask_login import login_required, current_user
 
 import app.extensions.sidebar as sb
 import app.extensions.timeline as tl
 import app.extensions.jobs as jobs
 import app.extensions.chat as chat
+import app.types as t
 
 # Import the database object from the main app module
 from app import db
 
 # Import module models (i.e. Projects)
-from app.models import Project
+from app.models import Project, Developer, DeveloperProjectsMap
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_marketplace = Blueprint('marketplace', __name__, url_prefix='/')
 
-# TODO: think about how to tell if a link is active or not
 def generate_sidebar():
+    menu = sb.Menu([
+        sb.MenuLabel('Developer'),
+        sb.MenuList(None, [
+            sb.MenuCollapsibleList(0, '<span class="icon is-small"><i class="fa fa-clipboard-list"></i></span> Current Assignments', '', [
+                sb.MenuLink('Assignment 1', ''),
+                sb.MenuLink('Assignment 2', '')
+            ], mouseover=True),
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-clipboard-check"></i></span> Past Assignments'),
+            sb.MenuLink('<span class="icon is-small"><i class="fa fa-money-check-alt"></i></span> Payroll')
+        ]),
+    ])
+    return menu.render()
+
+# TODO: think about how to tell if a link is active or not
+def generate_sidebar_old():
     menu = sb.Menu([
         sb.MenuLabel('General'),
         sb.MenuList(None, [
@@ -182,39 +198,42 @@ def create_job_listing(project):
     # Generate tags tuples
     tags = [(tag.display_name, tag.colour, 'broken_tag_link') for tag \
             in project.tags]
+    
 
     return jobs.JobListing(
         job_link=url_for('marketplace.projects', project_id=project.id),
         title=project.display_name,
         date=project.date_created.strftime('%Y-%M-%d'),
-        ect=str(project.ect) if project.ect is not None else '',
+        ect=str(project.ect) if project.ect is not None else None,
         cost=str(project.price),
-        organisation=org.display_name,
+        organisation=org.display_name if org else '',
         organisation_link=url_for('organisations.organisation', 
-            organisation_id=org.id),
+            organisation_id=org.id) if org else '',
         department=dep.display_name,
         department_link=url_for('organisations.department',
-            organisation_id=org.id, department_id=dep.id),
+            department_id=dep.id),
         tags=tags,
         description=project.description,
         colour='#e0ffff',
-        image_link=project.display_image
+        image_link=project.display_image.url if project.display_image else 'https://bulma.io/images/placeholders/128x128.png'
     )
 
 @mod_marketplace.route('/marketplace', methods=['GET', 'POST'])
+@login_required
 def marketplace():
     # Ensure the user is logged in
 
     # Generate the appropriate sidebar
     sidebar = generate_searchbar()
 
-    # Get some job listings
-    projects = Project.query.limit(5).all()
+    # Get some job listings TODO: eventually limit results per page, paginate
+    projects = Project.query.all()
     job_listings = [create_job_listing(project).render() for project in projects]
 
     return render_template('marketplace/marketplace.html', sidebar=sidebar, job_listings=job_listings)
 
 @mod_marketplace.route('/dashboard', methods=['GET', 'POST'])
+@login_required
 def dashboard():
     # Ensure the user is logged in
 
@@ -224,13 +243,49 @@ def dashboard():
     # Get some job listings
     return render_template('marketplace/dashboard.html', sidebar=sidebar)
 
-
 @mod_marketplace.route('/projects/<project_id>')
+@login_required
 def projects(project_id):
     # Look up the project ID
     [project] = Project.query.filter(Project.id == project_id).all()
     job_listing = create_job_listing(project).render()
+    db.session.add(current_user)
+    developer = current_user.developer
+
+    # Build a table of the user's current assignments
+    assignments = Developer.query.join(DeveloperProjectsMap).filter(DeveloperProjectsMap.developer_id == developer.id).all()
+
+    assignments_dict = {e: [] for e in t.DeveloperProjectStatus}
+    for assignment in assignments:
+        assignments_dict[assignment.role].append(
+            Project.query.filter(id=assignment.project_id))
+
+    print('### Assignments:')
+    print(assignments_dict)
 
     return render_template('marketplace/project.html', project=project, \
-            sidebar=generate_sidebar(), job_listing=job_listing, \
-            timeline=generate_timeline(), discussion=generate_chat())
+            job_listing=job_listing, timeline=generate_timeline())
+            #, discussion=generate_chat()
+
+@mod_marketplace.route('/projects/<project_id>/register_interest')
+@login_required
+def register_interest(project_id):
+    # Ensure that the current user is a developer
+    if not (developer := current_user.developer):
+        return 'Forbidden'
+
+    # Get the project
+    project = Project.query.filter_by(id=project_id).first()
+
+    # Mark user as interested
+    a = DeveloperProjectsMap(role=t.DeveloperProjectStatus.interested)
+    project.developers.append(a)
+    developer.projects.append(a)
+    
+    # Save
+    db.session.add(a)
+    db.session.add(project)
+    db.session.add(developer)
+    db.session.commit()
+
+    # Create a chat room with the user and Dreaming Spires

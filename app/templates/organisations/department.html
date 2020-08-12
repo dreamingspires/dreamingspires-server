@@ -33,7 +33,8 @@
                     {% endif %}
                 </div>
 
-                <a class="button is-success">Create new project</a>
+                <a class="button is-success">Add users</a>
+                <a href={{ url_for('organisations.create_project', department_id=dep.id) }} class="button is-success">Create new project</a>
             </div>
 
             <main class="column">

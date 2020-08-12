@@ -73,7 +73,7 @@
                                     </a>
                                     <div class="navbar-dropdown is-right is-boxed">
                                         {% for item in nav.profile %}
-                                        <a href="{{ item.url }}" class="navbar-item">{{ item.label|safe }}</a>
+                                        <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
                                         {% endfor %}
                                     </div>
                                 {% else %}
@@ -101,7 +101,6 @@
         </div>
 
         <div class="hero-foot">
-            footer goes here
         </div>
     </section>
     <script>

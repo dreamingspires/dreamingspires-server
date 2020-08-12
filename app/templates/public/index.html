@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <section class="hero is-primary is-medium is-fullheight-with-navbar">
+    <section class="is-primary is-medium is-fullheight-with-navbar">
         <div style="background-image: url('/static/assets/images/backgrounds/background-original.png'); background-size: cover; background-position: bottom; display: block">
         <div class="hero-body is-bg-img" style="background-image: url('/static/assets/images/backgrounds/skyline.png'); background-size: cover; background-position: bottom">
             <div class="container has-text-centered">
@@ -42,11 +42,8 @@
         </div>
     </section>
 
+    <a id="about"></a>
     {% include 'includes/who_are_we.html' %}
     {% include 'includes/testimonials.html' %}
     {% include 'includes/portfolio.html' %}
-
-    <div>
-        How does it work?
-    </div>
 {% endblock %}

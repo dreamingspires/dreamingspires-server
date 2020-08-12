@@ -47,9 +47,8 @@ login_manager.login_view = 'auth.login'
 
 nav.Bar('start', [
     nav.Item('Home', 'index'),
-    nav.Item('About', 'about'),
-    nav.Item('Contact', 'contact'),
-    nav.Item('Marketplace', 'marketplace.marketplace')
+    nav.Item('About', 'index', args={'_anchor':'about'}),
+    nav.Item('Contact', 'contact', args={'_anchor':'contact'}),
 ])
 
 nav.Bar('end', [
@@ -60,6 +59,7 @@ nav.Bar('end', [
 nav.Bar('profile', [
     nav.Item('Inbox', 'mail.inbox'),
     nav.Item('Edit profile', 'profile.edit_profile'),
+    nav.Item('Marketplace', 'marketplace.marketplace'),
     nav.Item('Log out', 'auth.logout')
 ])
 

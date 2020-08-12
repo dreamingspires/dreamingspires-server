@@ -80,6 +80,8 @@ class Developer(BaseRequiresVerification):
             nullable=False)
     cv = db.relationship('CV', backref='developer')
 
+    projects = db.relationship('DeveloperProjectsMap',
+        back_populates='developer')
     def __repr__(self):
         return f'<Developer {self.display_name}>'
 
@@ -132,13 +134,17 @@ class Department(BaseRequiresVerification):
     def __repr__(self):
         return f'<Department {self.display_name}>'
 
-developer_projects_map = db.Table('developer_projects_map', 
-    db.Column('developer_id', db.String(t.LEN_UUID), db.ForeignKey('developers.id'), 
-        primary_key=True),
-    db.Column('project_id', db.String(t.LEN_UUID), db.ForeignKey('projects.id'),
-        primary_key=True),
-    db.Column('role', db.String(60))
-)
+class DeveloperProjectsMap(Base):
+    __tablename__ = 'developer_projects_map'
+    developer_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('developers.id'),
+        primary_key=True)
+    project_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('projects.id'),
+        primary_key=True)
+    role = db.Column(db.Enum(t.DeveloperProjectStatus), nullable=False,
+        default=t.DeveloperProjectStatus.not_related)
+
+    developer = db.relationship('Developer', back_populates='projects')
+    project = db.relationship('Project', back_populates='developers')
 
 ## Projects
 project_tags_map = db.Table('project_tags_map',
@@ -160,8 +166,8 @@ class Project(Base):
     tags = db.relationship('ProjectTag', secondary=project_tags_map,
         backref='projects')
 
-    developers = db.relationship('Developer', secondary=developer_projects_map, 
-        backref='projects')
+    developers = db.relationship('DeveloperProjectsMap',
+        back_populates='project')
     department_id = db.Column(db.String(t.LEN_UUID), \
             db.ForeignKey('departments.id'), nullable=False)
     department = db.relationship('Department', backref='projects')

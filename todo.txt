@@ -10,30 +10,21 @@
     [x] Automatic page refresh on new messages
     [=] Page auto-scrolls to correct location
     [ ] New message button
-
 [x] Profile on navbar
 [x] Modify profile page
-[ ] All organisation pages etc. to be part of the "dashboard"?
-[ ] Organisation sign-up
-[x] Department sign-up
-[ ] Edit department page (mostly a copy+paste job from edit_profile)
-    [x] Shows department status
-    [x] Organisation name
-    [x] Department name
-    [x] Department description
-    [ ] Delete supporting evidence button
-    [ ] Add users
-[ ] Add job page
 [ ] Error page
     [ ]Redirect from:
         [ ] profile/create_organisation
         [ ] profile/create_department
         [ ] organisations/edit_department
-[ ] After organisation creation, a "thank you for registering" page
-[ ] Create department supporting evidence actually does something
-    
-[ ] Organisation payment for projects
+[ ] Admin console
+    [ ] Create jobs on marketplace
+    [ ] Assign people jobs and add them into a chat room
 [ ] Write client FAQ
+[ ] Integrate marketplace with chat service
+[ ] Flask-Mail
+    [ ] Sign-up process
+    [ ] Notifications of new messages (can disable if required)
 
 === Week 2 ===
 Apply polish!
@@ -59,6 +50,21 @@ Apply polish!
 [ ] Developer account settings page
 [ ] Linking a chat into a project
 [ ] Verification for user's educational institutions
+[ ] Delete supporting evidence button for creating departments
+[ ] Edit department page (mostly a copy+paste job from edit_profile)
+    [x] Shows department status
+    [x] Organisation name
+    [x] Department name
+    [x] Department description
+    [ ] Add users
+[ ] All organisation pages etc. to be part of the "dashboard"?
+[ ] Organisation sign-up
+[ ] Add job page
+[x] Department sign-up
+[ ] After organisation creation, a "thank you for registering" page
+[x] Create department supporting evidence actually does something
+    
+[ ] Organisation payment for projects
 
 
 == Overall client workflow ==

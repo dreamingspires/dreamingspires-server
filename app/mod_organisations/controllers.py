@@ -20,7 +20,7 @@ mod_organisations = Blueprint('organisations', __name__, url_prefix='/org')
 def organisation(organisation_id):
     return(f'Organisation: {organisation_id}')
 
-@mod_organisations.route('/<organisation_id>/create')
+@mod_organisations.route('/organisation/<organisation_id>/create')
 def create_organisation(organisation_id):
     org = Organisation.query.filter_by(id=organisation_id).first()
     if org:
@@ -33,9 +33,9 @@ def create_organisation(organisation_id):
         db.session.commit()
         return(f'Organisation created: {organisation_id}')
 
-@mod_organisations.route('/<organisation_id>/<department_id>')
-def department(organisation_id, department_id):
-    return(f'Department: {organisation_id}/{department_id}')
+@mod_organisations.route('/department/<department_id>')
+def department(department_id):
+    return(f'Department: {department_id}')
 
 # TODO: move actual department creation here
 #@mod_organisations.route('/<organisation_id>/<department_id>/create')
@@ -99,19 +99,19 @@ def edit_department(department_id):
         dep=dep, form=form)
     
 
-@mod_organisations.route('/<organisation_id>/<department_id>/create_project/', \
+@mod_organisations.route('/<department_id>/create_project/', \
         methods=['GET', 'POST'])
-def create_project(organisation_id, department_id):
+@login_required
+def create_project(department_id):
+    # Ensure the current user is a member of the department
+    dep = Department.query.filter_by(id=department_id).first()
+    if not dep:
+        return(f'Department {department_id} does not exist')
+    if current_user not in dep.users:
+        return('Forbidden')
+
     form = CreateProjectForm()
     if form.validate_on_submit():
-        org = Organisation.query.filter_by(id=organisation_id).first()
-        if not org:
-            return(f'Organisation {organisation_id} does not exist')
-
-        dep = Department.query.filter_by(id=department_id).first()
-        if not dep:
-            return(f'Department {organisation_id}/{department_id} does not exist')
-
         # Create the project
         project = Project(display_name=form.display_name.data,
             description=form.description.data,
