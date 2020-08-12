@@ -36,12 +36,6 @@ app.jinja_env.lstrip_blocks = True
 # Configurations
 app.config.from_object('config')
 
-#try:
-if app.config['PREFIX']:
-    app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=app.config['PREFIX'])
-#except KeyError:
-#    pass
-
 # Register extensions with app
 db = SQLAlchemy(app)
 nav = Navigation(app)
@@ -49,6 +43,7 @@ login_manager = LoginManager(app)
 principals = Principal(app)
 register_template_utils(app)
 Session(app)
+#socketio = SocketIO(app, manage_session=False, path='dreamingspires/socket.io')
 socketio = SocketIO(app, manage_session=False)
         # Sessions are managed with flask-session
 migrate = Migrate(app, db)
@@ -64,6 +59,12 @@ from app.models import User
 def load_user(uid):
     return User.query.filter_by(id=uid).first()
 login_manager.login_view = 'auth.login'
+
+#try:
+if app.config['PREFIX']:
+    app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=app.config['PREFIX'])
+#except KeyError:
+#    pass
 
 
 nav.Bar('start', [
