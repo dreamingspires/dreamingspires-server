@@ -1,6 +1,5 @@
 # Statement for enabling the development environment
 DEBUG = True
-SERVER_NAME = '0.0.0.0'
 
 # Define the application directory
 import os

@@ -13,7 +13,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug import secure_filename
 
 # Import the database object from the main app module
-from app import db, socketio
+from app import app, db, socketio
 
 # Import module forms
 from app.mod_auth.forms import LoginForm, RegisterDeveloperForm, \
