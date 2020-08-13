@@ -78,10 +78,11 @@ class Developer(BaseRequiresVerification):
     __tablename__ = 'developers'
     user_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('auth_user.id'),
             nullable=False)
-    cv = db.relationship('CV', backref='developer')
+    cv = db.relationship('CV', backref='developer', uselist=False)
 
     projects = db.relationship('DeveloperProjectsMap',
         back_populates='developer')
+
     def __repr__(self):
         return f'<Developer {self.display_name}>'
 
@@ -114,8 +115,8 @@ user_departments_map = db.Table('user_departments_map',
 class DepartmentFile(Base):
     __tablename__ = 'department_files'
     document = db.Column('content_col', UploadedFileField)
-    department_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('departments.id'),
-            nullable=False)
+    department_id = db.Column(db.String(t.LEN_UUID), \
+        db.ForeignKey('departments.id'), nullable=False)
 
 class Department(BaseRequiresVerification):
     __tablename__ = 'departments'

@@ -9,7 +9,6 @@
     [x] Read receipts
     [x] Automatic page refresh on new messages
     [=] Page auto-scrolls to correct location
-    [ ] New message button
 [x] Profile on navbar
 [x] Modify profile page
 [ ] Error page
@@ -17,14 +16,11 @@
         [ ] profile/create_organisation
         [ ] profile/create_department
         [ ] organisations/edit_department
-[ ] Admin console
-    [ ] Create jobs on marketplace
-    [ ] Assign people jobs and add them into a chat room
 [ ] Write client FAQ
-[ ] Integrate marketplace with chat service
 [ ] Flask-Mail
     [ ] Sign-up process
     [ ] Notifications of new messages (can disable if required)
+[ ] fix filedepot when migrated to new suburl
 
 === Week 2 ===
 Apply polish!
@@ -45,6 +41,11 @@ Apply polish!
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
 == Extension ==
+[ ] Integrate marketplace with chat service
+[ ] New message button in chat service
+[ ] Admin console
+    [ ] Create jobs on marketplace
+    [ ] Assign people jobs and add them into a chat room
 [ ] Messages are send via socketio instead of page refresh (if js enabled?)
 [ ] Messages are received passively anywhere on the site (not just inbox.html)
 [ ] Developer account settings page

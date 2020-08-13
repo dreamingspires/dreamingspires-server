@@ -94,7 +94,7 @@ def logout():
     # Tell Flask-Principal the user is anonymous
     #identity_changed.send(current_app._get_current_object(),
     #                      identity=AnonymousIdentity())
-    return redirect(request.args.get('next') or '/')
+    return redirect(request.args.get('next') or url_for('index'))
 
 @mod_auth.route('/register_developer/', methods=['GET', 'POST'])
 def register_developer():

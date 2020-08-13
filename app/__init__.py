@@ -51,6 +51,10 @@ migrate = Migrate(app, db)
 # Define the back-end file storage
 DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
 DepotManager.configure('images', {'depot.storage_path': '/tmp/depot_images/'})
+#if app.config['PREFIX']:
+#    app.wsgi_app = DepotManager.make_middleware(app.wsgi_app, \
+#        mountpoint=app.config['PREFIX'])
+#else:
 app.wsgi_app = DepotManager.make_middleware(app.wsgi_app)
 
 # login_manager settings

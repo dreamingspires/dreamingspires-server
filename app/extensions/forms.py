@@ -107,7 +107,7 @@ class IconPasswordInput(PasswordInput):
     Custom widget to create a password box that displays logos
     """
 
-    def __init__(self, left_logos, right_logos):
+    def __init__(self, left_logos, right_logos, hide_value=True):
         self.where_has_icons = ''
         if left_logos is None:
             self.left_logos = None
@@ -119,6 +119,7 @@ class IconPasswordInput(PasswordInput):
         else:
             self.right_logos = ' '.join(right_logos)
             self.where_has_icons += ' has-icons-right'
+        self.hide_value = hide_value
 
     def __call__(self, field, **kwargs):
         if field.default is None:
@@ -146,7 +147,7 @@ class IconPasswordField(PasswordField):
 
     def __init__(self, label=None, validators=None, \
             left_logos=None, right_logos=None, **kwargs):
-        self.widget = IconTextInput(left_logos, right_logos)
+        self.widget = IconPasswordInput(left_logos, right_logos)
         super().__init__(label, validators, **kwargs)
 
 class PrettyFileInput(FileInput):
