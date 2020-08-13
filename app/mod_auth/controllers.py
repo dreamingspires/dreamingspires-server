@@ -125,7 +125,7 @@ def register_developer():
             try:
                 if app.config['BEHIND_HTTPS_PROXY']:
                     confirm_url = url_for('auth.confirm_email', token=token, \
-                        _external=True, _schema='https')
+                        _external=True, _scheme='https')
                 else:
                     confirm_url = url_for('auth.confirm_email', token=token, \
                         _external=True)
