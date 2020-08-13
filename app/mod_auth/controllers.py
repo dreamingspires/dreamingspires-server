@@ -178,10 +178,13 @@ def confirm_email(token):
         email = confirm_token(token)
     except:
         flash('The confirmation link is invalid or has expired.', 'danger')
-    user = User.query.filter_by(primary_email=email).first_or_404()
+    user = User.query.filter_by(primary_email=email).first()
+
+    if not user:
+        return('Error: user not tied to a valid email')
 
     if user.email_verified:
-        flash('Email address already confirmed.  Please log in.', 'success')
+        return('Email address already confirmed.  Please log in.', 'success')
     else:
         user.email_verified = True
         user.date_email_verified = datetime.now()
