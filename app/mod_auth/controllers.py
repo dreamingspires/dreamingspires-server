@@ -122,8 +122,17 @@ def register_developer():
 
             # Generate and send email
             token = generate_confirmation_token(user.primary_email)
-            confirm_url = url_for('auth.confirm_email', token=token, \
-                _external=True)
+            try:
+                if app.config['BEHIND_HTTPS_PROXY']:
+                    confirm_url = url_for('auth.confirm_email', token=token, \
+                        _external=True, _schema='https')
+                else:
+                    confirm_url = url_for('auth.confirm_email', token=token, \
+                        _external=True)
+            except KeyError:
+                confirm_url = url_for('auth.confirm_email', token=token, \
+                    _external=True)
+
             html = render_template('email/confirm_user_email.html', \
                 confirm_url=confirm_url)
             subject = 'Dreaming Spires email confirmation'
