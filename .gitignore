@@ -5,3 +5,4 @@ app.db
 mail.db
 flask_session/
 migrations/
+secret_config.py

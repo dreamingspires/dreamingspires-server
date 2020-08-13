@@ -35,6 +35,8 @@ class User(UserMixin, Base):
     password    = db.Column(db.String(192), nullable=False)
     primary_email = db.Column(db.String(128), nullable=False, unique=True, \
             primary_key=True)
+    email_verified = db.Column(db.Boolean, default=False, nullable=False)
+    date_email_verified = db.Column(db.DateTime)
     display_name = db.Column(db.String(t.LEN_DISPLAY_NAME))
     description = db.Column(db.String(t.LEN_DESCRIPTION))
     display_image = db.Column(UploadedFileField( \

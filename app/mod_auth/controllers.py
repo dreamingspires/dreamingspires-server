@@ -6,6 +6,7 @@ from flask_principal import Principal, Identity, AnonymousIdentity, \
      identity_changed
 from is_safe_url import is_safe_url
 from flask_socketio import send, emit
+from datetime import datetime
 
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -26,6 +27,8 @@ from app.models import User, Email, Matrix, CV, Developer, \
 
 # Import extensions
 from app.extensions.socketio_helpers import authenticated_only
+from app.extensions.token import generate_confirmation_token, confirm_token
+from app.extensions.email import send_email
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -48,12 +51,11 @@ def login():
         print('form validated')
         user = User.query.filter_by(primary_email=form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
+            if not user.email_verified:
+                return render_template('auth/not_yet_activated.html')
+
             # Keep the user info in the session using Flask-Login
             login_user(user, remember=form.remember_me.data)
-
-            # Tell Flask-Principal the identity changed
-            #identity_changed.send(current_app._get_current_object(),
-            #        identity=Identity(user.id))
 
             next = request.args.get('next')
             #if not is_safe_url(next):
@@ -118,10 +120,16 @@ def register_developer():
             db.session.add(user)
             db.session.commit()
 
-            next = request.args.get('next')
-            #if not is_safe_url(next):
-            #    return abort(400)
-            return redirect(next or url_for('auth.login'))
+            # Generate and send email
+            token = generate_confirmation_token(user.primary_email)
+            confirm_url = url_for('auth.confirm_email', token=token, \
+                _external=True)
+            html = render_template('email/confirm_user_email.html', \
+                confirm_url=confirm_url)
+            subject = 'Dreaming Spires email confirmation'
+            send_email(user.primary_email, subject, html)
+
+            return render_template('auth/thanks_for_registering.html')
     return render_template('auth/register_developer.html', form=form, \
         entries=list(range(1000)))
 
@@ -154,3 +162,20 @@ def register_client():
             #    return abort(400)
             return redirect(next or url_for('auth.login'))
     return render_template('auth/register_client.html', form=form)
+
+@mod_auth.route('/confirm_email/<token>')
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    user = User.query.filter_by(primary_email=email).first_or_404()
+
+    if user.email_verified:
+        flash('Email address already confirmed.  Please log in.', 'success')
+    else:
+        user.email_verified = True
+        user.date_email_verified = datetime.now()
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('auth.login'))  # TODO: add message

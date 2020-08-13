@@ -8,6 +8,7 @@ from flask_socketio import SocketIO
 from flask_session import Session   # Required because socketio can't modify
                                     # default cookie-based sessions
 from flask_migrate import Migrate
+from flask_mail import Mail
 
 from app.utils import register_template_utils 
 
@@ -35,6 +36,7 @@ app.jinja_env.lstrip_blocks = True
 
 # Configurations
 app.config.from_object('config')
+app.config.from_object('secret_config')
 
 # Register extensions with app
 db = SQLAlchemy(app)
@@ -47,6 +49,7 @@ Session(app)
 socketio = SocketIO(app, manage_session=False)
         # Sessions are managed with flask-session
 migrate = Migrate(app, db)
+mail = Mail(app)
 
 # Define the back-end file storage
 DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})

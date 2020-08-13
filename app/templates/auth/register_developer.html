@@ -47,15 +47,15 @@
 {% endif %}
 {% endwith %}
 
+<a id="register_form"></a>
 <div class="column is-8 is-offset-2">
     <h3 class="title has-text-centered">Create a developer account</h3>
 </div>
-<a id="register_form"></a>
 {# render_form(form, ".", width=8, mark_required=False, is_horizontal=False) #}
 <div class="container">
   <div class="columns is-centered">
     <div class="column is-8">
-      <form method="post" action="." role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
+      <form method="post" action=".#register_form" role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
         {{ form.csrf_token }}
         <p>Basic user account fields</p>
         {{ render_field(form.user_name) }}
