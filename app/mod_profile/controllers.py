@@ -21,6 +21,8 @@ import app.types as t
 # Import module forms
 from app.mod_profile.forms import generate_edit_user_public_profile_form, \
     CreateDepartmentForm
+from werkzeug.exceptions import Forbidden, TooManyRequests, \
+        UnsupportedMediaType
 
 # Define the blueprint: 'profile', set its url prefix: app.url/profile
 mod_profile = Blueprint('profile', __name__, url_prefix='/profile')
@@ -47,8 +49,8 @@ def edit_profile():
             try:
                 current_user.display_image = form.display_image.data
             except PIL.UnidentifiedImageError:
-                # TODO: pretty up error page
-                return "Error: Uploaded file is not an image"
+                raise UnsupportedMediaType( \
+                    description="Uploaded file is not an image")
 
         db.session.add(current_user)
         db.session.commit()
@@ -90,12 +92,12 @@ def edit_profile():
 def create_department():
     form = CreateDepartmentForm()
     if not current_user.can_create_departments:
-        return 'TODO: Error page'
+        raise Forbidden
 
     # Ensure the user has no other pending organisation applications
     for dep in current_user.departments:
         if dep.verification_status == t.VerificationStatus.pending:
-            return "You cannot register more than one organisation at once"
+            raise TooManyRequests(description="You cannot register more than one organisation at once")
 
     if form.validate_on_submit():
 

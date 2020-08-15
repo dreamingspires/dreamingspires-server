@@ -10,6 +10,7 @@ import app.extensions.jobs as jobs
 import app.extensions.chat as chat
 import app.types as t
 from app.extensions.decorators import verified_user_required
+from werkzeug.exceptions import Forbidden
 
 # Import the database object from the main app module
 from app import db
@@ -275,7 +276,7 @@ def projects(project_id):
 def register_interest(project_id):
     # Ensure that the current user is a developer
     if not (developer := current_user.developer):
-        return 'Forbidden'
+        raise Forbidden
 
     # Get the project
     project = Project.query.filter_by(id=project_id).first()

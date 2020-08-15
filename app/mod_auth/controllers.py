@@ -10,6 +10,7 @@ from datetime import datetime
 
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.exceptions import Unauthorized
 from werkzeug import secure_filename
 
 # Import the database object from the main app module
@@ -32,13 +33,6 @@ from app.extensions.email import send_email
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
-
-@mod_auth.route('/home/', methods=['GET', 'POST'])
-def home():
-    return render_template('projects/projects.html')
-
-    return 'Successfully logged in'
-
 
 # Set the route and accepted methods
 @mod_auth.route('/login/', methods=['GET', 'POST'])
@@ -181,13 +175,15 @@ def confirm_email(token):
     user = User.query.filter_by(primary_email=email).first()
 
     if not user:
-        return('Error: user not tied to a valid email')
+        raise Unauthorized(description='User not tied to a valid email')
 
     if user.email_verified:
-        return('Email address already confirmed.  Please log in.', 'success')
+        flash('Email address already confirmed.  Please log in.', 'success')
+        return redirect(url_for('auth.login'))
     else:
         user.email_verified = True
         user.date_email_verified = datetime.now()
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('auth.login'))  # TODO: add message
+        flash('Email address confirmed.  Please log in.', 'success')
+        return redirect(url_for('auth.login'))

@@ -15,6 +15,7 @@ from app.mod_organisations.forms import generate_edit_organisation_form
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_organisations = Blueprint('organisations', __name__, url_prefix='/org')
+from werkzeug.exceptions import Forbidden, NotFound
 
 @mod_organisations.route('/<organisation_id>')
 def organisation(organisation_id):
@@ -64,11 +65,11 @@ def edit_department(department_id):
     # Test to make sure person is owner of department
     if current_user not in dep.users:
         # Forbidden
-        return 'Forbidden'
+        raise Forbidden
     
     form = generate_edit_organisation_form(dep)
     if not dep:
-        return(f'Department {department_id} does not exist')
+        raise NotFound(description='Department {department_id} does not exist')
 
     if form.validate_on_submit():
         dep.description = form.description.data
@@ -76,8 +77,7 @@ def edit_department(department_id):
             try:
                 dep.display_image = form.display_image.data
             except PIL.UnidentifiedImageError:
-                # TODO: pretty up error page
-                return "Error: Uploaded file is not an image"
+                flash('Uploaded file is not an image', 'warning')
 
         # Ugly hack because checking if data==None for MultipleFileField
         # doesn't work - it always returns an empty, garbage file
@@ -106,9 +106,9 @@ def create_project(department_id):
     # Ensure the current user is a member of the department
     dep = Department.query.filter_by(id=department_id).first()
     if not dep:
-        return(f'Department {department_id} does not exist')
+        raise NotFound(description='Department {department_id} does not exist')
     if current_user not in dep.users:
-        return('Forbidden')
+        raise Forbidden
 
     form = CreateProjectForm()
     if form.validate_on_submit():
@@ -120,6 +120,7 @@ def create_project(department_id):
         db.session.add(project)
         db.session.commit()
         print('created project')
+        # TODO: nicer page
         return(f'Project created')
 
     return render_template('organisations/create_project.html', form=form)

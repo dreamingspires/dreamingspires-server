@@ -1,6 +1,6 @@
 == Minimally Functional Website Timeline ==
 === Week 1 ===
-[ ] On-site messaging
+[x] On-site messaging
     [x] Message page
     [x] Database for handling messages
     [x] Message log generation
@@ -11,11 +11,11 @@
     [=] Page auto-scrolls to correct location
 [x] Profile on navbar
 [x] Modify profile page
-[ ] Error page
-    [ ]Redirect from:
-        [ ] profile/create_organisation
-        [ ] profile/create_department
-        [ ] organisations/edit_department
+[x] Error page
+[ ] Redirect from:
+    [x] profile/create_organisation
+    [x] profile/create_department
+    [x] organisations/edit_department
 [ ] Write client FAQ
 [x] Flask-Mail
     [x] Sign-up process
