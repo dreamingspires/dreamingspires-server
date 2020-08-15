@@ -9,6 +9,7 @@ import app.extensions.timeline as tl
 import app.extensions.jobs as jobs
 import app.extensions.chat as chat
 import app.types as t
+from app.extensions.decorators import verified_user_required
 
 # Import the database object from the main app module
 from app import db
@@ -221,7 +222,9 @@ def create_job_listing(project):
 @mod_marketplace.route('/marketplace', methods=['GET', 'POST'])
 @login_required
 def marketplace():
-    # Ensure the user is logged in
+    if not(current_user.developer and \
+            current_user.developer.verification_status == t.VerificationStatus.accepted):
+        return redirect(url_for('profile.landing_page'))
 
     # Generate the appropriate sidebar
     sidebar = generate_searchbar()

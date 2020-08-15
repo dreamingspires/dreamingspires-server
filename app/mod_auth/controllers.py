@@ -60,9 +60,9 @@ def login():
             next = request.args.get('next')
             #if not is_safe_url(next):
             #    return abort(400)
-            return redirect(next or url_for('profile.edit_profile'))
+            return redirect(next or url_for('profile.landing_page'))
 
-        flash('Wrong email or password', 'error-message')
+        flash('Wrong email or password', 'danger')
 
     return render_template('auth/login.html', form=form)
 

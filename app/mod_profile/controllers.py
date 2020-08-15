@@ -139,3 +139,8 @@ def developer():
 def join_organisation():
     form = generate_edit_user_public_profile_form(current_user)
     return render_template('profile/developer_profile.html', form=form)
+
+@mod_profile.route('/landing_page/', methods=['GET', 'POST'])
+@login_required
+def landing_page():
+    return render_template('profile/landing_page.html')

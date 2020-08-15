@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="mt-4">
+        <div class="columns" style="width: 100%">
+            <main class="column is-10 is-offset-1 content">
+                <div class="box">
+                    <h1 class="title has-text-primary">Dreaming Spires Landing Page</h1>
+                        <hr>
+                        <p>
+                        Thanks for signing up to Dreaming Spires!
+                        </p>
+                        <p>
+                        Your account is currently unverified: we will review
+                        your application and get back to you shortly
+                        via email.
+                        </p>
+                        <h3 class="subtitle has-text-primary">What happens next?</h3>
+                        <p>
+                        We may contact you for an interview as additional
+                        positions become available on Dreaming Spires.
+                        Once verified, you will have access to job opportunities
+                        on the platform.
+                        </p>
+                        <p>
+                        The interview invite will be sent by email,
+                        and will be conducted using the <a href="meet.jit.si">Jitsi
+                        Meet</a> platform.
+                        </p>
+                        <p>
+                        For more information about the interview
+                        process, see our <a href={{ url_for('developer_faq') }}>developer FAQ</a>.
+                        </p>
+
+                        <h3 class="subtitle has-text-primary">More questions?</h3>
+                        Email us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>!
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

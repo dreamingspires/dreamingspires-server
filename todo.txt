@@ -17,10 +17,9 @@
         [ ] profile/create_department
         [ ] organisations/edit_department
 [ ] Write client FAQ
-[ ] Flask-Mail
-    [ ] Sign-up process
-    [ ] Notifications of new messages (can disable if required)
-[ ] fix filedepot when migrated to new suburl
+[x] Flask-Mail
+    [x] Sign-up process
+[x] Better message flashing (e.g. wrong password field)
 
 === Week 2 ===
 Apply polish!
@@ -41,6 +40,8 @@ Apply polish!
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
 == Extension ==
+[ ] fix filedepot when migrated to new suburl
+[ ] Email notifications of new messages (can disable if required)
 [ ] Integrate marketplace with chat service
 [ ] New message button in chat service
 [ ] Admin console
