@@ -67,6 +67,7 @@ Apply polish!
 [x] Create department supporting evidence actually does something
     
 [ ] Organisation payment for projects
+[ ] Login page validation without refreshing
 
 
 == Overall client workflow ==

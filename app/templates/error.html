@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="mt-4">
+        <div class="columns" style="width: 100%">
+            <main class="column is-10 is-offset-1 content">
+                <div class="box">
+                    <h1 class="title has-text-primary">{{ heading }}</h3>
+                        <hr>
+                        {% for error in errors %}
+                        <p>
+                        {{ error }}
+                        </p>
+                        {% endfor %}
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

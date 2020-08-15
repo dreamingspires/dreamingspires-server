@@ -9,6 +9,7 @@ from flask_session import Session   # Required because socketio can't modify
                                     # default cookie-based sessions
 from flask_migrate import Migrate
 from flask_mail import Mail
+from werkzeug.exceptions import HTTPException
 
 from app.utils import register_template_utils 
 
@@ -96,9 +97,10 @@ nav.Bar('profile', [
 from app import views
 
 # Sample HTTP error handling
-@app.errorhandler(404)
+@app.errorhandler(HTTPException)
 def not_found(error):
-    return render_template('404.html'), 404
+    split_errors = [s.strip() for s in str(error).split(':')]
+    return render_template('error.html', heading=split_errors[0], errors=split_errors[1:])
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.mod_auth.controllers import mod_auth as auth_module
