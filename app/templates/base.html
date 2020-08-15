@@ -55,9 +55,9 @@
                     <div class="navbar-start">
                         {% for item in nav.start %}
                             {% if item.is_active %}
-                            <a href="{{ item.url }}" class="navbar-item is-active">{{ item.label|safe }}</a>
+                            <a href="{{ item.url }}" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
                             {% else %}
-                            <a href="{{ item.url }}" class="navbar-item">{{ item.label|safe }}</a>
+                            <a href="{{ item.url }}" class="navbar-item has-text-white">{{ item.label|safe }}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -96,21 +96,24 @@
                     </div>
                 </div>
             </nav>
+            <hr class="mt-0">
         </div>
 
-        {# message flashing #}
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {{ flash(messages) }}
-        {% endwith %}
+        <div class="hero-body">
+            {# message flashing #}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {{ flash(messages) }}
+            {% endwith %}
 
-        <div class="is-fullwidth">
-           {% block content %}
-           {% endblock %}
-        </div>
-
-        <div class="hero-foot">
+            <div class="is-fullwidth">
+               {% block fullheight %}
+               {% endblock %}
+            </div>
         </div>
     </section>
+       {% block content %}
+       {% endblock %}
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Get all "navbar-burger" elements
