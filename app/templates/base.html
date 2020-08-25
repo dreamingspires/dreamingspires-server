@@ -96,20 +96,20 @@
                     </div>
                 </div>
             </nav>
-            <hr class="mt-0">
+            <hr class="my-0">
         </div>
 
-        <div class="hero-body">
+        {# <div class="hero-body"> #}
             {# message flashing #}
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {{ flash(messages) }}
             {% endwith %}
 
-            <div class="is-fullwidth">
+            {# <div class="is-fullwidth"> #}
                {% block fullheight %}
                {% endblock %}
-            </div>
-        </div>
+               {# </div> #}
+             {# </div> #}
     </section>
        {% block content %}
        {% endblock %}

@@ -1,47 +1,56 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <section class="is-primary is-medium is-fullheight-with-navbar">
-        <div style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size: cover; background-position: bottom; display: block">
-            <div class="hero-body is-bg-img" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/skyline.png') }}'); background-size: cover; background-position: bottom">
-            <div class="container has-text-centered">
-                <div class="pb-6">
-                    <div class="columns is-centered">
-                        <div class="column is-narrow has-text-centered" style="width:  50%">
-                            <figure class="image">
-                                <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}">
+{% block fullheight %}
+<div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; background-image: url('{{ url_for('static', filename='assets/images/backgrounds/skyline.png') }}'); background-size:cover; background-position:bottom; width:100%">
+
+
+              <div style="flex:3; display:flex; flex-direction:column;">
+                    <div class="columns is-mobile is-centered is-vcentered" style="flex:1">
+                        <div class="column is-three-quarters-mobile is-half-tablet is-half-desktop is-half-widescreen is-one-third-fullhd has-text-centered mt-6">
+                            <figure class="image has-text-centered">
+                                <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}" style="width:100%;">
                             </figure>
                         </div>
                     </div>
                     <!-- <h1 class="title is-1">Dreaming Spires</h1>
                     <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
-                </div>
-                <div class="mt-6">
-                    <p class="is-size-5 mb-4">Are you a...</p>
-                    <div class="columns is-mobile is-centered">
-                        <div class="column is-one-third-desktop has-equal-height">
-                            <a href="{{ url_for('auth.register_client') }}">
-                                <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
-                                    <p>research institution looking for</p>
-                                    <p>programming talent?</p>
-                                </button>
-                            </a>
-                        </div>
-                        <div class="column is-one-third-desktop has-equal-height">
-                            <a href="{{ url_for('auth.register_developer') }}">
-                                <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
-                                    <p>developer or student looking for</p>
-                                    <p>freelance work?</p>
-                                </button>
-                            </a>
-                        </div>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
+                <p class="is-size-5 mb-4">Are you a...</p>
+                <div class="columns is-centered">
+                  <div class="column is-5">
+                    <div class="columns is-centered">
+                      <div class="column has-equal-height">
+                          <a href="{{ url_for('auth.register_client') }}">
+                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                                  <p>research institution looking for</p>
+                                  <p>programming talent?</p>
+                              </button>
+                          </a>
+                      </div>
+                      <div class="column has-equal-height">
+                          <a href="{{ url_for('auth.register_developer') }}">
+                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                                  <p>developer or student looking for</p>
+                                  <p>freelance work?</p>
+                              </button>
+                          </a>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        </div>
-    </section>
+              </div>
+              <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
+                <a href="#about" class="title is-2">
+                <i class="fas fa-chevron-down"></i>
+                </a>
+              </div>
 
+  </div>
+</div>
+{% endblock %}
+{% block content %}
     <a id="about"></a>
     {% include 'includes/who_are_we.html' %}
     {% include 'includes/testimonials.html' %}
