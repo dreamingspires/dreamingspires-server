@@ -4,7 +4,7 @@ from app import app, nav
 
 @app.route('/')
 def index():
-    return render_template('public/index.html')
+    return render_template('public/index.html', is_fullpage=True)
 
 @app.route('/about')
 def about():
