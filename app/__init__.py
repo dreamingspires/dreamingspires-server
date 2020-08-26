@@ -86,6 +86,14 @@ nav.Bar('end', [
     nav.Item('Log in', 'auth.login')
 ])
 
+nav.Bar('footer', [
+    nav.Item('Home', 'index'),
+    nav.Item('About', 'index', args={'_anchor':'about'}),
+    nav.Item('Developer FAQ', 'developer_faq'),
+    nav.Item('Client FAQ', 'client_faq'),
+    nav.Item('Contact', 'contact'),
+])
+
 nav.Bar('profile', [
     nav.Item('Inbox', 'mail.inbox'),
     nav.Item('Edit profile', 'profile.edit_profile'),

@@ -31,6 +31,7 @@
 </head>
 
 <body>
+    <a id="top"></a>
     <section class="hero is-primary is-fullheight">
         <div class="hero-head">
             <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -111,8 +112,21 @@
                {# </div> #}
              {# </div> #}
     </section>
-       {% block content %}
-       {% endblock %}
+   {% block content %}
+   {% endblock %}
+    <footer class="footer py-2">
+      <div class="content has-text-centered">
+        {% for item in nav.footer %}
+            <a href="{{ item.url }}">{{ item.label|safe }}</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+        <p>
+          <strong>Dreaming Spires</strong>
+          &nbsp;&nbsp;&nbsp;
+          Copyright © 2020.  All rights reserved.
+        </p>
+      </div>
+    </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {

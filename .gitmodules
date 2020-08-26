@@ -10,3 +10,6 @@
 [submodule "modules/bulma-divider"]
 	path = modules/bulma-divider
 	url = https://github.com/CreativeBulma/bulma-divider/
+[submodule "modules/bulma-o-steps"]
+	path = modules/bulma-o-steps
+	url = https://github.com/octoshrimpy/bulma-o-steps.git

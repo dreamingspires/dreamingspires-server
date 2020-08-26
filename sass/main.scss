@@ -24,6 +24,7 @@ $navbar-breakpoint: $mobile;
 @import "../modules/bulma-collapsible/src/sass/index.sass";
 @import "../modules/bulma-timeline/src/sass/index.sass";
 @import "../modules/bulma-divider/src/sass/index.sass";
+@import "../modules/bulma-o-steps/index.sass";
 
 // Custom CSS
 .has-equal-height {
@@ -46,4 +47,8 @@ $navbar-breakpoint: $mobile;
     width: 128px;
     height: 128px;
     object-fit: cover;
+}
+
+.has-box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

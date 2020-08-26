@@ -42,25 +42,26 @@
                 </div>
               </div>
               <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-                <a href="#about" class="title is-2">
-                <i class="fas fa-chevron-down"></i>
-                </a>
+                <a href="#about" class="title is-2 fas fa-chevron-down"></a>
               </div>
 
   </div>
 </div>
 {% endblock %}
 {% block content %}
-<a id="about"></a>
-<section class="section is-fullwidth is-medium has-background-primary">
-  <div class="container">
+<section class="section is-fullwidth is-medium has-background-info">
+  <a id="about"></a>
+  <div class="container is-fluid">
+    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
+      <a href="#top" class="title has-text-white is-2 fas fa-chevron-up"></a>
+    </div>
     <div class="columns is-vcentered">
       <div class="column content">
         <h1>We are a collaborative freelance agency...</h1>
         <p> We link first-class programming talent with interesting programming projects, tailoring to the needs of your group.</p>
       </div>
       <div class="column">
-        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/research.jpg') }}" style="width:100%;">
       </div>
     </div>
   </div>
@@ -68,11 +69,11 @@
 <hr class="my-0">
 
 
-<section class="section is-fullwidth is-medium has-background-info">
-  <div class="container">
+<section class="section is-fullwidth is-medium has-background-primary">
+  <div class="container is-fluid">
     <div class="columns is-vcentered">
       <div class="column">
-        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/typing.jpg') }}" style="width:100%;">
       </div>
       <div class="column content">
         <h1>...working on interesting projects...</h1>
@@ -83,15 +84,30 @@
 </section>
 <hr class="my-0">
 
-<section class="section is-fullwidth is-medium has-background-primary">
-  <div class="container">
+<section class="section is-fullwidth is-medium has-background-info">
+  <div class="container is-fluid">
     <div class="columns is-vcentered">
       <div class="column content">
         <h1>...specialising in open source...</h1>
         <p>We want our code to be as useful as possible, so we strive to work according to open source values. We strive to contribute code upstream through our community-driven efforts.</p>
       </div>
       <div class="column">
-        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/code_heart.jpg') }}" style="width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+<section class="section is-fullwidth is-medium has-background-primary">
+  <div class="container is-fluid">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/oxford_arial.jpg') }}" style="width:100%;">
+      </div>
+      <div class="column content">
+        <h1>...with a wide talent pool</h1>
+        <p>Our developers represent a diverse variety of skillsets, ranging from web design and software development to porting and patching old codebases.</p>
       </div>
     </div>
   </div>
@@ -100,15 +116,80 @@
 
 <section class="section is-fullwidth is-medium has-background-info">
   <div class="container">
-    <div class="columns is-vcentered">
-      <div class="column">
-        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+    <div class="columns">
+      <div class="column is-4">
+        <h2 class="title">How does it work?</h2>
+        <hr>
       </div>
-      <div class="column content">
-        <h1>...with a wide talent pool</h1>
-        <p>Our developers represent a diverse variety of skillsets, ranging from web design and software development to porting and patching old codebases.</p>
+
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-10">
+          <div class="timeline is-centered">
+            <header class="timeline-header">
+              <span class="tag is-medium is-success">Start</span>
+            </header>
+            <div class="timeline-item is-success">
+              <div class="timeline-marker is-icon is-success">
+                <i class="fa fa-play fa-3x"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project submission</p>
+                <p>A research institution contacts us with a digital project in mind</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-clipboard-list"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Develop requirements</p>
+                <p>We work closely to flesh out project requirements, a roadmap, and a costing for the project</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Assign developers</p>
+                <p>Through our internal marketplace, we advertise available jobs to interested developers</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-terminal"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project work underway</p>
+                <p>We assign developers to work on the project, either individually or collaboratively</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-bug"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Code review</p>
+                <p>We bug test the code, and ensure the resulting code is of a high standard</p>
+              </div>
+            </div>
+            <div class="timeline-item is-danger">
+              <div class="timeline-marker is-icon is-danger">
+                <i class="fa fa-flag"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project completion</p>
+                <p> We help you deploy the project, and provide a maintenance package for ongoing work</p>
+              </div>
+            </div>
+            <div class="timeline-header">
+              <span class="tag is-medium is-success">End</span>
+            </div>
+          </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 <hr class="my-0">
@@ -131,14 +212,14 @@
                   <div class="columns is-centered">
                     <div class="column is-half has-equal-height">
                         <a href="{{ url_for('auth.register_client') }}">
-                            <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                            <button class="button is-medium is-dark is-outlined is-box-button">
                                 <p>register as a client</p>
                             </button>
                         </a>
                     </div>
                     <div class="column is-half has-equal-height">
                         <a href="{{ url_for('auth.register_developer') }}">
-                            <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                            <button class="button is-medium is-dark is-outlined is-box-button">
                                 <p>register as a developer</p>
                             </button>
                         </a>
@@ -164,7 +245,7 @@
             Whether you'd like to discuss your research project, find more about what working for us is like, or something else, we'd love to hear from you!
             </p>
             <p>
-            You can find us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>
+            You can email us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>
             </p>
           </div>
         </article>
@@ -174,9 +255,4 @@
     </div>
   </div>
 </section>
-
-      {#
-    {% include 'includes/who_are_we.html' %}
-    {% include 'includes/testimonials.html' %}
-    {% include 'includes/portfolio.html' %} #}
 {% endblock %}

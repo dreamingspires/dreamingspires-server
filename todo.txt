@@ -20,6 +20,8 @@
 [x] Flask-Mail
     [x] Sign-up process
 [x] Better message flashing (e.g. wrong password field)
+[ ] Centered circle mini-logo
+[ ] Fix top spacing on other pages
 
 https://stackoverflow.com/questions/44897794/how-to-vertically-center-elements-in-bulma
 
