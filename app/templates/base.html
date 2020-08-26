@@ -62,7 +62,7 @@
                         {% endfor %}
                     </div>
 
-                    <div class="container has-text-dark">
+                    {# <div class="container has-text-dark"> #}
                         <div class="navbar-end">
                             <div class="navbar-item has-dropdown is-hoverable">
                                 {% if current_user.is_authenticated %}
@@ -93,7 +93,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
+                    {# </div> #}
                 </div>
             </nav>
             <hr class="my-0">
@@ -136,6 +136,17 @@
           });
         });
       }
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
     </script>
 </body>

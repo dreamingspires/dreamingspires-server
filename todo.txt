@@ -21,6 +21,8 @@
     [x] Sign-up process
 [x] Better message flashing (e.g. wrong password field)
 
+https://stackoverflow.com/questions/44897794/how-to-vertically-center-elements-in-bulma
+
 === Week 2 ===
 Apply polish!
 [ ] Login process clearer if password incorrect

@@ -51,8 +51,132 @@
 </div>
 {% endblock %}
 {% block content %}
-    <a id="about"></a>
+<a id="about"></a>
+<section class="section is-fullwidth is-medium has-background-primary">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column content">
+        <h1>We are a collaborative freelance agency...</h1>
+        <p> We link first-class programming talent with interesting programming projects, tailoring to the needs of your group.</p>
+      </div>
+      <div class="column">
+        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+
+<section class="section is-fullwidth is-medium has-background-info">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+      </div>
+      <div class="column content">
+        <h1>...working on interesting projects...</h1>
+        <p>We love finding elegant, practical solutions to diverse programming problems. Our rich skillset lends itself well to interdisciplinary work. Take a look at <a>our portfolio</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+<section class="section is-fullwidth is-medium has-background-primary">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column content">
+        <h1>...specialising in open source...</h1>
+        <p>We want our code to be as useful as possible, so we strive to work according to open source values. We strive to contribute code upstream through our community-driven efforts.</p>
+      </div>
+      <div class="column">
+        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+<section class="section is-fullwidth is-medium has-background-info">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <img src="{{ url_for('static', filename='assets/images/bliss.png') }}" style="width:100%;">
+      </div>
+      <div class="column content">
+        <h1>...with a wide talent pool</h1>
+        <p>Our developers represent a diverse variety of skillsets, ranging from web design and software development to porting and patching old codebases.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+
+<section class="section is-fullwidth is-medium has-background-primary">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h2 class="title">Interested?</h2>
+        <hr>
+      </div>
+      <div class="column is-8 mt-6">
+        <article class="media">
+          <div class="media-content content">
+            <h4 class="subtitle">Register with us</h4>
+            <div class="columns is-vcentered">
+              <div class="column content">
+                <p>Whether you're a seasoned developer or a research team member, we'd love to hear from you!  Although we're in the early stages of our release, you can register your interest below.</p>
+                  <div class="columns is-centered">
+                    <div class="column is-half has-equal-height">
+                        <a href="{{ url_for('auth.register_client') }}">
+                            <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                                <p>register as a client</p>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="column is-half has-equal-height">
+                        <a href="{{ url_for('auth.register_developer') }}">
+                            <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                                <p>register as a developer</p>
+                            </button>
+                        </a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+        <article class="media">
+          <div class="media-content content">
+            <h4 class="subtitle">More questions?</h4>
+            <p>
+            Take a look at our Frequently Asked Questions pages for <a href="{{ url_for('developer_faq') }}">developers</a> and <a href="{{ url_for('client_faq') }}">clients</a>.
+            </p>
+          </div>
+        </article>
+        <article class="media">
+          <div class="media-content content">
+            <h4 class="subtitle">Contact us</h4>
+            <p>
+            Whether you'd like to discuss your research project, find more about what working for us is like, or something else, we'd love to hear from you!
+            </p>
+            <p>
+            You can find us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>
+            </p>
+          </div>
+        </article>
+        
+
+      </div>
+    </div>
+  </div>
+</section>
+
+      {#
     {% include 'includes/who_are_we.html' %}
     {% include 'includes/testimonials.html' %}
-    {% include 'includes/portfolio.html' %}
+    {% include 'includes/portfolio.html' %} #}
 {% endblock %}
