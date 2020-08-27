@@ -62,7 +62,7 @@ def generate_chat(mail_group):
 from werkzeug.security import generate_password_hash # TEMP
 import time
 from datetime import datetime
-@mod_mail.route('/generate', methods=['GET', 'POST'])
+
 def generate():
     # Generate a few users
     try:

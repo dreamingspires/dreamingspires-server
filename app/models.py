@@ -43,6 +43,7 @@ class User(UserMixin, Base):
         upload_type=UploadedImageWithThumb, upload_storage='images'))
     educational_institution = db.Column(db.String(t.LEN_DISPLAY_NAME))
     can_create_departments = db.Column(db.Boolean, default=False, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
 
     email_addresses = db.relationship('Email', backref='user')
     matrix_addresses = db.relationship('Matrix', backref='user')

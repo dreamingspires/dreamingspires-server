@@ -9,6 +9,7 @@ from flask_session import Session   # Required because socketio can't modify
                                     # default cookie-based sessions
 from flask_migrate import Migrate
 from flask_mail import Mail
+from flask_admin import Admin
 from werkzeug.exceptions import HTTPException
 
 from app.utils import register_template_utils 
@@ -51,6 +52,7 @@ socketio = SocketIO(app, manage_session=False)
         # Sessions are managed with flask-session
 migrate = Migrate(app, db)
 mail = Mail(app)
+admin = Admin(app, name='Dreaming Spires Admin', template_mode='bootstrap3')
 
 # Define the back-end file storage
 try:
@@ -134,6 +136,30 @@ app.register_blueprint(marketplace_module)
 app.register_blueprint(organisations_module)
 app.register_blueprint(mail_module)
 
+# Register admin interface
+print('before importing admin')
+from app import admin_interface
+print('done importing admin')
+
 # Build the database:
 # This will create the database files using SQLAlchemy
 db.create_all()
+
+# Register admin users
+from app.models import User, Developer
+from werkzeug.security import generate_password_hash
+from datetime import datetime
+try:
+    app.config['ADMIN_USERS']
+except KeyError:
+    pass
+else:
+    for (username, password, email) in app.config['ADMIN_USERS']:
+        if not User.query.filter_by(id=username).first():
+            user = User(id=username,
+                password=generate_password_hash(password),
+                display_name='', description='',
+                primary_email=email, is_admin=True,
+                email_verified=True, date_email_verified=datetime.now())
+            db.session.add(user)
+    db.session.commit()
