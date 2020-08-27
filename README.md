@@ -24,6 +24,11 @@ git clone
 
 Copy up the systemd service from `dreamingspires-server/dreamingspires-server.service` to `/etc/systemd/system/dreamingspires-server.service`.
 
+Install gunicorn
+```
+dnf install python3-gunicorn
+```
+
 Refresh systemctl and start server
 ```
 systemctl daemon-reload
