@@ -39,4 +39,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # Configure flask-session
 SESSION_TYPE = 'filesystem'
 
-PREFIX='/dreamingspires'
+PREFIX=''
+
+DEFAULT_STORAGE = {'depot.storage_path': './depot/default/'}
+IMAGE_STORAGE = {'depot.storage_path': './depot/images/'}

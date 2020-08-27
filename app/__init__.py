@@ -53,8 +53,17 @@ migrate = Migrate(app, db)
 mail = Mail(app)
 
 # Define the back-end file storage
-DepotManager.configure('default', {'depot.storage_path': '/tmp/depot/'})
-DepotManager.configure('images', {'depot.storage_path': '/tmp/depot_images/'})
+try:
+    default_storage = app.config['DEFAULT_STORAGE']
+except KeyError:
+    default_storage = {'depot.storage_path': '/tmp/depot/'}
+try:
+    image_storage = app.config['IMAGE_STORAGE']
+except KeyError:
+    default_storage = {'depot.storage_path': '/tmp/depot_images/'}
+DepotManager.configure('default', default_storage)
+DepotManager.configure('images', image_storage)
+
 #if app.config['PREFIX']:
 #    app.wsgi_app = DepotManager.make_middleware(app.wsgi_app, \
 #        mountpoint=app.config['PREFIX'])
