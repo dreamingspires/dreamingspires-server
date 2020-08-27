@@ -1,0 +1,85 @@
+{% from "macros/bulma_form.html" import render_form, render_field %}
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="has-background-primary-light"> <!-- used to be hero-body -->
+        <div class="columns" style="width: 100%">
+            <div class="column is-narrow has-background-primary pl-5" style="max-width:250px">
+                <aside class="menu mb-2">
+                    <figure class="image is-128x128">
+                        {# img should use is-square-image-128x128, but this
+                        isn't working for some reason in main.scss #}
+                        <img class="is-rounded" style="width:128px; height:128px; object-fit:cover" src="{{ dep.display_image.url if dep.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+                    </figure>
+                </aside>
+                <h1 class="title">{{ dep.display_name }}</h1>
+                {% if dep.description is not none %}
+                <div class="content">
+                    <p>{{ dep.description }}</p>
+                </div>
+                {% endif %}
+                <hr>
+
+                <div class="mb-3">
+                    {% if dep.verification_status.value == 1 %}
+                        <i class="fas fa-minus-circle has-text-warning"></i> Application pending
+                    {% elif dep.verification_status.value == 2 %}
+                        <i class="fas fa-minus-circle has-text-warning"></i> Awaiting response
+                    {% elif dep.verification_status.value == 3 %}
+                        <i class="fas fa-check-circle has-text-success"></i> Verified 
+                    {% else %}
+                        <i class="fas fa-times-circle has-text-danger"></i> Not verified
+                    {% endif %}
+                </div>
+
+                <a class="button is-success">Add users</a>
+                <a href={{ url_for('organisations.create_project', department_id=dep.id) }} class="button is-success">Create new project</a>
+            </div>
+
+            <main class="column">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Edit department</a></li>
+                  </ul>
+                </nav>
+                        <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="title has-text-primary"><i class="fa fa-university"></i> Edit department</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-11">
+
+                            <form method="post" role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
+                                {{ form.csrf_token }}
+                                {{ render_field(form.organisation) }}
+                                {{ render_field(form.display_name) }}
+                                {{ render_field(form.description) }}
+                                {{ render_field(form.display_image) }}
+                                {% if dep.verification_status.value != 3 %}
+                                <label class="label">Supporting evidence of your ownership of the department</label>
+                                {% for f in dep.supporting_evidence %}
+                                <p>
+                                    <a href={{ f.document.url }}>{{ f.document.filename }}</a>
+                                </p>
+                                {% endfor %}
+                                {{ render_field(form.supporting_evidence) }}
+                                {% endif %}
+                                <button class="button is-success" type="submit" name="submit"><i class="fas fa-save">&nbsp;</i>Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {#{{ render_form(form, width=11) }}#}
+            </main>
+        </div>
+    </div>
+</section>
+<script src="{{ url_for('static', filename='assets/js/sidebar.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/university_collapsible.js') }}"></script>
+{% endblock %}

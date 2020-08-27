@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="mt-4">
+        <div class="columns" style="width: 100%">
+            <main class="column is-10 is-offset-1 content">
+                <div class="box">
+                        <h1 class="title has-text-primary">Thanks for registering!</h3>
+                        <hr>
+                        <p>You should receive an email within the next few minutes allowing you to confirm your email address.  After confirmation, you should be able
+                        to log in!</p>
+
+                        <h3 class="subtitle has-text-primary">What happens next?</h3>
+                        <p>
+                        We will contact you for an interview as additional
+                        positions become available on Dreaming Spires.
+                        Once verified, you will have access to job opportunities
+                        on the platform.
+                        </p>
+                        <p>
+                        For more information about the interview
+                        process, see our <a href={{ url_for('developer_faq') }}>developer FAQ</a>.
+                        </p>
+
+                        
+
+                        <h3 class="subtitle has-text-primary">More questions?</h3>
+                        Email us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>!
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

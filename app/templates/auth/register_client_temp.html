@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% from "macros/bulma_form.html" import render_form, render_field %}
+
+{% block content %}
+
+<div class="column is-8 is-offset-2 content"> <h1 class="title">Register as a client</h1>
+    <p>
+    At Dreaming Spires, we seek to link first-class programming talent into your
+    research.  Through us, you can gain access to our wide talent pool, helping
+    solve computational problems your organisation faces in areas such as data
+    processing, porting old software, and app development.  
+    </p>
+
+    <p>
+    Our developers are selected to be of a high standard through our interview
+    process.
+    </p>
+
+    <h2 class="subtitle">How does it work?</h2>
+    <p>
+    If you have a project in mind, email us at
+    <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>. 
+    We'd love to discuss your project with you, and will help you find developers
+    whose talents align with the requirements of your project.
+    Through our internal marketplace, your project will be
+    advertised to our developers who can register interest to work on it.
+    </p>
+
+    <p>
+    <b>More questions?</b> Read our <a href="{{ url_for('client_faq') }}">client FAQ</a>
+    </p> 
+</div>
+
+{% with errors = get_flashed_messages() %}
+{% if errors %}
+<div>
+{% for error in errors %}
+{{ error }}<br>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<script>
+function yesnoCheck() {
+    if (document.getElementById('university_check').checked) {
+        document.getElementById('university_div').style.display = 'block';
+    } else {
+        document.getElementById('university_div').style.display = 'none';
+    }
+}
+yesnoCheck()
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="mt-4">
+        <div class="columns" style="width: 100%">
+            <main class="column is-10 is-offset-1 content">
+                <div class="box">
+                        <h1 class="title has-text-primary">Developer FAQ</h3>
+                        <hr>
+                        <h3 class="subtitle has-text-primary">What is Dreaming Spires?</h3>
+                        <p>At Dreaming Spires, we find interesting programming work from organisations across the world and
+                        give you the opportunity to earn money, improve your skills, and develop your
+                        CV through taking on projects from our marketplace.</p>
+
+                        <p>A wide variety of projects is available for different levels of programming
+                        experience across different languages and frameworks, so we're sure 
+                        to find something interesting to suit you!</p>
+
+                        <h3 class="subtitle has-text-primary">What benefits will I receive by working through the platform?</h3>
+                        <p> We aim to make freelancing as simple as possible; we handle the
+                        admin work and ensure that the projects are well scoped and
+                        clearly defined.</p>
+
+                        <p>Specifically, we:</p>
+                        <ul>
+                            <li>Work with our clients to establish clear, unambigious project requirements </li>
+                            <li>Guarantee payment upon completion of any project by mediating between you and the client</li>
+                            <li>Offer a selection of interesting research problems in which you can make a real difference</li>
+                            <li>Give you as much flexibility as possible - you can work whenever you
+                                like, taking on projects as you feel comfortable</li>
+                            <li>Allow you to build a portfolio of work, providing a strong reference for future employment</li>
+                        </ul>
+                        <h3 class="subtitle has-text-primary">How does it work?</h3>
+                        <p>
+                        To become a developer on Dreaming Spires, you must first register an
+                        account and then prepare the required information for the verification
+                        process.  You will need to submit a CV, a description of your
+                        past experience, and a short paragraph describing the sorts of projects you're
+                        interested in.
+                        </p>
+
+                        <p>
+                        We will assess your application and may invite you for an online interview.
+                        The interview will consist of a short chat where we get a feel for your
+                        experience level, and will involve various problems designed to test your
+                        abilities.  It will take no more than 20 minutes.
+                        </p>
+
+                        <p>
+                        Provided your application is successful, you will become a registered
+                        developer.  You will be able to take on projects from the marketplace, and
+                        begin working on interesting projects!
+                        </p>
+
+                        <p>
+                        You can get started by filling out the <a href="{{ url_for('auth.register_developer', _anchor='register_form') }}">registration form</a>.
+                        </p>
+                        <h3 class="subtitle has-text-primary">What do we look for in applicants?</h3>
+                        <p>
+                        We are looking for applicants with an aptitude for solving varied problems
+                        and a commitment to free software.  Your application is more likely to be
+                        successful if you have formal education in Computer Science and/or have practical
+                        experience developing software in other organisations.
+                        </p>
+
+                        <p>
+                        We are not too concerned with the amount of time you have to devote to
+                        development work - once you've been verified, the working schedule is
+                        entirely up to you and the projects you select.  However, to keep your
+                        account open you will be required to complete at least one project every six
+                        months.
+                        </p>
+
+                        <h3 class="subtitle has-text-primary">More questions?</h3>
+                        Email us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>!
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

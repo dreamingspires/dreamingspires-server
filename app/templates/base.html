@@ -1,0 +1,163 @@
+{% from "macros/flash.html" import flash %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dreaming Spires</title>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+    <script src="https://kit.fontawesome.com/108492ddd0.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/bulma-collapsible.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>   
+    <script type="text/javascript" charset="utf-8">
+        //var socket = io();
+        var socket = io.connect({path:"/dreamingspires/socket.io" });
+        socket.on('connect', function() {
+            console.log('I\'m connected');
+            // This code only executes after authentication
+
+            socket.emit('my event', {data: 'I\'m connected!'});
+        });
+        socket.on('my response', function() {
+            alert('test!');
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/konpa/devicon@master/devicon.min.css">
+</head>
+
+<body style="overflow-x: hidden">
+    <a id="top"></a>
+    <section class="hero is-primary {% if is_fullpage %} is-fullheight{% endif %}">
+        <div class="hero-head">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                  <a class="navbar-item" href="{{ url_for('index') }}">
+                          <figure class="image is-32x32">
+                              <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_circle.svg') }}">
+                          </figure>
+                  </a>
+
+                  <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <div class="navbar-start">
+                        {% for item in nav.start %}
+                            {% if item.is_active %}
+                            <a href="{{ item.url }}" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
+                            {% else %}
+                            <a href="{{ item.url }}" class="navbar-item has-text-white">{{ item.label|safe }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    {# <div class="container has-text-dark"> #}
+                        <div class="navbar-end">
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                {% if current_user.is_authenticated %}
+                                    <a class="navbar-link">
+                                        <figure class="image is-32x32">
+                                            <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+
+                                        </figure>
+                                        &nbsp;
+                                        {{ current_user.display_name }}
+                                    </a>
+                                    <div class="navbar-dropdown is-right is-boxed">
+                                        {% for item in nav.profile %}
+                                        <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="buttons">
+                                        {% for item in nav.end %}
+                                            {% if item.is_active %}
+                                                <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
+                                            {% else %}
+                                                <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
+
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {# </div> #}
+                </div>
+            </nav>
+            <hr class="my-0">
+        </div>
+
+        {# <div class="hero-body"> #}
+            {# message flashing #}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {{ flash(messages) }}
+            {% endwith %}
+
+            {# <div class="is-fullwidth"> #}
+               {% block fullheight %}
+               {% endblock %}
+               {# </div> #}
+             {# </div> #}
+    </section>
+   {% block content %}
+   {% endblock %}
+    <footer class="footer py-2">
+      <div class="content has-text-centered">
+        {% for item in nav.footer %}
+            <a href="{{ item.url }}">{{ item.label|safe }}</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+        <p>
+          <strong>Dreaming Spires</strong>
+          &nbsp;&nbsp;&nbsp;
+          Copyright © 2020.  All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+          el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    </script>
+</body>
+</html>

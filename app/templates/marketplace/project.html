@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="has-background-primary-light"> <!-- used to be hero-body -->
+        <div class="columns" style="width: 100%">
+            <div class="column is-narrow has-background-primary pl-5" style="max-width:250px">
+                <aside class="menu mb-2">
+                    <figure class="image is-128x128">
+                        {# img should use is-square-image-128x128, but this
+                        isn't working for some reason in main.scss #}
+                        <img class="is-rounded" style="width:128px; height:128px; object-fit:cover" src="{{ current_user.display_image.url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+                    </figure>
+                </aside>
+                <h1 class="title">{{ current_user.display_name }}</h1>
+                <h2 class="subtitle mb-3">{{ current_user.id }}</h2>
+
+                <p class="menu-label">
+                    Developer
+                </p>
+                    <ul class="menu-list">
+                        <li>
+                            <div onmouseover="mouseover_expand(this)" onmouseout="mouseover_collapse(this)">
+                                <a><span class="icon is-small"><i class="fa fa-clipboard-list"></i></span> Current Assignments</a>
+                                <div id="collapsible-div-0" class="is-collapsible">
+                                    <ul>
+                                        {#
+                                        {% for dep_name, dep in current_user.developer.projects %}
+                                        {% if 
+                                        <li>
+                                            {% if dep['link'] %}
+                                            <a href={{ dep['link'] }}>{{ dep_name }}</a>
+                                            {% else %}
+                                            <a>{{ dep_name }}</a>
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+                                        #}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        
+                    </ul>
+
+
+
+            </div>
+
+            <main class="column">
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                  <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">{{ project.display_name }}</a></li>
+                  </ul>
+                </nav>
+                <div class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <div class="title has-text-primary">{{ project.display_name }}</div>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <a href="{{ url_for('marketplace.register_interest', project_id=project.id) }}" type="button" class="button is-small is-success" title="You will receive notifications about updates to this project">
+                                Register interest
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{ job_listing|safe }}
+                <div class="has-text-dark">
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Timeline</p>
+                        </div>
+                            {{ timeline|safe }}
+                    </article>
+                    {#
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Discussion</p>
+                        </div>
+                        <!-- Render discussion here -->
+                            {{ discussion|safe }}
+                    </article>
+                    #}
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+<script src="{{ url_for('static', filename='assets/js/sidebar.js') }}"></script>
+{% endblock %}
