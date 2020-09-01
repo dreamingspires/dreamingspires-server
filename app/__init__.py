@@ -77,11 +77,11 @@ def load_user(uid):
     return User.query.filter_by(id=uid).first()
 login_manager.login_view = 'auth.login'
 
-#try:
-if app.config['PREFIX']:
-    app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=app.config['PREFIX'])
-#except KeyError:
-#    pass
+try:
+    if app.config['PREFIX']:
+        app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=app.config['PREFIX'])
+except KeyError:
+    pass
 
 
 nav.Bar('start', [
