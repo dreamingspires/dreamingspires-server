@@ -1,0 +1,13 @@
+[Unit]
+Description=Dreaming Spires Server
+After=network.target
+
+[Service]
+User=dreamingspires
+Group=dreamingspires
+WorkingDirectory=/var/dreamingspires/dreamingspires-server
+ExecStart=poetry run gunicorn --bind 0.0.0.0:8080 -w 4 run2:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
