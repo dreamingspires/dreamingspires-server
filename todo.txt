@@ -24,6 +24,26 @@
 [x] Fix top spacing on other pages
 [x] Overflowing issues (leading to sideways scrolling on mobile)
 
+=== Next ===
+[x] Website logo in tab
+[x] Are you a... legibility (drop shadow?)
+Improved client page:
+    Top text: Power up your ideas with access to world-class developers
+    "sign up now" button - takes you to bottom
+    Multi-step process:
+    * Submit your project idea below
+    * We'll contact you to flesh out project requirements
+    * We assign developers to your project through our internal marketplace
+    * 
+
+    Portfolio:
+
+    Get signed up!
+    Form:
+    * email
+    * (optional) phone number
+    * idea
+
 === Week 2 ===
 Apply polish!
 [ ] Login process clearer if password incorrect
@@ -43,6 +63,10 @@ Apply polish!
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
 == Extension ==
+[ ] Staff page
+[ ] Animated flow chart for client page
+[ ] YouTube advert
+[ ] Developer box for "hours per week"
 [ ] fix filedepot when migrated to new suburl
 [ ] Email notifications of new messages (can disable if required)
 [ ] Integrate marketplace with chat service
@@ -68,6 +92,7 @@ Apply polish!
 [x] Department sign-up
 [ ] After organisation creation, a "thank you for registering" page
 [x] Create department supporting evidence actually does something
+[ ] Export my job reference
     
 [ ] Organisation payment for projects
 [ ] Login page validation without refreshing
