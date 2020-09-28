@@ -11,7 +11,7 @@ from datetime import datetime
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import Unauthorized
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 
 # Import the database object from the main app module
 from app import app, db, socketio
