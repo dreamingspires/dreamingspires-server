@@ -47,9 +47,10 @@ Improved client page:
 === Week 2 ===
 Apply polish!
 [ ] Login process clearer if password incorrect
+[ ] Password reset feature
 [ ] Global message flashing (linked to incorrect password? Use bulma 'message')
-[ ] Password box to mask password
-[ ] Navbar logo centered correctly
+[x] Password box to mask password
+[x] Navbar logo centered correctly
 [ ] Navbar dropdown no white effect
 [ ] Redirecting next after login doesn't work
 [ ] User account creation rate limiting (+ organisations etc.)
@@ -58,7 +59,7 @@ Apply polish!
 == Pre-launch ==
 [ ] Ensure mail.db is correctly separated (in the models)
 [ ] socketio to use the eventlet backend
-[ ] Locally host fontawesome and the socketio client (in base.html)
+[-] Locally host fontawesome and the socketio client (in base.html)
 [ ] Ensure redirects are safe
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
@@ -74,7 +75,8 @@ Apply polish!
 [ ] Admin console
     [ ] Create jobs on marketplace
     [ ] Assign people jobs and add them into a chat room
-[ ] Messages are send via socketio instead of page refresh (if js enabled?)
+    [ ] Verify accounts
+[x] Messages are sent via socketio instead of page refresh (if js enabled?)
 [ ] Messages are received passively anywhere on the site (not just inbox.html)
 [ ] Developer account settings page
 [ ] Linking a chat into a project

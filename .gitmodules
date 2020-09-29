@@ -13,3 +13,6 @@
 [submodule "modules/bulma-o-steps"]
 	path = modules/bulma-o-steps
 	url = https://github.com/octoshrimpy/bulma-o-steps.git
+[submodule "modules/bulma-carousel"]
+	path = modules/bulma-carousel
+	url = git://github.com/Wikiki/bulma-carousel.git
