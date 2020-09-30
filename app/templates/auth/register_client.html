@@ -2,26 +2,44 @@
 
 {% from "macros/bulma_form.html" import render_form, render_field %}
 
+{% macro render_post(post) %}
+<a href="{{ url_for('blog', _anchor=post.url_id) }}"> <div class="card">
+    <div class="card-image">
+      <figure class="image is-16by9  is-covered">
+        {% if post.display_image is not none %}
+        <img src="{{ post.display_image.url }}" alt="">
+        {% endif %}
+      </figure>
+    </div>
+    <div class="card-content">
+      <div style="font-weight: bold">
+        {{ post.title }}
+      </div>
+      <div>
+        {{ post.description }}
+      </div>
+    </div>
+  </div>
+</a>
+{% endmacro %}
+
 {% block content %}
 <section class="section is-fullwidth is-medium has-background-primary pt-1">
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
       <div class="column content">
         <h1>Power up your ideas with access to world-class developers</h1>
-        <p>We link first-class programming talent into your research.  You can gain access to our wide talent pool, helping solve computational problems your organisation faces</p>
+        <p>We link first-class programming talent into your research.  You can gain access to our wide talent pool, helping solve computational problems your organisation faces.</p>
         {#  in areas such as data processing, porting old software, and app development. #}
       </div>
       <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/lightbulb.jpg') }}" style="width:100%;">
       </div>
     </div>
 
     <a href="#signup" class="button is-medium is-primary is-inverted is-outlined is-box-button">
       <p>Sign up now</p>
     </a>
-    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-      <a href="#top" class="title has-text-white is-2 fas fa-chevron-down"></a>
-    </div>
   </div>
 </section>
 
@@ -30,75 +48,22 @@
 <section class="section is-fullwidth is-medium has-background-info pt-1">
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
-      <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
-      </div>
-      <div class="column content">
+      <div class="column is-8 content">
         <h1>Our portfolio</h1>
-        <p>We have wide experience across areas such as app development, data processing, software porting, and scientific computing.</p>
-        {#  in areas such as data processing, porting old software, and app development. #}
+        <hr>
+        <p>With past projects spanning app development, data processing, software porting, and more, we're sure to find talent to match your project.  Check out our portfolio below.</p>
+      </div>
+      <div class="column">
       </div>
     </div>
 
     <div class="container">
       <!-- Start Carousel -->
       <div id="carousel-demo" class="carousel">
-        <div class="item-1">
-          <!-- Slide Content -->
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9  is-covered">
-                <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="item__title">
-                Mon titre 1
-              </div>
-              <div class="item__description">
-                Ici une petite description pour tester le slider
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item-2">
-          <!-- Slide Content -->
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9  is-covered">
-                <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="item__title">
-                Mon titre 2
-              </div>
-              <div class="item__description">
-                Ici une petite description pour tester le slider
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item-3">
-          <!-- Slide Content -->
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-16by9  is-covered">
-                <img src="https://images.unsplash.com/photo-1550921082-c282cdc432d6?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="item__title">
-                Mon titre 3
-              </div>
-              <div class="item__description">
-                Ici une petite description pour tester le slider
-              </div>
-            </div>
-          </div>
-        </div>
+        {% for post in posts %}
+        {{ render_post(post) }}
+        {% endfor %}
       </div>
-      <!-- End Carousel -->
     </div>
 
   </div>
@@ -110,12 +75,12 @@
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
       <div class="column content">
-        <h1>Cloud computing support</h1>
-        <p>Need to be always online?  We provide a cloud computing environment to host your web projects and ensure uptime.  We can also help you run projects on your local supercomputer cluster.</p>
+        <h1>Cloud hosting, sorted.</h1>
+        <p>Seamlessly deploy your project online through the Dreaming Spires cloud computing environment.  We can also get you set up on your <a>own server</a>, or even your <a>local supercomputer cluster</a>.</p>
         {# Link to blog post about ARC #}
       </div>
       <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/pero-kalimero-9BJRGlqoIUk-unsplash.jpg') }}" style="width:100%;">
       </div>
     </div>
   </div>
@@ -130,7 +95,7 @@
       </div>
       <div class="column content">
         <h1>How does it work?</h1>
-        <p>Simply use the <a href="#signup">form below</a> to contact us about your projects.  We'll get in contact to talk about how we can help.</p>
+        <p>To get started, use the <a href="#signup">form below</a> to contact us about your project.  We'll get in contact to talk about how we can help.</p>
       </div>
     </div>
 
@@ -146,7 +111,7 @@
               </div>
               <div class="timeline-content">
                 <p class="heading">Project submission</p>
-                <p><a href="signup">Get in contact</a> with your project in mind</p>
+                <p>To get started, <a href="#signup">contact us</a> about your project</p>
               </div>
             </div>
             <div class="timeline-item is-warning">
@@ -226,7 +191,7 @@
   <h3 class="title has-text-centered">Register your project idea</h3>
 </div>
 <a id="register_form"></a>
-{{ render_form(form, ".", width=8, mark_required=False, is_horizontal=False) }}
+{{ render_form(form, ".#signup", width=8, mark_required=False, is_horizontal=False) }}
 
 
 <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>

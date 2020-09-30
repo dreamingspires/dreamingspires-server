@@ -12,6 +12,7 @@ import uuid
 
 from colour import Color
 from sqlalchemy_utils import ColorType
+from sqlalchemy.types import Text
 
 # Define a base model for other database tables to inherit
 class Base(db.Model):
@@ -185,3 +186,17 @@ class ProjectTag(Base):
 
     def __repr__(self):
         return f'<ProjectTag {self.id}>'
+
+# Blog-related things
+class BlogPost(Base):
+    __tablename__ = 'blog_posts'
+
+    title = db.Column(Text(), nullable=False)
+    url_id = db.Column(Text(), nullable=False)
+    display_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='blog_images'))
+    author = db.Column(Text(), nullable=False)
+    description = db.Column(Text(), nullable=False)
+    body_html = db.Column(Text(), nullable=False)
+    # Whether to render the post on the portfolio page
+    is_portfolio = db.Column(db.Boolean, default=False, nullable=False)

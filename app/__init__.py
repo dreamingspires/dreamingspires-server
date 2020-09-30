@@ -62,9 +62,15 @@ except KeyError:
 try:
     image_storage = app.config['IMAGE_STORAGE']
 except KeyError:
-    default_storage = {'depot.storage_path': '/tmp/depot_images/'}
+    image_storage = {'depot.storage_path': '/tmp/depot_images/'}
+try:
+    blog_image_storage = app.config['BLOG_IMAGE_STORAGE']
+except KeyError:
+    blog_image_storage = {'depot.storage_path': '/tmp/depot_blog_images/'}
+
 DepotManager.configure('default', default_storage)
 DepotManager.configure('images', image_storage)
+DepotManager.configure('blog_images', blog_image_storage)
 
 #if app.config['PREFIX']:
 #    app.wsgi_app = DepotManager.make_middleware(app.wsgi_app, \

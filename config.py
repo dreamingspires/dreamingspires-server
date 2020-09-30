@@ -13,7 +13,8 @@ DATABASE_CONNECT_OPTIONS = {}
 
 # Additional databases
 SQLALCHEMY_BINDS = {
-    'mail_db': 'sqlite:///' + os.path.join(BASE_DIR, 'mail.db')
+    'mail_db': 'sqlite:///' + os.path.join(BASE_DIR, 'mail.db'),
+    'temp_db': 'sqlite:///' + os.path.join(BASE_DIR, 'temp.db')
 }
 
 # Application threads. A common general assumption is

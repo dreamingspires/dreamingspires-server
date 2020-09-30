@@ -18,13 +18,14 @@ from app import app, db, socketio
 
 # Import module forms
 from app.mod_auth.forms import LoginForm, RegisterDeveloperForm, \
-    RegisterClientForm
+    RegisterClientForm, RegisterClientInterest
 
 # Import module models (i.e. User)
 #from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
 #    Organisation, Project
 from app.models import User, Email, Matrix, CV, Developer, \
-    Organisation, Project
+    Organisation, Project, BlogPost
+from app.temp_models import InterestedClient
 
 # Import extensions
 from app.extensions.socketio_helpers import authenticated_only
@@ -143,6 +144,27 @@ def register_client():
 
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
+    form = RegisterClientInterest()
+    if form.validate_on_submit():
+        # TODO: add information to database
+        # TODO: rate limiting
+        client = InterestedClient(email=form.email.data, \
+            phone=form.phone.data, organisation=form.organisation.data, \
+            project_description = form.project_description.data)
+        db.session.add(client)
+        db.session.commit()
+
+        next = request.args.get('next')
+        #if not is_safe_url(next):
+        #    return abort(400)
+        # Redirect to "thanks for signing up" page
+        return redirect(next or url_for('auth.login'))
+
+    posts = BlogPost.query.filter_by(is_portfolio=True).all()
+    return render_template('auth/register_client.html', form=form, posts=posts)
+
+#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+def register_client():
     form = RegisterClientForm()
     if form.validate_on_submit():
         if User.query.filter_by(primary_email=form.email.data).first():
@@ -164,7 +186,10 @@ def register_client():
             #if not is_safe_url(next):
             #    return abort(400)
             return redirect(next or url_for('auth.login'))
-    return render_template('auth/register_client.html', form=form)
+
+    
+    posts = BlogPost.query.filter_by(is_portfolio=True).all()
+    return render_template('auth/register_client.html', form=form, posts=posts)
 
 @mod_auth.route('/confirm_email/<token>')
 def confirm_email(token):

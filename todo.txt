@@ -27,7 +27,9 @@
 === Next ===
 [x] Website logo in tab
 [x] Are you a... legibility (drop shadow?)
-Improved client page:
+[ ] Blog
+[ ] Blog image uploader (for inline images)
+[ ] Improved client page:
     Top text: Power up your ideas with access to world-class developers
     "sign up now" button - takes you to bottom
     Multi-step process:
