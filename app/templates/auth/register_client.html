@@ -3,20 +3,21 @@
 {% from "macros/bulma_form.html" import render_form, render_field %}
 
 {% macro render_post(post) %}
-<a href="{{ url_for('blog', _anchor=post.url_id) }}"> <div class="card">
+<a href="{{ url_for('blog', _anchor=post.url_id) }}">
+  <div class="card">
     <div class="card-image">
-      <figure class="image is-16by9  is-covered">
-        {% if post.display_image is not none %}
-        <img src="{{ post.display_image.url }}" alt="">
+      <figure class="image is-16by9">{# is-covered #}
+        {% if post.portfolio_image is not none %}
+        <img src="{{ post.portfolio_image.url }}" alt="">
         {% endif %}
       </figure>
     </div>
     <div class="card-content">
       <div style="font-weight: bold">
-        {{ post.title }}
+        {{ post.portfolio_title }}
       </div>
       <div>
-        {{ post.description }}
+        {{ post.portfolio_description }}
       </div>
     </div>
   </div>
@@ -29,7 +30,7 @@
     <div class="columns is-vcentered pt-5">
       <div class="column content">
         <h1>Power up your ideas with access to world-class developers</h1>
-        <p>We link first-class programming talent into your research.  You can gain access to our wide talent pool, helping solve computational problems your organisation faces.</p>
+        <p>We link first-class programming talent into your research.  You can gain access to our wide talent pool, helping to solve computational problems your organisation faces.</p>
         {#  in areas such as data processing, porting old software, and app development. #}
       </div>
       <div class="column">
@@ -75,7 +76,7 @@
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
       <div class="column content">
-        <h1>Cloud hosting, sorted.</h1>
+        <h1>Cloud hosting? Sorted.</h1>
         <p>Seamlessly deploy your project online through the Dreaming Spires cloud computing environment.  We can also get you set up on your <a>own server</a>, or even your <a>local supercomputer cluster</a>.</p>
         {# Link to blog post about ARC #}
       </div>
@@ -170,10 +171,10 @@
 
   </div>
 </section>
-<div class="column is-8 is-offset-2 content">    <p>
-    <p>
+<div class="column is-8 is-offset-2 content">
+  <p class="has-text-centered">
     <b>More questions?</b> Read our <a href="{{ url_for('client_faq') }}">client FAQ</a>
-    </p> 
+  </p> 
 </div>
 
 {% with errors = get_flashed_messages() %}

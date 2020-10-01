@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% macro render_post(post) %}
-<a id="{{ post.url_id }}"/>
+<a id="{{ post.url_id }}"></a>
 <div class="card article">
     <div class="card-content">
         <div class="media">
@@ -8,7 +8,7 @@
               <p class="title article-title">{{ post.title }}</p>
                 <div class="tags has-addons level-item">
                   <span class="tag is-rounded is-info">{{ post.author }}</span>
-                  <span class="tag is-rounded">{{ post.date_created }}</span>
+                  <span class="tag is-rounded">{{ post.date_created.strftime('%-d %b, %Y') }}</span>
                 </div>
             </div>
         </div>
@@ -32,8 +32,8 @@
     </section>
 
     <div class="container">
-        <section style="margin-top: -200px">
-          <div class="column is-8 is-offset-2">
+        <section class="columns is-mobile is-centered" style="margin-top: -170px">
+          <div class="column is-7">
             {% for post in posts %}
               {{ render_post(post) }}
             {% endfor %}

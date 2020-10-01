@@ -150,17 +150,15 @@ def register_client():
         # TODO: rate limiting
         client = InterestedClient(email=form.email.data, \
             phone=form.phone.data, organisation=form.organisation.data, \
-            project_description = form.project_description.data)
+            project_description = form.project_description.data,
+            estimated_cost = form.estimated_cost.data)
         db.session.add(client)
         db.session.commit()
 
         next = request.args.get('next')
-        #if not is_safe_url(next):
-        #    return abort(400)
-        # Redirect to "thanks for signing up" page
-        return redirect(next or url_for('auth.login'))
+        return render_template('auth/thanks_client.html')
 
-    posts = BlogPost.query.filter_by(is_portfolio=True).all()
+    posts = BlogPost.query.filter_by(is_portfolio=True, is_published=True).all()
     return render_template('auth/register_client.html', form=form, posts=posts)
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])

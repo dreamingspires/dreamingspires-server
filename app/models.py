@@ -190,13 +190,26 @@ class ProjectTag(Base):
 # Blog-related things
 class BlogPost(Base):
     __tablename__ = 'blog_posts'
-
     title = db.Column(Text(), nullable=False)
     url_id = db.Column(Text(), nullable=False)
     display_image = db.Column(UploadedFileField( \
         upload_type=UploadedImageWithThumb, upload_storage='blog_images'))
     author = db.Column(Text(), nullable=False)
-    description = db.Column(Text(), nullable=False)
     body_html = db.Column(Text(), nullable=False)
     # Whether to render the post on the portfolio page
     is_portfolio = db.Column(db.Boolean, default=False, nullable=False)
+    portfolio_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='blog_images'))
+    portfolio_title = db.Column(Text())
+    portfolio_description = db.Column(Text())
+    is_published = db.Column(db.Boolean, default=False, nullable=False)
+
+class BlogImage(Base):
+    __tablename__ = 'blog_images'
+
+    blog_post_id = db.Column(db.String(t.LEN_UUID), db.ForeignKey('blog_posts.id'),
+            nullable=False)
+    display_image = db.Column(UploadedFileField( \
+        upload_type=UploadedImageWithThumb, upload_storage='blog_images'))
+
+    blog_post = db.relationship('BlogPost', backref='images')

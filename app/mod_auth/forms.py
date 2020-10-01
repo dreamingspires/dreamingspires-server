@@ -89,6 +89,11 @@ class RegisterClientInterest(FlaskForm):
     organisation = IconStringField('', [],
             render_kw={'placeholder': 'Organisation (optional)'},
             left_logos=['fa-university'])
+    estimated_cost = SelectField('Estimated project cost', choices=[
+        (None, 'Enter a value'),
+        ('<500', '< £500'), ('500-1000', '£500 - £1000'), ('1000-5000', '£1000-5000'), \
+        ('5000-10000', '£5000 - £10,000'), ('>10000', '> £10,000')
+    ])
     project_description = TextAreaField('', [validators.Length(max=1000)],
         render_kw={'placeholder': 'Describe briefly your project idea'})
     submit = SubmitField('Submit', render_kw={'class': 'button is-success'})

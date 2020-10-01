@@ -14,4 +14,5 @@ class InterestedClient(Base):
     email = db.Column(db.String(128), primary_key=True)
     phone = db.Column(db.String(128))
     organisation = db.Column(db.String(t.LEN_DISPLAY_NAME))
+    estimated_cost = db.Column(db.String(20))
     project_description = db.Column(db.String(1000), nullable=False)

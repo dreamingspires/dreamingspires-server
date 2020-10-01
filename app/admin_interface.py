@@ -2,7 +2,7 @@
 from flask_login import current_user
 from flask_admin.contrib.sqla import ModelView
 from app.models import User, CV, Developer, Organisation, Department, \
-    DepartmentFile, DeveloperProjectsMap, Project, ProjectTag, BlogPost
+    DepartmentFile, DeveloperProjectsMap, Project, ProjectTag, BlogPost, BlogImage
 import PIL
 from flask_wtf.file import FileField
 
@@ -33,8 +33,33 @@ class ImageView(BaseView):
             except PIL.UnidentifiedImageError:
                 raise UnsupportedMediaType( \
                     description="Uploaded file is not an image")
-        else:
-            print('no image supplied')
+
+class BlogPostView(AdminView):
+    form_extra_fields = {'display_image2': FileField('Display Image', [validate_image]),
+        'portfolio_image2': FileField('Portfolio Image', [validate_image])}
+
+    def on_model_change(self, form, Object, is_created):
+        if form.display_image2.data:
+            try:
+                Object.display_image = form.display_image2.data
+            except PIL.UnidentifiedImageError:
+                raise UnsupportedMediaType( \
+                    description="Uploaded file is not an image")
+
+        if form.portfolio_image2.data:
+            try:
+                Object.portfolio_image = form.portfolio_image2.data
+            except PIL.UnidentifiedImageError:
+                raise UnsupportedMediaType( \
+                    description="Uploaded file is not an image")
+
+class BlogImageView(ImageView):
+    column_formatters = dict(url=lambda v, c, m, p: m.display_image.url)
+
+    def get_column_names(self, only_columns, excluded_columns):
+        only_columns.append('url')
+        return super().get_column_names(only_columns, excluded_columns)
+
 
 admin.add_view(BaseView(User, db.session))
 admin.add_view(BaseView(CV, db.session))
@@ -45,4 +70,5 @@ admin.add_view(BaseView(DepartmentFile, db.session))
 admin.add_view(BaseView(DeveloperProjectsMap, db.session))
 admin.add_view(BaseView(Project, db.session))
 admin.add_view(BaseView(ProjectTag, db.session))
-admin.add_view(ImageView(BlogPost, db.session))
+admin.add_view(BlogPostView(BlogPost, db.session))
+admin.add_view(BlogImageView(BlogImage, db.session))

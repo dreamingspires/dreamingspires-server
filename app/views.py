@@ -38,5 +38,5 @@ def login2():
 @app.route('/blog')
 def blog():
     # Get blog posts from db
-    posts = BlogPost.query.all()
+    posts = BlogPost.query.filter_by(is_published=True).all()
     return render_template('public/blog.html', posts=posts)
