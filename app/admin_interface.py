@@ -61,6 +61,11 @@ class BlogImageView(ImageView):
         only_columns.append('url')
         return super().get_column_names(only_columns, excluded_columns)
 
+class InterestedClientView(BaseView):
+    def get_column_names(self, only_columns, excluded_columns):
+        only_columns = only_columns[:2] + ['email'] + only_columns[2:]
+        return super().get_column_names(only_columns, excluded_columns)
+
 
 admin.add_view(BaseView(User, db.session))
 admin.add_view(BaseView(CV, db.session))
@@ -73,4 +78,4 @@ admin.add_view(BaseView(Project, db.session))
 admin.add_view(BaseView(ProjectTag, db.session))
 admin.add_view(BlogPostView(BlogPost, db.session))
 admin.add_view(BlogImageView(BlogImage, db.session))
-admin.add_view(BaseView(InterestedClient, db.session))
+admin.add_view(InterestedClientView(InterestedClient, db.session))
