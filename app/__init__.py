@@ -40,6 +40,11 @@ app.jinja_env.lstrip_blocks = True
 app.config.from_object('config')
 app.config.from_object('secret_config')
 
+# Add the fathom analytics ID
+@app.context_processor
+def inject_id():
+    return dict(FATHOM_ID=app.config['FATHOM_ID'])
+
 # Register extensions with app
 db = SQLAlchemy(app)
 nav = Navigation(app)

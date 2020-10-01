@@ -155,6 +155,12 @@ def register_client():
         db.session.add(client)
         db.session.commit()
 
+        # Send confirmation email
+        html = render_template('email/project_idea_registered.html', \
+            project=client)
+        subject = 'Dreaming Spires project confirmation'
+        send_email(client.email, subject, html)
+
         next = request.args.get('next')
         return render_template('auth/thanks_client.html')
 
