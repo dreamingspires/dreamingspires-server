@@ -16,3 +16,4 @@ class InterestedClient(Base):
     organisation = db.Column(db.String(t.LEN_DISPLAY_NAME))
     estimated_cost = db.Column(db.String(20))
     project_description = db.Column(db.String(1000), nullable=False)
+    actioned = db.Column(db.Boolean, server_default='0', nullable=False)
