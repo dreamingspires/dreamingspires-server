@@ -158,7 +158,7 @@ def register_client():
         next = request.args.get('next')
         return render_template('auth/thanks_client.html')
 
-    posts = BlogPost.query.filter_by(is_portfolio=True, is_published=True).all()
+    posts = BlogPost.query.filter_by(is_portfolio=True, is_published=True).order_by(BlogPost.date_created.desc()).all()
     return render_template('auth/register_client.html', form=form, posts=posts)
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
