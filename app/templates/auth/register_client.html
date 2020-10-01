@@ -47,6 +47,7 @@
 
 <hr class="my-0">
 
+<a id="portfolio"></a>
 <section class="section is-fullwidth is-medium has-background-info pt-1">
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
@@ -63,7 +64,9 @@
       <!-- Start Carousel -->
       <div id="carousel-demo" class="carousel">
         {% for post in posts %}
+				<div>
         {{ render_post(post) }}
+				</div>
         {% endfor %}
       </div>
     </div>
@@ -93,7 +96,7 @@
 <section class="section is-fullwidth is-medium has-background-info pt-1">
   <div class="container is-fluid">
     <div class="columns is-vcentered pt-5">
-      <div class="column">
+      <div class="column  is-hidden-mobile">
         <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
       </div>
       <div class="column content">
@@ -190,13 +193,12 @@
 {% endif %}
 {% endwith %}
 
-<a id="signup">
 <div class="column is-8 is-offset-2">
   <h3 class="title has-text-centered">Register your project idea</h3>
 </div>
-<a id="register_form"></a>
 {{ render_form(form, ".#signup", width=8, mark_required=False, is_horizontal=False) }}
 
+<a id="signup"></a>
 
 <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
 <script>

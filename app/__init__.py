@@ -99,13 +99,14 @@ except KeyError:
 
 nav.Bar('start', [
     nav.Item('Home', 'index'),
-    nav.Item('About', 'index', args={'_anchor':'about'}),
-    nav.Item('Contact', 'contact'),
-    nav.Item('Blog', 'blog'),
+    nav.Item('<b>Blog</b>', 'blog'),
+    nav.Item('Client', 'auth.register_client'),
+    nav.Item('Developer', 'auth.register_developer'),
 ])
 
 nav.Bar('end', [
-    nav.Item('<strong>Sign up</strong>', 'auth.register_developer'),
+    nav.Item('<strong>Client sign up</strong>', 'auth.register_client', args={'_anchor':'signup'}),
+    nav.Item('<strong>Dev sign up</strong>', 'auth.register_developer'),
     nav.Item('Log in', 'auth.login')
 ])
 
