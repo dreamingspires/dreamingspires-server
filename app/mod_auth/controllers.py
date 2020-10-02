@@ -11,20 +11,21 @@ from datetime import datetime
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import Unauthorized
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 
 # Import the database object from the main app module
 from app import app, db, socketio
 
 # Import module forms
 from app.mod_auth.forms import LoginForm, RegisterDeveloperForm, \
-    RegisterClientForm
+    RegisterClientForm, RegisterClientInterest
 
 # Import module models (i.e. User)
 #from app.mod_auth.models import User, Email, Matrix, CV, Developer, \
 #    Organisation, Project
 from app.models import User, Email, Matrix, CV, Developer, \
-    Organisation, Project
+    Organisation, Project, BlogPost
+from app.temp_models import InterestedClient
 
 # Import extensions
 from app.extensions.socketio_helpers import authenticated_only
@@ -136,10 +137,35 @@ def register_developer():
     return render_template('auth/register_developer.html', form=form, \
         entries=list(range(1000)))
 
-@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     return render_template('auth/register_client_temp.html')
 
+
+@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+def register_client():
+    form = RegisterClientInterest()
+    if form.validate_on_submit():
+        # TODO: add information to database
+        # TODO: rate limiting
+        client = InterestedClient(email=form.email.data, \
+            phone=form.phone.data, organisation=form.organisation.data, \
+            project_description = form.project_description.data,
+            estimated_cost = form.estimated_cost.data)
+        db.session.add(client)
+        db.session.commit()
+
+        # Send confirmation email
+        html = render_template('email/project_idea_registered.html', \
+            project=client)
+        subject = 'Dreaming Spires project confirmation'
+        send_email(client.email, subject, html)
+
+        next = request.args.get('next')
+        return render_template('auth/thanks_client.html')
+
+    posts = BlogPost.query.filter_by(is_portfolio=True, is_published=True).order_by(BlogPost.date_created.desc()).all()
+    return render_template('auth/register_client.html', form=form, posts=posts)
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
@@ -164,7 +190,10 @@ def register_client():
             #if not is_safe_url(next):
             #    return abort(400)
             return redirect(next or url_for('auth.login'))
-    return render_template('auth/register_client.html', form=form)
+
+    
+    posts = BlogPost.query.filter_by(is_portfolio=True).all()
+    return render_template('auth/register_client.html', form=form, posts=posts)
 
 @mod_auth.route('/confirm_email/<token>')
 def confirm_email(token):

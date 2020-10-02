@@ -24,12 +24,35 @@
 [x] Fix top spacing on other pages
 [x] Overflowing issues (leading to sideways scrolling on mobile)
 
+=== Next ===
+[x] Website logo in tab
+[x] Are you a... legibility (drop shadow?)
+[ ] Blog
+[ ] Blog image uploader (for inline images)
+[ ] Improved client page:
+    Top text: Power up your ideas with access to world-class developers
+    "sign up now" button - takes you to bottom
+    Multi-step process:
+    * Submit your project idea below
+    * We'll contact you to flesh out project requirements
+    * We assign developers to your project through our internal marketplace
+    * 
+
+    Portfolio:
+
+    Get signed up!
+    Form:
+    * email
+    * (optional) phone number
+    * idea
+
 === Week 2 ===
 Apply polish!
 [ ] Login process clearer if password incorrect
+[ ] Password reset feature
 [ ] Global message flashing (linked to incorrect password? Use bulma 'message')
-[ ] Password box to mask password
-[ ] Navbar logo centered correctly
+[x] Password box to mask password
+[x] Navbar logo centered correctly
 [ ] Navbar dropdown no white effect
 [ ] Redirecting next after login doesn't work
 [ ] User account creation rate limiting (+ organisations etc.)
@@ -38,11 +61,15 @@ Apply polish!
 == Pre-launch ==
 [ ] Ensure mail.db is correctly separated (in the models)
 [ ] socketio to use the eventlet backend
-[ ] Locally host fontawesome and the socketio client (in base.html)
+[-] Locally host fontawesome and the socketio client (in base.html)
 [ ] Ensure redirects are safe
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
 == Extension ==
+[ ] Staff page
+[ ] Animated flow chart for client page
+[ ] YouTube advert
+[ ] Developer box for "hours per week"
 [ ] fix filedepot when migrated to new suburl
 [ ] Email notifications of new messages (can disable if required)
 [ ] Integrate marketplace with chat service
@@ -50,7 +77,8 @@ Apply polish!
 [ ] Admin console
     [ ] Create jobs on marketplace
     [ ] Assign people jobs and add them into a chat room
-[ ] Messages are send via socketio instead of page refresh (if js enabled?)
+    [ ] Verify accounts
+[x] Messages are sent via socketio instead of page refresh (if js enabled?)
 [ ] Messages are received passively anywhere on the site (not just inbox.html)
 [ ] Developer account settings page
 [ ] Linking a chat into a project
@@ -68,6 +96,7 @@ Apply polish!
 [x] Department sign-up
 [ ] After organisation creation, a "thank you for registering" page
 [x] Create department supporting evidence actually does something
+[ ] Export my job reference
     
 [ ] Organisation payment for projects
 [ ] Login page validation without refreshing

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dreaming Spires</title>
+    <link rel="icon" href="{{ url_for('static', filename='assets/images/logos/mini_logo.svg') }}">
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
     <script src="https://kit.fontawesome.com/108492ddd0.js"></script>
@@ -159,5 +160,21 @@
         });
     });
     </script>
+
+    <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+    (function(f, a, t, h, o, m){
+      a[h]=a[h]||function(){
+        (a[h].q=a[h].q||[]).push(arguments)
+      };
+      o=f.createElement('script'),
+      m=f.getElementsByTagName('script')[0];
+      o.async=1; o.src=t; o.id='fathom-script';
+      m.parentNode.insertBefore(o,m)
+    })(document, window, '//analytics.dreamingspires.dev/tracker.js', 'fathom');
+fathom('set', 'siteId', '{{ FATHOM_ID }}');
+    fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
 </body>
 </html>

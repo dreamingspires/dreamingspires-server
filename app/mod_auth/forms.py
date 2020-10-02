@@ -7,6 +7,7 @@ from wtforms.widgets import TextInput, TextArea, CheckboxInput, \
 from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
     IconPasswordField, PrettyFileField
+import phonenumbers
 
 class LoginForm(FlaskForm):
     email = IconStringField('', validators=[
@@ -68,3 +69,31 @@ class RegisterClientForm(FlaskForm):
     confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
         left_logos=['fa-lock'])
     submit = SubmitField('Register', render_kw={'class': 'button is-success'})
+
+def validate_phone_number(form, number):
+    if number.data == '':
+        pass
+    else:
+        try:
+            phonenumbers.parse(number.data, 'GB')
+        except phonenumbers.phonenumberutil.NumberParseException:
+            raise validators.ValidationError('Invalid phone number')
+
+class RegisterClientInterest(FlaskForm):
+    email = IconStringField('', [validators.Email(),
+        validators.Required(message="Must provide an email address")],
+        render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
+    phone = IconStringField('', [validate_phone_number],
+            render_kw={'placeholder': 'Phone number (optional)'},
+            left_logos=['fa-phone'])
+    organisation = IconStringField('', [],
+            render_kw={'placeholder': 'Organisation (optional)'},
+            left_logos=['fa-university'])
+    estimated_cost = SelectField('Estimated project cost', choices=[
+        (None, 'Enter a value'),
+        ('<500', '< £500'), ('500-1000', '£500 - £1000'), ('1000-5000', '£1000-5000'), \
+        ('5000-10000', '£5000 - £10,000'), ('>10000', '> £10,000')
+    ])
+    project_description = TextAreaField('', [validators.Length(max=1000)],
+        render_kw={'placeholder': 'Describe briefly your project idea'})
+    submit = SubmitField('Submit', render_kw={'class': 'button is-success'})

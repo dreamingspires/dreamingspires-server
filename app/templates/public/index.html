@@ -17,21 +17,21 @@
                     <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
               </div>
               <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-                <p class="is-size-5 mb-4">Are you a...</p>
+              <p class="is-size-5 mb-4 has-text-shadowed">Are you a...</p>
                 <div class="columns is-centered">
                   <div class="column is-5">
                     <div class="columns is-centered">
                       <div class="column has-equal-height">
                           <a href="{{ url_for('auth.register_client') }}">
-                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
-                                  <p>research institution looking for</p>
-                                  <p>programming talent?</p>
+                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed">
+                                  <p>researcher or research institution</p>
+                                  <p>looking for programming talent?</p>
                               </button>
                           </a>
                       </div>
                       <div class="column has-equal-height">
                           <a href="{{ url_for('auth.register_developer') }}">
-                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button">
+                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed">
                                   <p>developer or student looking for</p>
                                   <p>freelance work?</p>
                               </button>
@@ -77,7 +77,7 @@
       </div>
       <div class="column content">
         <h1>...working on interesting projects...</h1>
-        <p>We love finding elegant, practical solutions to diverse programming problems. Our rich skillset lends itself well to interdisciplinary work. Take a look at <a href="https://github.com/dreamingspires/">our portfolio</a>.</p>
+        <p>We love finding elegant, practical solutions to diverse programming problems. Our rich skillset lends itself well to interdisciplinary work. Take a look at <a href="{{ url_for('auth.register_client', _anchor='portfolio') }}">our portfolio</a>.</p>
       </div>
     </div>
   </div>
@@ -123,72 +123,7 @@
       </div>
 
     </div>
-    <div class="columns is-centered">
-      <div class="column is-10">
-          <div class="timeline is-centered">
-            <header class="timeline-header">
-              <span class="tag is-medium is-success">Start</span>
-            </header>
-            <div class="timeline-item is-success">
-              <div class="timeline-marker is-icon is-success">
-                <i class="fa fa-play fa-3x"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Project submission</p>
-                <p>A research institution contacts us with a digital project in mind</p>
-              </div>
-            </div>
-            <div class="timeline-item is-warning">
-              <div class="timeline-marker is-icon">
-                <i class="fa fa-clipboard-list"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Develop requirements</p>
-                <p>We work closely to flesh out project requirements, a roadmap, and a costing for the project</p>
-              </div>
-            </div>
-            <div class="timeline-item is-warning">
-              <div class="timeline-marker is-icon">
-                <i class="fa fa-users"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Assign developers</p>
-                <p>Through our internal marketplace, we advertise available jobs to interested developers</p>
-              </div>
-            </div>
-            <div class="timeline-item is-warning">
-              <div class="timeline-marker is-icon">
-                <i class="fa fa-terminal"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Project work underway</p>
-                <p>We assign developers to work on the project, either individually or collaboratively</p>
-              </div>
-            </div>
-            <div class="timeline-item is-warning">
-              <div class="timeline-marker is-icon">
-                <i class="fa fa-bug"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Code review</p>
-                <p>We bug test the code, and ensure the resulting code is of a high standard</p>
-              </div>
-            </div>
-            <div class="timeline-item is-danger">
-              <div class="timeline-marker is-icon is-danger">
-                <i class="fa fa-flag"></i>
-              </div>
-              <div class="timeline-content">
-                <p class="heading">Project completion</p>
-                <p> We help you deploy the project, and provide a maintenance package for ongoing work</p>
-              </div>
-            </div>
-            <div class="timeline-header">
-              <span class="tag is-medium is-success">End</span>
-            </div>
-          </div>
-      </div>
-    </div>
+    {% include 'includes/general_timeline.html' %}
   </div>
   </div>
 </section>

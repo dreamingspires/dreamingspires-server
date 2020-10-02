@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% macro render_post(post) %}
+<a id="{{ post.url_id }}"></a>
+<div class="card article">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content has-text-centered">
+              <p class="title article-title">{{ post.title }}</p>
+                <div class="tags has-addons level-item">
+                  <span class="tag is-rounded is-info">{{ post.author }}</span>
+                  <span class="tag is-rounded">{{ post.date_created.strftime('%-d %b, %Y') }}</span>
+                </div>
+            </div>
+        </div>
+        {% if post.display_image is not none %}
+        <img src="{{ post.display_image.url }}">
+        {% endif %}
+        <div class="content article-body">
+          {{ post.body_html | safe }}
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% block content %}
+    <section class="hero">
+      <div class="hero-body" style="background-image: url('{{ url_for('static', filename='assets/images/photos/oxford_arial.jpg') }}'); background-position: center; height:400px; background-size: cover">
+            <div class="container has-text-centered mt-6">
+                <h1 class="title is-2 has-text-white" style="text-shadow: 1px 1px 2px black">Dreaming Spires Development Blog</h1>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="columns is-mobile is-centered" style="margin-top: -170px">
+          <div class="column is-11-mobile is-8-tablet is-7-desktop is-7-widescreen is-7-fullhd">
+            {% for post in posts %}
+              {{ render_post(post) }}
+            {% endfor %}
+          </div>
+        </section>
+{% endblock %}

@@ -2,54 +2,185 @@
 
 {% from "macros/bulma_form.html" import render_form, render_field %}
 
+{% macro render_post(post) %}
+<a href="{{ url_for('blog', _anchor=post.url_id) }}">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-16by9">{# is-covered #}
+        {% if post.portfolio_image is not none %}
+        <img src="{{ post.portfolio_image.url }}" alt="">
+        {% endif %}
+      </figure>
+    </div>
+    <div class="card-content">
+      <div style="font-weight: bold">
+        {{ post.portfolio_title }}
+      </div>
+      <div>
+        {{ post.portfolio_description }}
+      </div>
+    </div>
+  </div>
+</a>
+{% endmacro %}
+
 {% block content %}
+<section class="section is-fullwidth is-medium has-background-primary pt-1">
+  <div class="container is-fluid">
+    <div class="columns is-vcentered pt-5">
+      <div class="column content">
+        <h1>Power up your ideas with access to world-class developers</h1>
+        <hr>
+        <p>We link first-class programming talent into your research.  You can gain access to our wide talent pool, helping to solve computational problems your organisation faces.</p>
+        {#  in areas such as data processing, porting old software, and app development. #}
+      </div>
+      <div class="column">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/lightbulb.jpg') }}" style="width:100%;">
+      </div>
+    </div>
 
-<div class="column is-8 is-offset-2 content"> <h1 class="title">Register as a client</h1>
-    <p>
-    At Dreaming Spires, we seek to link first-class programming talent into your
-    research.  Through us, you can gain access to our wide talent pool, helping
-    solve computational problems your organisation faces in areas such as data
-    processing, porting old software, and app development.  
-    </p>
+    <a href="#signup" class="button is-medium is-primary is-inverted is-outlined is-box-button">
+      <p>Sign up now</p>
+    </a>
+  </div>
+</section>
 
-    <p>
-    Our developers are selected to be of a high standard through our interview
-    process.  You can click <a>here</a> to see our portfolio of work.
-    </p>
+<hr class="my-0">
 
-    <h2 class="subtitle">How does it work?</h2>
-    <p>
-    Once verified as an organisation, you gain access to our online marketplace where
-    your programming tasks can be submitted.  
-    Notices of these jobs will be made available to our developers who can register
-    interest to work on the project.
-    </p>
+<a id="portfolio"></a>
+<section class="section is-fullwidth is-medium has-background-info pt-1">
+  <div class="container is-fluid">
+    <div class="columns is-vcentered pt-5">
+      <div class="column is-8 content">
+        <h1>Our portfolio</h1>
+        <hr>
+        <p>With past projects spanning app development, data processing, software porting, and more, we're sure to find talent to match your project.  Check out our portfolio below.</p>
+      </div>
+      <div class="column">
+      </div>
+    </div>
 
-    <h2 class="subtitle">Getting started</h2>
-    <p>
-    To become a verified organisation, you must first create a user account.
-    Afterwards, you will be able to create a new organisation or join an existing
-    one.
-    </p>
+    <div class="container">
+      <!-- Start Carousel -->
+      <div id="carousel-demo" class="carousel">
+        {% for post in posts %}
+				<div>
+        {{ render_post(post) }}
+				</div>
+        {% endfor %}
+      </div>
+    </div>
 
-    <p>
-    To create a new organisation, you will be required to provide proof of
-    leadership of the organisation.  This will include registering your account
-    with an email address from your organisation, and providing supporting
-    documentation.
-    </p>
+  </div>
+</section>
 
-    <p>
-    To join an existing organisation, you should request that the leader of the
-    organisation add you.
-    </p>
-    
-    <p>
-    <b>Sound interesting?</b>  <a href="#register_form">Sign up below</a>
-    </p> 
-    <p>
+<hr class="my-0">
+
+<section class="section is-fullwidth is-medium has-background-primary pt-1">
+  <div class="container is-fluid">
+    <div class="columns is-vcentered pt-5">
+      <div class="column content">
+        <h1>Cloud hosting? Sorted.</h1>
+        <hr>
+        <p>Seamlessly deploy your project online through the Dreaming Spires cloud computing environment.  We can also get you set up on your <a>own server</a>, or even your <a>local supercomputer cluster</a>.</p>
+        {# Link to blog post about ARC #}
+      </div>
+      <div class="column">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/pero-kalimero-9BJRGlqoIUk-unsplash.jpg') }}" style="width:100%;">
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="my-0">
+
+<section class="section is-fullwidth is-medium has-background-info pt-1">
+  <div class="container is-fluid">
+    <div class="columns is-vcentered pt-5">
+      <div class="column  is-hidden-mobile">
+        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
+      </div>
+      <div class="column content">
+        <h1>How does it work?</h1>
+        <hr>
+        <p>To get started, use the <a href="#signup">form below</a> to contact us about your project.  We'll get in contact to talk about how we can help.</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-11">
+          <div class="timeline is-centered">
+            <header class="timeline-header">
+              <span class="tag is-medium is-success">Start</span>
+            </header>
+            <div class="timeline-item is-success">
+              <div class="timeline-marker is-icon is-success">
+                <i class="fa fa-play fa-4x"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project submission</p>
+                <p>To get started, <a href="#signup">contact us</a> about your project</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-clipboard-list"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Develop requirements</p>
+                <p>We'll work closely with you to flesh out project requirements, a roadmap, and a costing for the project</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Assign developers</p>
+                <p>Through our internal marketplace, we advertise available jobs to interested developers</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-terminal"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project work underway</p>
+                <p>We assign developers to work on the project, either individually or collaboratively</p>
+              </div>
+            </div>
+            <div class="timeline-item is-warning">
+              <div class="timeline-marker is-icon">
+                <i class="fa fa-bug"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Code review</p>
+                <p>We bug test the code, and ensure the resulting code is of a high standard</p>
+              </div>
+            </div>
+            <div class="timeline-item is-danger">
+              <div class="timeline-marker is-icon is-danger">
+                <i class="fa fa-flag"></i>
+              </div>
+              <div class="timeline-content">
+                <p class="heading">Project completion</p>
+                <p> We can help launch the project, whether on an app store, cloud computing environment, or packaged up in an installer. </p>
+              </div>
+            </div>
+            <div class="timeline-header">
+              <span class="tag is-medium is-success">End</span>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+<div class="column is-8 is-offset-2 content">
+  <p class="has-text-centered">
     <b>More questions?</b> Read our <a href="{{ url_for('client_faq') }}">client FAQ</a>
-    </p> 
+  </p> 
 </div>
 
 {% with errors = get_flashed_messages() %}
@@ -63,19 +194,20 @@
 {% endwith %}
 
 <div class="column is-8 is-offset-2">
-    <h3 class="title has-text-centered">Create an account</h3>
+  <h3 class="title has-text-centered">Register your project idea</h3>
 </div>
-<a id="register_form"></a>
-{{ render_form(form, ".", width=8, mark_required=False, is_horizontal=False) }}
+{{ render_form(form, ".#signup", width=8, mark_required=False, is_horizontal=False) }}
 
+<a id="signup"></a>
+
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
 <script>
-function yesnoCheck() {
-    if (document.getElementById('university_check').checked) {
-        document.getElementById('university_div').style.display = 'block';
-    } else {
-        document.getElementById('university_div').style.display = 'none';
-    }
-}
-yesnoCheck()
+  bulmaCarousel.attach('#carousel-demo', {
+    slidesToScroll: 1,
+    slidesToShow: 2
+  });
+
+
 </script>
+
 {% endblock %}

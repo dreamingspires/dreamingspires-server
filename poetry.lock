@@ -141,6 +141,22 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 category = "main"
+description = "Simple and extensible admin interface framework for Flask"
+name = "flask-admin"
+optional = false
+python-versions = "*"
+version = "1.5.6"
+
+[package.dependencies]
+Flask = ">=0.7"
+wtforms = "*"
+
+[package.extras]
+aws = ["boto"]
+azure = ["azure-storage-blob"]
+
+[[package]]
+category = "main"
 description = "User session management for Flask"
 name = "flask-login"
 optional = false
@@ -336,6 +352,14 @@ version = "20.4"
 [package.dependencies]
 pyparsing = ">=2.0.2"
 six = "*"
+
+[[package]]
+category = "main"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+name = "phonenumbers"
+optional = false
+python-versions = "*"
+version = "8.12.10"
 
 [[package]]
 category = "main"
@@ -569,7 +593,7 @@ ipaddress = ["ipaddress"]
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "f18caf4a0a78904cf26d27979414cffe30b2065435735110a6da8231f336aa64"
+content-hash = "85e2403237887da7f2950adbdcf92fcc1a28f7f2ad2a292003ffb8a2b87ea0c1"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -618,6 +642,9 @@ filedepot = [
 flask = [
     {file = "Flask-1.1.2-py2.py3-none-any.whl", hash = "sha256:8a4fdd8936eba2512e9c85df320a37e694c93945b33ef33c89946a340a238557"},
     {file = "Flask-1.1.2.tar.gz", hash = "sha256:4efa1ae2d7c9865af48986de8aeb8504bf32c7f3d6fdc9353d34b21f4b127060"},
+]
+flask-admin = [
+    {file = "Flask-Admin-1.5.6.tar.gz", hash = "sha256:68c761d8582d59b1f7702013e944a7ad11d7659a72f3006b89b68b0bd8df61b8"},
 ]
 flask-login = [
     {file = "Flask-Login-0.5.0.tar.gz", hash = "sha256:6d33aef15b5bcead780acc339464aae8a6e28f13c90d8b1cf9de8b549d1c0b4b"},
@@ -719,6 +746,10 @@ more-itertools = [
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
     {file = "packaging-20.4.tar.gz", hash = "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"},
+]
+phonenumbers = [
+    {file = "phonenumbers-8.12.10-py2.py3-none-any.whl", hash = "sha256:58f96147fe1ca6d62a72dab3af6a3fda3551da4e0d360c5db2e3a909229d9f6e"},
+    {file = "phonenumbers-8.12.10.tar.gz", hash = "sha256:d6e108352e7113c55cf0d92f8aede876a379580e46a3b9c2e779dc3601f11863"},
 ]
 pillow = [
     {file = "Pillow-7.2.0-cp35-cp35m-macosx_10_10_intel.whl", hash = "sha256:1ca594126d3c4def54babee699c055a913efb01e106c309fa6b04405d474d5ae"},
