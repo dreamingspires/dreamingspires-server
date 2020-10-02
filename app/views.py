@@ -40,3 +40,7 @@ def blog():
     # Get blog posts from db
     posts = BlogPost.query.filter_by(is_published=True).order_by(BlogPost.date_created.desc()).all()
     return render_template('public/blog.html', posts=posts)
+
+@app.route('/privacy_policy')
+def privacy_policy():
+    return render_template('public/privacy_policy.html')

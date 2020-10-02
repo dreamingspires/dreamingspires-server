@@ -116,6 +116,7 @@ nav.Bar('footer', [
     nav.Item('Developer FAQ', 'developer_faq'),
     nav.Item('Client FAQ', 'client_faq'),
     nav.Item('Contact', 'contact'),
+    nav.Item('Privacy Policy', 'privacy_policy'),
 ])
 
 nav.Bar('profile', [
