@@ -24,27 +24,19 @@
 [x] Fix top spacing on other pages
 [x] Overflowing issues (leading to sideways scrolling on mobile)
 
+=== UI Improvements ===
+[ ] Font colour on blue text (esp. links)
+[ ] Blog tag system
+
 === Next ===
 [x] Website logo in tab
 [x] Are you a... legibility (drop shadow?)
-[ ] Blog
-[ ] Blog image uploader (for inline images)
-[ ] Improved client page:
-    Top text: Power up your ideas with access to world-class developers
-    "sign up now" button - takes you to bottom
-    Multi-step process:
-    * Submit your project idea below
-    * We'll contact you to flesh out project requirements
-    * We assign developers to your project through our internal marketplace
-    * 
-
-    Portfolio:
-
-    Get signed up!
-    Form:
-    * email
-    * (optional) phone number
-    * idea
+[x] Blog
+[x] Blog image uploader (for inline images)
+[x] Improved client page
+[ ] On client registration, checkbox to allow registration without a project idea
+[ ] Rate limiting on forms
+[ ] Captcha on forms
 
 === Week 2 ===
 Apply polish!
@@ -66,6 +58,7 @@ Apply polish!
 [ ] Flask-session to use a different (non-filesystem) session storing backend
 
 == Extension ==
+[ ] Dreaming Spires hosting page
 [ ] Staff page
 [ ] Animated flow chart for client page
 [ ] YouTube advert
