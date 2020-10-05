@@ -161,11 +161,14 @@ def register_client():
         subject = 'Dreaming Spires project confirmation'
         send_email(client.email, subject, html)
 
-        next = request.args.get('next')
-        return render_template('auth/thanks_client.html')
+        return redirect(url_for('auth.thanks_for_registering_client'))
 
     posts = BlogPost.query.filter_by(is_portfolio=True, is_published=True).order_by(BlogPost.date_created.desc()).all()
     return render_template('auth/register_client.html', form=form, posts=posts)
+
+@mod_auth.route('thanks_for_registering_client')
+def thanks_for_registering_client():
+    return render_template('auth/thanks_for_registering.html')
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
