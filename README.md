@@ -1,5 +1,24 @@
+## Running the deve
+`dreamingspires-server` has its dependencies managed by the [poetry](https://python-poetry.org) build system.  To get started, install poetry.
+
+Within the repo, run:
+
+```
+poetry install
+```
+
+To run the project within poetry's environment, run:
+
+```
+poetry run python run.py
+```
+
+## Configuring secret_config.py
+`secret_config.py` contains all of the secret API keys and things for your app.  It needs to be configured for a production release.
+
 ## Building CSS
 Requires sassc
+
 Run build_sass
 
 ## Running the production server
