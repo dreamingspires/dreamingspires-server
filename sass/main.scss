@@ -13,10 +13,18 @@ $brand-blue-darker: #00878C;
 $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
 
+$brand-dark: #0F4C5A;
+$brand-cream: #F3EFEA;
+$brand-backdrop: #CFCFCF;
+$brand-warning: #D26D48;
+
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
 // Update Bulma's global variables
 $primary: $brand-blue;
+$info: $brand-dark;
+$light: $brand-cream;
+$warnings: $brand-warning;
 $navbar-breakpoint: $mobile;
 
 // Import Bulma
