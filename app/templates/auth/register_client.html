@@ -3,7 +3,7 @@
 {% from "macros/bulma_form.html" import render_form, render_field %}
 
 {% macro render_post(post) %}
-<a href="{{ url_for('blog', _anchor=post.url_id) }}">
+<a href="{{ url_for('portfolio', _anchor=post.url_id) }}">
   <div class="card">
     <div class="card-image">
       <figure class="image is-16by9">{# is-covered #}
@@ -83,7 +83,7 @@
         <h1>Cloud hosting? Sorted.</h1>
         <hr>
         <p>Seamlessly deploy your project online through the Dreaming Spires cloud computing environment.  We can also get you set up on your <a>own server</a>, or even your <a>local supercomputer cluster</a>.</p>
-        {# Link to blog post about ARC #}
+        {# Link to portfolio post about ARC #}
       </div>
       <div class="column">
         <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/pero-kalimero-9BJRGlqoIUk-unsplash.jpg') }}" style="width:100%;">

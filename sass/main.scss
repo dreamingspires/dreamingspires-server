@@ -24,7 +24,7 @@ $mobile: 760px; // Usually 768px, overridden for my splitscreen
 $primary: $brand-blue;
 $info: $brand-dark;
 $light: $brand-cream;
-$warnings: $brand-warning;
+$warning: $brand-warning;
 $navbar-breakpoint: $mobile;
 
 // Import Bulma
@@ -34,6 +34,11 @@ $navbar-breakpoint: $mobile;
 @import "../modules/bulma-divider/src/sass/index.sass";
 @import "../modules/bulma-o-steps/index.sass";
 @import "../modules/bulma-carousel/src/sass/index.sass";
+
+// Custom colours
+.has-background-backdrop {
+    background-color: $brand-backdrop !important;
+}
 
 // Custom CSS
 .has-equal-height {
@@ -62,6 +67,10 @@ $navbar-breakpoint: $mobile;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.has-box-shadow-x {
+    box-shadow: 13px 0 5px -2px rgba(0, 0, 0, 0.19), -13px 0 5px -2px rgba(0, 0, 0, 0.19);
+}
+
 .has-text-shadowed {
     text-shadow: 1px 1px 2px black;
 }
@@ -69,3 +78,5 @@ $navbar-breakpoint: $mobile;
 .is-horizontal-center {
   justify-content: center;
 }
+
+

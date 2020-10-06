@@ -35,11 +35,11 @@ def developer_faq():
 def login2():
     return render_template('login2.html')
 
-@app.route('/blog')
-def blog():
+@app.route('/portfolio')
+def portfolio():
     # Get blog posts from db
     posts = BlogPost.query.filter_by(is_published=True).order_by(BlogPost.date_created.desc()).all()
-    return render_template('public/blog.html', posts=posts)
+    return render_template('public/portfolio.html', posts=posts)
 
 @app.route('/privacy_policy')
 def privacy_policy():

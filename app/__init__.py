@@ -97,18 +97,21 @@ except KeyError:
     pass
 
 
-nav.Bar('start', [
+nav.Bar('end', [
     nav.Item('Home', 'index'),
-    nav.Item('<b>Blog</b>', 'blog'),
-    nav.Item('Client', 'auth.register_client'),
-    nav.Item('Developer', 'auth.register_developer'),
+    nav.Item('Client Services', 'auth.register_client'),
+    nav.Item('Portfolio', 'portfolio'),
+    nav.Item('How We Operate', 'index', args={'_anchor':'about'}),
+    nav.Item('About Us', 'index', args={'_anchor':'about'}),
 ])
 
-nav.Bar('end', [
-    nav.Item('<strong>Client sign up</strong>', 'auth.register_client', args={'_anchor':'signup'}),
-    nav.Item('<strong>Dev sign up</strong>', 'auth.register_developer'),
-    nav.Item('Log in', 'auth.login')
+nav.Bar('buttons', [
+    nav.Item('Contact Us', 'contact'),
 ])
+
+#nav.Bar('login', [
+#    nav.Item('Log in', 'auth.login')
+#])
 
 nav.Bar('footer', [
     nav.Item('Home', 'index'),
