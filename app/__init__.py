@@ -11,6 +11,7 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_admin import Admin
 from werkzeug.exceptions import HTTPException
+from werkzeug.utils import ImportStringError
 
 from app.utils import register_template_utils 
 
@@ -38,12 +39,18 @@ app.jinja_env.lstrip_blocks = True
 
 # Configurations
 app.config.from_object('config')
-app.config.from_object('secret_config')
+try:
+    app.config.from_object('secret_config')
+except ImportStringError:
+    print('Warning: secret_config.py not found')
 
 # Add the fathom analytics ID
 @app.context_processor
 def inject_id():
-    return dict(FATHOM_ID=app.config['FATHOM_ID'])
+    if 'FATHOM_ID' in app.config.keys():
+        return dict(FATHOM_ID=app.config['FATHOM_ID'])
+
+    return {}
 
 # Register extensions with app
 db = SQLAlchemy(app)
