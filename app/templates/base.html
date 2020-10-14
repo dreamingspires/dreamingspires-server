@@ -41,8 +41,11 @@
               <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <a class="navbar-item" href="{{ url_for('index') }}">
-                    <figure style="width: 90px" class="image">
-                      <img src="{{ url_for('static', filename='assets/images/logos/logo_dark.svg') }}">
+                    <figure style="width: 90px" class="image is-hidden-mobile">
+                      <img src="{{ url_for('static', filename='assets/images/logos/logo_dark.svg') }}" style="max-height: 3rem">
+                    </figure>
+                    <figure style="width: 40px" class="image is-hidden-tablet">
+                      <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_dark_variant.svg') }}" style="width:100%;">
                     </figure>
                   </a>
 
@@ -128,7 +131,7 @@
 
     <section class="columns is-mobile is-centered my-0 has-background-backdrop">
       <div class="column is-11-mobile is-9-tablet is-10-desktop is-10-widescreen is-10-fullhd has-box-shadow-x px-0 py-0 has-background-light">
-        <section class="hero{% if is_fullpage %} is-fullheight {% endif %}">
+        <section class="hero{% if is_fullpage %} is-fullheight-with-navbar {% endif %}">
           {% block fullheight %}
           {% endblock %}
         </section>
