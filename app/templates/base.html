@@ -41,8 +41,8 @@
               <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <a class="navbar-item" href="{{ url_for('index') }}">
-                    <figure class="image is-32x32">
-                      <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_circle.svg') }}">
+                    <figure style="width: 90px" class="image">
+                      <img src="{{ url_for('static', filename='assets/images/logos/logo_dark.svg') }}">
                     </figure>
                   </a>
 
@@ -66,9 +66,9 @@
                   <div class="navbar-end">
                     {% for item in nav.end %}
                       {% if item.is_active %}
-                      <a href="{{ item.url }}" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
+                      <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
                       {% else %}
-                      <a href="{{ item.url }}" class="navbar-item has-text-white">{{ item.label|safe }}</a>
+                      <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white">{{ item.label|safe }}</a>
                       {% endif %}
                     {% endfor %}
 
@@ -76,9 +76,9 @@
                       <div class="buttons">
                         {% for item in nav.buttons %}
                           {% if item.is_active %}
-                            <a href="{{ item.url }}" class="button is-warning-light">{{ item.label|safe }}</a>
+                            <a href="{{ item.url }}" class="button is-rounded is-warning-light" style="font-size: 0.9em">{{ item.label|safe }}</a>
                           {% else %}
-                            <a href="{{ item.url }}" class="navbar-item button is-warning">{{ item.label|safe }}</a>
+                            <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
 
                           {% endif %}
                         {% endfor %}

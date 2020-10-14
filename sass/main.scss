@@ -27,6 +27,9 @@ $light: $brand-cream;
 $warning: $brand-warning;
 $navbar-breakpoint: $mobile;
 
+// Other colour updates
+$input-placeholder-color: hsl(0, 0%, 21%);
+
 // Import Bulma
 @import "../modules/bulma/bulma.sass";
 @import "../modules/bulma-collapsible/src/sass/index.sass";
@@ -78,5 +81,4 @@ $navbar-breakpoint: $mobile;
 .is-horizontal-center {
   justify-content: center;
 }
-
 
