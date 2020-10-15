@@ -7,7 +7,7 @@ from wtforms.widgets import TextInput, TextArea, CheckboxInput, \
     FileInput, HTMLString, PasswordInput
 from app.static.assets.misc.university_list import university_list
 from app.extensions.forms import DatalistField, IconStringField, \
-    IconPasswordField, PrettyFileField
+    IconPasswordField, PrettyFileField, IconTextAreaField
 
 class RegisterClientInterest(FlaskForm):
     name = IconStringField('', [validators.Required(
@@ -19,10 +19,10 @@ class RegisterClientInterest(FlaskForm):
     organisation = IconStringField('', [validators.Required(
             message='Must provide a name')],
         render_kw={'placeholder': 'Organisation/University'}, left_logos=['fa-university'])
-    # Use logo pencil-alt
-    project_description = TextAreaField('', [validators.Required(
+    # Use logo lightbulb
+    project_description = IconTextAreaField('', [validators.Required(
             'Must provide a description')],
         render_kw={'placeholder': 'Tell us about your project idea',
-            'style': 'height: 250px'})
+            'style': 'height: 250px'}, left_logos=['fa-lightbulb'])
     submit = SubmitField('Submit', render_kw={'class': 
         'button is-warning is-rounded'})

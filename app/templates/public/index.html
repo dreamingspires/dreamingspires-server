@@ -19,17 +19,17 @@
     </div>
     <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
       <p class="is-size-5 mb-4 has-text-shadowed has-text-white">Are You...</p>
-      <div class="columns is-centered">
-        <div class="column is-5">
+      <div class="columns is-mobile is-centered">
+        <div class="column is-5 is-10-mobile">
           <div class="columns is-centered">
-            <div class="column has-equal-height">
+            <div class="column is-narrow has-equal-height">
               <a href="{{ url_for('auth.register_developer') }}">
                 <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed is-rounded">
                   <p>A Developer</p>
                 </button>
               </a>
             </div>
-            <div class="column has-equal-height">
+            <div class="column is-narrow has-equal-height">
               <a href="{{ url_for('auth.register_client') }}">
                 <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
                   <p>A Researcher</p>
@@ -49,7 +49,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="section is-fullwidth is-medium has-background-info py-6">
+<section class="section is-fullwidth is-medium has-background-info pt-6 pb-1">
   <div class="column has-text-light">
     <h1 class="title has-text-light">Welcome to Dreaming Spires</h1>
     <h2 class="subtitle has-text-primary">Bringing Programming Talent to Your Research</h2>
@@ -80,12 +80,16 @@
             Benefit 1
           </p>
 
-					<p class="has-text-centered pt-4">Find out more as...</p>
-					<a class="pt-2" href="{{ url_for('auth.register_developer') }}">
-						<button class="button is-normal is-primary is-box-button is-rounded">
-							<p>A Developer</p>
-						</button>
-					</a>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-narrow has-text-centered">
+              <p class="has-text-centered pt-4">Find out more as...</p>
+              <a class="pt-2" href="{{ url_for('auth.register_developer') }}">
+                <button class="button is-normal is-primary is-rounded is-fullwidth">
+                  <p>A Developer</p>
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
         <div class="column is-half has-equal-height has-text-light">
           <p class="is-size-5 has-text-weight-semibold">Perfect for Researchers...</p>
@@ -109,22 +113,29 @@
             Benefit 1
           </p>
 
-					<p class="has-text-centered pt-4">Find out more as...</p>
-					<a class="pt-2" href="{{ url_for('auth.register_client') }}">
-						<button class="button is-normal is-warning is-box-button is-rounded">
-							<p>A Researcher</p>
-						</button>
-					</a>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-narrow has-text-centered">
+              <p class="has-text-centered pt-4">Find out more as...</p>
+              <a class="pt-2" href="{{ url_for('auth.register_client') }}">
+                <button class="button is-normal is-warning is-rounded is-fullwidth">
+                  <p>A Researcher</p>
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="has-text-centered">
+    <a href="#about" class="title is-2 fas fa-chevron-down has-text-white"></a>
   </div>
 </section>
 
 <section class="section is-fullwidth is-medium has-background-light py-6">
   <div class="column">
     <h1 class="title has-text-dark">Our Development Process</h1>
-    <h2 class="subtitle has-text-primary">See our process</h2>
+    <h2 class="subtitle has-text-primary">Accelerating your research projects</h2>
   </div>
 
 	<!-- Mobile timeline -->
@@ -182,7 +193,7 @@
           <p>
           Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.
           </p>
-          <div class="has-text-centered mt-6">
+          <div class="has-text-centered is-hidden-mobile mt-6">
             <img src="{{ url_for('static', filename='assets/images/icons/megaphone_heart.svg') }}" style="width:90%;">
           </div>
         </div>
@@ -196,6 +207,9 @@
           <p class="is-size-7 is-italic">
           At Dreaming Spires, we take your data seriously.  Any data you give us will be handled according to our <a href="{{ url_for('privacy_policy') }}">privacy policy</a>.
           <p>
+        </div>
+        <div class="has-text-centered is-hidden-tablet mt-6">
+          <img src="{{ url_for('static', filename='assets/images/icons/megaphone_heart.svg') }}" style="width:50%;">
         </div>
       </div>
 		</div>
@@ -237,26 +251,26 @@
 
 {% macro timeline_text(n) %}
   {% if n == 0 %}
-    <h2 class="subtitle has-text-weight-semibold">Project Commencement</h2>
+    <h2 class="subtitle has-text-weight-semibold">1. &nbsp;Project Commencement</h2>
     Reach out to us to discuss your needs - we offer a free quote and initial consultation for every project
   {% elif n == 1 %}
-    <h2 class="subtitle has-text-weight-semibold">Define Requirements</h2>
+    <h2 class="subtitle has-text-weight-semibold">2. &nbsp;Define Requirements</h2>
     Our consultants will discuss with you the ways your research could be accelerated by introducing cyber talent.
   {% elif n == 2 %}
-    <h2 class="subtitle has-text-weight-semibold">Allocate Developers</h2>
+    <h2 class="subtitle has-text-weight-semibold">3. &nbsp;Allocate Developers</h2>
     After agreeing a solution, we then make it available for our pool of talented developers to apply for.
     We’ll select the most appropriate applicants possible, who then begin on your work.
   {% elif n == 3 %}
-    <h2 class="subtitle has-text-weight-semibold">Project Work Underway</h2>
+    <h2 class="subtitle has-text-weight-semibold">4. &nbsp;Project Work Underway</h2>
     The chosen developers work collaboratively on your project and, we’ll handle interdisciplinary coordination, be it logo designers, or data scientists.
   {% elif n == 4 %}
-    <h2 class="subtitle has-text-weight-semibold">Intermediary Reports</h2>
+    <h2 class="subtitle has-text-weight-semibold">5. &nbsp;Intermediary Reports</h2>
     In the meantime, you’ll be receiving detailed progress reports each week up until project completion.
   {% elif n == 5 %}
-    <h2 class="subtitle has-text-weight-semibold">Code Test and Review</h2>
+    <h2 class="subtitle has-text-weight-semibold">6. &nbsp;Code Test and Review</h2>
     We bug test the code, and ensure the resulting program functions to a high standard.
   {% else %}
-    <h2 class="subtitle has-text-weight-semibold">Project Completion</h2>
+    <h2 class="subtitle has-text-weight-semibold">7. &nbsp;Project Completion</h2>
     We help you get the ball rolling with your complete project via training, hosting and maintenance packages for evolving projects.
   {% endif %}
 {% endmacro %}

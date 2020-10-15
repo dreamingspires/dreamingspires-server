@@ -1,5 +1,5 @@
-from wtforms import validators, StringField, PasswordField, FileField
-from wtforms.widgets import TextInput, FileInput, PasswordInput, HTMLString
+from wtforms import validators, StringField, PasswordField, FileField, TextAreaField
+from wtforms.widgets import TextInput, FileInput, PasswordInput, HTMLString, TextArea
 
 def validate_image(form, field):
     if field.data and not str(field.data.filename).endswith(
@@ -100,6 +100,53 @@ class IconStringField(StringField):
     def __init__(self, label=None, validators=None, \
             left_logos=None, right_logos=None, **kwargs):
         self.widget = IconTextInput(left_logos, right_logos)
+        super().__init__(label, validators, **kwargs)
+
+class IconTextArea(TextArea):
+    """
+    Custom widget to create a text area box that displays logos
+    """
+
+    def __init__(self, left_logos, right_logos):
+        self.where_has_icons = ''
+        if left_logos is None:
+            self.left_logos = None
+        else:
+            self.left_logos = ' '.join(left_logos)
+            self.where_has_icons += ' has-icons-left'
+        if right_logos is None:
+            self.right_logos = None
+        else:
+            self.right_logos = ' '.join(right_logos)
+            self.where_has_icons += ' has-icons-right'
+
+    def __call__(self, field, **kwargs):
+        if field.default is None:
+            value = ""
+        else:
+            value = field.default
+
+        html = [f'<div class="control {self.where_has_icons}">',
+                super().__call__(field, **kwargs)]
+        if self.left_logos is not None:
+            html.extend(['<span class="icon is-small is-left">',
+                         f'<i class="fas {self.left_logos}"></i>',
+                         '</span>'])
+        if self.right_logos is not None:
+            html.extend(['<span class="icon is-small is-right">',
+                         f'<i class="fas {self.right_logos}"></i>',
+                         '</span>'])
+        html.append('</div>')
+        return HTMLString(''.join(html))
+
+class IconTextAreaField(TextAreaField):
+    """
+    Custom field type to create an input box that displays logos
+    """
+
+    def __init__(self, label=None, validators=None, \
+            left_logos=None, right_logos=None, **kwargs):
+        self.widget = IconTextArea(left_logos, right_logos)
         super().__init__(label, validators, **kwargs)
 
 class IconPasswordInput(PasswordInput):

@@ -12,11 +12,13 @@ $cyan-lighter: #B6DFF9;
 $brand-blue-darker: #00878C;
 $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
+$brand-blue-alt: #53A4AB;
 
 $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
 $brand-backdrop: #CFCFCF;
 $brand-warning: #D26D48;
+$brand-link: #999999;
 
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
@@ -25,6 +27,7 @@ $primary: $brand-blue;
 $info: $brand-dark;
 $light: $brand-cream;
 $warning: $brand-warning;
+$link: $brand-link;
 $navbar-breakpoint: $mobile;
 
 // Other colour updates
@@ -82,3 +85,7 @@ $input-placeholder-color: hsl(0, 0%, 21%);
   justify-content: center;
 }
 
+// Thicker navbar-burger
+.navbar-burger > span {
+    height: 2px;
+}
