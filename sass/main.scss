@@ -6,6 +6,7 @@ $pink: #FA7C91;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
+$cyan: #53A4AB;
 $cyan-light: #71C0F4;
 $cyan-lighter: #B6DFF9;
 
@@ -13,6 +14,7 @@ $brand-blue-darker: #00878C;
 $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
 
+$dark-brand-background: #0F4C5A;
 $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
 $brand-backdrop: #CFCFCF;
@@ -24,8 +26,11 @@ $mobile: 760px; // Usually 768px, overridden for my splitscreen
 $primary: $brand-blue;
 $info: $brand-dark;
 $light: $brand-cream;
+$info-light: $cyan-light;
 $warning: $brand-warning;
 $navbar-breakpoint: $mobile;
+$scheme-main: $dark-brand-background;
+
 
 // Import Bulma
 @import "../modules/bulma/bulma.sass";
@@ -38,6 +43,15 @@ $navbar-breakpoint: $mobile;
 // Custom colours
 .has-background-backdrop {
     background-color: $brand-backdrop !important;
+}
+
+
+.subtitle-on-white {
+    color: #53A4AB;
+}
+
+.subtitle-on-dark {
+    color: #65C8D0;
 }
 
 // Custom CSS
@@ -57,6 +71,9 @@ $navbar-breakpoint: $mobile;
     width: 100%;
 }
 
+.is-full-height {
+    min-height: 100vh;
+}
 .is-square-image-128x128 {
     width: 128px;
     height: 128px;
@@ -76,7 +93,14 @@ $navbar-breakpoint: $mobile;
 }
 
 .is-horizontal-center {
-  justify-content: center;
+  text-align: center;
 }
 
+.fa-centered {
+    margin: auto;
+}
 
+.fa-rotate-335 {
+    transform: rotate(335deg);
+
+}
