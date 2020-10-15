@@ -79,7 +79,7 @@ def validate_phone_number(form, number):
         except phonenumbers.phonenumberutil.NumberParseException:
             raise validators.ValidationError('Invalid phone number')
 
-class RegisterClientInterest(FlaskForm):
+class RegisterClientInterestOld(FlaskForm):
     email = IconStringField('', [validators.Email(),
         validators.Required(message="Must provide an email address")],
         render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
@@ -97,3 +97,19 @@ class RegisterClientInterest(FlaskForm):
     project_description = TextAreaField('', [validators.Length(max=1000)],
         render_kw={'placeholder': 'Describe briefly your project idea'})
     submit = SubmitField('Submit', render_kw={'class': 'button is-success'})
+
+class RegisterClientInterest(FlaskForm):
+    name = IconStringField('', [validators.Required(
+            message='Must provide a name')],
+        render_kw={'placeholder': 'Organisation/University'}, left_logos=['fa-university'])
+    organisation = IconStringField('', [validators.Required(
+            message='Must provide a name')],
+        render_kw={'placeholder': 'Name'}, left_logos=['fa-user'])
+    email = IconStringField('', [validators.Email(),
+        validators.Required(message="Must provide an email address")],
+        render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
+    project_description = TextAreaField('', [validators.Required(
+            'Must provide a description')],
+        render_kw={'placeholder': 'Tell us about your project idea'})
+    submit = SubmitField('Submit', render_kw={'class': 
+        'button is-warning is-rounded'})

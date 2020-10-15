@@ -2,10 +2,12 @@ from flask import render_template
 
 from app import app, nav
 from app.models import BlogPost
+from app.public_forms import RegisterClientInterest
 
 @app.route('/')
 def index():
-    return render_template('public/index.html', is_fullpage=True)
+    form = RegisterClientInterest()
+    return render_template('public/index.html', is_fullpage=True, form=form)
 
 @app.route('/about')
 def about():

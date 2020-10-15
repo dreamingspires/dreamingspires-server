@@ -13,12 +13,14 @@ $cyan-lighter: #B6DFF9;
 $brand-blue-darker: #00878C;
 $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
+$brand-blue-alt: #53A4AB;
 
 $dark-brand-background: #0F4C5A;
 $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
 $brand-backdrop: #CFCFCF;
 $brand-warning: #D26D48;
+$brand-link: #999999;
 
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
@@ -28,9 +30,13 @@ $info: $brand-dark;
 $light: $brand-cream;
 $info-light: $cyan-light;
 $warning: $brand-warning;
+$link: $brand-link;
 $navbar-breakpoint: $mobile;
 $scheme-main: $dark-brand-background;
 
+
+// Other colour updates
+$input-placeholder-color: hsl(0, 0%, 21%);
 
 // Import Bulma
 @import "../modules/bulma/bulma.sass";
@@ -98,6 +104,11 @@ $scheme-main: $dark-brand-background;
 
 .fa-centered {
     margin: auto;
+}
+
+// Thicker navbar-burger
+.navbar-burger > span {
+    height: 2px;
 }
 
 .fa-rotate-335 {

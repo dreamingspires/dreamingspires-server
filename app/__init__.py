@@ -106,10 +106,10 @@ except KeyError:
 
 nav.Bar('end', [
     nav.Item('Home', 'index'),
-    nav.Item('Client Services', 'auth.register_client'),
+    nav.Item('Our Services', 'auth.register_client'),
     nav.Item('Portfolio', 'portfolio'),
-    nav.Item('How We Operate', 'index', args={'_anchor':'about'}),
-    nav.Item('About Us', 'index', args={'_anchor':'about'}),
+    nav.Item('Develop with Us', 'auth.register_developer'),
+    nav.Item('Log in', 'auth.login')
 ])
 
 nav.Bar('buttons', [
