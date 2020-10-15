@@ -17,7 +17,7 @@ class RegisterClientInterest(FlaskForm):
         validators.Required(message="Must provide an email address")],
         render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
     organisation = IconStringField('', [validators.Required(
-            message='Must provide a name')],
+            message='Must provide an organisation')],
         render_kw={'placeholder': 'Organisation/University'}, left_logos=['fa-university'])
     # Use logo lightbulb
     project_description = IconTextAreaField('', [validators.Required(

@@ -34,6 +34,7 @@ $link: $brand-link;
 $navbar-breakpoint: $mobile;
 $scheme-main: $dark-brand-background;
 
+$input-background-color: hsl(0, 0%, 100%); // This is required for some reason as the input box styling is broken
 
 // Other colour updates
 $input-placeholder-color: hsl(0, 0%, 21%);

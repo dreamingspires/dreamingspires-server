@@ -11,6 +11,7 @@ from app.models import Base
 class InterestedClient(Base):
     __tablename__ = 'interested_clients'
     __bind_key__ = 'temp_db'
+    name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), primary_key=True)
     phone = db.Column(db.String(128))
     organisation = db.Column(db.String(t.LEN_DISPLAY_NAME))

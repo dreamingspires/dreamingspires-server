@@ -1,12 +1,31 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 
-from app import app, nav
+from app import app, nav, db
 from app.models import BlogPost
+from app.temp_models import InterestedClient
 from app.public_forms import RegisterClientInterest
+from app.extensions.email import send_email
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = RegisterClientInterest()
+    if form.validate_on_submit():
+        # TODO: add information to database
+        # TODO: rate limiting
+        client = InterestedClient(name=form.name.data, email=form.email.data, \
+            phone=None, organisation=form.organisation.data, \
+            project_description = form.project_description.data,
+            estimated_cost = None)
+        db.session.add(client)
+        db.session.commit()
+
+        # Send confirmation email
+        html = render_template('email/project_idea_registered.html', \
+            project=client)
+        subject = 'Dreaming Spires project confirmation'
+        send_email(client.email, subject, html)
+
+        return redirect(url_for('auth.thanks_for_registering_client'))
     return render_template('public/index.html', is_fullpage=True, form=form)
 
 @app.route('/about')

@@ -168,7 +168,7 @@ def register_client():
 
 @mod_auth.route('thanks_for_registering_client')
 def thanks_for_registering_client():
-    return render_template('auth/thanks_for_registering.html')
+    return render_template('auth/thanks_client.html')
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
