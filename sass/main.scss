@@ -6,6 +6,7 @@ $pink: #FA7C91;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
+$cyan: #53A4AB;
 $cyan-light: #71C0F4;
 $cyan-lighter: #B6DFF9;
 
@@ -14,6 +15,7 @@ $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
 $brand-blue-alt: #53A4AB;
 
+$dark-brand-background: #0F4C5A;
 $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
 $brand-backdrop: #CFCFCF;
@@ -26,9 +28,12 @@ $mobile: 760px; // Usually 768px, overridden for my splitscreen
 $primary: $brand-blue;
 $info: $brand-dark;
 $light: $brand-cream;
+$info-light: $cyan-light;
 $warning: $brand-warning;
 $link: $brand-link;
 $navbar-breakpoint: $mobile;
+$scheme-main: $dark-brand-background;
+
 
 // Other colour updates
 $input-placeholder-color: hsl(0, 0%, 21%);
@@ -44,6 +49,15 @@ $input-placeholder-color: hsl(0, 0%, 21%);
 // Custom colours
 .has-background-backdrop {
     background-color: $brand-backdrop !important;
+}
+
+
+.subtitle-on-white {
+    color: #53A4AB;
+}
+
+.subtitle-on-dark {
+    color: #65C8D0;
 }
 
 // Custom CSS
@@ -63,6 +77,9 @@ $input-placeholder-color: hsl(0, 0%, 21%);
     width: 100%;
 }
 
+.is-full-height {
+    min-height: 100vh;
+}
 .is-square-image-128x128 {
     width: 128px;
     height: 128px;
@@ -82,10 +99,19 @@ $input-placeholder-color: hsl(0, 0%, 21%);
 }
 
 .is-horizontal-center {
-  justify-content: center;
+  text-align: center;
+}
+
+.fa-centered {
+    margin: auto;
 }
 
 // Thicker navbar-burger
 .navbar-burger > span {
     height: 2px;
+}
+
+.fa-rotate-335 {
+    transform: rotate(335deg);
+
 }

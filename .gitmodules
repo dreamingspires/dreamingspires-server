@@ -1,18 +1,18 @@
 [submodule "modules/bulma"]
 	path = modules/bulma
-	url = https://github.com/jgthms/bulma
+	url = https://github.com/jgthms/bulma.git
 [submodule "modules/bulma-collapsible"]
 	path = modules/bulma-collapsible
-	url = https://github.com/creativebulma/bulma-collapsible
+	url = https://github.com/CreativeBulma/bulma-collapsible.git
 [submodule "modules/bulma-timeline"]
 	path = modules/bulma-timeline
 	url = https://github.com/Wikiki/bulma-timeline.git
 [submodule "modules/bulma-divider"]
 	path = modules/bulma-divider
-	url = https://github.com/CreativeBulma/bulma-divider/
+	url = https://github.com/CreativeBulma/bulma-divider.git
 [submodule "modules/bulma-o-steps"]
 	path = modules/bulma-o-steps
 	url = https://github.com/octoshrimpy/bulma-o-steps.git
 [submodule "modules/bulma-carousel"]
 	path = modules/bulma-carousel
-	url = git://github.com/Wikiki/bulma-carousel.git
+	url = https://github.com/Wikiki/bulma-carousel.git

@@ -48,8 +48,19 @@
                       <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_dark_variant.svg') }}" style="width:100%;">
                     </figure>
                   </a>
-
-                  <a role="button" class="navbar-burger burger has-text-light has-text-weight-bold" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                  <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd">
+                      <div class="buttons">
+                        {% for item in nav.buttons %}
+                          {% if item.is_active %}
+                            <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
+                          {% else %}
+                            <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
+                            <a role="button" class="navbar-burger burger has-text-light has-text-weight-bold" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  <a role="button" class="navbar-burger burger has-text-warning" aria-label="menu" aria-expanded="false" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -75,14 +86,13 @@
                       {% endif %}
                     {% endfor %}
 
-                    <div class="navbar-item">
+                    <div class="navbar-item is-hidden-mobile">
                       <div class="buttons">
                         {% for item in nav.buttons %}
                           {% if item.is_active %}
                             <a href="{{ item.url }}" class="button is-rounded is-warning-light" style="font-size: 0.9em">{{ item.label|safe }}</a>
                           {% else %}
                             <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
-
                           {% endif %}
                         {% endfor %}
                       </div>
