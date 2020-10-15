@@ -24,6 +24,54 @@
 </a>
 {% endmacro %}
 
+{% block fullheight %}
+<section class="hero  is-fullheight-with-navbar ">
+<div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-size:contain; background-repeat: no-repeat; background-position:bottom; width:100%">
+
+    <div style="flex:3; display:flex; flex-direction:column;">
+      <div class="columns is-mobile is-centered is-vcentered" style="flex:1">
+        <div class="column is-three-quarters-mobile is-half-tablet is-half-desktop is-half-widescreen is-one-third-fullhd has-text-centered mt-6">
+          <figure class="image has-text-centered">
+            <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}" style="width:100%;">
+          </figure>
+        </div>
+      </div>
+      <!-- <h1 class="title is-1">Dreaming Spires</h1>
+      <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
+      <p class="is-size-5 mb-4 has-text-shadowed has-text-white">Are You...</p>
+      <div class="columns is-mobile is-centered">
+        <div class="column is-5 is-10-mobile">
+          <div class="columns is-centered">
+            <div class="column is-narrow has-equal-height">
+              <a href="{{ url_for('auth.register_developer') }}">
+                <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed is-rounded">
+                  <p>A Developer</p>
+                </button>
+              </a>
+            </div>
+            <div class="column is-narrow has-equal-height">
+              <a href="{{ url_for('auth.register_client') }}">
+                <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
+                  <p>A Researcher</p>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="has-text-centered pb-1">
+      <a href="#signup" class="title is-2 fas fa-chevron-down has-text-white"></a>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}
+
 {% block content %}
 <!-- <section class="section is-fullwidth is-medium has-background-primary pt-1">
   <div class="container is-fluid">
@@ -45,7 +93,7 @@
   </div>
 </section> -->
 
-<section class="section is-hero is-full-height has-background-info has-text-light is-hidden-mobile">
+<section class="section is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch">
     <div class="tile is-ancestor mx-6">
       <div class="tile is-parent is-12 is-horizontal mb-3">
         <!-- <div class="tile is-child is-1"></div> -->
@@ -128,7 +176,7 @@ get in touch!</p>
    
 </section>
 
-<section class="section is-hero is-full-height has-background-light is-hidden-mobile">
+<section class="section is-hero is-full-height has-background-light is-hidden-touch">
     <div class="tile is-ancestor mx-6">
       <div class="tile is-parent is-vertical">
         <div class="tile is-parent is-horizontal ">
@@ -222,7 +270,7 @@ covered.</p>
 
 
 <!-- MOBILE  -->
-<section class="is-hidden-tablet">
+<section class="is-hidden-desktop">
   <section class="is-hero has-background-info has-text-light">
     <div class="is-8 content px-6 pt-3" >
         <h1 class="has has-text-light is-size-1 mb-0 pt-3 has-text-weight-light">Welcome to Dreaming <br>Spires!</h1>
@@ -302,7 +350,7 @@ covered.</p>
     </div>
   </section>
 
-  <section class="is-hero is-full-height has-background-info has-text-light">
+  <section class="is-hero has-background-info has-text-light">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
         <h2 class="title mb-3 has-text-light has-text-weight-normal">Specialising in
@@ -362,7 +410,7 @@ covered.</p>
     </div>
   </section>
 
-  <section class="is-hero is-full-height has-background-light has-text-black">
+  <section class="is-hero has-background-light has-text-black">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
         <h2 class="title mb-3 has-text-weight-normal">Total Transparency</h2>
