@@ -1,56 +1,10 @@
 {% extends "base.html" %}
 
 {% from "macros/bulma_form.html" import render_form, render_field %}
+{% from "includes/landing.html" import render_landing %}
 
 {% block fullheight %}
-<div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
-  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-size:contain; background-repeat: no-repeat; background-position:bottom; width:100%">
-
-    <div style="flex:3; display:flex; flex-direction:column;">
-      <div class="columns is-mobile is-centered is-vcentered" style="flex:1">
-        <div class="column is-three-quarters-mobile is-half-tablet is-half-desktop is-half-widescreen is-one-third-fullhd has-text-centered mt-6">
-          <figure class="image has-text-centered">
-            <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}" style="width:100%;">
-          </figure>
-        </div>
-      </div>
-      <!-- <h1 class="title is-1">Dreaming Spires</h1>
-      <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
-    </div>
-    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-      <p class="is-size-5 mb-4 has-text-shadowed has-text-white">Are You...</p>
-      <div class="columns is-mobile is-centered">
-        <div class="column is-5 is-10-mobile">
-          <div class="columns is-centered">
-            <div class="column is-narrow has-equal-height">
-              <a href="{{ url_for('auth.register_client', _anchor='registerClient') }}" class="is-hidden-touch">
-                <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
-                  <p>A Researcher</p>
-                </button>
-              </a>
-              <a href="{{ url_for('auth.register_client', _anchor='registerClientMob') }}" class="is-hidden-desktop">
-                <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
-                  <p>A Researcher</p>
-                </button>
-              </a>
-            </div>
-            <div class="column is-narrow has-equal-height">
-              <a href="{{ url_for('auth.register_developer') }}">
-                <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed is-rounded">
-                  <p>A Developer</p>
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="has-text-centered pb-1">
-      <a href="#signup" class="title is-2 fas fa-chevron-down has-text-white"></a>
-    </div>
-  </div>
-</div>
+{{ render_landing() }}
 {% endblock %}
 
 {% block content %}
@@ -92,12 +46,7 @@
           <div class="columns is-mobile is-centered">
             <div class="column is-narrow has-text-centered">
               <p class="has-text-centered pt-4">Find out more as...</p>
-              <a class="pt-2 is-hidden-touch" href="{{ url_for('auth.register_client', _anchor='registerClient') }}">
-                <button class="button is-normal is-warning is-rounded is-fullwidth">
-                  <p>A Researcher</p>
-                </button>
-              </a>
-              <a class="pt-2 is-hidden-desktop" href="{{ url_for('auth.register_client', _anchor='registerClientMob') }}">
+              <a class="pt-2" href="{{ url_for('auth.register_client', _anchor='register_client') }}">
                 <button class="button is-normal is-warning is-rounded is-fullwidth">
                   <p>A Researcher</p>
                 </button>

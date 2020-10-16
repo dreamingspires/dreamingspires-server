@@ -49,17 +49,17 @@
                     </figure>
                   </a>
                   <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd">
-                      <div class="buttons">
-                        {% for item in nav.buttons %}
-                          {% if item.is_active %}
-                            <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
-                          {% else %}
-                            <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
-                            <a role="button" class="navbar-burger burger has-text-light has-text-weight-bold" aria-label="menu" aria-expanded="false" data-target="navMenu">
-                          {% endif %}
-                        {% endfor %}
-                      </div>
+                    <div class="buttons">
+                      {% for item in nav.buttons %}
+                        {% if item.is_active %}
+                          <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
+                          <a role="button" class="navbar-burger burger has-text-light has-text-weight-bold" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                        {% endif %}
+                      {% endfor %}
                     </div>
+                  </div>
                   <a role="button" class="navbar-burger burger has-text-warning" aria-label="menu" aria-expanded="false" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>

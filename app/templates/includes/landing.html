@@ -1,0 +1,49 @@
+{% macro render_landing(researcher_rel_href=False, developer_rel_href=False) %}
+<div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
+  <div style="flex:1; display:flex; flex-direction:column; width:100%">
+
+    <div style="flex:3; display:flex; flex-direction:column;">
+      <div class="columns is-mobile is-centered is-vcentered" style="flex:1">
+        <div class="column is-three-quarters-mobile is-half-tablet is-half-desktop is-half-widescreen is-one-third-fullhd has-text-centered mt-6">
+          <figure class="image has-text-centered">
+            <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}" style="width:100%;">
+          </figure>
+        </div>
+      </div>
+      <!-- <h1 class="title is-1">Dreaming Spires</h1>
+      <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered{% if not is_fullpage %} mt-6 pt-6{% endif %}">
+      <p class="is-size-5 mb-4 has-text-shadowed has-text-white">Are You...</p>
+      <div class="columns is-mobile is-centered">
+        <div class="column is-5 is-10-mobile">
+          <div class="columns is-centered">
+            <div class="column is-narrow has-equal-height">
+              <a href="{% if researcher_rel_href %}#register_client{% else %}{{ url_for('auth.register_client', _anchor='register_client') }}{% endif %}">
+                <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
+                  <p>A Researcher</p>
+                </button>
+              </a>
+            </div>
+            <div class="column is-narrow has-equal-height">
+              <a href="{% if developer_rel_href %}#register_developer{% else %}{{ url_for('auth.register_developer') }}{% endif %}">
+                <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed is-rounded">
+                  <p>A Developer</p>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+		<div class="is-hidden-touch" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-position: bottom; background-repeat: repeat-x; background-size: contain; height: 200px">
+		</div>
+		<div class="is-hidden-desktop" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-position: bottom left; background-repeat: repeat-x; background-size: cover; height: 200px">
+		</div>
+    <div class="has-text-centered pb-1" style="margin-top: -50px">
+      <a href="#signup" class="title is-2 fas fa-chevron-down has-text-white"></a>
+    </div>
+	</div>
+</div>
+{% endmacro %}
