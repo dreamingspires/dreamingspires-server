@@ -23,7 +23,12 @@
         <div class="column is-5 is-10-mobile">
           <div class="columns is-centered">
             <div class="column is-narrow has-equal-height">
-              <a href="{{ url_for('auth.register_client') }}">
+              <a href="{{ url_for('auth.register_client', _anchor='registerClient') }}" class="is-hidden-touch">
+                <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
+                  <p>A Researcher</p>
+                </button>
+              </a>
+              <a href="{{ url_for('auth.register_client', _anchor='registerClientMob') }}" class="is-hidden-desktop">
                 <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
                   <p>A Researcher</p>
                 </button>
@@ -87,7 +92,12 @@
           <div class="columns is-mobile is-centered">
             <div class="column is-narrow has-text-centered">
               <p class="has-text-centered pt-4">Find out more as...</p>
-              <a class="pt-2" href="{{ url_for('auth.register_client') }}">
+              <a class="pt-2 is-hidden-touch" href="{{ url_for('auth.register_client', _anchor='registerClient') }}">
+                <button class="button is-normal is-warning is-rounded is-fullwidth">
+                  <p>A Researcher</p>
+                </button>
+              </a>
+              <a class="pt-2 is-hidden-desktop" href="{{ url_for('auth.register_client', _anchor='registerClientMob') }}">
                 <button class="button is-normal is-warning is-rounded is-fullwidth">
                   <p>A Researcher</p>
                 </button>
