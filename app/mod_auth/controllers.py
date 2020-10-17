@@ -142,7 +142,7 @@ def register_client():
     return render_template('auth/register_client_temp.html')
 
 
-@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     form = RegisterClientInterest()
     if form.validate_on_submit():

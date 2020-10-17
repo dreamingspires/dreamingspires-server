@@ -48,35 +48,24 @@
                       <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_dark_variant.svg') }}" style="width:100%;">
                     </figure>
                   </a>
-                  <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd">
-                      <div class="buttons">
-                        {% for item in nav.buttons %}
-                          {% if item.is_active %}
-                            <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
-                          {% else %}
-                            <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
-                            <a role="button" class="navbar-burger burger has-text-light has-text-weight-bold" aria-label="menu" aria-expanded="false" data-target="navMenu">
-                          {% endif %}
-                        {% endfor %}
-                      </div>
+                  <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd" style="margin-left: auto">
+                    <div class="buttons">
+                      {% for item in nav.buttons %}
+                        {% if item.is_active %}
+                          <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
+                        {% endif %}
+                      {% endfor %}
                     </div>
-                  <a role="button" class="navbar-burger burger has-text-warning" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                  </div>
+                  <a role="button" class="navbar-burger burger has-text-light ml-0" aria-label="menu" aria-expanded="false" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                   </a>
                 </div>
                 <div class="navbar-menu" id="navMenu">
-                  <div class="navbar-start">
-                    {% for item in nav.start %}
-                      {% if item.is_active %}
-                      <a href="{{ item.url }}" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
-                      {% else %}
-                      <a href="{{ item.url }}" class="navbar-item has-text-white">{{ item.label|safe }}</a>
-                      {% endif %}
-                    {% endfor %}
-                  </div>
-
                   <div class="navbar-end">
                     {% for item in nav.end %}
                       {% if item.is_active %}
@@ -85,45 +74,46 @@
                       <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white">{{ item.label|safe }}</a>
                       {% endif %}
                     {% endfor %}
+                  </div>
 
-                    <div class="navbar-item is-hidden-mobile">
-                      <div class="buttons">
-                        {% for item in nav.buttons %}
-                          {% if item.is_active %}
-                            <a href="{{ item.url }}" class="button is-rounded is-warning-light" style="font-size: 0.9em">{{ item.label|safe }}</a>
-                          {% else %}
-                            <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
-                          {% endif %}
+                  <div class="navbar-item is-hidden-mobile">
+                    <div class="buttons">
+                      {% for item in nav.buttons %}
+                        {% if item.is_active %}
+                          <a href="{{ item.url }}" class="button is-rounded is-warning-light" style="font-size: 0.9em">{{ item.label|safe }}</a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    {% if current_user.is_authenticated %}
+                      <a class="navbar-link">
+                        <figure class="image is-32x32">
+                          <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+
+                        </figure>
+                        &nbsp;
+                        {{ current_user.display_name }}
+                      </a>
+                      <div class="navbar-dropdown is-right is-boxed">
+                        {% for item in nav.profile %}
+                        <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
                         {% endfor %}
                       </div>
-                    </div>
+                    {% else %}
+                        <div class="buttons">
+                          {% for item in nav.login %}
+                            {% if item.is_active %}
+                              <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
+                            {% else %}
+                              <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                      {% if current_user.is_authenticated %}
-                        <a class="navbar-link">
-                          <figure class="image is-32x32">
-                            <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
-
-                          </figure>
-                          &nbsp;
-                          {{ current_user.display_name }}
-                        </a>
-                        <div class="navbar-dropdown is-right is-boxed">
-                          {% for item in nav.profile %}
-                          <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
+                            {% endif %}
                           {% endfor %}
                         </div>
-                      {% else %}
-                          <div class="buttons">
-                            {% for item in nav.login %}
-                              {% if item.is_active %}
-                                <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
-                              {% else %}
-                                <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
-
-                              {% endif %}
-                            {% endfor %}
-                          </div>
                       {% endif %}
                     </div>
                   </div>

@@ -106,7 +106,7 @@ except KeyError:
 
 nav.Bar('end', [
     nav.Item('Home', 'index'),
-    nav.Item('Our Services', 'auth.register_client', args={'_anchor': 'register_client'}),
+    nav.Item('Our Services', 'our_services', args={'_anchor': 'register_client'}),
     nav.Item('Portfolio', 'portfolio'),
     nav.Item('Develop with Us', 'auth.register_developer'),
     nav.Item('Log in', 'auth.login')

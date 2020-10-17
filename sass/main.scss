@@ -20,16 +20,19 @@ $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
 $brand-backdrop: #CFCFCF;
 $brand-warning: #D26D48;
+$brand-warning-dark: #AF5737;
 $brand-link: #999999;
 
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
 // Update Bulma's global variables
 $primary: $brand-blue;
+$primary-dark: $brand-blue-alt;
 $info: $brand-dark;
 $light: $brand-cream;
 $info-light: $cyan-light;
 $warning: $brand-warning;
+$warning-dark: $brand-warning-dark;
 $link: $brand-link;
 $navbar-breakpoint: $mobile;
 $scheme-main: $dark-brand-background;
@@ -51,7 +54,6 @@ $input-placeholder-color: hsl(0, 0%, 21%);
 .has-background-backdrop {
     background-color: $brand-backdrop !important;
 }
-
 
 .subtitle-on-white {
     color: #53A4AB;
@@ -115,7 +117,7 @@ has-background-light > .fas, has-background-light > .fab {
 }
 
 .has-text-shadowed {
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 10px black;
 }
 
 

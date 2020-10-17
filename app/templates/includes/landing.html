@@ -1,4 +1,4 @@
-{% macro render_landing(researcher_rel_href=False, developer_rel_href=False) %}
+{% macro render_landing(researcher_rel_href=False, developer_rel_href=False, chevron_id="#signup") %}
 <div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
   <div style="flex:1; display:flex; flex-direction:column; width:100%">
 
@@ -13,13 +13,15 @@
       <!-- <h1 class="title is-1">Dreaming Spires</h1>
       <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
     </div>
-    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered{% if not is_fullpage %} mt-6 pt-6{% endif %}">
+    <div class="is-hidden-desktop mt-4"></div>
+    <div class="is-hidden-mobile mt-6 pt-5"></div>
+    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
       <p class="is-size-5 mb-4 has-text-shadowed has-text-white">Are You...</p>
       <div class="columns is-mobile is-centered">
         <div class="column is-5 is-10-mobile">
           <div class="columns is-centered">
             <div class="column is-narrow has-equal-height">
-              <a href="{% if researcher_rel_href %}#register_client{% else %}{{ url_for('auth.register_client', _anchor='register_client') }}{% endif %}">
+              <a href="{% if researcher_rel_href %}#register_client{% else %}{{ url_for('our_services', _anchor='register_client') }}{% endif %}">
                 <button class="button is-medium is-warning is-box-button has-text-shadowed is-rounded">
                   <p>A Researcher</p>
                 </button>
@@ -42,7 +44,7 @@
 		<div class="is-hidden-desktop" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-position: bottom left; background-repeat: repeat-x; background-size: cover; height: 200px">
 		</div>
     <div class="has-text-centered pb-1" style="margin-top: -50px">
-      <a href="#signup" class="title is-2 fas fa-chevron-down has-text-white"></a>
+      <a href="{{ chevron_id }}" class="title is-2 fas fa-chevron-down has-text-white"></a>
     </div>
 	</div>
 </div>

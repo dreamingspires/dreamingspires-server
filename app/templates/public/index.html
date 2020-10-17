@@ -2,52 +2,61 @@
 
 {% from "macros/bulma_form.html" import render_form, render_field %}
 {% from "includes/landing.html" import render_landing %}
+{% from "includes/client_register.html" import render_get_in_touch %}
 
 {% block fullheight %}
-{{ render_landing() }}
+{{ render_landing(chevron_id="#page_1") }}
 {% endblock %}
 
 {% block content %}
-<section class="section is-fullwidth is-medium has-background-info pt-6 pb-1">
-  <div class="column has-text-light">
-    <h1 class="title has-text-light">Welcome to Dreaming Spires</h1>
-    <h2 class="subtitle has-text-primary">Bringing Programming Talent to Your Research</h2>
-    <p>We specialise in bringing first-class programming talent to computational projects, tailored to the needs of digital research.</p>
-    <br>
-    <p>With our roots in the Oxbridge academic communities, we accelerate research projects through collaboration within our freelance community.</p>
-
-    <!--<p>With our core values in collaboration, open source, and good software engineering</p>-->
+<section id="page_1" class="section is-fullwidth is-medium has-background-info pt-6 pb-1">
+  <div class="columns">
+    <div class="column is-7-fullhd is-9-widescreen is-10-desktop has-text-light">
+      <h1 class="title has-text-light">Welcome to Dreaming Spires</h1>
+      <h2 class="subtitle has-text-primary is-italic">Bringing Programming Talent to Your Research</h2>
+      <div class="columns">
+        <div class="column is-1 is-hidden-mobile"></div>
+        <div class="column">
+          <p>We specialise in bringing first-class programming talent to computational projects, tailored to the needs of digital research.</p>
+          <br>
+          <p>With our roots in the Oxbridge academic communities, we accelerate research projects through collaboration within our freelance community.</p>
+        </div>
+      <!--<p>With our core values in collaboration, open source, and good software engineering</p>-->
+      </div>
+    </div>
   </div>
-  <div class="columns is-centered pt-5">
+  <div class="is-hidden-mobile mt-6"></div>
+  <div class="columns is-centered">
     <div class="column is-9 is-11-tablet">
       <div class="columns">
         <div class="column is-half has-equal-height has-text-light">
           <p class="is-size-5 has-text-weight-semibold">Perfect for Researchers...</p>
 
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-warning">
               <i class="fas fa-check"></i>
             </span>
             Consultants who work closely with your project
           </p>
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-warning">
               <i class="fas fa-check"></i>
             </span>
             Access to our wide talent pool
           </p>
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-warning">
               <i class="fas fa-check"></i>
             </span>
 						Competitive rates due to our unique model
           </p>
 
+          <div class="is-hidden-mobile mt-6"></div>
           <div class="columns is-mobile is-centered">
             <div class="column is-narrow has-text-centered">
               <p class="has-text-centered pt-4">Find out more as...</p>
-              <a class="pt-2" href="{{ url_for('auth.register_client', _anchor='register_client') }}">
-                <button class="button is-normal is-warning is-rounded is-fullwidth">
+              <a class="pt-2" href="{{ url_for('our_services', _anchor='register_client') }}">
+                <button class="button is-normal is-warning has-background-warning-dark is-rounded is-fullwidth">
                   <p>A Researcher</p>
                 </button>
               </a>
@@ -57,30 +66,31 @@
         <div class="column is-half has-equal-height has-text-light">
           <p class="is-size-5 has-text-weight-semibold">Ideal for Developers...</p>
 
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-primary">
               <i class="fas fa-check"></i>
             </span>
-						Well-paid projects with well-defined scope
+						Interesting projects with well-defined scope
           </p>
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-primary">
               <i class="fas fa-check"></i>
             </span>
 						Flexible working hours
           </p>
-          <p class="has-text-left pt-2">
+          <p class="has-text-left py-3">
             <span class="icon has-text-primary">
               <i class="fas fa-check"></i>
             </span>
 						Writing open source software that makes a difference
           </p>
 
+          <div class="is-hidden-mobile mt-6"></div>
           <div class="columns is-mobile is-centered">
             <div class="column is-narrow has-text-centered">
               <p class="has-text-centered pt-4">Find out more as...</p>
               <a class="pt-2" href="{{ url_for('auth.register_developer') }}">
-                <button class="button is-normal is-primary is-rounded is-fullwidth">
+                <button class="button is-normal is-primary has-background-primary-dark is-rounded is-fullwidth">
                   <p>A Developer</p>
                 </button>
               </a>
@@ -90,15 +100,16 @@
       </div>
     </div>
   </div>
+  <div class="is-hidden-mobile mt-5"></div>
   <div class="has-text-centered">
-    <a href="#signup" class="title is-2 fas fa-chevron-down has-text-white"></a>
+    <a href="#page_2" class="title is-2 fas fa-chevron-down has-text-white"></a>
   </div>
 </section>
 
-<section class="section is-fullwidth is-medium has-background-light py-6">
+<section id="page_2" class="section is-fullwidth is-medium has-background-light pt-6 pb-0">
   <div class="column">
     <h1 class="title has-text-dark">Our Development Process</h1>
-    <h2 class="subtitle has-text-primary">The unique Dreaming Spires model</h2>
+    <h2 class="subtitle has-text-primary is-italic">The Unique Dreaming Spires Model</h2>
   </div>
 
 	<!-- Mobile timeline -->
@@ -122,7 +133,7 @@
 		<div class="column is-11-tablet is-10-desktop is-9-widescreen is-9-fullhd">
       <div style="display: grid; align-items: center; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 1fr">
         {% for i in range(7) %}
-          {% if i%2 == 0 %}
+          {% if i%2 == 1 %}
             <div style="grid-column-end: span 5">
             </div>
             <div style="grid-column-end: span 2" class="has-text-centered">
@@ -145,39 +156,12 @@
       </div>
     </div>
   </div>
+  <div class="has-text-centered">
+    <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
+  </div>
 </section>
 
-<section class="section is-fullwidth is-medium has-background-info has-text-light py-6">
-	<div class="columns">
-		<div class="column is-half">
-      <div class="columns is-centered">
-        <div class="column is-11-tablet is-10-desktop is-7-widescreen is-7-fullhd">
-          <h1 class="title is-size-1 has-text-light">GET IN TOUCH!</h1>
-          <p>
-          Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.
-          </p>
-          <div class="has-text-centered is-hidden-mobile mt-6">
-            <img src="{{ url_for('static', filename='assets/images/icons/megaphone_heart.svg') }}" style="width:90%;">
-          </div>
-        </div>
-      </div>
-    </div>
-		<div class="column is-half">
-      <div class="columns is-centered">
-        <div class="column is-11-tablet is-10-desktop is-10-widescreen is-10-fullhd pt-6">
-          {{ render_form(form, ".#signup", width=12, box=False, mark_required=False, is_horizontal=False) }}
-          <a id="signup"></a>
-          <p class="is-size-7 is-italic">
-          At Dreaming Spires, we take your data seriously.  Any data you give us will be handled according to our <a href="{{ url_for('privacy_policy') }}">privacy policy</a>.
-          <p>
-        </div>
-        <div class="has-text-centered is-hidden-tablet mt-6">
-          <img src="{{ url_for('static', filename='assets/images/icons/megaphone_heart.svg') }}" style="width:50%;">
-        </div>
-      </div>
-		</div>
-	</div>
-</section>
+{{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form) }}
 {% endblock %}
 
 {% macro timeline_logo(n) %}

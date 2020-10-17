@@ -6,8 +6,7 @@ from app.temp_models import InterestedClient
 from app.public_forms import RegisterClientInterest
 from app.extensions.email import send_email
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+def client_signup(template_path, *args, **kwargs):
     form = RegisterClientInterest()
     if form.validate_on_submit():
         # TODO: add information to database
@@ -26,7 +25,15 @@ def index():
         send_email(client.email, subject, html)
 
         return redirect(url_for('auth.thanks_for_registering_client'))
-    return render_template('public/index.html', is_fullpage=True, form=form)
+    return render_template(template_path, *args, form=form, **kwargs)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return client_signup('public/index.html', is_fullpage=True)
+
+@app.route('/our_services', methods=['GET', 'POST'])
+def our_services():
+    return client_signup('public/our_services.html', is_fullpage=False)
 
 @app.route('/about')
 def about():

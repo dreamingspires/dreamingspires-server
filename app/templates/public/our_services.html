@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% from "macros/bulma_form.html" import render_form, render_field %}
 {% from "includes/landing.html" import render_landing %}
+{% from "includes/client_register.html" import render_get_in_touch %}
 
 {% macro render_post(post) %}
 <a href="{{ url_for('portfolio', _anchor=post.url_id) }}">
@@ -26,14 +26,14 @@
 {% endmacro %}
 
 {% block fullheight %}
-{{ render_landing(researcher_rel_href=True) }}
+{{ render_landing(researcher_rel_href=True, chevron_id="#client_desk_1") }}
 {% endblock %}
 
 {% block content %}
 <a id="register_client" style="font-size: 0"></a>
 
   <section class="is-hidden-touch">
-    <section class=" is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch pt-6">
+    <section id="client_desk_1" class="is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch pt-6">
       
       <div class="tile is-ancestor mx-6">
         <div class="tile is-parent is-12 is-horizontal mb-3">
@@ -46,7 +46,7 @@
             <div class="tile is-child">
               <p class="subtitle is-size-3 mb-0">Know what you need?</p>
               <div class="buttons level-right">
-                <a class="button is-warning is-rounded" href="#signup">Get in touch</a>
+                <a class="button is-warning has-background-warning-dark is-rounded" href="#signup">Get in touch</a>
               </div> 
             </div>
               
@@ -63,19 +63,21 @@
         {% endfor %}
       </div>    
       <div class="has-text-centered pb-1">
-        <a href="#ClientDesk2" class="title is-2 fas fa-chevron-down has-text-light"></a>
+        <a href="#client_desk_2" class="title is-2 fas fa-chevron-down has-text-light"></a>
       </div>
 
     </section>
 
-    <section id="ClientDesk2" class=" is-hero  has-background-light is-hidden-touch pb-0">
+    <section id="client_desk_2" class="is-hero has-background-light is-hidden-touch pb-0">
       <div class="tile is-ancestor mx-6">
         
         <div class="tile is-parent is-vertical">
-          <div class="tile is-parent is-horizontal ">
+          <div class="tile is-parent is-horizontal">
             <div class="tile is-child is-6"> 
               {{ client_title(3)}}
-              {{ client_icon(3, 0) }}
+              <div class="has-text-info">
+                {{ client_icon(3, 0) }}
+              </div>
               {{ client_blurb(3) }}
             </div>
             <div class="tile is-parent is-vertical is-6">
@@ -84,31 +86,33 @@
               </div>    
               <div class="tile is-child is-12"> 
                 {{ client_title(4) }}
-                {{ client_icon(4, 0) }}
+                <div class="has-text-info">
+                  {{ client_icon(4, 0) }}
+                </div>
                 {{ client_blurb(4) }}
               </div>
             </div>
           </div>
           <div class="tile is-child is-12">
-            <h1 class="title is-size-1">Oxbridge-based Software
+            <h1 class="title is-size-1 has-text-dark">Oxbridge-based Software
     Solutions <br>for Researchers</h1>
           </div>
         </div>
         <div class="tile is-parent is-vertical is-4">
           
-          <p class="title is-size-1 is-pulled-right" style="text-align:right">Access Tailored<br>Freelance  Talent</p>            
+          <p class="title is-size-1 is-pulled-right has-text-dark" style="text-align:right">Access Tailored<br>Freelance Talent</p>            
           <div class="tile is-parent is-12">
             <div class="tile is-parent is-12 is-vertical">          
               <div class="tile is-child is-12 mt-6">           
-                {{ client_icon(5, 0) }}
+                <div class="has-text-info">
+                  {{ client_icon(5, 0) }}
+                </div>
                 {{ client_title(5)}}
                 {{ client_blurb(5) }}
               </div>
               <div class="tile is-child is-12 has-text-centered">
                 <p class="is-size-5"><i>Oxbridge based, freelance powered.</i></p>
-                <div class="">
-                  <a class="button is-warning is-rounded" href="#signup">Enquire Now</a>
-                </div>
+                  <a class="button is-warning is-rounded has-background-warning-dark" href="#signup">Enquire Now</a>
               </div>
             </div>
           </div>
@@ -140,14 +144,14 @@
     </div>
   </section>
 
-  <section id="reg2Mob" class=" is-hero has-background-light has-text-black pb-0">
+  <section id="reg2Mob" class=" is-hero has-background-light has-text-info pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        {{ client_title(2) }}
-        {{ client_blurb(2) }}
+        {{ client_title(0) }}
+        {{ client_blurb(0) }}
       </div>
       <div class="column is-two-fifths pt-6">
-        {{ client_icon(2, 1) }}
+        {{ client_icon(0, 1) }}
       </div>
     </div>
     <div class="columns is-vcentered is-mobile mx-3">
@@ -167,20 +171,20 @@
   <section id="reg3Mob" class="is-hero has-background-info has-text-light pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        {{ client_title(5) }}
-        {{ client_blurb(5) }}
+        {{ client_title(2) }}
+        {{ client_blurb(2) }}
       </div>
       <div class="column is-two-fifths pt-6">
-        {{ client_icon(5, 1) }}
+        {{ client_icon(2, 1) }}
       </div>
     </div>
     <div class="columns is-vcentered is-mobile mx-3">
       <div class="column is-two-fifths pl-6 pt-6">
-        {{ client_icon(0, 1) }}
+        {{ client_icon(3, 1) }}
       </div>
       <div class="column is-three-fifths">
-        {{ client_title(0) }}
-        {{ client_blurb(0) }}
+        {{ client_title(3) }}
+        {{ client_blurb(3) }}
       </div>
     </div>
     <div class="has-text-centered pb-1">
@@ -188,14 +192,14 @@
     </div>
   </section>
 
-  <section id="reg4Mob" class="is-hero has-background-light has-text-black pb-0">
+  <section id="reg4Mob" class="is-hero has-background-light has-text-info pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        {{ client_title(3) }}
-        {{ client_blurb(3) }}
+        {{ client_title(5) }}
+        {{ client_blurb(5) }}
       </div>
       <div class="column is-two-fifths pt-6">
-        {{ client_icon(3, 1) }}
+        {{ client_icon(5, 1) }}
       </div>  
     </div>
     <div class="columns is-vcentered is-mobile mx-3">
@@ -222,36 +226,7 @@
   </section>
 </section>
 
-<!-- form -->
-
-<section class="section is-fullwidth is-medium has-background-info has-text-light py-6">
-  <div class="columns">
-    <div class="column is-half">
-      <div class="columns is-centered">
-        <div class="column is-11-tablet is-10-desktop is-7-widescreen is-7-fullhd">
-          <h1 class="title is-size-1 has-text-light">GET IN TOUCH!</h1>
-          <p>
-          Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.
-          </p>
-          <div class="has-text-centered mt-6">
-            <img src="{{ url_for('static', filename='assets/images/icons/megaphone_heart.svg') }}" style="width:90%;">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="column is-half">
-      <div class="columns is-centered">
-        <div class="column is-11-tablet is-10-desktop is-10-widescreen is-10-fullhd pt-6">
-          {{ render_form(form, ".#signup", width=12, box=False, mark_required=False, is_horizontal=False) }}
-          <a id="signup"></a>
-          <p class="is-size-7 is-italic">
-          At Dreaming Spires, we take your data seriously.  Any data you give us will be handled according to our <a href="{{ url_for('privacy_policy') }}">privacy policy</a>.
-          <p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+{{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form) }}
 {% endblock %}
 
 {% macro client_icon(n, v) %}
@@ -259,9 +234,9 @@
     <div class="level">
       <div class="level-item">
         {% if v ==  0 %}
-          <i class="fas fa-comments fa-10x fa-centered  mb-3 "></i>
+          <i class="fas fa-comments fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-comments fa-8x fa-centered  mb-3 "></i>
+          <i class="fas fa-comments fa-8x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -279,9 +254,9 @@
     <div class="level">
       <div class="level-item">
         {% if v == 0 %}
-          <i class="fas fa-toolbox fa-10x fa-centered mb-3 "></i>
+          <i class="fas fa-toolbox fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-toolbox fa-8x fa-centered mb-3 "></i>
+          <i class="fas fa-toolbox fa-8x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -289,9 +264,9 @@
     <div class="level">
       <div class="level-item">
         {% if v == 0 %}
-          <i class="fas fa-microscope fa-10x fa-centered mb-3 "></i>
+          <i class="fas fa-microscope fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-microscope fa-8x fa-centered mb-3 "></i>
+          <i class="fas fa-microscope fa-8x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -299,9 +274,9 @@
     <div class="level">
       <div class="level-item">
         {% if v == 0 %}
-          <i class="fas fa-window-restore fa-10x fa-centered mb-3 "></i>
+          <i class="fas fa-paper-plane fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-window-restore fa-8x fa-centered mb-3 "></i>
+          <i class="fas fa-paper-plane fa-8x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -309,9 +284,9 @@
     <div class="level">
       <div class="level-item">
         {% if v == 0 %}
-          <i class="fab fa-osi fa-10x fa-centered mb-3 "></i>
+          <i class="fas fa-code fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fab fa-osi fa-8x fa-centered mb-3 "></i>
+          <i class="fas fa-code fa-8x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -320,8 +295,8 @@
 
 
 {% macro welcomeBlock() %} 
-  <h1 class=" is-size-1 mb-0">Welcome to Dreaming Spires!</h1>
-  <p class="subtitle is-size-3 ">Bringing Programming Talent to Your Research</p>
+  <h1 class="has has-text-light is-size-1 mb-0 pt-3 has-text-weight-light">Welcome to Dreaming Spires!</h1>
+  <p class="subtitle is-size-3 subtitle-on-dark pt-3 has-text-weight-normal is-italic">Bringing Programming Talent to Your Research</p>
   <p>Whether you’re a historian wondering about automation, a computer scientist who’s got  too
     much work on their hands, or anything in between, we’re here for you.<br><br>
     Dreaming Spires specialises in bringing elegant digital solutions to researchers. With  our roots
@@ -333,23 +308,23 @@
 
 {% macro client_title(n) %}
   {% if n == 0 %}
-    <h2 class="title has-text-weight-light">Free Quote<br> and Initial Consultation..</h2>
-    <h3 class="subtitle has-text-weight-bold">...for every project!</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">Free Quote<br> and Initial Consultation...</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">...for every project!</h3>
   {% elif n == 1 %}
-    <h2 class="title has-text-weight-light">It Doesn’t Have to<br> be Rocket-Science...</h2>
-    <h3 class="subtitle has-text-weight-bold">...unless you want it to be!</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">It Doesn’t Have to<br> be Rocket-Science...</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">...unless you want it to be!</h3>
   {% elif n == 2 %}
-    <h2 class="title has-text-weight-light">Exceptional <br>Talent...</h2>
-    <h3 class="subtitle has-text-weight-bold">...at exceptional prices!</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">Exceptional <br>Talent...</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">...at exceptional prices!</h3>
   {% elif n == 3 %}
-    <h2 class="title has-text-weight-light">Total <br>Transparency</h2>
-    <h3 class="subtitle has-text-weight-bold">We'll work under a looking-glass!</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">Total <br>Transparency</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">We'll work under a looking-glass!</h3>
   {% elif n == 4 %}
-    <h2 class="title has-text-weight-light">Deployment? <br>Sorted!</h2>
-    <h3 class="subtitle has-text-weight-bold">Success begins with a well planned launch</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">Deployment? <br>Sorted!</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">Success begins with a well planned launch</h3>
   {% else %}
-    <h2 class="title has-text-weight-light">Specialising in<br>Open Source</h2>
-    <h3 class="subtitle has-text-weight-bold">We love open source...</h3>
+    <h2 style="word-break: normal" class="title has-text-weight-light">Specialising in<br>Open Source</h2>
+    <h3 style="word-break: normal" class="subtitle is-italic">We love open source...</h3>
   {% endif %}
 {% endmacro %}
 

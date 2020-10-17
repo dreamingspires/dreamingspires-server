@@ -2,9 +2,9 @@
 {% from "macros/bulma_form.html" import render_form %}
 
 {% block content %}
-<div class="column is-6 is-offset-3 has-text-centered">
-    <h3 class="title">Log in</h3>
-    <h4 class="subtitle">(Account system coming soon!)</h4>
+<div class="column is-6 is-offset-3 has-text-centered pb-5">
+    <h3 class="title">Log in to Dreaming Spires</h3>
 </div>
-{{ render_form(form, ".", width=8, mark_required=False, is_horizontal=False) }}
+{{ render_form(form, ".", box=False, width=8, mark_required=False, is_horizontal=False) }}
+<div class="mb-5"></div>
 {% endblock %}

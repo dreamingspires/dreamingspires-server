@@ -25,4 +25,4 @@ class RegisterClientInterest(FlaskForm):
         render_kw={'placeholder': 'Tell us about your project idea',
             'style': 'height: 250px'}, left_logos=['fa-lightbulb'])
     submit = SubmitField('Submit', render_kw={'class': 
-        'button is-warning is-rounded'})
+        'button is-warning has-background-warning-dark is-rounded'})
