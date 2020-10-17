@@ -31,198 +31,100 @@
 
 {% block content %}
 <a id="register_client" style="font-size: 0"></a>
-<section class=" is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch pt-6">
-  <div class="tile is-ancestor mx-6">
-    <div class="tile is-parent is-12 is-horizontal mb-3">
-        <!-- <div class="tile is-child is-1"></div> -->
-      <div class="tile is-child is-8 content">
-        <h1 class="has has-text-light is-size-1 mb-0">Welcome to Dreaming Spires!</h1>
-        <p class="subtitle is-size-3 subtitle-on-dark">Bringing Programming Talent to Your Research</p>
-        <p>Whether you’re a historian wondering about automation, a computer scientist who’s got too
-    much work on their hands, or anything in between, we’re here for you.<br><br>
-          Dreaming Spires specialises in bringing elegant digital solutions to researchers. With our roots
-    in the Oxbridge academic communities, we understand the unique computational requirements
-    of research. So from data processing to application development, we’ve got you covered.</p>
-      </div>
-      <div class="tile is-parent is-vertical is-4 content has-text-right pb-0">
-        <div class="tile is-child"></div>
-        <div class="tile is-child">
-          <p class="subtitle subtitle-on-dark is-size-3 mb-0">Know what you need?</p>
-          <div class="buttons level-right">
-            <a class="button is-warning is-rounded" href="#signup">Get in touch</a>
+
+  <section class="is-hidden-touch">
+    <section class=" is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch pt-6">
+      
+      <div class="tile is-ancestor mx-6">
+        <div class="tile is-parent is-12 is-horizontal mb-3">
+            <!-- <div class="tile is-child is-1"></div> -->
+          <div class="tile is-child is-8 content">
+            <h1 class=" is-size-1 mb-0">Welcome to Dreaming Spires!</h1>
+            <p class="subtitle is-size-3 ">Bringing Programming Talent to Your Research</p>
+            <p>Whether you’re a historian wondering about automation, a computer scientist who’s got too
+        much work on their hands, or anything in between, we’re here for you.<br><br>
+              Dreaming Spires specialises in bringing elegant digital solutions to researchers. With our roots
+        in the Oxbridge academic communities, we understand the unique computational requirements
+        of research. So from data processing to application development, we’ve got you covered.</p>
+          </div>
+          <div class="tile is-parent is-vertical is-4 content has-text-right pb-0">
+            <div class="tile is-child"></div>
+            <div class="tile is-child">
+              <p class="subtitle is-size-3 mb-0">Know what you need?</p>
+              <div class="buttons level-right">
+                <a class="button is-warning is-rounded" href="#signup">Get in touch</a>
+              </div> 
+            </div>
+              
+          </div>
+        </div>
+      </div>       
+      <div class="columns mx-6 my-3">
+        {% for i in range(3) %}
+          <div class="column">
+              {{ client_title(i) }}
+              {{ client_icon(i, 0) }}
+              {{ client_blurb(i) }}
           </div> 
+        {% endfor %}
+      </div>    
+      <div class="has-text-centered pb-1">
+        <a href="#ClientDesk2" class="title is-2 fas fa-chevron-down has-text-light"></a>
+      </div>
+
+    </section>
+
+    <section id="ClientDesk2" class=" is-hero  has-background-light is-hidden-touch pb-0">
+      <div class="tile is-ancestor mx-6">
+        
+        <div class="tile is-parent is-vertical">
+          <div class="tile is-parent is-horizontal ">
+            <div class="tile is-child is-6"> 
+              {{ client_title(3)}}
+              {{ client_icon(3, 0) }}
+              {{ client_blurb(3) }}
+            </div>
+            <div class="tile is-parent is-vertical is-6">
+              <div class="tile is-child is-12">
+                <div class="is-square-image-128x128"></div>
+              </div>    
+              <div class="tile is-child is-12"> 
+                {{ client_title(4) }}
+                {{ client_icon(4, 0) }}
+                {{ client_blurb(4) }}
+              </div>
+            </div>
+          </div>
+          <div class="tile is-child is-12">
+            <h1 class="title is-size-1">Oxbridge-based Software
+    Solutions <br>for Researchers</h1>
+          </div>
         </div>
+        <div class="tile is-parent is-vertical is-4">
           
-      </div>
-    </div>
-
-
-  </div>
-
-    
-  <div class="columns mx-6 my-3">
-    <div class="column">
-      <h2 class="title has-text-light ">Free Quote<br> and Initial Consultation..</h2>
-      <h3 class="subtitle subtitle-on-dark ">...for every project!</h3>
-      <div class="level">
-        <div class="level-item">
-          <i class="fas fa-comments fa-10x fa-centered  mb-3 " ></i>
-        </div> 
-      </div>
-
-      <p>Testing the digital waters shouldn’t incur
-    charges; we offer a free initial consultation and
-    subsequent quote! Our experienced
-    consultants will help you plan the requirements
-    and scope of your project, enabling you to
-    make informed decisions about what’s
-    important to you. And if you decide that we’re
-    not the right fit, you won’t have incurred any
-    charges.</p>
-    </div>
-    <div class="column">
-      <h2 class="title has-text-light">It Doesn’t Have to<br> be Rocket-Science...</h2>
-      <h3 class="subtitle subtitle-on-dark">...unless you want it to be!</h3>
-      <div class="level">
-        <div class="level-item">
-          <i class="fas fa-space-shuttle fa-10x fa-centered fa-rotate-335 mb-3" ></i>
-        </div>
-      </div>
-      <p>We offer step-by-step guidance, regardless of
-your computer literacy or academic
-background. Our consultants will ensure you
-are clearly informed throughout the design and
-development process - there’s no need for you
-to have programming experience or knowledge
-of application development. Our research-
-oriented approach will allow you to make well
-informed decisions from start to finish.</p>
-    </div>
-    <div class="column">
-      <h2 class="title has-text-light">Exceptional <br>Talent...</h2>
-      <h3 class="subtitle subtitle-on-dark">...at exceptional prices!</h3>
-      <div class="level">
-        <div class="level-item">
-          <i class="fas fa-toolbox fa-10x fa-centered mb-3 " ></i>
-        </div>
-      </div>
-      <p>Many other software development firms won't
-take on a project worth under £5,000, £10,000,
-or even £20,000; this is where Dreaming Spires
-excels. Our freelance business structure
-employs the most skilled developers to work
-collaboratively, and the money saved on office
-costs etc. reduces the final cost to you. To talk
-through your project - no matter how small -
-get in touch!</p>
-    </div>
-  </div>    
-  <div class="has-text-centered pb-1">
-    <a href="#ClientDesk2" class="title is-2 fas fa-chevron-down has-text-light"></a>
-  </div>
-</section>
-
-<section id="ClientDesk2" class=" is-hero  has-background-light is-hidden-touch pb-0">
-  <div class="tile is-ancestor mx-6">
-    <div class="tile is-parent is-vertical">
-      <div class="tile is-parent is-horizontal ">
-        <div class="tile is-child is-6"> 
-          <h2 class="title">Total <br>Transparency</h2>
-              <h3 class="subtitle has-text-weight-bold subtitle-on-white">We'll work under a looking-glass!</h3>
-              <div class="level">
-                <div class="level-item">
-                  <i class="fas fa-microscope fa-10x fa-centered my-5 " ></i>
+          <p class="title is-size-1 is-pulled-right" style="text-align:right">Access Tailored<br>Freelance  Talent</p>            
+          <div class="tile is-parent is-12">
+            <div class="tile is-parent is-12 is-vertical">          
+              <div class="tile is-child is-12 mt-6">           
+                {{ client_icon(5, 0) }}
+                {{ client_title(5)}}
+                {{ client_blurb(5) }}
+              </div>
+              <div class="tile is-child is-12 has-text-centered">
+                <p class="is-size-5"><i>Oxbridge based, freelance powered.</i></p>
+                <div class="">
+                  <a class="button is-warning is-rounded" href="#signup">Enquire Now</a>
                 </div>
               </div>
-              <p>From project requirements to finished code, we’ll stay
-    in touch throughout the entire process. You’ll be
-    receiving weekly progress reports from our
-    consultants from day one right up to project
-    completion. We want to get things just right, so we
-    won’t finish development until all of your
-    requirements have been met.</p>
-        </div>
-        <div class="tile is-parent is-vertical is-6">
-          <div class="tile is-child is-12"><div class="is-square-image-128x128"></div></div>
-              
-          <div class="tile is-child is-12"> 
-            <h2 class="title">Deployment? <br>Sorted!</h2>
-            <h3 class="subtitle has-text-weight-bold subtitle-on-white">Success begins with a well planned launch</h3>
-            <div class="level">
-              <div class="level-item">
-                <i class="fas fa-window-restore fa-10x fa-centered my-5" ></i>
-              </div>
-            </div>
-            <p>It’s one thing to have the code written, but it’s only
-        useful once you can use it. So whether your project
-        requires 24/7 web hosting, launching to mobile app
-        stores, deployment to your local supercomputer
-        cluster, or just quality documentation, we have you
-        covered.</p>
-          </div> 
-
-        </div>
-
-      </div>
-      <div class="tile is-child is-12">
-        <h1 class="title is-size-1">Oxbridge-based Software
-Solutions <br>for Researchers</h1>
-      </div>
-    </div>
-
-      <!-- <div class="tile is-child is-8 "></div> -->
-    <div class="tile is-parent is-vertical is-4">
-      
-      <p class="title is-size-1 is-pulled-right" style="text-align:right">Access Tailored<br>Freelance  Talent</p>
-
-        
-      <div class="tile is-parent is-12">
-          <!-- <div class="tile is-child is-6"> 
-            <h2 class="title">Deployment? <br>Sorted!</h2>
-            <h3 class="subtitle has-text-weight-bold subtitle-on-white">Success begins with a well planned launch</h3>
-            <svg class="is-square-image-128x128 "></svg>
-            <p>It’s one thing to have the code written, but it’s only
-useful once you can use it. So whether your project
-requires 24/7 web hosting, launching to mobile app
-stores, deployment to your local supercomputer
-cluster, or just quality documentation, we have you
-covered.</p>
-          </div> -->
-        
-        <div class="tile is-parent is-12 is-vertical">
-           
-          <div class="tile is-child is-12 mt-6"> 
-           
-            <div class="level">
-              <div class="level-item">
-                <i class="fab fa-osi fa-10x fa-centered my-5" ></i>
-              </div>
-            </div>
-            <h2 class="title">Specialising in<br>Open Source</h2>
-            <h3 class="subtitle has-text-weight-bold subtitle-on-white">We love open source...</h3>
-            <p>...because it aligns with our ethoses of transparency,
-  collaboration, and honesty. In research, collaboration
-  through sharing methods and discoveries is critical; in
-  the same way, open source software is publicly
-  available online for others to see, edit, and make use
-  of. Whether your project will be open source is
-  entirely your decision, and we’ll do our best to inform
-  you of the impacts of doing so.</p>
-          </div>
-          <div class="tile is-child is-12 has-text-centered">
-            <p class="is-size-5"><i>Oxbridge based, freelance powered.</i></p>
-            <div class="">
-              <a class="button is-warning is-rounded" href="#signup">Enquire Now</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="has-text-centered pb-1">
-    <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
-  </div>
-</section>
+      <div class="has-text-centered pb-1">
+        <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
+      </div>
+    </section>
+  </section>
 
 
 <!-- MOBILE  -->
@@ -253,53 +155,22 @@ covered.</p>
   <section id="reg2Mob" class=" is-hero has-background-light has-text-black pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        <h2 class="title mb-3 has-text-weight-normal">Exceptional <br>Talent...</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">...at exceptional prices!</h3>
-        <p>Many other software development firms won't
-  take on a project worth under £5,000, £10,000,
-  or even £20,000; this is where Dreaming Spires
-  excels. Our freelance business structure
-  employs the most skilled developers to work
-  collaboratively, and the money saved on office
-  costs etc. reduces the final cost to you. To talk
-  through your project - no matter how small -
-  get in touch!</p>
+        {{ client_title(2) }}
+        {{ client_blurb(2) }}
       </div>
       <div class="column is-two-fifths pt-6">
-        <div class="level pt-6">
-          <div class="level-item">
-            <i class="has-text-info fas fa-toolbox fa-6x fa-centered mb-6 " ></i>
-          </div>
-        </div>
+        {{ client_icon(2, 1) }}
       </div>
     </div>
     <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column is-two-fifths pt-6">
-        <div class="level pt-6">
-          <div class="level-item">
-            <i class="has-text-info fas fa-space-shuttle fa-6x fa-centered fa-rotate-335 mb-6" ></i>
-          </div>
-        </div>
+      <div class="column is-two-fifths pl-6 pt-6">
+        {{ client_icon(1, 1) }}
       </div>
       <div class="column is-three-fifths">
-        <h2 class="title mb-3 has-text-weight-normal">It Doesn't Have to be Rocket Science...</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">...unless you want it to be!</h3>
-        <p>We offer step-by-step guidance,
-  regardless of your computer literacy
-  or academic background. Our
-  consultants will ensure you are clearly
-  informed throughout the design and
-  development process - there’s no
-  need for you to have programming
-  experience or knowledge of
-  application development. Our
-  research-oriented approach will allow
-  you to make well informed decisions
-  from start to finish.</p>
+        {{ client_title(1) }}
+        {{ client_blurb(1) }}
       </div>
-      
     </div>
-
     <div class="has-text-centered pb-1">
       <a href="#reg3Mob" class="title is-2 fas fa-chevron-down has-text-info"></a>
     </div>
@@ -308,56 +179,22 @@ covered.</p>
   <section id="reg3Mob" class="is-hero has-background-info has-text-light pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        <h2 class="title mb-3 has-text-light has-text-weight-normal">Specialising in
-  Open Source</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">We love open source...</h3>
-        <p>...because it aligns with our ethoses
-  of transparency, collaboration, and
-  honesty. In research, collaboration
-  through sharing methods and
-  discoveries is critical; in the same
-  way, open source software is
-  publicly available online for others
-  to see, edit, and make use of.
-  Whether your project will be open
-  source is entirely your decision, and
-  we’ll do our best to inform you of
-  the impacts of doing so.</p>
+        {{ client_title(5) }}
+        {{ client_blurb(5) }}
       </div>
-      <div class="column level is-two-fifths pt-6">
-        <div class="level-item pt-6">
-          <i class="fab fa-osi fa-6x fa-centered mb-6" ></i>
-        </div>
+      <div class="column is-two-fifths pt-6">
+        {{ client_icon(5, 1) }}
       </div>
     </div>
-
     <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column level is-two-fifths pt-6">
-        <div class="level-item pt-6">
-
-          <i class=" fas fa-comments fa-6x fa-centered mb-6" ></i>
-        </div>
+      <div class="column is-two-fifths pl-6 pt-6">
+        {{ client_icon(0, 1) }}
       </div>
       <div class="column is-three-fifths">
-        <h2 class="title has-text-light mb-3 has-text-weight-normal">Free Quote
-  and Initial
-  Consultation...</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">...for every project!</h3>
-        <p>Testing the digital waters shouldn’t
-  incur charges; we offer a free initial
-  consultation and subsequent quote!
-  Our experienced consultants will
-  help you plan the requirements and
-  scope of your project, enabling you
-  to make informed decisions about
-  what’s important to you. And if you
-  decide that we’re not the right fit,
-  you won’t have incurred any
-  charges.</p>
+        {{ client_title(0) }}
+        {{ client_blurb(0) }}
       </div>
-      
     </div>
-
     <div class="has-text-centered pb-1">
       <a href="#reg4Mob" class="title is-2 fas fa-chevron-down has-text-light"></a>
     </div>
@@ -366,48 +203,20 @@ covered.</p>
   <section id="reg4Mob" class="is-hero has-background-light has-text-black pb-0">
     <div class="columns is-vcentered is-mobile mt-4 mx-5">
       <div class="column is-three-fifths">
-        <h2 class="title mb-3 has-text-weight-normal">Total Transparency</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">We'll work under a looking-glass!</h3>
-        <p>We'll work under a looking-glass!
-  From project requirements to
-  finished code, we’ll stay in touch
-  throughout the entire process.
-  You’ll be receiving weekly
-  progress reports from our
-  consultants from day one right
-  up to project completion. We
-  want to get things just right, so
-  we won’t finish development
-  until all of your requirements
-  have been met.</p>
+        {{ client_title(3) }}
+        {{ client_blurb(3) }}
       </div>
-      <div class="column level is-two-fifths pt-6">
-        <div class="level-item pt-6">
-          <i class="has-text-info fas fa-microscope fa-6x fa-centered mb-6" ></i>
-        </div>
-      </div>
+      <div class="column is-two-fifths pt-6">
+        {{ client_icon(3, 1) }}
+      </div>  
     </div>
     <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column level is-two-fifths pt-6">
-        <div class="level-item pt-6">
-
-          <i class="has-text-info fas fa-window-restore fa-6x fa-centered mb-6" ></i>
-        </div>
+      <div class="column is-two-fifths pl-6 pt-6">
+        {{ client_icon(4, 1) }}
       </div>
       <div class="column is-three-fifths">
-        <h2 class="title mb-3 has-text-weight-normal">Deployment?
-  Sorted.</h2>
-        <h3 class=" subtitle-on-white has-text-weight-bold">Succeed with a well
-  planned launch</h3>
-        <p>It’s one thing to have the code
-  written, but it’s only useful once
-  you can use it. So whether your
-  project requires 24/7 web
-  hosting, launching to mobile app
-  stores, deployment to your local
-  supercomputer cluster, or just
-  quality documentation, we have
-  you covered.</p>
+        {{ client_title(4) }}
+        {{ client_blurb(4) }}
       </div>
       
     </div>
@@ -456,3 +265,153 @@ covered.</p>
   </div>
 </section>
 {% endblock %}
+
+{% macro client_icon(n, v) %}
+  {% if n == 0 %}
+    <div class="level">
+      <div class="level-item">
+        {% if v ==  0 %}
+          <i class="fas fa-comments fa-10x fa-centered  mb-3 "></i>
+        {% else %}
+          <i class="fas fa-comments fa-8x fa-centered  mb-3 "></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 1 %}
+    <div class="level">
+      <div class="level-item">
+        {% if v == 0 %}
+          <i class="fas fa-space-shuttle fa-10x fa-centered fa-rotate-335 mb-3"></i>
+        {% else %}
+          <i class="fas fa-space-shuttle fa-8x fa-centered fa-rotate-335 mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 2 %}
+    <div class="level">
+      <div class="level-item">
+        {% if v == 0 %}
+          <i class="fas fa-toolbox fa-10x fa-centered mb-3 "></i>
+        {% else %}
+          <i class="fas fa-toolbox fa-8x fa-centered mb-3 "></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 3 %}
+    <div class="level">
+      <div class="level-item">
+        {% if v == 0 %}
+          <i class="fas fa-microscope fa-10x fa-centered mb-3 "></i>
+        {% else %}
+          <i class="fas fa-microscope fa-8x fa-centered mb-3 "></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 4 %}
+    <div class="level">
+      <div class="level-item">
+        {% if v == 0 %}
+          <i class="fas fa-window-restore fa-10x fa-centered mb-3 "></i>
+        {% else %}
+          <i class="fas fa-window-restore fa-8x fa-centered mb-3 "></i>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="level">
+      <div class="level-item">
+        {% if v == 0 %}
+          <i class="fab fa-osi fa-10x fa-centered mb-3 "></i>
+        {% else %}
+          <i class="fab fa-osi fa-8x fa-centered mb-3 "></i>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro client_title(n) %}
+  {% if n == 0 %}
+    <h2 class="title has-text-weight-light">Free Quote<br> and Initial Consultation..</h2>
+    <h3 class="subtitle has-text-weight-bold">...for every project!</h3>
+  {% elif n == 1 %}
+    <h2 class="title has-text-weight-light">It Doesn’t Have to<br> be Rocket-Science...</h2>
+    <h3 class="subtitle has-text-weight-bold">...unless you want it to be!</h3>
+  {% elif n == 2 %}
+    <h2 class="title has-text-weight-light">Exceptional <br>Talent...</h2>
+    <h3 class="subtitle has-text-weight-bold">...at exceptional prices!</h3>
+  {% elif n == 3 %}
+    <h2 class="title has-text-weight-light">Total <br>Transparency</h2>
+    <h3 class="subtitle has-text-weight-bold">We'll work under a looking-glass!</h3>
+  {% elif n == 4 %}
+    <h2 class="title has-text-weight-light">Deployment? <br>Sorted!</h2>
+    <h3 class="subtitle has-text-weight-bold">Success begins with a well planned launch</h3>
+  {% else %}
+    <h2 class="title has-text-weight-light">Specialising in<br>Open Source</h2>
+    <h3 class="subtitle has-text-weight-bold">We love open source...</h3>
+  {% endif %}
+{% endmacro %}
+
+{% macro client_blurb(n) %} 
+  {% if n == 0 %}
+    <p>Testing the digital waters shouldn’t incur
+      charges; we offer a free initial consultation and
+      subsequent quote! Our experienced
+      consultants will help you plan the requirements
+      and scope of your project, enabling you to
+      make informed decisions about what’s
+      important to you. And if you decide that we’re
+      not the right fit, you won’t have incurred any
+      charges.
+    </p>
+  {% elif n == 1 %}
+    <p>We offer step-by-step guidance, regardless of
+      your computer literacy or academic
+      background. Our consultants will ensure you
+      are clearly informed throughout the design and
+      development process - there’s no need for you
+      to have programming experience or knowledge
+      of application development. Our research-
+      oriented approach will allow you to make well
+      informed decisions from start to finish.
+    </p>
+  {% elif n == 2 %}
+    <p>Many other software development firms won't
+      take on a project worth under £5,000, £10,000,
+      or even £20,000; this is where Dreaming Spires
+      excels. Our freelance business structure
+      employs the most skilled developers to work
+      collaboratively, and the money saved on office
+      costs etc. reduces the final cost to you. To talk
+      through your project - no matter how small -
+      get in touch!
+    </p>
+  {% elif n == 3 %}
+    <p>From project requirements to finished code, we’ll stay
+      in touch throughout the entire process. You’ll be
+      receiving weekly progress reports from our
+      consultants from day one right up to project
+      completion. We want to get things just right, so we
+      won’t finish development until all of your
+      requirements have been met.
+    </p>
+  {% elif n == 4 %}
+    <p>It’s one thing to have the code written, but it’s only
+      useful once you can use it. So whether your project
+      requires 24/7 web hosting, launching to mobile app
+      stores, deployment to your local supercomputer
+      cluster, or just quality documentation, we have you
+      covered.
+    </p>
+  {% else %}
+    <p>...because it aligns with our ethoses of transparency,
+      collaboration, and honesty. In research, collaboration
+      through sharing methods and discoveries is critical; in
+      the same way, open source software is publicly
+      available online for others to see, edit, and make use
+      of. Whether your project will be open source is
+      entirely your decision, and we’ll do our best to inform
+      you of the impacts of doing so.
+    </p>
+  {% endif %}
+{% endmacro %}

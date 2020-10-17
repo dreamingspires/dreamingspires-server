@@ -9265,6 +9265,21 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .subtitle-on-dark {
   color: #65C8D0; }
 
+section.has-background-info .title, section.has-background-info h1, section.has-background-info h2 {
+  color: #F3EFEA; }
+
+section.has-background-light .title, section.has-background-light h1, section.has-background-light h2 {
+  color: black; }
+
+.has-background-info .subtitle, .has-background-info h3 {
+  color: #65C8D0; }
+
+section.has-background-light .subtitle, section.has-background-light h3 {
+  color: #53A4AB; }
+
+has-background-light > .fas, has-background-light > .fab {
+  color: #0F4C5A; }
+
 .has-equal-height {
   height: 100%;
   display: flex;

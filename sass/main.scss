@@ -61,6 +61,25 @@ $input-placeholder-color: hsl(0, 0%, 21%);
     color: #65C8D0;
 }
 
+//allows for dynamic coloring of titles
+section.has-background-info .title,  section.has-background-info h1, section.has-background-info h2 {
+    color: $light;
+}
+section.has-background-light .title,  section.has-background-light h1, section.has-background-light h2{
+    color: black;
+}
+//allows for dynamic colouring of subtitles
+.has-background-info .subtitle,  .has-background-info h3 {
+    color: #65C8D0;
+}
+section.has-background-light .subtitle,  section.has-background-light h3 {
+    color: #53A4AB;
+}
+//allows for dynamic colouring of svgs
+has-background-light > .fas, has-background-light > .fab {
+    color: $info;
+}
+
 // Custom CSS
 .has-equal-height {
     height: 100%;
