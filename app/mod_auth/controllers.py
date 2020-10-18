@@ -137,9 +137,9 @@ def register_developer():
     return render_template('auth/register_developer.html', form=form, \
         entries=list(range(1000)))
 
-#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
+@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
-    return render_template('auth/register_client_temp.html')
+    return redirect(url_for('our_services'))
 
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
