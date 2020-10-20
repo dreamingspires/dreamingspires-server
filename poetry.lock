@@ -194,14 +194,19 @@ alembic = ">=0.7"
 [[package]]
 category = "main"
 description = "The navigation of Flask application."
-name = "flask-navigation"
+name = "Flask-Navigation"
 optional = false
 python-versions = "*"
-version = "0.2.0"
+version = "0.2.1"
 
 [package.dependencies]
 Flask = "*"
 blinker = "*"
+
+[package.source]
+reference = ""
+type = "file"
+url = "modules/flask-navigation/dist/Flask_Navigation-0.2.1-py2.py3-none-any.whl"
 
 [[package]]
 category = "main"
@@ -593,7 +598,7 @@ ipaddress = ["ipaddress"]
 locale = ["Babel (>=1.3)"]
 
 [metadata]
-content-hash = "85e2403237887da7f2950adbdcf92fcc1a28f7f2ad2a292003ffb8a2b87ea0c1"
+content-hash = "908fb0118941de438b3d76524e9bfd8d5514bf4c0d268bd2b1bde7151c1d9dc9"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -657,9 +662,8 @@ flask-migrate = [
     {file = "Flask-Migrate-2.5.3.tar.gz", hash = "sha256:a69d508c2e09d289f6e55a417b3b8c7bfe70e640f53d2d9deb0d056a384f37ee"},
     {file = "Flask_Migrate-2.5.3-py2.py3-none-any.whl", hash = "sha256:4dc4a5cce8cbbb06b8dc963fd86cf8136bd7d875aabe2d840302ea739b243732"},
 ]
-flask-navigation = [
-    {file = "Flask-Navigation-0.2.0.tar.gz", hash = "sha256:c42d30efa989ca877444a410e8a1cd2563546f9effe3d9fe388eedf7a6c69285"},
-    {file = "Flask_Navigation-0.2.0-py2.py3-none-any.whl", hash = "sha256:5b1f5120dbed47f81c0333aefda48972709d9d8506c02a644cb933508c6dabe1"},
+Flask-Navigation = [
+    {file = "Flask_Navigation-0.2.1-py2.py3-none-any.whl", hash = "sha256:46b9b994fcba51fdecf69d042b9e0c919bedb6cd80b179f93448089b63e19b96"},
 ]
 flask-principal = [
     {file = "Flask-Principal-0.4.0.tar.gz", hash = "sha256:f5d6134b5caebfdbb86f32d56d18ee44b080876a27269560a96ea35f75c99453"},

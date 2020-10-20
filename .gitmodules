@@ -16,3 +16,6 @@
 [submodule "modules/bulma-carousel"]
 	path = modules/bulma-carousel
 	url = https://github.com/Wikiki/bulma-carousel.git
+[submodule "modules/flask-navigation"]
+	path = modules/flask-navigation
+	url = https://github.com/dreamingspires/flask-navigation

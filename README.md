@@ -1,6 +1,12 @@
 ## Running the development server
 `dreamingspires-server` has its dependencies managed by the [poetry](https://python-poetry.org) build system.  To get started, install poetry.
 
+Build the submodules:
+```
+cd modules/flask-navigation
+python3 setup.py bdist_wheel
+```
+
 Within the repo, run:
 
 ```

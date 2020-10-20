@@ -14,7 +14,6 @@ Flask-SQLAlchemy = "^2.4.3"
 Flask-WTF = "^0.14.3"
 werkzeug = "0.16.0"
 email_validator = "^1.1.1"
-Flask-Navigation = "^0.2.0"
 SQLAlchemy-ImageAttach = "^1.1.0"
 filedepot = "^0.7.1"
 flask-principal = "^0.4.0"
@@ -30,6 +29,7 @@ pillow = "^7.2.0"
 Flask-Mail = "^0.9.1"
 flask-admin = "^1.5.6"
 phonenumbers = "^8.12.10"
+flask-navigation = {path = "modules/flask-navigation/dist/Flask_Navigation-0.2.1-py2.py3-none-any.whl"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
