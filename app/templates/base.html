@@ -52,7 +52,7 @@
                     <div class="buttons">
                       {% for item in nav.buttons %}
                         {% if item.is_active %}
-                          <a href="{{ item.url }}" class="button is-warning-light is-rounded">{{ item.label|safe }}</a>
+                          <a href="{{ item.url }}" class="button is-warning is-rounded">{{ item.label|safe }}</a>
                         {% else %}
                           <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
                         {% endif %}
@@ -80,7 +80,7 @@
                     <div class="buttons">
                       {% for item in nav.buttons %}
                         {% if item.is_active %}
-                          <a href="{{ item.url }}" class="button is-rounded is-warning-light" style="font-size: 0.9em">{{ item.label|safe }}</a>
+                          <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
                         {% else %}
                           <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
                         {% endif %}
