@@ -83,6 +83,18 @@ has-background-light > .fas, has-background-light > .fab {
 }
 
 // Custom CSS
+
+// fixes floating footer issue
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body > footer {
+    margin-top: auto;    
+}
+//
+
 .has-equal-height {
     height: 100%;
     display: flex;
@@ -102,6 +114,7 @@ has-background-light > .fas, has-background-light > .fab {
 .is-full-height {
     min-height: 100vh;
 }
+
 .is-square-image-128x128 {
     width: 128px;
     height: 128px;
