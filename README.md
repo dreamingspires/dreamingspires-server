@@ -1,6 +1,11 @@
 ## Running the development server
 `dreamingspires-server` has its dependencies managed by the [poetry](https://python-poetry.org) build system.  To get started, install poetry.
 
+Clone the repository:
+```
+git clone --recurse-submodules git@github.com:dreamingspires/dreamingspires-server.git
+```
+
 Build the submodules:
 ```
 cd modules/flask-navigation
