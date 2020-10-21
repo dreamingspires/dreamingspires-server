@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% from "includes/landing.html" import render_landing %}
+{% from "includes/client_landing.html" import render_landing %}
 {% from "includes/client_register.html" import render_get_in_touch %}
 
 {% macro render_post(post) %}
@@ -26,7 +26,7 @@
 {% endmacro %}
 
 {% block fullheight %}
-{{ render_landing(researcher_rel_href=True, chevron_id="#client_desk_1") }}
+{{ render_landing(researcher_rel_href=True, chevron_id="#register_client") }}
 {% endblock %}
 
 {% block content %}
@@ -126,7 +126,7 @@
 
 
 <!-- MOBILE  -->
-<section class="is-hidden-desktop">
+<section id="client_desk_1" class="is-hidden-desktop ">
   <section class="is-hero has-background-info has-text-light pb-0">
     <div class="is-8 content px-6 pt-3" >
       {{ welcomeBlock() }}
