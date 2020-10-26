@@ -9,3 +9,4 @@ secret_config.py
 dist/
 depot/
 dreamingspires_server.egg-info/
+dreaming-workspace.code-workspace
