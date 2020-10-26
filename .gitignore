@@ -10,3 +10,4 @@ dist/
 depot/
 dreamingspires_server.egg-info/
 dreaming-workspace.code-workspace
+modules/bulma/

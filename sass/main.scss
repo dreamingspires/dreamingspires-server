@@ -91,7 +91,9 @@ body {
     flex-direction: column;
 }
 body > footer {
-    margin-top: auto;    
+    margin-top: auto; 
+    height: calc(110px + 1rem);
+    box-sizing: border-box;   
 }
 //
 
@@ -113,6 +115,10 @@ body > footer {
 
 .is-full-height {
     min-height: 100vh;
+}
+.is-fullheight-with-footer-and-navbar {
+    min-height: calc(100vh - 166px - 1rem);
+
 }
 
 .is-square-image-128x128 {
