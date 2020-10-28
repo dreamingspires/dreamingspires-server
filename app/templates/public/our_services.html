@@ -78,25 +78,13 @@
       
       <div class="columns mx-6 my-3">
         {% for i in range(3) %}
-
-          <div class="column collapsible-wrapper is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch pt-6">
-            {{ client_title(i) }}
-            {{ client_icon(i, 0) }}
-            {% set div_id_numerated = 'collapsible-message' + i|string() %}
-            {% set imageid = 'imageid' + i|string() %}
-            <div class="columns is-vcentered is-gapless has-text-weight-bold">
-                <div class = "column is-four-fifths">
-                  {{ client_blurb_title(i) }}
-                </div>
-                <div class = "column is-one-fifth">
-                  <button style="border: none; outline: none;" class="title title is-2 has-background-info pb-1 fas fa-chevron-down has-text-light" aria-label="chevron" onclick="ToggleExpand(this)">
-                  </button>
-                </div>
-            </div>
-            <div id="{{ div_id_numerated }}" class="is-collapsible">
-              {{ client_blurb(i) }}
-            </div>
-          </div>
+        <div class="column">
+          {{ client_title(i) }}
+          {{ client_icon(i, 0) }}
+          <b>{{ client_blurb_title(i) }}</b>
+          <br>
+          {{ client_blurb(i) }}
+        </div> 
         {% endfor %}
 
       </div>    
@@ -116,6 +104,8 @@
               <div class="has-text-info">
                 {{ client_icon(3, 0) }}
               </div>
+              <b>{{ client_blurb_title(3) }}</b>
+              <br>
               {{ client_blurb(3) }}
             </div>
             <div class="tile is-parent is-vertical is-6">
@@ -127,6 +117,8 @@
                 <div class="has-text-info">
                   {{ client_icon(4, 0) }}
                 </div>
+                <b>{{ client_blurb_title(4) }}</b>
+                <br>
                 {{ client_blurb(4) }}
               </div>
             </div>
@@ -139,7 +131,7 @@
         <div class="tile is-parent is-vertical is-4">
           
           <p class="title is-size-1 is-pulled-right has-text-dark" style="text-align:right">Interested? Call:<br>
-            <span class="is-size-2 mb-3">{{ call_number() }}</span>
+            <span class="is-pulled-right is-size-2 mb-3" style="white-space:nowrap">{{ call_number() }}</span>
           </p>            
           <div class="tile is-parent is-12">
             <div class="tile is-parent is-12 is-vertical">          
@@ -148,6 +140,8 @@
                   {{ client_icon(5, 0) }}
                 </div>
                 {{ client_title(5)}}
+                <b>{{ client_blurb_title(i) }}</b>
+                <br>
                 {{ client_blurb(5) }}
               </div>
               <div class="tile is-child is-12 has-text-centered">
@@ -157,6 +151,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="has-text-centered pb-1">
+        <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
       </div>
     </section>
   </section>
@@ -168,7 +165,7 @@
     <div class="is-8 content px-6 pt-3" >
       {{ welcomeBlock() }}
     </div>
-    <div class="mt-6">
+    <div class="mt-6 px-6">
       <p class="subtitle subtitle-on-dark is-size-3 mb-0 has-text-centered mb-3">Know what you need?</p>
       <div class="level">
         <div class="buttons level-item">
@@ -181,7 +178,7 @@
     </div>
   </section>
 
-  {% set list2 = [1,1,1,3,0,5] %}
+  {% set list2 = [2,1,5,0,3,4] %}
   {% set section_number = list2|length %}
   {% for j in list2 %}
   {% set i = loop.index0 %}
@@ -195,6 +192,7 @@
         </div>
         <div class="columns is-mobile is-vcentered is-gapless mx-3">
           <div class = "column is-four-fifths has-text-weight-bold">
+            <br>
             {{ client_blurb_title(j) }}
           </div>
           <div class = "column is-one-fifth">
@@ -203,12 +201,10 @@
           </div>
         </div>
         <div id="blurb0" class="is-collapsible">
-          <div class="columns is-vcentered is-mobile mx-0">
-            {{ section_alignment(i,j,1) }}
-          </div>
+          {{ section_alignment(i,j,1) }}
         </div>
       </div>
-    {{ last_section_test(i,section_number,hashed_regMob_numerated) }}
+    {{ last_section(i,section_number,hashed_regMob_numerated) }}
   </section>
   {% endfor %}
 </section>
@@ -293,7 +289,7 @@
   </p>
 {% endmacro %}
 
-{% macro last_section_test(a,b,regMob) %}
+{% macro last_section(a,b,regMob) %}
   {% if a + 1 == b %}
     <div class="level mt-6">
       <div class="level-item">
@@ -306,7 +302,7 @@
     <div class="has-text-centered pb-1">
       <a href="#signup" class="title is-2 fas fa-chevron-down {{ section_color((a + 2) // 2 % 2,2) }}"></a>
     </div>
-  {% elif a // 2 % 2 == 0 %}
+  {% elif a % 2 == 0 %}
   {% else %}
     <div class="has-text-centered pb-1">
       <a href="{{ regMob }}" class="title is-2 fas fa-chevron-down {{ section_color((a + 2) // 2 % 2,2) }}"></a>
@@ -314,20 +310,24 @@
   {% endif %}
 {% endmacro %}
 
-{% macro section_alignment(a,n,v) %}
-  {% if a % 2 == 0 %}
+{% macro section_alignment(align,n,v) %}
+  {% if align % 2 == 0 %}
+    <div class="columns is-vcentered is-mobile ml-0 mr-4">
+      <div class="column is-three-quarters">
+        {{ client_blurb(n) }}
+      </div>
+      <div class="column is-3">
+        {{ client_icon(n, v) }}
+      </div>
+    </div>
+  {% else %}
+  <div class="columns is-vcentered is-mobile mr-0 ml-4">
+    <div class="column is-3">
+      {{ client_icon(n, v) }}
+    </div>
     <div class="column is-three-quarters">
       {{ client_blurb(n) }}
     </div>
-    <div class="column is-2">
-      {{ client_icon(n, v) }}
-    </div>
-  {% else %}
-  <div class="column is-2">
-    {{ client_icon(n, v) }}
-  </div>
-  <div class="column is-three-quarters">
-    {{ client_blurb(n) }}
   </div>
   {% endif %}
 {% endmacro %}
