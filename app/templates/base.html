@@ -10,7 +10,7 @@
     <link rel="icon" href="{{ url_for('static', filename='assets/images/logos/mini_logo.svg') }}">
     <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
-    <script src="https://kit.fontawesome.com/108492ddd0.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{{ url_for('static', filename='assets/js/bulma-collapsible.min.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>   
     <script type="text/javascript" charset="utf-8">
@@ -33,92 +33,123 @@
 
 <body style="overflow-x: hidden">
     <a id="top"></a>
-    <section class="hero is-primary {% if is_fullpage %} is-fullheight{% endif %}">
-        <div class="hero-head">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
+    <section class="hero is-info">
+        <div class="hero-head" style="height:56px;">
+          {# Keep the navbar in alignment with the margins #}
+          <div class="columns is-mobile is-centered my-0">
+            <div class="column is-11-mobile is-9-tablet is-10-desktop is-10-widescreen is-10-fullhd px-0 py-0">
+              <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <a class="navbar-item" href="{{ url_for('index') }}">
-                          <figure class="image is-32x32">
-                              <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_circle.svg') }}">
-                          </figure>
+                    <figure style="width: 90px" class="image is-hidden-mobile">
+                      <img src="{{ url_for('static', filename='assets/images/logos/logo_dark.svg') }}" style="max-height: 3rem">
+                    </figure>
+                    <figure style="width: 40px" class="image is-hidden-tablet">
+                      <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_dark_variant.svg') }}" style="width:100%;">
+                    </figure>
                   </a>
-
-                  <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                  <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd" style="margin-left: auto">
+                    <div class="buttons">
+                      {% for item in nav.buttons %}
+                        {% if item.is_active %}
+                          <a href="{{ item.url }}" class="button is-warning is-rounded">{{ item.label|safe }}</a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="navbar-item button is-warning is-rounded">{{ item.label|safe }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <a role="button" class="navbar-burger burger has-text-light ml-0" aria-label="menu" aria-expanded="false" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                   </a>
                 </div>
                 <div class="navbar-menu" id="navMenu">
-                    <div class="navbar-start">
-                        {% for item in nav.start %}
-                            {% if item.is_active %}
-                            <a href="{{ item.url }}" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
-                            {% else %}
-                            <a href="{{ item.url }}" class="navbar-item has-text-white">{{ item.label|safe }}</a>
-                            {% endif %}
-                        {% endfor %}
+                  <div class="navbar-end">
+                    {% for item in nav.end %}
+                      {% if item.is_active %}
+                      <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
+                      {% else %}
+                      <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white">{{ item.label|safe }}</a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <div class="navbar-item is-hidden-mobile">
+                    <div class="buttons">
+                      {% for item in nav.buttons %}
+                        {% if item.is_active %}
+                          <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
+                        {% else %}
+                          <a href="{{ item.url }}" class="button is-rounded is-warning" style="font-size: 0.9em">{{ item.label|safe }}</a>
+                        {% endif %}
+                      {% endfor %}
                     </div>
+                  </div>
 
-                    {# <div class="container has-text-dark"> #}
-                        <div class="navbar-end">
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                {% if current_user.is_authenticated %}
-                                    <a class="navbar-link">
-                                        <figure class="image is-32x32">
-                                            <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    {% if current_user.is_authenticated %}
+                      <a class="navbar-link">
+                        <figure class="image is-32x32">
+                          <img class="is-rounded" src="{{ current_user.display_image.thumb_url if current_user.display_image is not none else 'https://bulma.io/images/placeholders/128x128.png' }}">
 
-                                        </figure>
-                                        &nbsp;
-                                        {{ current_user.display_name }}
-                                    </a>
-                                    <div class="navbar-dropdown is-right is-boxed">
-                                        {% for item in nav.profile %}
-                                        <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    <div class="buttons">
-                                        {% for item in nav.end %}
-                                            {% if item.is_active %}
-                                                <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
-                                            {% else %}
-                                                <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
+                        </figure>
+                        &nbsp;
+                        {{ current_user.display_name }}
+                      </a>
+                      <div class="navbar-dropdown is-right is-boxed">
+                        {% for item in nav.profile %}
+                        <a href="{{ item.url }}" class="dropdown-item">{{ item.label|safe }}</a>
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                        <div class="buttons">
+                          {% for item in nav.login %}
+                            {% if item.is_active %}
+                              <a href="{{ item.url }}" class="button is-light">{{ item.label|safe }}</a>
+                            {% else %}
+                              <a href="{{ item.url }}" class="button is-primary">{{ item.label|safe }}</a>
 
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                            {% endif %}
+                          {% endfor %}
                         </div>
-                    {# </div> #}
+                      {% endif %}
+                    </div>
+                  </div>
                 </div>
-            </nav>
-            <hr class="my-0">
+              </nav>
+            </div>
+          </div>
         </div>
 
-        {# <div class="hero-body"> #}
-            {# message flashing #}
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {{ flash(messages) }}
-            {% endwith %}
-
-            {# <div class="is-fullwidth"> #}
-               {% block fullheight %}
-               {% endblock %}
-               {# </div> #}
-             {# </div> #}
+        {# message flashing #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {{ flash(messages) }}
+        {% endwith %}
     </section>
-   {% block content %}
-   {% endblock %}
-    <footer class="footer py-2">
+
+    <section class="columns is-mobile is-centered my-0 has-background-backdrop is-fullheight-with-footer-and-navbar">
+      <div class="column is-12-mobile is-9-tablet is-10-desktop is-10-widescreen is-10-fullhd has-box-shadow-x px-0 py-0 has-background-light">
+        <section class="hero{% if is_fullpage %} is-fullheight-with-navbar {% endif %}">
+          {% block fullheight %}
+          {% endblock %}
+        </section>
+     {% block content %}
+     {% endblock %}
+      </div>
+    </section>
+
+
+    <footer class="footer has-background-black has-text-light mb-0 pb-0 pt-4">
+      <div class="my-5 is-hidden-mobile "></div>
       <div class="content has-text-centered">
         {% for item in nav.footer %}
-            <a href="{{ item.url }}">{{ item.label|safe }}</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="{{ item.url }}">{{ item.label|safe }}</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% endfor %}
         <p>
-          <strong>Dreaming Spires</strong>
+          <strong class="has-text-light">Dreaming Spires</strong>
           &nbsp;&nbsp;&nbsp;
           Copyright © 2020.  All rights reserved.
         </p>

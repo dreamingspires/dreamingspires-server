@@ -5,9 +5,9 @@
     <div class="card-content">
         <div class="media">
             <div class="media-content has-text-centered">
-              <p class="title article-title">{{ post.title }}</p>
+              <p class="title article-title has-text-light">{{ post.title }}</p>
                 <div class="tags has-addons level-item">
-                  <span class="tag is-rounded is-info">{{ post.author }}</span>
+                  <span class="tag is-rounded is-warning">{{ post.author }}</span>
                   <span class="tag is-rounded">{{ post.date_created.strftime('%-d %b, %Y') }}</span>
                 </div>
             </div>
@@ -15,7 +15,7 @@
         {% if post.display_image is not none %}
         <img src="{{ post.display_image.url }}">
         {% endif %}
-        <div class="content article-body">
+        <div class="content article-body has-text-light">
           {{ post.body_html | safe }}
         </div>
     </div>
@@ -32,11 +32,12 @@
     </section>
 
     <div class="container">
-        <section class="columns is-mobile is-centered" style="margin-top: -170px">
-          <div class="column is-11-mobile is-8-tablet is-7-desktop is-7-widescreen is-7-fullhd">
-            {% for post in posts %}
-              {{ render_post(post) }}
-            {% endfor %}
-          </div>
-        </section>
+      <section class="columns is-mobile is-centered" style="margin-top: -170px">
+        <div class="column background-primary-dark is-11-mobile is-8-tablet is-7-desktop is-7-widescreen is-7-fullhd">
+          {% for post in posts %}
+            {{ render_post(post) }}
+          {% endfor %}
+        </div>
+      </section>
+    </div>
 {% endblock %}

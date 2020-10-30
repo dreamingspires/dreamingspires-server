@@ -1,193 +1,223 @@
 {% extends "base.html" %}
 
+{% from "macros/bulma_form.html" import render_form, render_field %}
+{% from "includes/landing.html" import render_landing %}
+{% from "includes/client_register.html" import render_get_in_touch %}
+
 {% block fullheight %}
-<div class="hero-body px-0 py-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:top; display:flex; flex-direction:column">
-  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline.svg') }}'); background-size:cover; background-position:bottom; width:100%">
-
-
-              <div style="flex:3; display:flex; flex-direction:column;">
-                    <div class="columns is-mobile is-centered is-vcentered" style="flex:1">
-                        <div class="column is-three-quarters-mobile is-half-tablet is-half-desktop is-half-widescreen is-one-third-fullhd has-text-centered mt-6">
-                            <figure class="image has-text-centered">
-                                <img src="{{ url_for('static', filename='assets/images/logos/extended_logo.svg') }}" style="width:100%;">
-                            </figure>
-                        </div>
-                    </div>
-                    <!-- <h1 class="title is-1">Dreaming Spires</h1>
-                    <p class="subtitle is-3">Bringing programming talent to your research.</p> -->
-              </div>
-              <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-              <p class="is-size-5 mb-4 has-text-shadowed">Are you a...</p>
-                <div class="columns is-centered">
-                  <div class="column is-5">
-                    <div class="columns is-centered">
-                      <div class="column has-equal-height">
-                          <a href="{{ url_for('auth.register_client') }}">
-                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed">
-                                  <p>researcher or research institution</p>
-                                  <p>looking for programming talent?</p>
-                              </button>
-                          </a>
-                      </div>
-                      <div class="column has-equal-height">
-                          <a href="{{ url_for('auth.register_developer') }}">
-                              <button class="button is-medium is-primary is-inverted is-outlined is-box-button has-text-shadowed">
-                                  <p>developer or student looking for</p>
-                                  <p>freelance work?</p>
-                              </button>
-                          </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="has-text-centered pb-1">
-                <a href="#about" class="title is-2 fas fa-chevron-down"></a>
-              </div>
-
-  </div>
-</div>
+{{ render_landing(chevron_id="#page_1") }}
 {% endblock %}
+
 {% block content %}
-<section class="section is-fullwidth is-medium has-background-info pt-1">
-  <a id="about"></a>
-  <div class="container is-fluid">
-    <div style="flex:1; display:flex; flex-direction:column;" class="has-text-centered">
-      <a href="#top" class="title has-text-white is-2 fas fa-chevron-up"></a>
-    </div>
-    <div class="columns is-vcentered pt-5">
-      <div class="column content">
-        <h1>We are a collaborative freelance agency...</h1>
-        <p> We link first-class programming talent with interesting programming projects, tailoring to the needs of your group.</p>
-      </div>
-      <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/research.jpg') }}" style="width:100%;">
-      </div>
-    </div>
-  </div>
-</section>
-<hr class="my-0">
-
-
-<section class="section is-fullwidth is-medium has-background-primary">
-  <div class="container is-fluid">
-    <div class="columns is-vcentered">
-      <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/typing.jpg') }}" style="width:100%;">
-      </div>
-      <div class="column content">
-        <h1>...working on interesting projects...</h1>
-        <p>We love finding elegant, practical solutions to diverse programming problems. Our rich skillset lends itself well to interdisciplinary work. Take a look at <a href="{{ url_for('auth.register_client', _anchor='portfolio') }}">our portfolio</a>.</p>
+<section id="page_1" class="section is-fullwidth is-medium has-background-info pt-6 pb-1 px-6">
+  <div class="columns">
+    <div class="column is-7-fullhd is-9-widescreen is-10-desktop has-text-light">
+      <h1 class="title has-text-light">Welcome to Dreaming Spires</h1>
+      <h2 class="subtitle has-text-primary is-italic">Bringing Programming Talent to Your Research</h2>
+      <div class="columns">
+        <div class="column is-1 is-hidden-mobile"></div>
+        <div class="column">
+          <p>We specialise in bringing first-class programming talent to computational projects, tailored to the needs of digital research.</p>
+          <br>
+          <p>With our roots in the Oxbridge academic communities, we accelerate research projects through collaboration within our freelance community.</p>
+        </div>
+      <!--<p>With our core values in collaboration, open source, and good software engineering</p>-->
       </div>
     </div>
   </div>
-</section>
-<hr class="my-0">
+  <div class="is-hidden-mobile mt-6"></div>
+  <div class="columns is-centered">
+    <div class="column is-9 is-11-tablet">
+      <div class="columns">
+        <div class="column is-half has-equal-height has-text-light">
+          <p class="is-size-5 has-text-weight-semibold">Perfect for Researchers...</p>
 
-<section class="section is-fullwidth is-medium has-background-info">
-  <div class="container is-fluid">
-    <div class="columns is-vcentered">
-      <div class="column content">
-        <h1>...specialising in open source...</h1>
-        <p>We want our code to be as useful as possible, so we strive to work according to open source values. We strive to contribute code upstream through our community-driven efforts.</p>
-      </div>
-      <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/code_heart.jpg') }}" style="width:100%;">
-      </div>
-    </div>
-  </div>
-</section>
-<hr class="my-0">
+          <p class="has-text-left py-3">
+            <span class="icon has-text-warning">
+              <i class="fas fa-check"></i>
+            </span>
+            Consultants who work closely with your project
+          </p>
+          <p class="has-text-left py-3">
+            <span class="icon has-text-warning">
+              <i class="fas fa-check"></i>
+            </span>
+            Access to our wide talent pool
+          </p>
+          <p class="has-text-left py-3">
+            <span class="icon has-text-warning">
+              <i class="fas fa-check"></i>
+            </span>
+						Competitive rates due to our unique model
+          </p>
 
-<section class="section is-fullwidth is-medium has-background-primary">
-  <div class="container is-fluid">
-    <div class="columns is-vcentered">
-      <div class="column">
-        <img class="has-box-shadow" src="{{ url_for('static', filename='assets/images/photos/oxford_arial.jpg') }}" style="width:100%;">
-      </div>
-      <div class="column content">
-        <h1>...with a wide talent pool</h1>
-        <p>Our developers represent a diverse variety of skillsets, ranging from web design and software development to porting and patching old codebases.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<hr class="my-0">
-
-<section class="section is-fullwidth is-medium has-background-info">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-4">
-        <h2 class="title">How does it work?</h2>
-        <hr>
-      </div>
-
-    </div>
-    {% include 'includes/general_timeline.html' %}
-  </div>
-  </div>
-</section>
-<hr class="my-0">
-
-
-<section class="section is-fullwidth is-medium has-background-primary">
-  <div class="container">
-    <div class="columns">
-      <div class="column">
-        <h2 class="title">Interested?</h2>
-        <hr>
-      </div>
-      <div class="column is-8 mt-6">
-        <article class="media">
-          <div class="media-content content" style="overflow:hidden"> {# TODO: work out why this element overflows on viewport width 667 (iPhone 6) #}
-            <h4 class="subtitle">Register with us</h4>
-            <div class="columns is-vcentered">
-              <div class="column content">
-                <p>Whether you're a seasoned developer or a research team member, we'd love to hear from you!  Although we're in the early stages of our release, you can register your interest below.</p>
-                  <div class="columns is-centered">
-                    <div class="column is-half has-equal-height">
-                        <a href="{{ url_for('auth.register_client') }}">
-                            <button class="button is-medium is-dark is-outlined is-box-button">
-                                <p>register as a client</p>
-                            </button>
-                        </a>
-                    </div>
-                    <div class="column is-half has-equal-height">
-                        <a href="{{ url_for('auth.register_developer') }}">
-                            <button class="button is-medium is-dark is-outlined is-box-button">
-                                <p>register as a developer</p>
-                            </button>
-                        </a>
-                    </div>
-                  </div>
-              </div>
+          <div class="is-hidden-mobile mt-6"></div>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-narrow has-text-centered">
+              <p class="has-text-centered pt-4">Find out more as...</p>
+              <a class="pt-2" href="{{ url_for('our_services', _anchor='register_client') }}">
+                <button class="button is-normal is-warning has-background-warning-dark is-rounded is-fullwidth">
+                  <p>A Researcher</p>
+                </button>
+              </a>
             </div>
+          </div>
+        </div>
+        <div class="column is-half has-equal-height has-text-light">
+          <p class="is-size-5 has-text-weight-semibold">Ideal for Developers...</p>
 
-          </div>
-        </article>
-        <article class="media">
-          <div class="media-content content">
-            <h4 class="subtitle">More questions?</h4>
-            <p>
-            Take a look at our Frequently Asked Questions pages for <a href="{{ url_for('developer_faq') }}">developers</a> and <a href="{{ url_for('client_faq') }}">clients</a>.
-            </p>
-          </div>
-        </article>
-        <article class="media">
-          <div class="media-content content">
-            <h4 class="subtitle">Contact us</h4>
-            <p>
-            Whether you'd like to discuss your research project, find more about what working for us is like, or something else, we'd love to hear from you!
-            </p>
-            <p>
-            You can email us at <a href="mailto:contact@dreamingspires.dev">contact@dreamingspires.dev</a>
-            </p>
-          </div>
-        </article>
-        
+          <p class="has-text-left py-3">
+            <span class="icon has-text-primary">
+              <i class="fas fa-check"></i>
+            </span>
+						Interesting projects with well-defined scope
+          </p>
+          <p class="has-text-left py-3">
+            <span class="icon has-text-primary">
+              <i class="fas fa-check"></i>
+            </span>
+						Flexible working hours
+          </p>
+          <p class="has-text-left py-3">
+            <span class="icon has-text-primary">
+              <i class="fas fa-check"></i>
+            </span>
+						Writing open source software that makes a difference
+          </p>
 
+          <div class="is-hidden-mobile mt-6"></div>
+          <div class="columns is-mobile is-centered">
+            <div class="column is-narrow has-text-centered">
+              <p class="has-text-centered pt-4">Find out more as...</p>
+              <a class="pt-2" href="{{ url_for('auth.register_developer') }}">
+                <button class="button is-normal is-primary has-background-primary-dark is-rounded is-fullwidth">
+                  <p>A Developer</p>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="is-hidden-mobile mt-5"></div>
+  <div class="has-text-centered">
+    <a href="#page_2" class="title is-2 fas fa-chevron-down has-text-white"></a>
+  </div>
 </section>
+
+<section id="page_2" class="section is-fullwidth is-medium has-background-light pt-6 pb-0 px-6">
+  <div class="column">
+    <h1 class="title has-text-dark">Our Development Process</h1>
+    <h2 class="subtitle has-text-primary is-italic">The Unique Dreaming Spires Model</h2>
+  </div>
+
+	<!-- Mobile timeline -->
+	<div class="columns is-centered is-hidden-tablet mt-2">
+		<div class="column is-11">
+      {% for i in range(7) %}
+        <div class="columns is-mobile is-vcentered">
+          <div class="column is-3 has-text-centered">
+            {{ timeline_logo(i) }}
+          </div>
+          <div class="column is-9">
+            {{ timeline_text(i) }}
+          </div>
+        </div>
+      {% endfor %}
+		</div>
+	</div>
+
+	<!-- Desktop timeline -->
+	<div class="columns is-centered is-hidden-mobile">
+		<div class="column is-11-tablet is-10-desktop is-9-widescreen is-9-fullhd">
+      <div style="display: grid; align-items: center; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 1fr">
+        {% for i in range(7) %}
+          {% if i%2 == 1 %}
+            <div style="grid-column-end: span 5">
+            </div>
+            <div style="grid-column-end: span 2" class="has-text-centered">
+              {{ timeline_logo(i) }}
+            </div>
+            <div style="grid-column-end: span 5">
+              {{ timeline_text(i) }}
+            </div>
+          {% else %}
+            <div style="grid-column-end: span 5">
+              {{ timeline_text(i) }}
+            </div>
+            <div style="grid-column-end: span 2" class="has-text-centered">
+              {{ timeline_logo(i) }}
+            </div>
+            <div style="grid-column-end: span 5">
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="has-text-centered">
+    <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
+  </div>
+</section>
+
+{{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form) }}
 {% endblock %}
+
+{% macro timeline_logo(n) %}
+  {% if n == 0 %}
+    <span class="icon is-large" style="color: #53A4AB">
+      <i class="fas fa-3x fa-lightbulb"></i>
+    </span>
+  {% elif n == 1 %}
+    <span class="icon is-large" style="color: #3C8790">
+      <i class="fas fa-3x fa-clipboard-list"></i>
+    </span>
+  {% elif n == 2 %}
+    <span class="icon is-large" style="color: #266975">
+      <i class="fas fa-3x fa-users-cog"></i>
+    </span>
+  {% elif n == 3 %}
+    <span class="icon is-large" style="color: #0F4C5A">
+      <i class="fas fa-3x fa-terminal"></i>
+    </span>
+  {% elif n == 4 %}
+    <span class="icon is-large" style="color: #2A4E54">
+      <i class="fas fa-3x fa-stopwatch"></i>
+    </span>
+  {% elif n == 5 %}
+    <span class="icon is-large" style="color: #7A5343">
+      <i class="fas fa-3x fa-bug"></i>
+    </span>
+  {% else %}
+    <span class="icon is-large" style="color: #AF5737">
+      <i class="fas fa-3x fa-flag"></i>
+    </span>
+  {% endif %}
+{% endmacro %}
+
+{% macro timeline_text(n) %}
+  {% if n == 0 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">1. &nbsp;Project Begins</h2>
+		<a href="#signup">Reach out to us</a> to discuss your needs - we offer a free quote and initial consultation for every project.
+  {% elif n == 1 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">2. &nbsp;Define Requirements</h2>
+    Our specialist consultants will discuss with you the ways your research could be accelerated by introducing cyber talent.
+  {% elif n == 2 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">3. &nbsp;Allocate Developers</h2>
+		After agreeeing a solution, we break your project down into components, making each one available for our pool of talented workers to apply for.
+    We’ll select the most appropriate applicants, who then begin on your work.
+  {% elif n == 3 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">4. &nbsp;Project Work Underway</h2>
+    The chosen developers work collaboratively on your project, and we’ll handle the interdisciplinary coordination, be it logo designers, or data scientists.
+  {% elif n == 4 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">5. &nbsp;Intermediary Reports</h2>
+    In the meantime, you’ll be receiving detailed progress reports each week up until project completion.
+  {% elif n == 5 %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">6. &nbsp;Code Test and Review</h2>
+		Our code is subject to rigorous quality control procedures, making use of continuously integrated testing suites to ensure the finished result performs to a high standard.
+  {% else %}
+    <h2 class="subtitle has-text-weight-semibold mb-0">7. &nbsp;Project Completion</h2>
+    We help you get the ball rolling with your complete project via training, hosting and maintenance packages for evolving projects.
+  {% endif %}
+{% endmacro %}

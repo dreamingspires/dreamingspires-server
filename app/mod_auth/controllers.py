@@ -137,12 +137,12 @@ def register_developer():
     return render_template('auth/register_developer.html', form=form, \
         entries=list(range(1000)))
 
-#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
-def register_client():
-    return render_template('auth/register_client_temp.html')
-
-
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])
+def register_client():
+    return redirect(url_for('our_services'))
+
+
+#@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     form = RegisterClientInterest()
     if form.validate_on_submit():
@@ -168,7 +168,7 @@ def register_client():
 
 @mod_auth.route('thanks_for_registering_client')
 def thanks_for_registering_client():
-    return render_template('auth/thanks_for_registering.html')
+    return render_template('auth/thanks_client.html')
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():

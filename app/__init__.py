@@ -11,6 +11,7 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_admin import Admin
 from werkzeug.exceptions import HTTPException
+from werkzeug.utils import ImportStringError
 
 from app.utils import register_template_utils 
 
@@ -38,12 +39,18 @@ app.jinja_env.lstrip_blocks = True
 
 # Configurations
 app.config.from_object('config')
-app.config.from_object('secret_config')
+try:
+    app.config.from_object('secret_config')
+except ImportStringError:
+    print('Warning: secret_config.py not found')
 
 # Add the fathom analytics ID
 @app.context_processor
 def inject_id():
-    return dict(FATHOM_ID=app.config['FATHOM_ID'])
+    if 'FATHOM_ID' in app.config.keys():
+        return dict(FATHOM_ID=app.config['FATHOM_ID'])
+
+    return {}
 
 # Register extensions with app
 db = SQLAlchemy(app)
@@ -97,22 +104,25 @@ except KeyError:
     pass
 
 
-nav.Bar('start', [
-    nav.Item('Home', 'index'),
-    nav.Item('<b>Blog</b>', 'blog'),
-    nav.Item('Client', 'auth.register_client'),
-    nav.Item('Developer', 'auth.register_developer'),
-])
-
 nav.Bar('end', [
-    nav.Item('<strong>Client sign up</strong>', 'auth.register_client', args={'_anchor':'signup'}),
-    nav.Item('<strong>Dev sign up</strong>', 'auth.register_developer'),
+    nav.Item('Home', 'index'),
+    nav.Item('Our Services', 'our_services', args={'_anchor': 'register_client'}),
+    nav.Item('Portfolio', 'portfolio'),
+    nav.Item('Develop with Us', 'auth.register_developer'),
     nav.Item('Log in', 'auth.login')
 ])
 
+nav.Bar('buttons', [
+    nav.Item('Contact Us', 'contact'),
+])
+
+#nav.Bar('login', [
+#    nav.Item('Log in', 'auth.login')
+#])
+
 nav.Bar('footer', [
     nav.Item('Home', 'index'),
-    nav.Item('About', 'index', args={'_anchor':'about'}),
+    nav.Item('About', 'index', args={'_anchor':'page_1'}),
     nav.Item('Developer FAQ', 'developer_faq'),
     nav.Item('Client FAQ', 'client_faq'),
     nav.Item('Contact', 'contact'),

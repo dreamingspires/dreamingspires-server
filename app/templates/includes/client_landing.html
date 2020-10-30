@@ -1,0 +1,14 @@
+{% macro render_landing(researcher_rel_href=False, developer_rel_href=False, chevron_id="#signup") %}
+<div class="hero-body py-0 px-0" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/background-original.png') }}'); background-size:cover; background-position:bottom; display:flex; flex-direction:column">
+  <div class="mt-6 mb-0 mx-0 pt-6 pb-0 px-0">
+  	<div class="is-hidden-touch is-hidden-tablet-only is-hidden-desktop-only" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-position: bottom; background-repeat: repeat-x; background-size: contain; height: 200px">
+  	</div>
+  	<div class="is-hidden-widescreen" style="background-image: url('{{ url_for('static', filename='assets/images/backgrounds/oxford_skyline_full.svg') }}'); background-position: bottom left; background-repeat: repeat-x; background-size: cover; height: 200px">
+    </div>
+    <div class="has-text-centered pb-1" style="margin-top: -50px">
+      <a href="{{ chevron_id }}" class="title is-2 fas fa-chevron-down has-text-white"></a>
+    </div>
+  </div>
+	
+</div>
+{% endmacro %}

@@ -1,0 +1,36 @@
+{% from "macros/bulma_form.html" import render_form %}
+
+{% macro render_get_in_touch(message, form) %}
+<section id="signup" class="section is-fullwidth is-medium has-background-info has-text-light py-6">
+	<div class="columns">
+		<div class="column is-half">
+      <div class="columns is-centered">
+        <div class="column is-11-tablet is-10-desktop is-7-widescreen is-7-fullhd">
+          <h1 class="title is-size-1 has-text-light">GET IN TOUCH!</h1>
+          <p>
+          {{ message }}
+          </p>
+          <div class="has-text-centered is-hidden-mobile mt-6">
+            <img src="{{ url_for('static', filename='assets/images/icons/megaphone_light.svg') }}" style="width:90%;">
+          </div>
+        </div>
+      </div>
+    </div>
+		<div class="column is-half">
+      <div class="columns is-centered">
+        <div class="column is-11-tablet is-10-desktop is-10-widescreen is-10-fullhd pt-6">
+          {{ render_form(form, ".#signup", width=12, box=False, mark_required=False, is_horizontal=False) }}
+          <p class="is-size-7 is-italic">
+          At Dreaming Spires, we take your data seriously.  Any data you give us will be handled according to our <a href="{{ url_for('privacy_policy') }}">privacy policy</a>.
+          <p>
+        </div>
+        {#
+        <div class="has-text-centered is-hidden-tablet mt-6">
+          <img src="{{ url_for('static', filename='assets/images/icons/megaphone_light.svg') }}" style="width:50%;">
+        </div>
+        #}
+      </div>
+		</div>
+	</div>
+</section>
+{% endmacro %}

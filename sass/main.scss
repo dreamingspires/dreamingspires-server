@@ -6,18 +6,41 @@ $pink: #FA7C91;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
+$cyan: #53A4AB;
 $cyan-light: #71C0F4;
 $cyan-lighter: #B6DFF9;
 
 $brand-blue-darker: #00878C;
 $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
+$brand-blue-alt: #53A4AB;
+
+$dark-brand-background: #0F4C5A;
+$brand-dark: #0F4C5A;
+$brand-cream: #F3EFEA;
+$brand-backdrop: #CFCFCF;
+$brand-warning: #D26D48;
+$brand-warning-dark: #AF5737;
+$brand-link: #999999;
 
 $mobile: 760px; // Usually 768px, overridden for my splitscreen
 
 // Update Bulma's global variables
 $primary: $brand-blue;
+$primary-dark: $brand-blue-alt;
+$info: $brand-dark;
+$light: $brand-cream;
+$info-light: $cyan-light;
+$warning: $brand-warning;
+$warning-dark: $brand-warning-dark;
+$link: $brand-link;
 $navbar-breakpoint: $mobile;
+$scheme-main: $dark-brand-background;
+
+$input-background-color: hsl(0, 0%, 100%); // This is required for some reason as the input box styling is broken
+
+// Other colour updates
+$input-placeholder-color: hsl(0, 0%, 21%);
 
 // Import Bulma
 @import "../modules/bulma/bulma.sass";
@@ -27,7 +50,53 @@ $navbar-breakpoint: $mobile;
 @import "../modules/bulma-o-steps/index.sass";
 @import "../modules/bulma-carousel/src/sass/index.sass";
 
+// Custom colours
+.has-background-backdrop {
+    background-color: $brand-backdrop !important;
+}
+
+.subtitle-on-white {
+    color: #53A4AB;
+}
+
+.subtitle-on-dark {
+    color: #65C8D0;
+}
+
+//allows for dynamic coloring of titles
+section.has-background-info .title,  section.has-background-info h1, section.has-background-info h2 {
+    color: $light;
+}
+section.has-background-light .title,  section.has-background-light h1, section.has-background-light h2{
+    color: black;
+}
+//allows for dynamic colouring of subtitles
+.has-background-info .subtitle,  .has-background-info h3 {
+    color: #65C8D0;
+}
+section.has-background-light .subtitle,  section.has-background-light h3 {
+    color: #53A4AB;
+}
+//allows for dynamic colouring of svgs
+has-background-light > .fas, has-background-light > .fab {
+    color: $info;
+}
+
 // Custom CSS
+
+// fixes floating footer issue
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body > footer {
+    margin-top: auto; 
+    height: calc(110px + 1rem);
+    box-sizing: border-box;   
+}
+//
+
 .has-equal-height {
     height: 100%;
     display: flex;
@@ -44,6 +113,14 @@ $navbar-breakpoint: $mobile;
     width: 100%;
 }
 
+.is-full-height {
+    min-height: 100vh;
+}
+.is-fullheight-with-footer-and-navbar {
+    min-height: calc(100vh - 166px - 1rem);
+
+}
+
 .is-square-image-128x128 {
     width: 128px;
     height: 128px;
@@ -54,10 +131,22 @@ $navbar-breakpoint: $mobile;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.has-text-shadowed {
-    text-shadow: 1px 1px 2px black;
+.has-box-shadow-x {
+    box-shadow: 13px 0 5px -2px rgba(0, 0, 0, 0.19), -13px 0 5px -2px rgba(0, 0, 0, 0.19);
 }
 
-.is-horizontal-center {
-  justify-content: center;
+.has-text-shadowed {
+    text-shadow: 1px 1px 10px black;
+}
+
+
+
+// Thicker navbar-burger
+.navbar-burger > span {
+    height: 2px;
+}
+
+.fa-rotate-335 {
+    transform: rotate(335deg) translateY(-10%);
+
 }
