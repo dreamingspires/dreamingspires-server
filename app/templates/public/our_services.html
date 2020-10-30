@@ -76,18 +76,35 @@
         </div>
       </div>
       
-      <div class="columns mx-6 my-3">
+      <div class="columns mx-6 my-0">
         {% for i in range(3) %}
         <div class="column">
           {{ client_title(i) }}
+        </div> 
+        {% endfor %}
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+        <div class="column">
           {{ client_icon(i, 0) }}
+        </div> 
+        {% endfor %}
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+        <div class="column">
           <b>{{ client_blurb_title(i) }}</b>
-          <br>
+        </div> 
+        {% endfor %}
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+        <div class="column">
           {{ client_blurb(i) }}
         </div> 
         {% endfor %}
+      </div>
 
-      </div>    
       <div class="has-text-centered pb-1">
         <a href="#client_desk_2" class="title is-2 fas fa-chevron-down has-text-light"></a>
       </div>
