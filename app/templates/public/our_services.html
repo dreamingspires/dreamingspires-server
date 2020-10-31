@@ -78,30 +78,30 @@
       
       <div class="columns mx-6 my-0">
         {% for i in range(3) %}
-        <div class="column">
-          {{ client_title(i) }}
-        </div> 
+          <div class="column">
+            {{ client_title(i) }}
+          </div> 
         {% endfor %}
       </div>
       <div class="columns mx-6 my-0">
         {% for i in range(3) %}
-        <div class="column">
-          {{ client_icon(i, 0) }}
-        </div> 
+          <div class="column">
+            {{ client_icon(i, 0) }}
+          </div> 
         {% endfor %}
       </div>
       <div class="columns mx-6 my-0">
         {% for i in range(3) %}
-        <div class="column">
-          <b>{{ client_blurb_title(i) }}</b>
-        </div> 
+          <div class="column">
+            <b>{{ client_blurb_title(i) }}</b>
+          </div> 
         {% endfor %}
       </div>
       <div class="columns mx-6 my-0">
         {% for i in range(3) %}
-        <div class="column">
-          {{ client_blurb(i) }}
-        </div> 
+          <div class="column">
+            {{ client_blurb(i) }}
+          </div> 
         {% endfor %}
       </div>
 
@@ -183,11 +183,25 @@
       {{ welcomeBlock() }}
     </div>
     <div class="mt-6 px-6">
-      <p class="subtitle subtitle-on-dark is-size-3 mb-0 has-text-centered mb-3">Know what you need?</p>
+      <p class="subtitle subtitle-on-dark is-size-3 mb-0 has-text-centered mb-3">
+        Know what you need?
+      </p>
       <div class="level">
         <div class="buttons level-item">
-          <a class="button is-warning is-rounded" href="#signup">Get in touch</a>
+          <a class="button is-warning is-rounded is-size-4" href="#signup">
+            <p class="is-size-3">
+              Get in Touch
+            </p>
+          </a>
         </div> 
+        <div class="has-text-centered">
+          <p class="subtitle is-size-4 mb-0 mt-1">
+            Or call us on:
+          </p>
+          <span class="is-size-4 mb-3">
+            {{ call_number() }}
+          </span>
+        </div>
       </div>
     </div>
     <div class="has-text-centered pb-1">
@@ -195,22 +209,22 @@
     </div>
   </section>
 
-  {% set list2 = [2,1,5,0,3,4] %}
-  {% set section_number = list2|length %}
-  {% for j in list2 %}
-  {% set i = loop.index0 %}
-  {% set regMob_numerated = 'regMob' + (i // 2 + 2)|string() %}
-  {% set hashed_regMob_numerated = '#regMob' + (i // 2 + 3)|string() %}
+  {% set section_order = [2, 1, 5, 0, 3, 4] %}
+  {% set n_sections = section_order|length %}
+  {% for n_section in section_order %}
+    {% set i = loop.index0 %}
+    {% set regMob_numerated = 'regMob' + (i // 2 + 2)|string() %}
+    {% set href_regMob_numerated = '#regMob' + (i // 2 + 3)|string() %}
 
-  <section id="{{ regMob_numerated }}" class=" is-hero {{ section_color((i + 2) // 2 % 2,0) }} pt-5 pb-0">
+    <section id="{{ regMob_numerated }}" class=" is-hero {{ section_color((i + 2) // 2 % 2,0) }} pt-5 pb-0">
       <div class="collapsible-wrapper mx-5 is-vcentered is-mobile">
         <div class="mx-3">
-        {{ client_title(j) }}
+          {{ client_title(n_section) }}
         </div>
         <div class="columns is-mobile is-vcentered is-gapless mx-3">
           <div class = "column is-four-fifths has-text-weight-bold">
             <br>
-            {{ client_blurb_title(j) }}
+            {{ client_blurb_title(n_section) }}
           </div>
           <div class = "column is-one-fifth">
             <button style="border: none; outline: none;" class="title is-pulled-right {{ section_color((i + 2) // 2 % 2,0) }} fas fa-chevron-down" aria-label="chevron" onclick="ToggleExpand(this)">
@@ -218,11 +232,11 @@
           </div>
         </div>
         <div id="blurb0" class="is-collapsible">
-          {{ section_alignment(i,j,1) }}
+          {{ generate_aligned_section(i, n_section, 1) }}
         </div>
       </div>
-    {{ last_section(i,section_number,hashed_regMob_numerated) }}
-  </section>
+      {{ last_section(i, n_sections, href_regMob_numerated) }}
+    </section>
   {% endfor %}
 </section>
 
@@ -327,7 +341,7 @@
   {% endif %}
 {% endmacro %}
 
-{% macro section_alignment(align,n,v) %}
+{% macro generate_aligned_section(align, n, v) %}
   {% if align % 2 == 0 %}
     <div class="columns is-vcentered is-mobile ml-0 mr-4">
       <div class="column is-three-quarters">
@@ -349,21 +363,21 @@
   {% endif %}
 {% endmacro %}
 
-{% macro section_color(n,m) %}
-  {% if n % 2 == 0 %}
-    {% if m == 0 %}
+{% macro section_color(color_scheme, required_component) %}
+  {% if color_scheme % 2 == 0 %}
+    {% if required_component == 0 %}
       has-background-info has-text-light
-    {% elif m == 1 %}
+    {% elif required_component == 1 %}
       has-background-info
-    {% elif m == 2 %}
+    {% elif required_component == 2 %}
       has-text-light
     {% endif %}
   {% else %}
-    {% if m == 0 %}
+    {% if required_component == 0 %}
       has-background-light has-text-info
-    {% elif m == 1 %}
+    {% elif required_component == 1 %}
       has-background-light
-    {% elif m == 2 %}
+    {% elif required_component == 2 %}
       has-text-info
     {% endif %}
   {% endif %}
