@@ -41,27 +41,70 @@
           <div class="tile is-child is-8 content">
             {{ welcomeBlock() }}
           </div>
-          <div class="tile is-parent is-vertical is-4 content has-text-right pb-0">
+          <div class="tile is-parent is-vertical is-4 content has-text-centered pb-0">
             <div class="tile is-child"></div>
             <div class="tile is-child">
-              <p class="subtitle is-size-3 mb-3">Know what you need?</p>
-              <div class="buttons level-right">
-                <a class="button is-warning has-background-warning-dark is-rounded" href="#signup">Get in touch</a>
+              <p class="subtitle is-size-4 mb-3">
+                Know what you need?
+              </p>
+              <div class="has-text-centered">
+                <a class="button is-warning has-background-warning-dark is-rounded is-large" href="#signup">
+                  <span class="is-size-4">
+                    Get in Touch
+                  </span>
+                </a>
               </div> 
-            </div>
+              <p class="subtitle is-size-4 mb-0 mt-1">
+                Or call us on:
+              </p>
+              <span class="is-size-4 mb-3">{{ call_number() }}</span>
               
+            </div>
           </div>
         </div>
-      </div>       
-      <div class="columns mx-6 my-3">
+      </div>
+   
+      <div class="columns mx-6">
+        <div class="column is-2">
+          <hr style="border: 1px solid;" class="new subtitle">
+        </div>
+        <div class="subtitle is-italic is-size-5 pt-5 mx-5">
+          Learn More About Us...
+        </div>
+        <div class="column">
+          <hr style="border: 1px solid;" class="new subtitle">
+        </div>
+      </div>
+      
+      <div class="columns mx-6 my-0">
         {% for i in range(3) %}
           <div class="column">
-              {{ client_title(i) }}
-              {{ client_icon(i, 0) }}
-              {{ client_blurb(i) }}
+            {{ client_title(i) }}
           </div> 
         {% endfor %}
-      </div>    
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+          <div class="column">
+            {{ client_icon(i, 0) }}
+          </div> 
+        {% endfor %}
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+          <div class="column">
+            <b>{{ client_blurb_title(i) }}</b>
+          </div> 
+        {% endfor %}
+      </div>
+      <div class="columns mx-6 my-0">
+        {% for i in range(3) %}
+          <div class="column">
+            {{ client_blurb(i) }}
+          </div> 
+        {% endfor %}
+      </div>
+
       <div class="has-text-centered pb-1">
         <a href="#client_desk_2" class="title is-2 fas fa-chevron-down has-text-light"></a>
       </div>
@@ -78,6 +121,8 @@
               <div class="has-text-info">
                 {{ client_icon(3, 0) }}
               </div>
+              <b>{{ client_blurb_title(3) }}</b>
+              <br>
               {{ client_blurb(3) }}
             </div>
             <div class="tile is-parent is-vertical is-6">
@@ -89,6 +134,8 @@
                 <div class="has-text-info">
                   {{ client_icon(4, 0) }}
                 </div>
+                <b>{{ client_blurb_title(4) }}</b>
+                <br>
                 {{ client_blurb(4) }}
               </div>
             </div>
@@ -100,7 +147,9 @@
         </div>
         <div class="tile is-parent is-vertical is-4">
           
-          <p class="title is-size-1 is-pulled-right has-text-dark" style="text-align:right">Access Tailored<br>Freelance Talent</p>            
+          <p class="title is-size-1 is-pulled-right has-text-dark" style="text-align:right">Interested? Call:<br>
+            <span class="is-pulled-right is-size-2 mb-3" style="white-space:nowrap">{{ call_number() }}</span>
+          </p>            
           <div class="tile is-parent is-12">
             <div class="tile is-parent is-12 is-vertical">          
               <div class="tile is-child is-12 mt-6">           
@@ -108,6 +157,8 @@
                   {{ client_icon(5, 0) }}
                 </div>
                 {{ client_title(5)}}
+                <b>{{ client_blurb_title(i) }}</b>
+                <br>
                 {{ client_blurb(5) }}
               </div>
               <div class="tile is-child is-12 has-text-centered">
@@ -127,106 +178,72 @@
 
 <!-- MOBILE  -->
 <section id="client_desk_1" class="is-hidden-desktop ">
-  <section class="is-hero has-background-info has-text-light pb-0">
+  <section class="is-hero {{ section_color(0,0) }} pb-0">
     <div class="is-8 content px-6 pt-3" >
       {{ welcomeBlock() }}
     </div>
-    <div class="mt-6">
-      <p class="subtitle subtitle-on-dark is-size-3 mb-0 has-text-centered mb-3">Know what you need?</p>
+    <div class="mt-6 px-6">
+      <p class="subtitle subtitle-on-dark is-size-3 mb-0 has-text-centered mb-3">
+        Know what you need?
+      </p>
       <div class="level">
         <div class="buttons level-item">
-          <a class="button is-warning is-rounded" href="#signup">Get in touch</a>
+          <a class="button is-warning is-rounded is-size-4" href="#signup">
+            <p class="is-size-3">
+              Get in Touch
+            </p>
+          </a>
         </div> 
+        <div class="has-text-centered">
+          <p class="subtitle is-size-4 mb-0 mt-1">
+            Or call us on:
+          </p>
+          <span class="is-size-4 mb-3">
+            {{ call_number() }}
+          </span>
+        </div>
       </div>
     </div>
     <div class="has-text-centered pb-1">
-      <a href="#reg2Mob" class="title is-2 fas fa-chevron-down has-text-light"></a>
+      <a href="#regMob2" class="title is-2 fas fa-chevron-down has-text-light"></a>
     </div>
   </section>
 
-  <section id="reg2Mob" class=" is-hero has-background-light has-text-info pt-5 pb-0">
-    <div class="columns is-vcentered is-mobile  mx-5">
-      <div class="column is-three-fifths">
-        {{ client_title(0) }}
-        {{ client_blurb(0) }}
-      </div>
-      <div class="column is-two-fifths pt-6">
-        {{ client_icon(0, 1) }}
-      </div>
-    </div>
-    <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column is-two-fifths pl-6 pt-6">
-        {{ client_icon(1, 1) }}
-      </div>
-      <div class="column is-three-fifths">
-        {{ client_title(1) }}
-        {{ client_blurb(1) }}
-      </div>
-    </div>
-    <div class="has-text-centered pb-1">
-      <a href="#reg3Mob" class="title is-2 fas fa-chevron-down has-text-info"></a>
-    </div>
-  </section>
+  {% set section_order = [2, 1, 5, 0, 3, 4] %}
+  {% set n_sections = section_order|length %}
+  {% for n_section in section_order %}
+    {% set i = loop.index0 %}
+    {% set regMob_numerated = 'regMob' + (i // 2 + 2)|string() %}
+    {% set href_regMob_numerated = '#regMob' + (i // 2 + 3)|string() %}
 
-  <section id="reg3Mob" class="is-hero has-background-info has-text-light pb-0 pt-5">
-    <div class="columns is-vcentered is-mobile mx-5">
-      <div class="column is-three-fifths">
-        {{ client_title(2) }}
-        {{ client_blurb(2) }}
+    <section id="{{ regMob_numerated }}" class=" is-hero {{ section_color((i + 2) // 2 % 2,0) }} pt-5 pb-0">
+      <div class="collapsible-wrapper mx-5 is-vcentered is-mobile">
+        <div class="mx-3">
+          {{ client_title(n_section) }}
+        </div>
+        <div class="columns is-mobile is-vcentered is-gapless mx-3">
+          <div class = "column is-four-fifths has-text-weight-bold">
+            <br>
+            {{ client_blurb_title(n_section) }}
+          </div>
+          <div class = "column is-one-fifth">
+            <button style="border: none; outline: none;" class="title is-pulled-right {{ section_color((i + 2) // 2 % 2,0) }} fas fa-chevron-down" aria-label="chevron" onclick="ToggleExpand(this)">
+            </button>
+          </div>
+        </div>
+        <div id="blurb0" class="is-collapsible">
+          {{ generate_aligned_section(i, n_section, 1) }}
+        </div>
       </div>
-      <div class="column is-two-fifths pt-6">
-        {{ client_icon(2, 1) }}
-      </div>
-    </div>
-    <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column is-two-fifths pl-6 pt-6">
-        {{ client_icon(3, 1) }}
-      </div>
-      <div class="column is-three-fifths">
-        {{ client_title(3) }}
-        {{ client_blurb(3) }}
-      </div>
-    </div>
-    <div class="has-text-centered pb-1">
-      <a href="#reg4Mob" class="title is-2 fas fa-chevron-down has-text-light"></a>
-    </div>
-  </section>
-
-  <section id="reg4Mob" class="is-hero has-background-light has-text-info pb-0 pt-5">
-    <div class="columns is-vcentered is-mobile  mx-5">
-      <div class="column is-three-fifths">
-        {{ client_title(5) }}
-        {{ client_blurb(5) }}
-      </div>
-      <div class="column is-two-fifths pt-6">
-        {{ client_icon(5, 1) }}
-      </div>  
-    </div>
-    <div class="columns is-vcentered is-mobile mx-3">
-      <div class="column is-two-fifths pl-6 pt-6">
-        {{ client_icon(4, 1) }}
-      </div>
-      <div class="column is-three-fifths">
-        {{ client_title(4) }}
-        {{ client_blurb(4) }}
-      </div>
-      
-    </div>
-    <div class="level mt-6">
-      <div class="level-item">
-        <div class="buttons level-right">
-            <a class="button is-warning is-rounded" href="../../contact">Sign Up Below</a>
-          </div> 
-      </div>
-    </div>
-    
-    <div class="has-text-centered pb-1">
-      <a href="#signup" class="title is-2 fas fa-chevron-down has-text-info"></a>
-    </div>
-  </section>
+      {{ last_section(i, n_sections, href_regMob_numerated) }}
+    </section>
+  {% endfor %}
 </section>
 
 {{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form) }}
+
+<script src="{{ url_for('static', filename='assets/js/register_collapsible.js') }}"></script>
+
 {% endblock %}
 
 {% macro client_icon(n, v) %}
@@ -236,7 +253,7 @@
         {% if v ==  0 %}
           <i class="fas fa-comments fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-comments fa-8x fa-centered mb-3"></i>
+          <i class="fas fa-comments fa-4x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -246,7 +263,7 @@
         {% if v == 0 %}
           <i class="fas fa-space-shuttle fa-10x fa-centered fa-rotate-335 mb-3"></i>
         {% else %}
-          <i class="fas fa-space-shuttle fa-8x fa-centered fa-rotate-335 mb-3"></i>
+          <i class="fas fa-space-shuttle fa-4x fa-centered fa-rotate-335 mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -256,7 +273,7 @@
         {% if v == 0 %}
           <i class="fas fa-toolbox fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-toolbox fa-8x fa-centered mb-3"></i>
+          <i class="fas fa-toolbox fa-4x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -266,7 +283,7 @@
         {% if v == 0 %}
           <i class="fas fa-microscope fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-microscope fa-8x fa-centered mb-3"></i>
+          <i class="fas fa-microscope fa-4x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -276,7 +293,7 @@
         {% if v == 0 %}
           <i class="fas fa-paper-plane fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-paper-plane fa-8x fa-centered mb-3"></i>
+          <i class="fas fa-paper-plane fa-4x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -286,7 +303,7 @@
         {% if v == 0 %}
           <i class="fas fa-code fa-10x fa-centered mb-3"></i>
         {% else %}
-          <i class="fas fa-code fa-8x fa-centered mb-3"></i>
+          <i class="fas fa-code fa-4x fa-centered mb-3"></i>
         {% endif %}
       </div>
     </div>
@@ -297,14 +314,74 @@
 {% macro welcomeBlock() %} 
   <h1 class="has has-text-light is-size-1 mb-0 pt-3 has-text-weight-light">Welcome to Dreaming Spires!</h1>
   <p class="subtitle is-size-3 subtitle-on-dark pt-3 has-text-weight-normal is-italic">Bringing Programming Talent to Your Research</p>
-  <p>Whether you’re a historian wondering about automation, a computer scientist who’s got  too
-    much work on their hands, or anything in between, we’re here for you.<br><br>
-    Dreaming Spires specialises in bringing elegant digital solutions to researchers. With  our roots
-    in the Oxbridge academic communities, we understand the unique computational requirements
-    of research. So from data processing to application development, we’ve got you covered.
+  <p class="is-size-5">Dreaming Spires is a software development consultancy specialising in research. <br> <br>
+    We manage a pool of talented developers to design, create and launch software for researchers 
+    and institutions.
   </p>
 {% endmacro %}
 
+{% macro last_section(a,b,regMob) %}
+  {% if a + 1 == b %}
+    <div class="level mt-6">
+      <div class="level-item">
+        <div class="buttons level-right">
+            <a class="button is-warning is-rounded" href="../../contact">Sign Up Below</a>
+          </div> 
+      </div>
+    </div>
+    
+    <div class="has-text-centered pb-1">
+      <a href="#signup" class="title is-2 fas fa-chevron-down {{ section_color((a + 2) // 2 % 2,2) }}"></a>
+    </div>
+  {% elif a % 2 == 0 %}
+  {% else %}
+    <div class="has-text-centered pb-1">
+      <a href="{{ regMob }}" class="title is-2 fas fa-chevron-down {{ section_color((a + 2) // 2 % 2,2) }}"></a>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro generate_aligned_section(align, n, v) %}
+  {% if align % 2 == 0 %}
+    <div class="columns is-vcentered is-mobile ml-0 mr-4">
+      <div class="column is-three-quarters">
+        {{ client_blurb(n) }}
+      </div>
+      <div class="column is-3">
+        {{ client_icon(n, v) }}
+      </div>
+    </div>
+  {% else %}
+  <div class="columns is-vcentered is-mobile mr-0 ml-4">
+    <div class="column is-3">
+      {{ client_icon(n, v) }}
+    </div>
+    <div class="column is-three-quarters">
+      {{ client_blurb(n) }}
+    </div>
+  </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro section_color(color_scheme, required_component) %}
+  {% if color_scheme % 2 == 0 %}
+    {% if required_component == 0 %}
+      has-background-info has-text-light
+    {% elif required_component == 1 %}
+      has-background-info
+    {% elif required_component == 2 %}
+      has-text-light
+    {% endif %}
+  {% else %}
+    {% if required_component == 0 %}
+      has-background-light has-text-info
+    {% elif required_component == 1 %}
+      has-background-light
+    {% elif required_component == 2 %}
+      has-text-info
+    {% endif %}
+  {% endif %}
+{% endmacro %}
 
 {% macro client_title(n) %}
   {% if n == 0 %}
@@ -328,10 +405,35 @@
   {% endif %}
 {% endmacro %}
 
-{% macro client_blurb(n) %} 
+{% macro client_blurb_title(n) %} 
   {% if n == 0 %}
     <p>Testing the digital waters shouldn’t incur
-      charges; we offer a free initial consultation and
+      charges.
+    </p>
+  {% elif n == 1 %}
+    <p>We offer step-by-step guidance, regardless of
+      your computer literacy or academic
+      background.
+    </p>
+  {% elif n == 2 %}
+    <p>Many other software development firms won't
+      take on a low-cost project.
+    </p>
+  {% elif n == 3 %}
+    <p>We stay in touch throughout the development process.
+    </p>
+  {% elif n == 4 %}
+    <p>Code is <i>only</i> useful when you can use it
+    </p>
+  {% else %}
+    <p>Open source aligns with our ethoses of transparency collaboration, and honesty.
+    </p>
+  {% endif %}
+{% endmacro %}
+
+{% macro client_blurb(n) %} 
+  {% if n == 0 %}
+    <p>We offer a free initial consultation and
       subsequent quote! Our experienced
       consultants will help you plan the requirements
       and scope of your project, enabling you to
@@ -341,9 +443,7 @@
       charges.
     </p>
   {% elif n == 1 %}
-    <p>We offer step-by-step guidance, regardless of
-      your computer literacy or academic
-      background. Our consultants will ensure you
+    <p>Our consultants will ensure you
       are clearly informed throughout the design and
       development process - there’s no need for you
       to have programming experience or knowledge
@@ -352,10 +452,8 @@
       informed decisions from start to finish.
     </p>
   {% elif n == 2 %}
-    <p>Many other software development firms won't
-      take on a project worth under £5,000, £10,000,
-      or even £20,000; this is where Dreaming Spires
-      excels. Our freelance business structure
+    <p>This is where we excel.
+      Our freelance business structure
       employs the most skilled developers to work
       collaboratively, and the money saved on office
       costs etc. reduces the final cost to you. To talk
@@ -363,9 +461,7 @@
       get in touch!
     </p>
   {% elif n == 3 %}
-    <p>From project requirements to finished code, we’ll stay
-      in touch throughout the entire process. You’ll be
-      receiving weekly progress reports from our
+    <p>You’ll be receiving weekly progress reports from our
       consultants from day one right up to project
       completion. We want to get things just right, so we
       won’t finish development until all of your
@@ -380,14 +476,13 @@
       covered.
     </p>
   {% else %}
-    <p>...because it aligns with our ethoses of transparency,
-      collaboration, and honesty. In research, collaboration
-      through sharing methods and discoveries is critical; in
-      the same way, open source software is publicly
-      available online for others to see, edit, and make use
-      of. Whether your project will be open source is
-      entirely your decision, and we’ll do our best to inform
-      you of the impacts of doing so.
+  <p>In research, collaboration
+    through sharing methods and discoveries is critical; in
+    the same way, open source software is publicly
+    available online for others to see, edit, and make use
+    of. Whether your project will be open source is
+    entirely your decision, and we’ll do our best to inform
+    you of the impacts of doing so.
     </p>
   {% endif %}
 {% endmacro %}

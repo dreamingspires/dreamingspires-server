@@ -23,7 +23,7 @@ $brand-warning: #D26D48;
 $brand-warning-dark: #AF5737;
 $brand-link: #999999;
 
-$mobile: 760px; // Usually 768px, overridden for my splitscreen
+$tablet: 761px;
 
 // Update Bulma's global variables
 $primary: $brand-blue;
@@ -34,7 +34,7 @@ $info-light: $cyan-light;
 $warning: $brand-warning;
 $warning-dark: $brand-warning-dark;
 $link: $brand-link;
-$navbar-breakpoint: $mobile;
+$navbar-breakpoint: $tablet;
 $scheme-main: $dark-brand-background;
 
 $input-background-color: hsl(0, 0%, 100%); // This is required for some reason as the input box styling is broken

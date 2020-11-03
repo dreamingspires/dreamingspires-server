@@ -1,5 +1,5 @@
 {% from "macros/flash.html" import flash %}
-
+{% from "macros/globals.html" import call_number %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +34,11 @@
 <body style="overflow-x: hidden">
     <a id="top"></a>
     <section class="hero is-info">
-        <div class="hero-head" style="height:56px;">
+        <div class="hero-head">
           {# Keep the navbar in alignment with the margins #}
           <div class="columns is-mobile is-centered my-0">
             <div class="column is-11-mobile is-9-tablet is-10-desktop is-10-widescreen is-10-fullhd px-0 py-0">
-              <nav class="navbar" role="navigation" aria-label="main navigation">
+              <nav class="navbar" role="navigation" aria-label="main navigation" style="height: 56px">
                 <div class="navbar-brand">
                   <a class="navbar-item" href="{{ url_for('index') }}">
                     <figure style="width: 90px" class="image is-hidden-mobile">
@@ -66,6 +66,13 @@
                   </a>
                 </div>
                 <div class="navbar-menu" id="navMenu">
+                  <div class="navbar-start">
+                    <div class="navbar-item is-hidden-touch">
+                      <span style="font-size: 0.9em" class="column is-vcentered has-text-white">
+                        Enquiries: {{ call_number() }}
+                      </span>
+                    </div>
+                  </div>
                   <div class="navbar-end">
                     {% for item in nav.end %}
                       {% if item.is_active %}
