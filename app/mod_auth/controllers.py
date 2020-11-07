@@ -96,6 +96,7 @@ def logout():
 @mod_auth.route('/register_developer/', methods=['GET', 'POST'])
 def register_developer():
     form = RegisterDeveloperForm()
+    login_form = LoginForm()
     if form.validate_on_submit():
         # Check username is not already taken
         if User.query.filter_by(primary_email=form.email.data).first():
@@ -134,7 +135,8 @@ def register_developer():
             send_email(user.primary_email, subject, html)
 
             return render_template('auth/thanks_for_registering.html')
-    return render_template('auth/register_developer.html', form=form, \
+
+    return render_template('auth/register_developer.html', form=form, login_form=login_form, \
         entries=list(range(1000)))
 
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])

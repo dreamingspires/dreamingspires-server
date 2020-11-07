@@ -1,85 +1,352 @@
 {% extends "base.html" %}
 
-{% from "macros/bulma_form.html" import render_form, render_field %}
+{% from "includes/client_landing.html" import render_landing %}
+{% from "includes/developer_register.html" import render_get_in_touch %}
 
 {% block fullheight %}
-    <div class="container">
-        <div class="column is-8 is-offset-2 content"> <h1 class="title">Register as a developer</h1>
-            <p>
-            At Dreaming Spires, we find interesting programming work from organisations across the world, and give you the opportunity to earn money, improve your skills, and develop your CV by taking it on.
-            </p>
-            
-            <h2 class="subtitle">Becoming a developer</h2>
-            <p> To become a developer on Dreaming Spires, you must first register an
-            account, submitting the required information for the verification
-            process.
-            </p>
 
-            <p>
-            We will assess your application and may invite you for an online interview
-            via email.
-            The interview will consist of a short chat where we get a feel for your
-            experience level, and will involve various problems designed to test your
-            abilities.  It will take no more than 20 minutes.
-            </p>
+{{ render_landing(researcher_rel_href=True, chevron_id="#register_developer") }}
 
-            <p>
-            Provided your application is successful, you will become a registered
-            developer!  You will be able to take on jobs from the marketplace, and
-            begin working on interesting problems for our clients.
-            </p>
-            
-            <p>
-            <b>Sound interesting?</b>  <a href="#register_form">Get signed up below</a>!
-            </p> 
-            <p>
-            <b>More questions?</b> Read our <a href="{{ url_for('developer_faq') }}">developer FAQ</a>.
-            </p> 
-        </div>
-    </div>
 {% endblock %}
 
 {% block content %}
-{% with errors = get_flashed_messages() %}
-{% if errors %}
-<div>
-{% for error in errors %}
-{{ error }}<br>
-{% endfor %}
-</div>
-{% endif %}
-{% endwith %}
 
-<a id="register_form"></a>
-<div class="column is-8 is-offset-2">
-    <h3 class="title has-text-centered">Create a developer account</h3>
-</div>
-{# render_form(form, ".", width=8, mark_required=False, is_horizontal=False) #}
-<div class="container">
-  <div class="columns is-centered">
-    <div class="column is-8">
-      <form method="post" action=".#register_form" role="form" accept-charset="UTF-8" enctype="multipart/form-data" novalidate class="box">
-        {{ form.csrf_token }}
-        <p>Basic user account fields</p>
-        {{ render_field(form.user_name) }}
-        {{ render_field(form.display_name) }}
-        {{ render_field(form.email) }}
-        {{ render_field(form.password) }}
-        {{ render_field(form.confirm) }}
-        <p>Application</p>
-        {{ render_field(form.description) }}
-        {{ render_field(form.description_interested_jobs) }}
-        {{ render_field(form.university_check) }}
-        <div id="div_university">
-        {{ render_field(form.university) }}
-        </div>
-        {{ render_field(form.upload_cv) }}
-        {{ render_field(form.accept_tos) }}
-        <button class="button is-success" type="submit" name="submit">Register</button>
-      </form>
+<section class="is-hidden-touch">
+  <section id="register_developer" class=" is-hero is-fullheight-with-navbar has-background-info has-text-light is-hidden-touch  pt-6 ">
+    <div style="width:70%" class=" is-8 mx-6 px-6">
+      {{ welcome_block() }}
     </div>
-  </div>
-</div>
+    <div class="has-text-centered pt-5 pb-1">
+      <a href="#dev_desk_2" class="title is-2 fas fa-chevron-down has-text-light"></a>
+    </div>
+  </section>
 
-<script src="{{ url_for('static', filename='assets/js/university_collapsible.js') }}"></script>
+  <section id="dev_desk_2" class=" is-hero has-background-light pt-6 pb-0 ">
+    <div class="mx-6 px-6">
+      
+      
+      {% for i in range(2) %}  
+        {% if i == 0 %} 
+          <h2 class=" is-size-1 mb-0 pt-3 has-text-weight-light">How to Join</h2>
+        {% else %}
+          <h2 class=" is-size-1 mb-0 pt-3 has-text-weight-light">How The Talent Pool Works</h2>
+        {% endif %}
+        <hr style="border: 0.2px solid black" class="mt-0 pt-0">
+        <div class="columns">
+          
+          {% for j in range(3) %}
+            <div class="column is-4 px-5 content">
+              {{ developer_title(j + (3 * 1) ) }}
+              {{ developer_subtitle(j + (3 * i) ) }}
+              {{ developer_bullets(j + (3 * i) ) }}
+            </div>
+          {% endfor %}
+        </div>
+        <div class="columns">
+          {% for j in range(3) %}
+            <div class="column is-4 px-5 content">
+              {{ developer_icon( j + (3 * i), 0) }}
+            </div>
+          {% endfor %}
+        </div>
+    
+    
+      {% endfor %}
+    </div>
+    <div class="has-text-centered pt-5 pb-1">
+      <a href="#register_form" class="title is-2 fas fa-chevron-down has-text-info"></a>
+    </div>
+  </section>
+</section>
+
+<section class="is-hidden-desktop">
+  <section id="register_developer" class="is-hero has-background-info has-text-light pt-6">
+    <div class="px-6 ">
+      {{ welcome_block() }}
+    </div>
+    <div class="has-text-centered pt-5 pb-1">
+      <a href="#dev_mob_2" class="title is-2 fas fa-chevron-down has-text-light"></a>
+    </div>
+  </section>
+
+  <section id="dev_mob_2" class=" is-hero has-background-light pt-6 pb-0 px-6">
+    {% for i in range(6) %}
+      {% if i == 0 %}
+        <h2 class=" is-size-1 mb-0 pt-3 has-text-weight-light">How to Join</h2>
+        <hr style="border: 0.2px solid black" class="mt-0 pt-0">
+      {% elif i == 3 %}
+        <h2 class=" is-size-1 mb-0 pt-3 has-text-weight-light">How The Talent Pool Works</h2>
+        <hr style="border: 0.2px solid black" class="mt-0 pt-0">
+      {% endif %}
+      <div class="collapsible-wrapper mx-2 is-vcentered is-mobile">
+        <div class="mx-3">
+          {{ developer_title(i) }}
+        </div>
+        <div class="columns is-mobile is-vcentered is-gapless mx-3 mb-0">
+          <div class = "column is-four-fifths has-text-weight-bold">
+            <br>
+            {{ developer_subtitle(i) }}
+          </div>
+          <div class = "column is-one-fifth">
+            <button style="border: none; outline: none;" class="title is-pulled-right has-background-light fas fa-chevron-down" aria-label="chevron" onclick="ToggleExpand(this)">
+            </button>
+          </div>
+        </div>
+        <div id="blurb0" class="is-collapsible content mx-2">
+          {{ developer_bullets(i) }}
+        </div>
+      </div>
+      <div class="my-4">
+        {{ developer_icon(i) }}
+      </div>
+    {% endfor %}
+    <div class="has-text-centered pt-5 pb-1">
+      <a href="#register_form" class="title is-2 fas fa-chevron-down has-text-info"></a>
+    </div>
+  </section>
+</section>
+<a id="register_form"></a>
+
+{{ render_get_in_touch( form ) }}
+
+<script src="{{ url_for('static', filename='assets/js/register_collapsible.js') }}"></script>
 {% endblock %}
+
+{% macro developer_icon(n, v) %}
+  {% if n == 0 %}
+    <div class="level">
+      <div class="level-item has-text-info">
+        {% if v ==  0 %}
+          <i class="fas fa-paper-plane fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-paper-plane fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 1 %}
+    <div class="level">
+      <div class="level-item has-text-info">
+        {% if v == 0 %}
+          <i class="fas fa-user-check fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-user-check fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 2 %}
+    <div class="level">
+      <div class="level-item has-text-info">
+        {% if v == 0 %}
+          <i class="fas fa-file-invoice-dollar fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-file-invoice-dollar fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 3 %}
+    <div class="level">
+      <div class="level-item has-text-dark-brown">
+        {% if v == 0 %}
+          <i class="fas fa-project-diagram fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-project-diagram fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% elif n == 4 %}
+    <div class="level">
+      <div class="level-item has-text-dark-brown">
+        {% if v == 0 %}
+          <i class="fas fa-file-alt fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-file-alt fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="level">
+      <div class="level-item has-text-dark-brown">
+        {% if v == 0 %}
+          <i class="fas fa-laptop-code fa-10x fa-centered mb-3"></i>
+        {% else %}
+          <i class="fas fa-laptop-code fa-4x fa-centered mb-3"></i>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% macro developer_title(n) %}
+  {% if n == 0 %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">1. Apply Online</h2>
+  {% elif n == 1 %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">2. Attend an Interview</h2>
+  {% elif n == 2 %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">3. Application Success</h2>
+  {% elif n == 3 %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">1. Freelancers Apply to
+      Our Research Projects</h2>
+  {% elif n == 4 %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">Projects, Our Job Board, Applying</h2>
+  {% else %}
+    <h2 style="word-break: normal" class="title has-text-weight-light">3. Project Development<br>
+      Begins</h2>
+  {% endif %}
+{% endmacro %}
+
+{% macro developer_subtitle(n) %}
+  {% if n == 0 %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0">Here on this page!</h3>
+    <p style="word-break: normal" >Contacting Us, What We Look For</p>
+  {% elif n == 1 %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0">Online, 1-to-1, with a consultant</h3>
+    <p style="word-break: normal" >The Interview, How To Prepare</p>
+  {% elif n == 2 %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0">Join our Talent Pool</h3>
+    <p style="word-break: normal;">What's Next, Benefits, Payment</p>
+  {% elif n == 3 %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0 has-text-brown">Listed on our site and emails</h3>
+    <p style="word-break: normal;">Projects, Our Job Board, Applying</p>
+  {% elif n == 4 %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0 has-text-brown">The best fit gets the work</h3>
+    <p style="word-break: normal;">Selection, Briefing, Pay</p>
+  {% else %}
+    <h3 style="word-break: normal" class="subtitle is-italic mb-0 has-text-brown">You're supported throughout</h3>
+    <p style="word-break: normal;">Work, Expectations, Job Completion</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro developer_bullets(n) %}
+  {% if n == 0 %}
+    <ul>
+      <li class="pt-3">
+        Application starts on this page, leave your details and we'll be in touch.
+      </li>
+      <li class="pt-3">
+        This work best suits people with unused time: students, people between jobs etc.
+      </li>
+      <li class="pt-3">
+        Applicants with a 'completionist'
+mindset, curiosity for other domains,
+formal relevant education, and portfolio
+work will be most strongly considered.
+      </li>
+      <li class="pt-3">
+        We acknowledge many candidates will
+not have all of these; the absence of
+such wont invalidate an application.
+      </li>
+    </ul>
+  {% elif n == 1 %}
+    <ul>
+      <li class="pt-3">
+        Our interview is an informal online
+video-call, of no longer than 20m
+      </li>
+      <li class="pt-3">
+        You will be asked to clarify on your
+experience, showcase previous work
+where possible (NDAs accounted for),
+& explain how you'd solve a relevant
+problem.
+      </li>
+    </ul>
+  {% elif n == 2 %}
+    <ul>
+      <li class="pt-3">
+        If your application succeeds, you'll be
+registered in our Talent Pool where you
+can apply to involve in different
+research projects.
+      </li>
+      <li class="pt-3">
+        You'll also be included in weekly email
+bulletins listing projects relevant to your
+skillset.
+      </li>
+      <li class="pt-3">
+        Payment for most projects is displayed
+upfront, along with estimated time to
+complete, and a project overview.
+      </li>
+    </ul>
+  {% elif n == 3 %}
+    <ul>
+      <li class="pt-3">
+        Projects are available via a 'jobs board',
+and on our email bulletins.
+      </li>
+      <li class="pt-3">
+        These projects are extremely varied,
+excepting their shared need for software
+development work.
+      </li>
+      <li class="pt-3">
+        Getting involved is as simple as pressing
+"Apply", your Talent profile will inform
+us of your skillset.
+      </li>
+      <li class="pt-3">
+        To become a member of the talent pool,
+apply online!
+      </li>
+     
+    </ul>
+  {% elif n == 4 %}
+    <ul>
+      <li class="pt-3">
+        When choosing developers, prior
+experience, knowledge, and skillsets are
+considered.
+      </li>
+      <li class="pt-3">
+        In some cases for lengthy or
+complicated projects, we may get in
+touch to clarify the details of your
+involvement.
+      </li>
+      <li class="pt-3">
+        Once developers are chosen, a leading
+consultant will brief and sign-on those
+involved.
+      </li>
+      <li class="pt-3">
+        TPay and terms of payment are disclosed
+        upfront
+      </li>
+    </ul>
+  {% else %}
+    <ul>
+
+      <li class="pt-3">
+        Each week of development, you'll be
+tasked with reporting your progress on
+assigned work.
+      </li>
+      <li class="pt-3">
+        Though rare, developers will be
+sometimes be expected to work
+collaboratively.
+      </li>
+      <li class="pt-3">
+        As a general rule, assigned deliverables
+require completion before any payment
+is made.
+      </li>
+      <li class="pt-3">
+        On project completion, you'll have
+earned a fair pay and gained experience
+developing for researchers.
+      </li>
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{% macro welcome_block() %}
+  <h1 class="has-text-light is-size-1 mb-0 pt-3 has-text-weight-light">Freelance With Us</h1>
+  <p class="subtitle is-size-3 subtitle-on-dark pt-3 has-text-weight-normal is-italic mb-0">Interested in joining our Talent Pool?</p>
+  <p class="is-size-5 mb-4">Our solutions aren't possible without the tremendous work of freelancers.
+  </p>
+  <p class="is-size-5">If you love being paid to work on varied projects and enjoy being free to
+    choose your own hours, we want to hear from you!</p>
+{% endmacro %}
