@@ -1,6 +1,5 @@
-{% from "macros/bulma_form.html" import render_form_fields, render_form_buttons  %}
+{% from "macros/bulma_form.html" import render_form  %}
 {% from "macros/globals.html" import call_number %}
-
 
 {% macro login(login_form) %}
 <div id="loginModal" class="modal">
@@ -8,19 +7,9 @@
     <div class="modal-content  has-background-light mx-4" style="border-radius: 10px;">
       <div class="column px-6">
         <div class="column is-6 is-offset-3 has-text-centered px-5 py-6">
-            <h3 class="title">Log in to Dreaming Spires</h3>
+          <h3 class="title">Log in to Dreaming Spires</h3>
         </div>
-
-          <form method="post" action="{{ action }}" role="form" accept-charset="UTF-8" enctype="multipart/form-data" class="box">
-            <!-- <div class="form-field control mb-2 has-icons-left">{{ login_form.email }}</div>
-            <div class="form-field control mb-2 has-icons-left"> {{ login_form.password }} </div>
-            <div class="form-field mb-2">{{ login_form.remember_me }} Remember me <br></div>
-            <div class="form-field mb-2">{{ login_form.submit }}</div> -->
-            {{ login_form.csrf_token if login_form.csrf_token }}
-            {{ render_form_fields(login_form, mark_required) }}
-            {{ render_form_buttons(login_form.buttons) }}
-          </form>
-        
+        {{ render_form(login_form, ".", box=True,  width=12, mark_required=False, is_horizontal=False) }}
         <div class="mb-5"></div>
       </div>
     </div>

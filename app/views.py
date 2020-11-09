@@ -6,6 +6,8 @@ from app.temp_models import InterestedClient
 from app.public_forms import RegisterClientInterest
 from app.extensions.email import send_email
 from app.mod_auth.forms import LoginForm
+
+
 def client_signup(template_path, *args, **kwargs):
     form = RegisterClientInterest()
     if form.validate_on_submit():
