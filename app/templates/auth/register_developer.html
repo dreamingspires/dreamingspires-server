@@ -36,7 +36,7 @@
           
           {% for j in range(3) %}
             <div class="column is-4 px-5 content">
-              {{ developer_title(j + (3 * 1) ) }}
+              {{ developer_title(j + (3 * i) ) }}
               {{ developer_subtitle(j + (3 * i) ) }}
               {{ developer_bullets(j + (3 * i) ) }}
             </div>
@@ -58,7 +58,7 @@
     </div>
   </section>
 </section>
-
+<!-- MOBILE -->
 <section class="is-hidden-desktop">
   <section id="register_developer" class="is-hero has-background-info has-text-light pt-6">
     <div class="px-6 ">
@@ -117,7 +117,7 @@
     <div class="level">
       <div class="level-item has-text-info">
         {% if v ==  0 %}
-          <i class="fas fa-paper-plane fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-paper-plane fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-paper-plane fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -127,7 +127,7 @@
     <div class="level">
       <div class="level-item has-text-info">
         {% if v == 0 %}
-          <i class="fas fa-user-check fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-user-check fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-user-check fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -137,7 +137,7 @@
     <div class="level">
       <div class="level-item has-text-info">
         {% if v == 0 %}
-          <i class="fas fa-file-invoice-dollar fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-file-invoice-dollar fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-file-invoice-dollar fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -147,7 +147,7 @@
     <div class="level">
       <div class="level-item has-text-dark-brown">
         {% if v == 0 %}
-          <i class="fas fa-project-diagram fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-project-diagram fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-project-diagram fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -157,7 +157,7 @@
     <div class="level">
       <div class="level-item has-text-dark-brown">
         {% if v == 0 %}
-          <i class="fas fa-file-alt fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-file-alt fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-file-alt fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -167,7 +167,7 @@
     <div class="level">
       <div class="level-item has-text-dark-brown">
         {% if v == 0 %}
-          <i class="fas fa-laptop-code fa-10x fa-centered mb-3"></i>
+          <i class="fas fa-laptop-code fa-8x fa-centered mb-3"></i>
         {% else %}
           <i class="fas fa-laptop-code fa-4x fa-centered mb-3"></i>
         {% endif %}
@@ -187,7 +187,7 @@
     <h2 style="word-break: normal" class="title has-text-weight-light">1. Freelancers Apply to
       Our Research Projects</h2>
   {% elif n == 4 %}
-    <h2 style="word-break: normal" class="title has-text-weight-light">Projects, Our Job Board, Applying</h2>
+    <h2 style="word-break: normal" class="title has-text-weight-light">2. Projects, Our Job Board, Applying</h2>
   {% else %}
     <h2 style="word-break: normal" class="title has-text-weight-light">3. Project Development<br>
       Begins</h2>
@@ -311,7 +311,7 @@ consultant will brief and sign-on those
 involved.
       </li>
       <li class="pt-3">
-        TPay and terms of payment are disclosed
+        Pay and terms of payment are disclosed
         upfront
       </li>
     </ul>

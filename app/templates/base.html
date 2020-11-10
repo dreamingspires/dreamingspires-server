@@ -176,9 +176,9 @@
         </p>
       </div>
     </footer>
-    
-    {{ login(login_form) }}
-
+    {% if login_form %}
+      {{ login(login_form) }}
+    {% endif %}
     <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Get all "navbar-burger" elements
