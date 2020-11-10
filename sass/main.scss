@@ -164,3 +164,18 @@ body > footer {
 
 }
 
+.modal a {
+    color: $warning;
+}
+
+.delete, .modal-close {
+	position: fixed;
+}
+.modal-content, .modal-card {
+
+	width: auto;
+}
+
+#mobileModal.modal-content {
+    max-height: 500px;
+}

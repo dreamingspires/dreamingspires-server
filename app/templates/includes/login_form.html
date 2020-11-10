@@ -1,18 +1,31 @@
 {% from "macros/bulma_form.html" import render_form  %}
 {% from "macros/globals.html" import call_number %}
 
+
 {% macro login(login_form) %}
 <div id="loginModal" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content  has-background-light mx-4" style="border-radius: 10px;">
-      <div class="column px-6">
-        <div class="column is-6 is-offset-3 has-text-centered px-5 py-6">
-          <h3 class="title">Log in to Dreaming Spires</h3>
-        </div>
-        {{ render_form(login_form, ".", box=True,  width=12, mark_required=False, is_horizontal=False) }}
-        <div class="mb-5"></div>
-      </div>
-    </div>
-    <button class="modal-close is-large has-background-light" aria-label="close" onclick="toggleModal()"></button>
+  <div class="modal-background columns is-vcentered is-mobile pb-0 mb-0"></div>
+  <div class="modal-content  column is-2 has-background-light mx-4 is-hidden-touch is-hidden-desktop-only " style="border-radius: 10px;">
+    {{ modalContent(login_form) }}
+  </div>
+  <div id="mobileModal" class="modal-content  column has-background-light mx-4 is-hidden-widescreen is-mobile" style="border-radius: 10px;">
+    {{ modalContent(login_form) }}
+  </div>
+  <button class="modal-close is-large has-background-light" style="position: fixed;" aria-label="close" onclick="toggleModal()"></button>
 </div>
+{% endmacro %}
+
+{% macro modalContent(login_form) %}
+  <div class="column px-2">
+    <div class="column has-text-centered py-5">
+      <h3 class="title has-text-weight-normal">Sign In to Spires</h3>
+    </div>
+
+    {{ render_form(login_form, "/login", box=False,  width=12, mark_required=False, is_horizontal=False) }}
+    <div class="has-text-centered">
+      <a id="forgotPassword" href="" class="pb-4" >Forgot your password? </a>
+      <p>Not got an account? <a href="">Sign up now</a></p>
+    </div>
+    <div class="mb-5"></div>
+  </div>
 {% endmacro %}

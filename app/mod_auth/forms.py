@@ -12,12 +12,12 @@ import phonenumbers
 class LoginForm(FlaskForm):
     email = IconStringField('', validators=[
         validators.Email(), validators.DataRequired()],
-        left_logos=['fa-envelope'], render_kw={'placeholder': 'Email'})
+        render_kw={'placeholder': 'Email / Username'})
     password = IconPasswordField('', validators=[
         validators.DataRequired()],
-        render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
-    remember_me = BooleanField('Remember me', '')
-    submit = SubmitField('Log in', render_kw={'class': 'button is-success'})
+        render_kw={'placeholder': 'Password'})
+    submit = SubmitField('Sign in', render_kw={'class': 'button is-warning is-rounded', 'style' : 'width:100%'})
+    remember_me = BooleanField('Remember me', '', render_kw={'id' : 'loginMemory'})
 
 class RegisterDeveloperForm(FlaskForm):
     user_name = IconStringField('', 
