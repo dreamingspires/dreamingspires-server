@@ -7,7 +7,6 @@ from app.public_forms import RegisterClientInterest
 from app.extensions.email import send_email
 from app.mod_auth.forms import LoginForm
 
-
 def client_signup(template_path, *args, **kwargs):
     form = RegisterClientInterest()
     if form.validate_on_submit():
@@ -32,13 +31,11 @@ def client_signup(template_path, *args, **kwargs):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    login_form = LoginForm()
-    return client_signup('public/index.html', login_form=login_form, is_fullpage=True)
+    return client_signup('public/index.html', login_form=LoginForm(), is_fullpage=True)
 
 @app.route('/our_services', methods=['GET', 'POST'])
 def our_services():
-    login_form = LoginForm()
-    return client_signup('public/our_services.html', login_form=login_form, is_fullpage=False)
+    return client_signup('public/our_services.html', login_form=LoginForm(), is_fullpage=False)
 
 @app.route('/about')
 def about():
@@ -46,8 +43,7 @@ def about():
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    login_form = LoginForm()
-    return render_template('public/contact.html', login_form=login_form)
+    return render_template('public/contact.html', login_form=LoginForm())
 
 @app.route('/client')
 def client():
@@ -63,8 +59,7 @@ def developer():
 
 @app.route('/register_developer', methods=['POST', 'GET'])
 def register_developer():
-    login_form = LoginForm()
-    return render_template('public/register_developer.html', login_form=login_form)
+    return render_template('public/register_developer.html', login_form=LoginForm())
 
 @app.route('/developer_faq')
 def developer_faq():
@@ -76,16 +71,13 @@ def login2():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-
-    return render_template('login.html', login_form=login_form)
+    return render_template('public/index.html', login_form=LoginForm())
 
 @app.route('/portfolio')
 def portfolio():
-    login_form = LoginForm()
     # Get blog posts from db
     posts = BlogPost.query.filter_by(is_published=True).order_by(BlogPost.date_created.desc()).all()
-    return render_template('public/portfolio.html', login_form=login_form, posts=posts)
+    return render_template('public/portfolio.html', login_form=LoginForm(), posts=posts)
 
 @app.route('/privacy_policy')
 def privacy_policy():
