@@ -1,5 +1,7 @@
 {% from "macros/flash.html" import flash %}
 {% from "macros/globals.html" import call_number %}
+{% from "includes/login_form.html" import login %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src="{{ url_for('static', filename='assets/js/bulma-collapsible.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/login_modal.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>   
     <script type="text/javascript" charset="utf-8">
         //var socket = io();
@@ -48,6 +51,7 @@
                       <img src="{{ url_for('static', filename='assets/images/logos/mini_logo_dark_variant.svg') }}" style="width:100%;">
                     </figure>
                   </a>
+                  <!-- mobile "contact us" button outside of navbar -->
                   <div class="navbar-item is-hidden-tablet is-hidden-desktop is-hidden-fullhd" style="margin-left: auto">
                     <div class="buttons">
                       {% for item in nav.buttons %}
@@ -59,6 +63,7 @@
                       {% endfor %}
                     </div>
                   </div>
+                  <!-- burger -->
                   <a role="button" class="navbar-burger burger has-text-light ml-0" aria-label="menu" aria-expanded="false" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -75,11 +80,20 @@
                   </div>
                   <div class="navbar-end">
                     {% for item in nav.end %}
+                    {% if not loop.last %}
                       {% if item.is_active %}
                       <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
                       {% else %}
                       <a href="{{ item.url }}" style="font-size: 0.9em" class="navbar-item has-text-white">{{ item.label|safe }}</a>
                       {% endif %}
+                    {% else %}
+                      {% if item.is_active %}
+                      <a id="loginButton" href="#" style="font-size: 0.9em" class="navbar-item has-text-white is-active">{{ item.label|safe }}</a>
+                      {% else %}
+                      <a id="loginButton" href="#" style="font-size: 0.9em" class="navbar-item has-text-white" onclick="toggleModal()">{{ item.label|safe }}</a>
+                      {% endif %}
+                    {% endif %}
+                      
                     {% endfor %}
                   </div>
 
@@ -162,7 +176,9 @@
         </p>
       </div>
     </footer>
-
+    {% if login_form %}
+      {{ login(login_form) }}
+    {% endif %}
     <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Get all "navbar-burger" elements

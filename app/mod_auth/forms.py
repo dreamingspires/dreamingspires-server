@@ -12,45 +12,33 @@ import phonenumbers
 class LoginForm(FlaskForm):
     email = IconStringField('', validators=[
         validators.Email(), validators.DataRequired()],
-        left_logos=['fa-envelope'], render_kw={'placeholder': 'Email'})
+        render_kw={'placeholder': 'Email / Username'})
     password = IconPasswordField('', validators=[
         validators.DataRequired()],
-        render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
-    remember_me = BooleanField('Remember me', '')
-    submit = SubmitField('Log in', render_kw={'class': 'button is-success'})
+        render_kw={'placeholder': 'Password'})
+    submit = SubmitField('Sign in', render_kw={'class': 'button is-warning is-rounded', 'style' : 'width:100%'})
+    remember_me = BooleanField('Remember me', '', render_kw={'id' : 'loginMemory'})
 
 class RegisterDeveloperForm(FlaskForm):
     user_name = IconStringField('', 
         validators=[validators.Length(min=3, max=25)],
-        render_kw={'placeholder': 'Username'},
+        render_kw={'placeholder': 'Name*'},
         left_logos=['fa-user'])
-    display_name = StringField('', [validators.Length(max=25)],
-        render_kw={'placeholder': 'Display Name'})
     email = IconStringField('', [validators.Email(),
         validators.Required(message="Must provide an email address")],
-        render_kw={'placeholder': 'Email'}, left_logos=['fa-envelope'])
-    password = IconPasswordField('', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords must match')],
-        render_kw={'placeholder': 'Password'}, left_logos=['fa-lock'])
-    confirm = IconPasswordField('', render_kw={'placeholder': 'Repeat Password'},
-        left_logos=['fa-lock'])
-
+        render_kw={'placeholder': 'Email Address*'}, left_logos=['fa-envelope'])
     # Optional stuff
-    description = TextAreaField('', [validators.Length(max=500)],
-        render_kw={'placeholder': 'Describe briefly your past programming experience'})
-    description_interested_jobs = TextAreaField('', [validators.Length(max=500)],
-        render_kw={'placeholder': 'Describe briefly the sorts of jobs you\'re interested in (e.g. languages/frameworks, porting, data processing, etc.)'})
-    university_check = BooleanField('I am a university student', \
-        render_kw={'onclick': 'yesnoCheck()'})
-    university = DatalistField('', \
-        university_list, default=None,
-        render_kw={'placeholder': 'Enter your university'})
-    upload_cv = FileField('Upload your CV (optional, .pdf only)')
-
+    phone_number = IconStringField('',
+        render_kw={'placeholder': 'Phone Number (Optional)'}, left_logos=['fa-phone'])
+    speciality = SelectField('Select Domain Speciality (Optional)', choices=[
+        ('None', 'Enter a field'),
+        ('Programming', 'Programming'), \
+        ('Server-side', 'Server-side'), ('Web Development', 'Web-development')
+    ])
     accept_tos = BooleanField('I accept the Terms of Service', [
         validators.DataRequired()])
-    submit = SubmitField('Register', render_kw={'class': 'button is-success'})
+    submit = SubmitField('Register', render_kw={'class': 'button is-warning is-rounded'})
+
 
 class RegisterClientForm(FlaskForm):
     user_name = IconStringField('', 

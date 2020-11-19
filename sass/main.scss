@@ -15,6 +15,9 @@ $brand-blue-dark: #37A6AD;
 $brand-blue: #65C8D0;
 $brand-blue-alt: #53A4AB;
 
+$brown: #AF5737;
+$dark-brown: #5A0F0F;
+
 $dark-brand-background: #0F4C5A;
 $brand-dark: #0F4C5A;
 $brand-cream: #F3EFEA;
@@ -51,20 +54,9 @@ $input-placeholder-color: hsl(0, 0%, 21%);
 @import "../modules/bulma-carousel/src/sass/index.sass";
 
 // Custom colours
-.has-background-backdrop {
-    background-color: $brand-backdrop !important;
-}
-
-.subtitle-on-white {
-    color: #53A4AB;
-}
-
-.subtitle-on-dark {
-    color: #65C8D0;
-}
 
 //allows for dynamic coloring of titles
-section.has-background-info .title,  section.has-background-info h1, section.has-background-info h2 {
+section.has-background-info .title,  section.has-background-info h1, section.has-background-info h2 , .label {
     color: $light;
 }
 section.has-background-light .title,  section.has-background-light h1, section.has-background-light h2{
@@ -80,6 +72,27 @@ section.has-background-light .subtitle,  section.has-background-light h3 {
 //allows for dynamic colouring of svgs
 has-background-light > .fas, has-background-light > .fab {
     color: $info;
+}
+
+.has-background-backdrop {
+    background-color: $brand-backdrop !important;
+}
+
+.subtitle-on-white {
+    color: #53A4AB;
+}
+
+.subtitle-on-dark {
+    color: #65C8D0;
+}
+section.has-background-light .subtitle.has-text-brown,  section.has-background-light .h3.has-text-brown{
+    color: $brown;
+}
+.has-text-dark-brown {
+    color: $dark-brown;
+}
+.box {
+    color: $light;
 }
 
 // Custom CSS
@@ -149,4 +162,20 @@ body > footer {
 .fa-rotate-335 {
     transform: rotate(335deg) translateY(-10%);
 
+}
+
+.modal a {
+    color: $warning;
+}
+
+.delete, .modal-close {
+	position: fixed;
+}
+.modal-content, .modal-card {
+
+	width: auto;
+}
+
+#mobileModal.modal-content {
+    max-height: 500px;
 }
