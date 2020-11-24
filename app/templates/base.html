@@ -1,3 +1,4 @@
+{% set has_number = False %}
 {% from "macros/flash.html" import flash %}
 {% from "macros/globals.html" import call_number %}
 {% from "includes/login_form.html" import login %}
@@ -71,6 +72,7 @@
                   </a>
                 </div>
                 <div class="navbar-menu" id="navMenu">
+                  {% if has_number %}
                   <div class="navbar-start">
                     <div class="navbar-item is-hidden-touch">
                       <span style="font-size: 0.9em" class="column is-vcentered has-text-white">
@@ -78,6 +80,7 @@
                       </span>
                     </div>
                   </div>
+                  {% endif %}
                   <div class="navbar-end">
                     {% for item in nav.end %}
                     {% if not loop.last %}

@@ -107,7 +107,7 @@
 </section>
 <a id="register_form"></a>
 
-{{ render_get_in_touch( form ) }}
+{{ render_get_in_touch( form, url_for('develop_with_us', _anchor="signup") ) }}
 
 <script src="{{ url_for('static', filename='assets/js/register_collapsible.js') }}"></script>
 {% endblock %}
@@ -256,7 +256,7 @@ problem.
       <li class="pt-3">
         If your application succeeds, you'll be
 registered in our Talent Pool where you
-can apply to involve in different
+can apply to get involved in different
 research projects.
       </li>
       <li class="pt-3">

@@ -108,7 +108,7 @@ nav.Bar('end', [
     nav.Item('Home', 'index'),
     nav.Item('Our Services', 'our_services'),
     nav.Item('Portfolio', 'portfolio'),
-    nav.Item('Develop with Us', 'auth.register_developer'),
+    nav.Item('Develop with Us', 'develop_with_us'),
     nav.Item('Log in', 'auth.login')
 ])
 

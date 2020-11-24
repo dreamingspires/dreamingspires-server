@@ -18,3 +18,12 @@ class InterestedClient(Base):
     estimated_cost = db.Column(db.String(20))
     project_description = db.Column(db.String(1000), nullable=False)
     actioned = db.Column(db.Boolean, server_default='0', nullable=False)
+
+class InterestedDeveloper(Base):
+    __tablename__ = 'interested_developers'
+    __bind_key__ = 'temp_db'
+    name = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(128), primary_key=True)
+    phone = db.Column(db.String(128))
+    speciality = db.Column(db.String(128))
+    actioned = db.Column(db.Boolean, server_default='0', nullable=False)

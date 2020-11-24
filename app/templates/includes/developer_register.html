@@ -1,7 +1,7 @@
 {% from "macros/bulma_form.html" import render_form %}
 {% from "macros/globals.html" import call_number %}
 
-{% macro render_get_in_touch(form) %}
+{% macro render_get_in_touch(form, action) %}
 <section id="signup" class="section is-fullwidth is-medium has-background-info has-text-light py-6">
     <div class="columns">
         <div class="column is-7">
@@ -10,16 +10,18 @@
                 <h1 class="title is-size-1 has-text-light">Ready to Begin?</h1>
                 <p class="subtitle is-size-3 subtitle-on-dark pt-3 has-text-weight-normal is-italic">Apply below to get started!</p>
                 <p class="is-size-5">Leave your details and we'll be in touch</p>
-                {{ render_form(form, ".", box=False,  width=12, mark_required=False, is_horizontal=False) }}
+                {{ render_form(form, action, box=False,  width=12, mark_required=False, is_horizontal=False) }}
                     <p class="is-size-7 is-italic">
                     At Dreaming Spires, we take your data seriously.  Any data you give us will be handled according to our <a href="{{ url_for('privacy_policy') }}">privacy policy</a>.
                     </p>
+                    {% if has_number %}
                     <div class="has-text-centered">
                         <p class="subtitle is-size-5 mb-0 mt-1">
                         Or call us on:
                         </p>
                         <span class="is-size-5 mb-3">{{ call_number() }}</span>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

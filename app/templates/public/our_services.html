@@ -54,11 +54,12 @@
                   </span>
                 </a>
               </div> 
+              {% if has_number %}
               <p class="subtitle is-size-4 mb-0 mt-1">
                 Or call us on:
               </p>
               <span class="is-size-4 mb-3">{{ call_number() }}</span>
-              
+              {% endif %}
             </div>
           </div>
         </div>
@@ -146,10 +147,11 @@
           </div>
         </div>
         <div class="tile is-parent is-vertical is-4">
-          
+          {% if has_number %}
           <p class="title is-size-1 is-pulled-right has-text-dark" style="text-align:right">Interested? Call:<br>
             <span class="is-pulled-right is-size-2 mb-3" style="white-space:nowrap">{{ call_number() }}</span>
           </p>            
+          {% endif %}
           <div class="tile is-parent is-12">
             <div class="tile is-parent is-12 is-vertical">          
               <div class="tile is-child is-12 mt-6">           
@@ -194,6 +196,7 @@
             </p>
           </a>
         </div> 
+        {% if has_number %}
         <div class="has-text-centered">
           <p class="subtitle is-size-4 mb-0 mt-1">
             Or call us on:
@@ -202,6 +205,7 @@
             {{ call_number() }}
           </span>
         </div>
+        {% endif %}
       </div>
     </div>
     <div class="has-text-centered pb-1">
@@ -240,7 +244,7 @@
   {% endfor %}
 </section>
 
-{{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form) }}
+{{ render_get_in_touch('Whether you’re beginning to wonder how computation would aid your research, or already have a fully-planned specification, we’d love to hear from you. Our consultants will be happy to discuss the ways in which your research could be accelerated by introducing programming talent.', form, url_for('our_services', _anchor="signup")) }}
 
 <script src="{{ url_for('static', filename='assets/js/register_collapsible.js') }}"></script>
 

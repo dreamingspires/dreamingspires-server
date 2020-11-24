@@ -2,15 +2,14 @@ from flask import render_template, redirect, url_for
 
 from app import app, nav, db
 from app.models import BlogPost
-from app.temp_models import InterestedClient
+from app.temp_models import InterestedClient, InterestedDeveloper
 from app.public_forms import RegisterClientInterest
 from app.extensions.email import send_email
-from app.mod_auth.forms import LoginForm
+from app.mod_auth.forms import LoginForm, RegisterDeveloperForm
 
 def client_signup(template_path, *args, **kwargs):
     form = RegisterClientInterest()
     if form.validate_on_submit():
-        # TODO: add information to database
         # TODO: rate limiting
         client = InterestedClient(name=form.name.data, email=form.email.data, \
             phone=None, organisation=form.organisation.data, \
@@ -28,6 +27,23 @@ def client_signup(template_path, *args, **kwargs):
         return redirect(url_for('auth.thanks_for_registering_client'))
     return render_template(template_path, *args, form=form, **kwargs)
 
+def developer_signup(template_path, *args, **kwargs):
+    form = RegisterDeveloperForm()
+    if form.validate_on_submit():
+        # TODO: rate limiting
+        developer = InterestedDeveloper(name=form.user_name.data, email=form.email.data, \
+            phone=form.phone_number.data, speciality=form.speciality.data)
+        db.session.add(developer)
+        db.session.commit()
+
+        # Send confirmation email
+        html = render_template('email/developer_signup_registered.html')
+        subject = 'Dreaming Spires Registration Confirmation'
+        send_email(developer.email, subject, html)
+
+        return redirect(url_for('auth.thanks_for_registering_developer'))
+    return render_template(template_path, *args, form=form, **kwargs)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -36,6 +52,10 @@ def index():
 @app.route('/our_services', methods=['GET', 'POST'])
 def our_services():
     return client_signup('public/our_services.html', login_form=LoginForm(), is_fullpage=False)
+
+@app.route('/develop_with_us', methods=['GET', 'POST'])
+def develop_with_us():
+    return developer_signup('public/develop_with_us.html', login_form=LoginForm(), is_fullpage=False)
 
 @app.route('/about')
 def about():
@@ -64,14 +84,6 @@ def register_developer():
 @app.route('/developer_faq')
 def developer_faq():
     return render_template('public/developer_faq.html')
-
-@app.route('/login2')
-def login2():
-    return render_template('login2.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('public/index.html', login_form=LoginForm())
 
 @app.route('/portfolio')
 def portfolio():

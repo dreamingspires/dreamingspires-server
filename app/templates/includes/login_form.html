@@ -1,6 +1,4 @@
 {% from "macros/bulma_form.html" import render_form  %}
-{% from "macros/globals.html" import call_number %}
-
 
 {% macro login(login_form) %}
 <div id="loginModal" class="modal">
@@ -21,7 +19,7 @@
       <h3 class="title has-text-weight-normal">Sign In to Spires</h3>
     </div>
 
-    {{ render_form(login_form, "/login", box=False,  width=12, mark_required=False, is_horizontal=False) }}
+    {{ render_form(login_form, "/auth/login/", box=False,  width=12, mark_required=False, is_horizontal=False) }}
     <div class="has-text-centered">
       <a id="forgotPassword" href="" class="pb-4" >Forgot your password? </a>
       <p>Not got an account? <a href="">Sign up now</a></p>

@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_admin.contrib.sqla import ModelView
 from app.models import User, CV, Developer, Organisation, Department, \
     DepartmentFile, DeveloperProjectsMap, Project, ProjectTag, BlogPost, BlogImage
-from app.temp_models import InterestedClient
+from app.temp_models import InterestedClient, InterestedDeveloper
 import PIL
 from flask_wtf.file import FileField
 
@@ -79,3 +79,4 @@ admin.add_view(BaseView(ProjectTag, db.session))
 admin.add_view(BlogPostView(BlogPost, db.session))
 admin.add_view(BlogImageView(BlogImage, db.session))
 admin.add_view(InterestedClientView(InterestedClient, db.session))
+admin.add_view(InterestedClientView(InterestedDeveloper, db.session))

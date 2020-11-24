@@ -93,7 +93,7 @@ def logout():
     #                      identity=AnonymousIdentity())
     return redirect(request.args.get('next') or url_for('index'))
 
-@mod_auth.route('/register_developer/', methods=['GET', 'POST'])
+#@mod_auth.route('/register_developer/', methods=['GET', 'POST'])
 def register_developer():
     form = RegisterDeveloperForm()
     login_form = LoginForm()
@@ -139,6 +139,10 @@ def register_developer():
     return render_template('auth/register_developer.html', form=form, login_form=login_form, \
         entries=list(range(1000)))
 
+@mod_auth.route('/register_developer/', methods=['GET', 'POST'])
+def register_developer():
+    return redirect(url_for('develop_with_us'))
+
 @mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
     return redirect(url_for('our_services'))
@@ -171,6 +175,10 @@ def register_client():
 @mod_auth.route('thanks_for_registering_client')
 def thanks_for_registering_client():
     return render_template('auth/thanks_client.html')
+
+@mod_auth.route('thanks_for_registering_developer')
+def thanks_for_registering_developer():
+    return render_template('auth/thanks_developer.html')
 
 #@mod_auth.route('/register_client/', methods=['GET', 'POST'])
 def register_client():
